@@ -78,7 +78,20 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .dot{width:13px;height:13px;border-radius:50%;background:rgba(120,140,180,.24)}
 .dot.on{background:#7FD3B0} .dot.done{background:#F4B740}
 
-.steps{display:flex;gap:8px;padding:14px 18px 0;flex-wrap:wrap;max-width:1400px;margin:0 auto}
+.steps{display:flex;gap:8px;padding:14px 18px 0;flex-wrap:wrap;max-width:1400px;margin:0 auto;
+  align-items:center}
+.sendbox{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sendchip{font-size:.9rem;font-weight:800;color:#1E8E62;background:rgba(233,250,243,.9);
+  border:1px solid var(--line);border-radius:20px;padding:6px 14px;white-space:nowrap}
+.sendchip.on{color:#8A5B12;background:rgba(255,246,220,.95);animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+.gotchip{display:flex;align-items:center;gap:8px}
+.gotnum{font-size:.9rem;font-weight:900;color:var(--mute);background:var(--glassb);
+  border:1px solid var(--line);border-radius:20px;padding:6px 12px;white-space:nowrap}
+.gotnum.all{color:#1E8E62;background:rgba(233,250,243,.95)}
+.gotdots{display:flex;gap:4px}
+.gotdots i{width:11px;height:11px;border-radius:50%;background:rgba(120,140,180,.28)}
+.gotdots i.y{background:#7FD3B0}
 .step{padding:10px 17px;border-radius:16px;background:rgba(255,255,255,.42);
   font-weight:800;font-size:.95rem;color:var(--mute);border:1px solid rgba(255,255,255,.6)}
 .step.on{background:var(--glassb);color:#2E3440;box-shadow:var(--sh)}
@@ -924,7 +937,7 @@ const CTRL0 = {phase:'idle', lessonNo:1, vocabIdx:-1, showHint:false, lessonDate
                showExplain:false, game:null, shopOpen:false,
                wordIdx:0, sub:'write', qIdx:0, qLocked:false,
                marks:{}, coins:{}, adj:{}, paid:{}};
-const BANK0 = {wallet:{}, tx:[]};
+const BANK0 = {wallet:{}};   /* 交易紀錄改存試算表獨立工作表，唔會寫爆一格 */
 const MINE0 = {a:{}, prog:''};
 
 let CTRL = rd(KC, CTRL0);
@@ -968,6 +981,7 @@ const NET = {
   url: localStorage.getItem(K+'.url') || window.__GAS_URL__ || GAS_DEFAULT,
   auto: !localStorage.getItem(K+'.url'),
   v: -1, t: 0, pulled:false, busy:false, q:[], status:'local', lastErr:'',
+  seen:{}, sending:false, beat:'',
   on(){ return !!this.url; },
   setUrl(u){
     this.url = (u||'').trim();
@@ -993,7 +1007,25 @@ const NET = {
     if(!this.on()) return;
     this.q = this.q.filter(x=>x.key!==key);   /* 同一格只留最新一次 */
     this.q.push({key, data:obj});
+    this.sending = true; paintSend();
     setTimeout(()=>this.tick(), 0);           /* 即刻傳，唔等下一次輪詢 */
+  },
+  /* 學生報到：話畀老師知自己已經跳到邊一頁。
+     刻意用獨立指令，唔會更新版本號，所以唔會令全班重新同步。 */
+  async sendBeat(){
+    if(!this.on() || ROLE!=='s' || !ME) return;
+    const s = phaseKey();
+    if(s === this.beat) return;
+    try{ await this.call({fn:'beat', me:ME, s}, 12000); this.beat = s; }catch(e){}
+  },
+  async txAdd(rows){
+    if(!this.on() || !rows.length) return;
+    try{ await this.call({fn:'tx', rows}, 20000); }catch(e){}
+  },
+  async txList(n){
+    if(!this.on()) return [];
+    try{ const r = await this.call({fn:'txlist', n:n||30}, 20000);
+         return (r && r.rows) || []; }catch(e){ return []; }
   },
   async tick(){
     if(!this.on() || this.busy) return;
@@ -1010,8 +1042,10 @@ const NET = {
       }
       /* 一次來回搞掂：帶住自己嘅版本號同上次同步時間，
          冇變就只回一個版本號；有變就順便把「變咗嗰幾格」一齊送返。 */
-      const res = await this.call({fn:'sync', v:this.v, t:(this.pulled ? this.t : 0)}, 20000);
+      const res = await this.call({fn:'sync', v:this.v, t:(this.pulled ? this.t : 0),
+                                   role:ROLE, me:ME}, 20000);
       if(res && res.ok){
+        if(res.seen) this.seen = res.seen;
         if(res.data && Object.keys(res.data).length){
           for(const [key,val] of Object.entries(res.data)){
             if(!key.startsWith(K)) continue;
@@ -1027,18 +1061,46 @@ const NET = {
       }
       if(this.status!=='ok'){ this.status='ok'; render(); }
       this.lastErr='';
+      if(!this.q.length && this.sending){ this.sending=false; paintSend(); }
     }catch(e){
       this.lastErr = String(e.message||e);
       if(this.status!=='err'){ this.status='err'; try{ render(); }catch(_){} }
     }finally{
       /* 必須在 finally 重設：否則畫面一旦出錯，同步會就此停頓，整堂課失聯 */
       this.busy = false;
+      if(!this.q.length && this.sending){ this.sending=false; paintSend(); }
     }
   }
 };
 if(NET.on()) NET.status='connecting';
 setInterval(()=>NET.tick(), 900);
 
+/* 老師同學生用同一條字串識別「而家喺邊一頁」，方便點算幾多人已收到 */
+function phaseKey(){
+  return [CTRL.phase, CTRL.lessonNo, CTRL.vocabIdx, CTRL.wordIdx,
+          CTRL.sub, CTRL.qIdx, CTRL.game?CTRL.game.w:''].join('|');
+}
+/* 只更新「傳送中」字樣，唔重畫成頁 */
+function paintSend(){
+  document.querySelectorAll('.sendchip').forEach(e=>{
+    e.textContent = NET.sending ? '📤 傳送中…' : '✅ 已送出';
+    e.classList.toggle('on', NET.sending);
+  });
+  document.querySelectorAll('.gotchip').forEach(e=> e.innerHTML = gotHTML());
+}
+/* 已有幾多部平板收到現時這一頁 */
+function gotCount(){
+  const key = phaseKey();
+  return STUDENTS.filter(s=>NET.seen[s.id]===key).length;
+}
+function gotHTML(){
+  if(!NET.on() || ROLE!=='t') return '';
+  const n = gotCount(), tot = STUDENTS.length;
+  const dots = STUDENTS.map(s=>
+    `<i class="${NET.seen[s.id]===phaseKey()?'y':''}" title="${s.n}"></i>`).join('');
+  return `<span class="gotnum ${n===tot?'all':''}">${n} / ${tot}</span>
+    <span class="gotdots">${dots}</span>`;
+}
 function netChip(){
   if(!NET.on()) return `<button class="btn sm" onclick="setRole('a')" title="尚未連接雲端">📴 本機</button>`;
   const m = {connecting:['⏳','連線中'], ok:['🟢','已連線'], err:['🔴','連線中斷']}[NET.status]||['⏳',''];
@@ -1421,7 +1483,11 @@ function renderTeacher(){
     return `<div class="dot ${p==='done'?'done':p?'on':''}" title="${s.n}"></div>`;
   }).join('');
   document.getElementById('tSteps').innerHTML = STEPS.map(([k,l])=>
-    `<button class="step ${STEP===k?'on':''}" onclick="tStep('${k}')">${l}</button>`).join('');
+    `<button class="step ${STEP===k?'on':''}" onclick="tStep('${k}')">${l}</button>`).join('')
+    + `<div class="sendbox">
+         <span class="sendchip ${NET.sending?'on':''}">${NET.sending?'📤 傳送中…':'✅ 已送出'}</span>
+         <span class="gotchip">${gotHTML()}</span>
+       </div>`;
   document.getElementById('tPanel').innerHTML =
     ({hello:tHello,notes:tNotes,text:tText,vocab:tVocab,round:tRound,qa:tQA,
       review:tReview,wallet:tWallet,goals:tGoals}[STEP]||tHello)();
@@ -1974,7 +2040,7 @@ function approveReq(sid, j){
   const rec = ANS[sid], r = rec.req[j];
   if((BANK.wallet[sid]||0) < r.p){ alert(`${stu(sid).n} 的金額不足。`); return; }
   BANK.wallet[sid] -= r.p;
-  BANK.tx.push({sid, d:new Date().toLocaleDateString('zh-HK'), t:`兌換 ${r.n}`, a:-r.p});
+  addTx([{sid, d:new Date().toLocaleDateString('zh-HK'), t:`兌換 ${r.n}`, a:-r.p}]);
   r.done=true; r.ok=true;
   wr(KA(sid), rec); saveBank(); render();
   cheer('兌換成功！');
@@ -1984,33 +2050,48 @@ function rejectReq(sid, j){
   wr(KA(sid), rec); render();
 }
 
+/* 交易紀錄：一筆一行寫入試算表；本機只留一份近期紀錄供顯示 */
+let TX = [];
+function addTx(list){
+  TX = list.concat(TX).slice(0, 60);
+  NET.txAdd(list.map(x=>[x.d, (stu(x.sid)||{}).n || x.sid, x.t, x.a]));
+}
+async function loadTx(){
+  const rows = await NET.txList(40);
+  TX = rows.reverse().map(r=>({d:String(r[0]), n:String(r[1]), t:String(r[2]), a:Number(r[3])}));
+  render();
+}
 function payout(){
   CTRL.paid=CTRL.paid||{};
   if(CTRL.paid[CTRL.lessonNo] &&
      !confirm(`第 ${CTRL.lessonNo} 連堂已經入過帳。\n再入一次？（會重複入帳）`)) return;
   CTRL.paid[CTRL.lessonNo]=true;
   recalcAll();
+  const list=[];
   STUDENTS.forEach(s=>{
     const c=CTRL.coins[s.id]||0; if(!c) return;
     BANK.wallet[s.id]=(BANK.wallet[s.id]||0)+c;
-    BANK.tx.push({sid:s.id,d:new Date().toLocaleDateString('zh-HK'),
-                  t:`第${CTRL.lessonNo}連堂 答對${scoreOf(s.id).right}題`,a:c});
+    list.push({sid:s.id, d:new Date().toLocaleDateString('zh-HK'),
+               t:`第${CTRL.lessonNo}連堂 答對${scoreOf(s.id).right}題`, a:c});
   });
+  addTx(list);
   saveCtrl(); saveBank(); render(); cheer('已存入戶口！');
 }
 function tWallet(){
   const cards = STUDENTS.map(s=>`<div class="wcard"><div class="n">${s.n}</div>
     <div class="today">$${BANK.wallet[s.id]||0}</div>
     <div class="bal">今日 +$${CTRL.coins[s.id]||0}</div></div>`).join('');
-  const tx = BANK.tx.slice(-20).reverse().map(t2=>
-    `<tr><td>${t2.d}</td><td>${stu(t2.sid)?stu(t2.sid).n:''}</td><td>${t2.t}</td>
-     <td class="amt ${t2.a>0?'pos':'neg'}">${t2.a>0?'+':''}$${t2.a}</td></tr>`).join('');
+  const tx = TX.slice(0,25).map(x=>
+    `<tr><td>${x.d}</td><td>${x.n || (stu(x.sid)||{}).n || ''}</td><td>${x.t}</td>
+     <td class="amt ${x.a>0?'pos':'neg'}">${x.a>0?'+':''}$${x.a}</td></tr>`).join('');
   return `<h3 class="sec">全班戶口</h3><div class="wgrid">${cards}</div>
     <div class="row" style="margin-top:14px">
       <button class="btn" onclick="STEP='review';render()">← 返回今日進帳</button></div>
-    <h3 class="sec">交易紀錄</h3>
+    <h3 class="sec">交易紀錄
+      <button class="btn sm" style="margin-left:10px" onclick="loadTx()">↻ 由試算表載入</button></h3>
+    <div class="note">交易紀錄一筆一行存喺試算表嘅「交易紀錄」工作表，可以直接打開查閱全年紀錄。</div>
     <table class="tx"><tr><th>日期</th><th>學生</th><th>項目</th><th style="text-align:right">金額</th></tr>
-    ${tx||'<tr><td colspan="4" style="color:#999">尚未有紀錄</td></tr>'}</table>`;
+    ${tx||'<tr><td colspan="4" style="color:#999">按上面「↻ 由試算表載入」查閱</td></tr>'}</table>`;
 }
 function buy(i){
   const p=PRIZES[i];
@@ -2020,7 +2101,7 @@ function buy(i){
   const s=STUDENTS[j];
   if((BANK.wallet[s.id]||0)<p.p){ alert(`${s.n} 的金額不足，尚差 $${p.p-(BANK.wallet[s.id]||0)}`); return; }
   BANK.wallet[s.id]-=p.p;
-  BANK.tx.push({sid:s.id,d:new Date().toLocaleDateString('zh-HK'),t:`兌換 ${p.n}`,a:-p.p});
+  addTx([{sid:s.id,d:new Date().toLocaleDateString('zh-HK'),t:`兌換 ${p.n}`,a:-p.p}]);
   saveBank(); render();
 }
 function resetAll(){
@@ -2057,6 +2138,7 @@ function renderStudent(){
   if(CTRL.phase==='text') followRead();
   if(CTRL.phase==='qa' && qMode(me.lv)==='write') initQPad(me);
   bindTypeBoxes();
+  NET.sendBeat();
 }
 function wait(em,t,d){
   return `<div class="waitbox"><div class="em">${em}</div>
