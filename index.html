@@ -967,14 +967,14 @@ const GAS_DEFAULT = 'https://script.google.com/macros/s/AKfycbwMYIoh8NSdqmUAmEoD
 const NET = {
   url: localStorage.getItem(K+'.url') || window.__GAS_URL__ || GAS_DEFAULT,
   auto: !localStorage.getItem(K+'.url'),
-  v: -1, busy:false, q:[], status:'local', lastErr:'',
+  v: -1, pulled:false, busy:false, q:[], status:'local', lastErr:'',
   on(){ return !!this.url; },
   setUrl(u){
     this.url = (u||'').trim();
     if(this.url) localStorage.setItem(K+'.url', this.url);
     else { localStorage.removeItem(K+'.url'); this.url = window.__GAS_URL__ || GAS_DEFAULT; }
     this.auto = !localStorage.getItem(K+'.url');
-    this.v = -1; this.status = this.url ? 'connecting' : 'local';
+    this.v = -1; this.pulled = false; this.status = this.url ? 'connecting' : 'local';
     render();
   },
   async call(body, ms){
@@ -1002,13 +1002,16 @@ const NET = {
         const it = this.q[0];
         const res = await this.call({fn:'push', key:it.key, data:it.data});
         if(!res || !res.ok) throw new Error(res && res.err || 'push failed');
-        this.q.shift(); this.v = res.v;
+        this.q.shift();
+        /* 注意：唔可以喺呢度更新 this.v。
+           上傳成功後如果當自己已經最新，就會永遠唔落去攞其他資料
+           （例如全新平板永遠攞唔到學生名單）。留返畀下面對版本號時觸發下載。 */
       }
       const ver = await this.call({fn:'ver'}, 8000);
-      if(ver && ver.ok && ver.v !== this.v){
+      if(ver && ver.ok && (!this.pulled || ver.v !== this.v)){   /* 開機第一次必定下載 */
         const full = await this.call({fn:'pull'}, 20000);
         if(full && full.ok){
-          this.v = full.v;
+          this.v = full.v; this.pulled = true;
           for(const [key,val] of Object.entries(full.data||{})){
             if(!key.startsWith(K)) continue;
             /* 自己的答案格：如果本機仲有未傳上去的新內容，或者正在打字，
