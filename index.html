@@ -2056,9 +2056,18 @@ function addTx(list){
   TX = list.concat(TX).slice(0, 60);
   NET.txAdd(list.map(x=>[x.d, (stu(x.sid)||{}).n || x.sid, x.t, x.a]));
 }
+/* 試算表會把「18/8/2026」自動當成日期，讀返嚟係內部格式，要還原做人睇得明嘅樣 */
+function fmtDate(v){
+  const s = String(v);
+  if(/^\d{4}-\d{2}-\d{2}T/.test(s)){
+    const d = new Date(s);
+    if(!isNaN(d)) return `${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`;
+  }
+  return s;
+}
 async function loadTx(){
   const rows = await NET.txList(40);
-  TX = rows.reverse().map(r=>({d:String(r[0]), n:String(r[1]), t:String(r[2]), a:Number(r[3])}));
+  TX = rows.reverse().map(r=>({d:fmtDate(r[0]), n:String(r[1]), t:String(r[2]), a:Number(r[3])}));
   render();
 }
 function payout(){
