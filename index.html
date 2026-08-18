@@ -967,14 +967,14 @@ const GAS_DEFAULT = 'https://script.google.com/macros/s/AKfycbwMYIoh8NSdqmUAmEoD
 const NET = {
   url: localStorage.getItem(K+'.url') || window.__GAS_URL__ || GAS_DEFAULT,
   auto: !localStorage.getItem(K+'.url'),
-  v: -1, pulled:false, busy:false, q:[], status:'local', lastErr:'',
+  v: -1, t: 0, pulled:false, busy:false, q:[], status:'local', lastErr:'',
   on(){ return !!this.url; },
   setUrl(u){
     this.url = (u||'').trim();
     if(this.url) localStorage.setItem(K+'.url', this.url);
     else { localStorage.removeItem(K+'.url'); this.url = window.__GAS_URL__ || GAS_DEFAULT; }
     this.auto = !localStorage.getItem(K+'.url');
-    this.v = -1; this.pulled = false; this.status = this.url ? 'connecting' : 'local';
+    this.v = -1; this.t = 0; this.pulled = false; this.status = this.url ? 'connecting' : 'local';
     render();
   },
   async call(body, ms){
@@ -993,6 +993,7 @@ const NET = {
     if(!this.on()) return;
     this.q = this.q.filter(x=>x.key!==key);   /* 同一格只留最新一次 */
     this.q.push({key, data:obj});
+    setTimeout(()=>this.tick(), 0);           /* 即刻傳，唔等下一次輪詢 */
   },
   async tick(){
     if(!this.on() || this.busy) return;
@@ -1007,12 +1008,12 @@ const NET = {
            上傳成功後如果當自己已經最新，就會永遠唔落去攞其他資料
            （例如全新平板永遠攞唔到學生名單）。留返畀下面對版本號時觸發下載。 */
       }
-      const ver = await this.call({fn:'ver'}, 8000);
-      if(ver && ver.ok && (!this.pulled || ver.v !== this.v)){   /* 開機第一次必定下載 */
-        const full = await this.call({fn:'pull'}, 20000);
-        if(full && full.ok){
-          this.v = full.v; this.pulled = true;
-          for(const [key,val] of Object.entries(full.data||{})){
+      /* 一次來回搞掂：帶住自己嘅版本號同上次同步時間，
+         冇變就只回一個版本號；有變就順便把「變咗嗰幾格」一齊送返。 */
+      const res = await this.call({fn:'sync', v:this.v, t:(this.pulled ? this.t : 0)}, 20000);
+      if(res && res.ok){
+        if(res.data && Object.keys(res.data).length){
+          for(const [key,val] of Object.entries(res.data)){
             if(!key.startsWith(K)) continue;
             /* 自己的答案格：如果本機仲有未傳上去的新內容，或者正在打字，
                就唔好用雲端舊版蓋過，否則同學啱啱寫的會不見了 */
@@ -1021,6 +1022,8 @@ const NET = {
           }
           pullAll(); renderSafe();
         }
+        this.v = res.v; if(res.t) this.t = res.t;
+        this.pulled = true;
       }
       if(this.status!=='ok'){ this.status='ok'; render(); }
       this.lastErr='';
@@ -1034,7 +1037,7 @@ const NET = {
   }
 };
 if(NET.on()) NET.status='connecting';
-setInterval(()=>NET.tick(), 2000);
+setInterval(()=>NET.tick(), 900);
 
 function netChip(){
   if(!NET.on()) return `<button class="btn sm" onclick="setRole('a')" title="尚未連接雲端">📴 本機</button>`;
