@@ -1012,7 +1012,7 @@ const NET = {
   url: localStorage.getItem(K+'.url') || window.__GAS_URL__ || GAS_DEFAULT,
   auto: !localStorage.getItem(K+'.url'),
   v: -1, t: 0, pulled:false, busy:false, q:[], status:'local', lastErr:'',
-  seen:{}, sending:false, beat:'', beating:false, fails:0,
+  seen:{}, sending:false, beat:'', beating:false, fails:0, lastMs:0, log:[],
   on(){ return !!this.url; },
   setUrl(u){
     this.url = (u||'').trim();
@@ -1026,13 +1026,26 @@ const NET = {
     body = Object.assign({k: GAS_KEY}, body);   /* 每個請求都帶鎖匙 */
     const ctl = new AbortController();
     const timer = setTimeout(()=>ctl.abort(), ms||25000);
+    const t0 = Date.now();
     try{
       const r = await fetch(this.url, {method:'POST', redirect:'follow', signal:ctl.signal,
         headers:{'Content-Type':'text/plain;charset=utf-8'},
         body: JSON.stringify(body)});
       if(!r.ok) throw new Error('HTTP '+r.status);
-      return await r.json();
+      const out = await r.json();
+      this.note(body.fn, Date.now()-t0, true);
+      return out;
+    } catch(e){
+      this.note(body.fn, Date.now()-t0, false);
+      throw e;
     } finally { clearTimeout(timer); }
+  },
+  /* 記低每次來回耗時，方便睇出慢喺邊 */
+  note(fn, ms, ok){
+    if(fn==='sync' || fn==='push') this.lastMs = ms;
+    this.log.unshift({fn, ms, ok, at:new Date().toLocaleTimeString('zh-HK')});
+    if(this.log.length > 12) this.log.pop();
+    document.querySelectorAll('.netms').forEach(e=> e.textContent = msLabel());
   },
   push(key, obj){
     if(!this.on()) return;
@@ -1145,12 +1158,16 @@ function gotHTML(){
   return `<span class="gotnum ${n===tot?'all':''}">${n} / ${tot}</span>
     <span class="gotdots">${dots}</span>`;
 }
+function msLabel(){
+  if(!NET.on() || !NET.lastMs) return '';
+  return ' · ' + (NET.lastMs/1000).toFixed(1) + '秒';
+}
 function netChip(){
   if(!NET.on()) return `<button class="btn sm" onclick="setRole('a')" title="尚未連接雲端">📴 本機</button>`;
   const m = {connecting:['⏳','連線中'], ok:['🟢','已連線'],
              slow:['🟡','網絡較慢'], err:['🔴','連線中斷']}[NET.status]||['⏳',''];
   const qn = NET.q.length ? `（${NET.q.length} 項待傳）` : '';
-  return `<button class="btn sm" onclick="alert('${NET.status==='err'||NET.status==='slow'
+  return `<button class="btn sm netbtn" onclick="alert('${NET.status==='err'||NET.status==='slow'
     ? '連線中斷：'+String(NET.lastErr).replace(/'/g,'') + String.fromCharCode(92)+'n學生的作答已暫存在平板電腦，回復連線後會自動補傳。'
     : '雲端同步正常。'}')">${m[0]} ${m[1]}${qn}</button>`;
 }
@@ -1459,6 +1476,16 @@ function renderAdmin(){
   <div class="note" style="border-left-color:#F7B7CB">
     🔒 <b>學生姓名只儲存在你的 Google 試算表</b>，不會寫進公開的程式檔案。
     在此修改姓名後會自動同步到所有平板電腦。</div>
+
+  <h3 class="sec">📶 連線速度（最近 12 次）</h3>
+  <div class="note">每次來回嘅實際耗時。<b>2 秒左右屬正常</b>；如果經常 5 秒以上，
+    即係你嗰邊去 Google 伺服器嘅網絡較慢，可以試下用手機熱點比較。</div>
+  <table class="tx"><tr><th>時間</th><th>指令</th><th style="text-align:right">耗時</th><th>結果</th></tr>
+  ${NET.log.length ? NET.log.map(x=>`<tr><td>${x.at}</td><td>${x.fn}</td>
+    <td class="amt" style="color:${x.ms>5000?'#C0554A':x.ms>3000?'#B7791F':'#1E8E62'}">${(x.ms/1000).toFixed(1)} 秒</td>
+    <td>${x.ok?'✅':'❌'}</td></tr>`).join('')
+    : '<tr><td colspan="4" style="color:#999">未有紀錄</td></tr>'}
+  </table>
 
   <h3 class="sec">說明</h3>
   <div class="note">
