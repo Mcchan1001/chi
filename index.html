@@ -80,6 +80,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 .steps{display:flex;gap:8px;padding:14px 18px 0;flex-wrap:wrap;max-width:1400px;margin:0 auto;
   align-items:center}
+.btn.holdon{animation:pulse 1.2s ease-in-out infinite}
+.holdbar{background:linear-gradient(180deg,#FFE7D6,#FFCBA8);border:2px solid #E89B62;
+  border-radius:20px;padding:14px 18px;margin-bottom:16px;font-size:1.05rem;
+  font-weight:700;line-height:1.8;cursor:pointer;box-shadow:var(--sh)}
+.holdwait{background:var(--glassb);border:1px solid var(--line);border-radius:28px;
+  box-shadow:var(--sh);margin:16px}
 .sendbox{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .sendchip{font-size:.9rem;font-weight:800;color:#1E8E62;background:rgba(233,250,243,.9);
   border:1px solid var(--line);border-radius:20px;padding:6px 14px;white-space:nowrap}
@@ -422,6 +428,7 @@ h3.sec{font-size:1.12rem;margin:22px 0 10px;padding-bottom:7px;
     </div>
     <div class="sp">
       <div class="dots" id="tDots"></div>
+      <button class="btn sm ${'' }" id="bHold" onclick="toggleHold()">🔒 鎖住學生機</button>
       <span id="tNet"></span>
       <button class="btn sm" id="bJy" onclick="toggleJy()">拼</button>
       <button class="btn sm" id="bLang" onclick="toggleLang()">🌐 EN</button>
@@ -923,16 +930,17 @@ function rd(key, dflt){
   try{ const r = JSON.parse(localStorage.getItem(key)); return r ? Object.assign({}, dflt, r) : {...dflt}; }
   catch(e){ return {...dflt}; }
 }
-function wr(key, obj){
+function wr(key, obj, noPush){
   localStorage.setItem(key, JSON.stringify(obj));
   const now = String(Date.now());
   localStorage.setItem(KP, now);
   lastPulse = now;              /* 記住是自己寫的，避免自己觸發重繪令輸入框失焦 */
   try{ CH && CH.postMessage(1); }catch(e){}
-  NET.push(key, obj);           /* 有連線就同步上雲端；無連線會排隊等候 */
+  if(!noPush) NET.push(key, obj);   /* 有連線就同步上雲端；無連線會排隊等候 */
 }
 let lastPulse = localStorage.getItem(KP)||'';
 const CTRL0 = {phase:'idle', lessonNo:1, vocabIdx:-1, showHint:false, lessonDate:'', read:null, readSeq:0,
+               hold:false,
                goalDone:{},
                showExplain:false, game:null, shopOpen:false,
                wordIdx:0, sub:'write', qIdx:0, qLocked:false,
@@ -953,7 +961,11 @@ function pullAll(){
   pullAns();
 }
 pullAns();
-function saveCtrl(){ wr(KC, CTRL); }
+/* 凍結期間，老師點揀邊一頁都唔傳送落學生機（佢哋停喺「望大電視」）。
+   解凍時一次過送出當時嘅畫面 —— 所以轉幾多頁都好，只傳兩次。 */
+function saveCtrl(opt){
+  wr(KC, CTRL, CTRL.hold && !(opt && opt.force));
+}
 function saveBank(){ wr(KB, BANK); }
 function saveStu(){  wr(KS, STUDENTS); }
 function saveMine(){ if(ME) wr(KA(ME), ANS[ME]); }
@@ -1085,7 +1097,7 @@ setInterval(()=>NET.tick(), 900);
 
 /* 老師同學生用同一條字串識別「而家喺邊一頁」，方便點算幾多人已收到 */
 function phaseKey(){
-  return [CTRL.phase, CTRL.lessonNo, CTRL.vocabIdx, CTRL.wordIdx,
+  return [CTRL.hold?'HOLD':CTRL.phase, CTRL.lessonNo, CTRL.vocabIdx, CTRL.wordIdx,
           CTRL.sub, CTRL.qIdx, CTRL.game?CTRL.game.w:''].join('|');
 }
 /* 只更新「傳送中」字樣，唔重畫成頁 */
@@ -1496,7 +1508,16 @@ function renderTeacher(){
          <span class="sendchip ${NET.sending?'on':''}">${NET.sending?'📤 傳送中…':'✅ 已送出'}</span>
          <span class="gotchip">${gotHTML()}</span>
        </div>`;
+  const bh = document.getElementById('bHold');
+  if(bh){
+    bh.textContent = CTRL.hold ? '🔓 解鎖，繼續互動' : '🔒 鎖住學生機';
+    bh.className = 'btn sm' + (CTRL.hold ? ' peach holdon' : '');
+  }
   document.getElementById('tPanel').innerHTML =
+    (CTRL.hold ? `<div class="holdbar" onclick="toggleHold()">
+        🔒 <b>學生機已鎖住</b> —— 佢哋見到「請望大電視」，撳唔到嘢。
+        你而家轉頁唔會傳送落去。講解完撳我（或右上角）解鎖。
+      </div>` : '') +
     ({hello:tHello,notes:tNotes,text:tText,vocab:tVocab,round:tRound,qa:tQA,
       review:tReview,wallet:tWallet,goals:tGoals}[STEP]||tHello)();
 }
@@ -1880,6 +1901,12 @@ function tQA(){
       <button class="btn lemon" onclick="tStep('review')">問答完成 → 今日進帳</button></div>
     <div class="sgrid">${live}</div>`;
 }
+/* 🔒 鎖住學生機：學生畫面即刻變「望大電視」，撳唔到嘢 */
+function toggleHold(){
+  CTRL.hold = !CTRL.hold;
+  saveCtrl({force:true});          /* 鎖同解鎖本身一定要即刻傳送 */
+  render();
+}
 function toggleShowHint(){ CTRL.showHint = !CTRL.showHint; saveCtrl(); render(); }
 /* 用文字寫出正確答案，供大電視顯示 */
 function correctText(q){ return q.ans; }
@@ -2146,6 +2173,14 @@ function renderStudent(){
   document.getElementById('sName').textContent = me.n;
   document.getElementById('sMeta').textContent = `單元一 · 第 ${L().no} 連堂`;
   document.getElementById('sPurse').textContent = `💰 $${BANK.wallet[ME]||0}`;
+  if(CTRL.hold){                       /* 老師鎖住咗：唔好畀學生撳嘢 */
+    stashPad();                        /* 寫緊嘅字先儲起，唔好因為突然鎖機而白寫 */
+    B.innerHTML = `<div class="waitbox holdwait"><div class="em">👀</div>
+      <div class="t">${ruby('請望大電視')}</div>
+      <div class="d">${ruby('老師正在講解')}</div></div>`;
+    NET.sendBeat();
+    return;
+  }
   if(SHOP_S){ B.innerHTML = sShop(me); return; }
   const f={hello:sHello,notes:sNotes,text:sText,vocab:sVocab,round:sRound,
            qa:sQA,goals:sGoals}[CTRL.phase];
@@ -2663,6 +2698,17 @@ function makePad(c, target, wlv, saved){
 function initPad(me){
   const c=document.getElementById('pad'); if(!c) return;
   PAD = makePad(c, curWord(), me.wlv, myAns()['w'+CTRL.wordIdx]);
+}
+/* 突然鎖機／轉頁時，把未按「寫好了」嘅筆劃悄悄儲起，避免同學白寫 */
+function stashPad(){
+  if(!ME || !PAD || !PAD.strokes || !PAD.strokes.length) return;
+  const key = (CTRL.phase==='qa') ? ('q'+CTRL.qIdx) : ('w'+CTRL.wordIdx);
+  const cur = myAns()[key];
+  const now = JSON.stringify(PAD.strokes);
+  if(cur && cur.s && JSON.stringify(cur.s)===now) return;   /* 同已儲存嘅一樣就唔使再存 */
+  myAns()[key] = {s:PAD.strokes, w:PAD.c.width, h:PAD.c.height};
+  PAD = null;
+  saveMine();
 }
 function clearPad(){ if(PAD){ PAD.strokes=[]; PAD.repaint(); } }
 function savePad(){
