@@ -2519,12 +2519,17 @@ function sQA(me){
 let QPAD=null;
 function initQPad(me){
   const i=CTRL.qIdx, c=document.getElementById('qpad'+i); if(!c) return;
-  QPAD = makePad(c, qaSet()[i].ans, me.wlv, myAns()['q'+i]);
+  QPAD = makePad(c, qaSet()[i].ans, me.wlv, myAns()['q'+i], 'q'+i);
 }
-function clearQPad(i){ if(QPAD){ QPAD.strokes=[]; QPAD.repaint(); } }
+function clearQPad(i){
+  if(!QPAD) return;
+  QPAD.strokes=[]; if(QPAD.bufKey) delete PADBUF[QPAD.bufKey];
+  QPAD.repaint();
+}
 function saveQPad(i){
   if(!QPAD || !QPAD.strokes.length){ alert('請先書寫，然後才按「寫好了」。'); return; }
   myAns()['q'+i] = {s:QPAD.strokes, w:QPAD.c.width, h:QPAD.c.height};
+  delete PADBUF['q'+i];
   saveMine(); render(); cheer('書寫完成！');
 }
 function ansKey(k,v,ok,el){
@@ -2574,7 +2579,7 @@ let COMPOSING = false;    /* 輸入法正在組字 */
 let RENDER_WANTED = false;
 let LAST_RENDER = 0, RENDER_TIMER = null;
 function renderSafe(){
-  if(TYPING || COMPOSING){ RENDER_WANTED = true; return; }
+  if(TYPING || COMPOSING || DRAWING){ RENDER_WANTED = true; return; }
   /* 同步密集時唔好一有變動就重建整版畫面；最多每 400 毫秒畫一次 */
   const gap = Date.now() - LAST_RENDER;
   if(gap >= 400){ LAST_RENDER = Date.now(); render(); return; }
@@ -2668,13 +2673,18 @@ const NPADS = {};
 function initNotePad(me, i){
   const c = document.getElementById('npad'+i); if(!c) return;
   const key = c.dataset.key, txt = c.dataset.txt;
-  const P = makePad(c, txt, me.wlv, myAns()[key]);
+  const P = makePad(c, txt, me.wlv, myAns()[key], key);
   NPADS[i] = P;
 }
-function clearNote(i){ const P=NPADS[i]; if(P){ P.strokes=[]; P.repaint(); } }
+function clearNote(i){
+  const P=NPADS[i]; if(!P) return;
+  P.strokes=[]; if(P.bufKey) delete PADBUF[P.bufKey];
+  P.repaint();
+}
 function saveNote(i){
   const P = NPADS[i]; if(!P || !P.strokes.length){ alert('請先書寫，然後才按「寫好了」。'); return; }
   myAns()[P.key] = {s:P.strokes, w:P.c.width, h:P.c.height};
+  delete PADBUF[P.key];
   saveMine(); render(); cheer('書寫完成！');
 }
 
@@ -2694,8 +2704,17 @@ function strokesSVG(rec, h){
       stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 }
 let PAD=null;
+/* 學生寫咗但未撳「寫好了」嘅筆劃。
+   畫面每次重畫（老師轉頁、其他同學交嘢）都會造一個新手寫板；
+   如果只由「已儲存」嘅內容開始，學生啱啱寫嗰幾筆就會不見了 ——
+   十二個人一齊上堂時同步好密，所以寫寫下就會消失。
+   未提交嘅筆劃留喺呢度，重畫幾多次都攞得返。
+   只存喺本機記憶，唔會上雲端；換連堂或重新載入就清走。 */
+const PADBUF = {};
+let DRAWING = false;
+
 /* 共用手寫板：課堂筆記與抄寫詞語都用這個 */
-function makePad(c, target, wlv, saved){
+function makePad(c, target, wlv, saved, key){
   const x = c.getContext('2d');
   const bg = ()=>{
     x.clearRect(0,0,c.width,c.height);
@@ -2716,7 +2735,8 @@ function makePad(c, target, wlv, saved){
       [...target].forEach((ch,k)=>x.fillText(ch,k*w+w/2,c.height/2));
     }
   };
-  const P = {c, x, key:c.dataset.key, strokes:(saved&&saved.s)?saved.s.map(a=>[...a]):[]};
+  const seed = (key && PADBUF[key]) || (saved && saved.s) || [];
+  const P = {c, x, key:c.dataset.key, bufKey:key, strokes: seed.map(a=>[...a])};
   P.repaint = ()=>{
     bg();
     x.strokeStyle='#2E3440'; x.lineWidth=SW; x.lineCap='round'; x.lineJoin='round';
@@ -2731,7 +2751,7 @@ function makePad(c, target, wlv, saved){
   const pos=e=>{ const r=c.getBoundingClientRect(), q=e.touches?e.touches[0]:e;
     return [Math.round((q.clientX-r.left)*c.width/r.width),
             Math.round((q.clientY-r.top)*c.height/r.height)]; };
-  const start=e=>{ e.preventDefault(); on=true;
+  const start=e=>{ e.preventDefault(); on=true; DRAWING=true;
     const [px,py]=pos(e); cur=[px,py]; P.strokes.push(cur);
     x.strokeStyle='#2E3440'; x.lineWidth=SW; x.lineCap='round'; x.lineJoin='round';
     x.beginPath(); x.moveTo(px,py); };
@@ -2739,7 +2759,10 @@ function makePad(c, target, wlv, saved){
     const [px,py]=pos(e), lx=cur[cur.length-2], ly=cur[cur.length-1];
     if(Math.abs(px-lx)+Math.abs(py-ly) < 3) return;
     cur.push(px,py); x.lineTo(px,py); x.stroke(); };
-  const end=()=>{ on=false; cur=null; };
+  const end=()=>{
+    on=false; cur=null; DRAWING=false;
+    if(key) PADBUF[key] = P.strokes;    /* 每寫完一筆即刻記低 */
+  };
   c.addEventListener('pointerdown',start); c.addEventListener('pointermove',move);
   c.addEventListener('touchstart',start,{passive:false});
   c.addEventListener('touchmove',move,{passive:false});
@@ -2754,7 +2777,8 @@ function makePad(c, target, wlv, saved){
 }
 function initPad(me){
   const c=document.getElementById('pad'); if(!c) return;
-  PAD = makePad(c, curWord(), me.wlv, myAns()['w'+CTRL.wordIdx]);
+  const k = 'w'+CTRL.wordIdx;
+  PAD = makePad(c, curWord(), me.wlv, myAns()[k], k);
 }
 /* 突然鎖機／轉頁時，把未按「寫好了」嘅筆劃悄悄儲起，避免同學白寫 */
 function stashPad(){
@@ -2767,10 +2791,16 @@ function stashPad(){
   PAD = null;
   saveMine();
 }
-function clearPad(){ if(PAD){ PAD.strokes=[]; PAD.repaint(); } }
+function clearPad(){
+  if(!PAD) return;
+  PAD.strokes=[]; if(PAD.bufKey) delete PADBUF[PAD.bufKey];
+  PAD.repaint();
+}
 function savePad(){
   if(!PAD || !PAD.strokes.length){ alert('請先書寫，然後才按「寫好了」。'); return; }
-  myAns()['w'+CTRL.wordIdx] = {s:PAD.strokes, w:PAD.c.width, h:PAD.c.height};
+  const k = 'w'+CTRL.wordIdx;
+  myAns()[k] = {s:PAD.strokes, w:PAD.c.width, h:PAD.c.height};
+  delete PADBUF[k];
   ANS[ME].prog='done'; saveMine(); render(); cheer('書寫完成！');
 }
 
