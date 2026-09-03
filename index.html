@@ -446,7 +446,7 @@ h3.sec{font-size:1.12rem;margin:22px 0 10px;padding-bottom:7px;
       <span id="sNet"></span>
       <button class="btn sm" id="bJy2" onclick="toggleJy()">拼</button>
       <button class="btn sm" id="bLang2" onclick="toggleLang()">🌐 EN</button>
-      <button class="btn sm lemon" id="sPurse" onclick="toggleShopS()">💰 $0</button>
+      <button class="btn sm lemon" id="sPurse">💰 $0</button>
       <button class="btn sm" onclick="location.reload()">✕</button>
     </div>
   </div>
@@ -2221,7 +2221,14 @@ function renderStudent(){
   const me=stu(ME);
   document.getElementById('sName').textContent = me.n;
   document.getElementById('sMeta').textContent = `單元一 · 第 ${L().no} 連堂`;
-  document.getElementById('sPurse').textContent = `💰 $${BANK.wallet[ME]||0}`;
+  /* 錢包平時淨係顯示餘額，撳唔到 —— 同學唔會上堂上到一半走咗入去。
+     老師打開獎品店嗰陣先變成可以撳入去換獎品。 */
+  const purse = document.getElementById('sPurse');
+  purse.textContent = `💰 $${BANK.wallet[ME]||0}` + (CTRL.shopOpen ? ' 🎁' : '');
+  purse.onclick = CTRL.shopOpen ? toggleShopS : null;
+  purse.style.pointerEvents = CTRL.shopOpen ? 'auto' : 'none';
+  purse.classList.toggle('peach', !!CTRL.shopOpen);
+  if(!CTRL.shopOpen && SHOP_S) SHOP_S = false;   /* 老師收舖，同學跟住返課堂 */
   if(CTRL.hold){                       /* 老師鎖住咗：唔好畀學生撳嘢 */
     stashPad();                        /* 寫緊嘅字先儲起，唔好因為突然鎖機而白寫 */
     B.innerHTML = `<div class="waitbox holdwait"><div class="em">👀</div>
@@ -2578,15 +2585,46 @@ let TYPING = false;       /* 輸入框有焦點 */
 let COMPOSING = false;    /* 輸入法正在組字 */
 let RENDER_WANTED = false;
 let LAST_RENDER = 0, RENDER_TIMER = null;
+
+/* ══ 學生機「死機」防護 ══
+   重畫會因為三件事被押後：學生打緊字、輸入法組緊字、手指喺度寫緊字。
+   問題係「結束」嘅事件唔一定嚟到 —— iPad 上第二隻手指掂到或者掃屏，
+   系統會取消觸控（冇 touchend）；輸入框亦可能連焦點一齊被刪走（冇 blur）。
+   一旦收唔到結束事件，旗標就永遠停喺 true，之後每次重畫都被押後，
+   部機好似死咗咁，老師轉幾多頁都唔會郁。
+   所以唔再淨靠旗標，改為問「而家真係咁咩」，同埋加時限。 */
+let TYPE_TS = 0, DRAW_TS = 0;
+function typingNow(){
+  const a = document.activeElement;
+  if(!(a && a.classList && a.classList.contains('typebox'))) return false;
+  return Date.now() - TYPE_TS < 8000;      /* 八秒冇撳過掣就當佢唔係打緊 */
+}
+function drawingNow(){
+  return DRAWING && Date.now() - DRAW_TS < 2000;   /* 兩秒冇郁過就當佢放咗手 */
+}
+function busyNow(){ return typingNow() || drawingNow(); }
+
+/* 看門狗：押後咗嘅重畫，一冇人打字寫字就即刻補畫，
+   確保學生機唔會永久停喺舊畫面。 */
+setInterval(()=>{
+  if(!RENDER_WANTED || busyNow()) return;
+  RENDER_WANTED = false;
+  TYPING = COMPOSING = DRAWING = false;
+  const el = document.activeElement;
+  if(el && el.classList && el.classList.contains('typebox') && el.dataset.key)
+    typeSave(el.dataset.key, el.value);          /* 打咗嘅字唔好唔見咗 */
+  try{ render(); }catch(e){}
+}, 1200);
+
 function renderSafe(){
-  if(TYPING || COMPOSING || DRAWING){ RENDER_WANTED = true; return; }
+  if(busyNow()){ RENDER_WANTED = true; return; }
   /* 同步密集時唔好一有變動就重建整版畫面；最多每 400 毫秒畫一次 */
   const gap = Date.now() - LAST_RENDER;
   if(gap >= 400){ LAST_RENDER = Date.now(); render(); return; }
   if(RENDER_TIMER) return;
   RENDER_TIMER = setTimeout(()=>{
     RENDER_TIMER = null; LAST_RENDER = Date.now();
-    if(!TYPING && !COMPOSING) render(); else RENDER_WANTED = true;
+    if(!busyNow()) render(); else RENDER_WANTED = true;
   }, 400 - gap);
 }
 function flushRender(){
@@ -2597,13 +2635,16 @@ function bindTypeBoxes(){
   document.querySelectorAll('.typebox').forEach(el=>{
     if(el.dataset.bound) return; el.dataset.bound = '1';
     const key = el.dataset.key;
-    el.addEventListener('focus', ()=>{ TYPING = true; });
+    el.addEventListener('focus', ()=>{ TYPING = true; TYPE_TS = Date.now(); });
+    el.addEventListener('keydown', ()=>{ TYPE_TS = Date.now(); });
+    el.addEventListener('compositionupdate', ()=>{ TYPE_TS = Date.now(); });
     el.addEventListener('blur',  ()=>{ TYPING = false; typeSave(key, el.value); flushRender(); });
     el.addEventListener('compositionstart', ()=>{ COMPOSING = true; });
     el.addEventListener('compositionend', e=>{
       COMPOSING = false; typeSave(key, e.target.value);
     });
     el.addEventListener('input', e=>{
+      TYPE_TS = Date.now();
       if(COMPOSING) return;          /* 組字途中不儲存，避免存了半截 */
       typeSave(key, e.target.value);
     });
@@ -2734,6 +2775,16 @@ function makePad(c, target, wlv, saved, key){
       x.textAlign='center'; x.textBaseline='middle';
       [...target].forEach((ch,k)=>x.fillText(ch,k*w+w/2,c.height/2));
     }
+    /* 每格底部標粵拼 —— 同學一路照住寫一路要讀得出，
+       顏色用返畫面其他地方注音同一隻藍。 */
+    if(!document.body.classList.contains('nojy')){
+      x.fillStyle = '#4C7FA8';                 /* 同畫面其他注音同一隻藍 */
+      x.font = `700 ${Math.max(14, Math.min(w, c.height)*0.15)}px "PingFang HK",sans-serif`;
+      x.textAlign='center'; x.textBaseline='alphabetic';
+      [...target].forEach((ch,k)=>{
+        if(JYUT[ch]) x.fillText(JYUT[ch], k*w+w/2, c.height-10);
+      });
+    }
   };
   const seed = (key && PADBUF[key]) || (saved && saved.s) || [];
   const P = {c, x, key:c.dataset.key, bufKey:key, strokes: seed.map(a=>[...a])};
@@ -2751,11 +2802,11 @@ function makePad(c, target, wlv, saved, key){
   const pos=e=>{ const r=c.getBoundingClientRect(), q=e.touches?e.touches[0]:e;
     return [Math.round((q.clientX-r.left)*c.width/r.width),
             Math.round((q.clientY-r.top)*c.height/r.height)]; };
-  const start=e=>{ e.preventDefault(); on=true; DRAWING=true;
+  const start=e=>{ e.preventDefault(); on=true; DRAWING=true; DRAW_TS=Date.now();
     const [px,py]=pos(e); cur=[px,py]; P.strokes.push(cur);
     x.strokeStyle='#2E3440'; x.lineWidth=SW; x.lineCap='round'; x.lineJoin='round';
     x.beginPath(); x.moveTo(px,py); };
-  const move=e=>{ if(!on) return; e.preventDefault();
+  const move=e=>{ if(!on) return; e.preventDefault(); DRAW_TS=Date.now();
     const [px,py]=pos(e), lx=cur[cur.length-2], ly=cur[cur.length-1];
     if(Math.abs(px-lx)+Math.abs(py-ly) < 3) return;
     cur.push(px,py); x.lineTo(px,py); x.stroke(); };
@@ -2767,12 +2818,22 @@ function makePad(c, target, wlv, saved, key){
   c.addEventListener('touchstart',start,{passive:false});
   c.addEventListener('touchmove',move,{passive:false});
   c.addEventListener('touchend',end);
+  /* 觸控被系統取消（第二隻手指掂到、掃屏手勢）唔會有 touchend，
+     一定要當佢收咗筆，否則之後成部機都唔會再重畫。 */
+  c.addEventListener('touchcancel',end);
+  c.addEventListener('pointercancel',end);
   /* 放手事件要掛喺 window（手指可能移出格外先放手），
      但畫面每次重畫都會再造一次手寫板 —— 舊嗰個監聽器一定要移除，
      否則會越積越多，用得耐就會越嚟越窒。 */
-  if(window.__padUp) window.removeEventListener('pointerup', window.__padUp);
+  if(window.__padUp){
+    window.removeEventListener('pointerup', window.__padUp);
+    window.removeEventListener('pointercancel', window.__padUp);
+    window.removeEventListener('touchcancel', window.__padUp);
+  }
   window.__padUp = end;
   window.addEventListener('pointerup', end);
+  window.addEventListener('pointercancel', end);
+  window.addEventListener('touchcancel', end);
   return P;
 }
 function initPad(me){
