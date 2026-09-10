@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>OLE · 職位申請表</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100%}
+:root{
+  --pink:#F7B7CB; --blue:#A8D8F0; --mint:#A8E6CF; --lemon:#FFE9A8;
+  --lilac:#CDB8E8; --peach:#FFCBA8;
+  --ink:#2E3440; --mute:#6B7280;
+  --glass:rgba(255,255,255,.58); --glassb:rgba(255,255,255,.80);
+  --line:rgba(255,255,255,.85);
+  --sh:0 8px 28px rgba(90,110,160,.16);
+  --hard:0 5px 0 rgba(120,130,170,.26);
+}
+body{
+  font-family:"PingFang HK","PingFang TC","Microsoft JhengHei","Noto Sans TC",system-ui,sans-serif;
+  color:var(--ink); min-height:100vh; overscroll-behavior:none;
+  background:
+    radial-gradient(58vw 52vw at 8% 4%,  #FBD5E4 0%, transparent 62%),
+    radial-gradient(52vw 48vw at 96% 8%, #CFE8FA 0%, transparent 60%),
+    radial-gradient(60vw 55vw at 88% 96%,#D8F2E4 0%, transparent 62%),
+    radial-gradient(52vw 50vw at 4% 94%, #FFF0C9 0%, transparent 60%),
+    linear-gradient(160deg,#EEF4FD 0%,#FCF3F7 55%,#F1FAF5 100%);
+  background-attachment:fixed;
+}
+ruby{ruby-position:under}
+ruby{margin:0 1px}
+ruby rt{font-size:.40em;color:#4C7FA8;font-weight:700;line-height:1.2;padding:0 .3em;
+  white-space:nowrap}
+body.nojy ruby rt{display:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.hide{display:none!important}
+.tr{display:block;font-size:.62em;color:#6B7B8C;font-weight:600;margin-top:3px;line-height:1.4}
+
+.glass{background:var(--glass);backdrop-filter:blur(16px) saturate(150%);
+  -webkit-backdrop-filter:blur(16px) saturate(150%);
+  border:1px solid var(--line);border-radius:26px;box-shadow:var(--sh)}
+.btn{border-radius:20px;font-size:1.15rem;font-weight:800;padding:14px 26px;
+  box-shadow:var(--hard);transition:transform .1s,box-shadow .1s;color:#2E3440;
+  background:var(--glassb);border:1px solid var(--line);min-height:56px}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(120,130,170,.26)}
+.btn:disabled{opacity:.4;box-shadow:none;transform:none}
+.btn.pink{background:linear-gradient(180deg,#FCC9DA,#F5A8C2)}
+.btn.blue{background:linear-gradient(180deg,#BFE4F7,#93CDEA)}
+.btn.mint{background:linear-gradient(180deg,#BFEFDA,#93DEBE)}
+.btn.lemon{background:linear-gradient(180deg,#FFF0BE,#FFE192)}
+.btn.lilac{background:linear-gradient(180deg,#DECCF2,#C3AAE4)}
+.btn.peach{background:linear-gradient(180deg,#FFDCC2,#FFC29B)}
+.btn.sm{font-size:.95rem;padding:9px 15px;min-height:0;border-radius:14px}
+.btn .tr{color:#5A6B7C}
+
+#roles{min-height:100vh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:24px;padding:26px;text-align:center}
+#roles h1{font-size:2.6rem;letter-spacing:3px;color:#33506E;text-shadow:0 2px 0 #fff}
+#roles .sub{color:var(--mute);font-size:1rem;margin-top:-8px}
+.rolebtns{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.rolecard{padding:30px 38px;min-width:210px;border-radius:30px;
+  background:var(--glass);backdrop-filter:blur(16px);border:1px solid var(--line);
+  box-shadow:var(--hard);transition:transform .1s}
+.rolecard:active{transform:translateY(4px)}
+.rolecard .ico{font-size:2.9rem}
+.rolecard .t{font-size:1.45rem;font-weight:900;margin-top:8px}
+.rolecard .d{font-size:.85rem;color:var(--mute);margin-top:6px;line-height:1.6}
+
+.top{background:rgba(255,255,255,.65);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);padding:10px 18px;display:flex;
+  align-items:center;gap:13px;flex-wrap:wrap;position:sticky;top:0;z-index:40}
+.top .ttl{font-size:1.1rem;font-weight:900;color:#33506E}
+.top .meta{font-size:.82rem;color:var(--mute)}
+.top .sp{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.top select{font-family:inherit;font-size:.83rem;background:var(--glassb);
+  border:1px solid var(--line);border-radius:12px;padding:6px 10px;max-width:44vw;font-weight:700}
+.dots{display:flex;gap:5px;flex-wrap:wrap}
+.dot{width:13px;height:13px;border-radius:50%;background:rgba(120,140,180,.24)}
+.dot.on{background:#7FD3B0} .dot.done{background:#F4B740}
+
+.steps{display:flex;gap:8px;padding:14px 18px 0;flex-wrap:wrap;max-width:1400px;margin:0 auto;
+  align-items:center}
+.btn.holdon{animation:pulse 1.2s ease-in-out infinite;
+  box-shadow:0 0 0 4px rgba(232,155,98,.35), var(--hard);border-color:#E89B62}
+.holdwait{background:var(--glassb);border:1px solid var(--line);border-radius:28px;
+  box-shadow:var(--sh);margin:16px}
+.sendbox{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sendchip{font-size:.9rem;font-weight:800;color:#1E8E62;background:rgba(233,250,243,.9);
+  border:1px solid var(--line);border-radius:20px;padding:6px 14px;white-space:nowrap}
+.sendchip.on{color:#8A5B12;background:rgba(255,246,220,.95);animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+.gotchip{display:flex;align-items:center;gap:8px}
+.gotnum{font-size:.9rem;font-weight:900;color:var(--mute);background:var(--glassb);
+  border:1px solid var(--line);border-radius:20px;padding:6px 12px;white-space:nowrap}
+.gotnum.all{color:#1E8E62;background:rgba(233,250,243,.95)}
+.gotdots{display:flex;gap:4px}
+.gotdots i{width:11px;height:11px;border-radius:50%;background:rgba(120,140,180,.28)}
+.gotdots i.y{background:#7FD3B0}
+.step{padding:10px 17px;border-radius:16px;background:rgba(255,255,255,.42);
+  font-weight:800;font-size:.95rem;color:var(--mute);border:1px solid rgba(255,255,255,.6)}
+.step.on{background:var(--glassb);color:#2E3440;box-shadow:var(--sh)}
+.panel{padding:22px;margin:12px auto 24px;max-width:1400px}
+
+.textrow{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap}
+.textrow img{width:min(470px,100%);border-radius:22px;border:5px solid #fff;box-shadow:var(--sh)}
+.sentence{flex:1;min-width:290px}
+.sentence .zh{font-size:2rem;line-height:2.6;font-weight:800}
+.sentence .zh w{display:inline-block;padding:2px 4px;border-radius:10px;cursor:pointer}
+.sentence .zh w.key{background:rgba(255,233,168,.85);box-shadow:inset 0 -4px 0 #F4C95D}
+.sentence .zh w:active{background:#BFEFDA}
+.zh w.reading, .sentence .zh w.reading{background:#FFD9D9;color:#C0392B;
+  box-shadow:inset 0 -5px 0 #E74C3C;border-radius:10px}
+.zh w.reading ruby rt{color:#C0392B}
+.note{background:rgba(255,255,255,.55);border-left:5px solid var(--lemon);
+  border-radius:0 16px 16px 0;padding:13px 16px;font-size:.93rem;line-height:1.75;margin:14px 0}
+.row{display:flex;gap:11px;flex-wrap:wrap;align-items:center}
+
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:15px}
+.vcard{background:var(--glassb);border:1px solid var(--line);border-radius:22px;padding:13px;
+  text-align:center;box-shadow:var(--hard);transition:transform .1s}
+.vcard:active{transform:translateY(3px)}
+.vcard img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:14px;background:#fff}
+.vcard .w{font-size:1.55rem;font-weight:900;margin-top:10px}
+.vcard .e{font-size:.82rem;color:var(--mute);font-weight:700}
+.vcard.big{grid-column:1/-1}
+.vcard.big img{max-width:380px;max-height:260px;object-fit:contain;margin:0 auto;display:block;aspect-ratio:auto}
+.vcard.big .w{font-size:3.3rem}
+
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:15px}
+.scard{background:var(--glassb);border:1px solid var(--line);border-radius:22px;padding:15px;
+  box-shadow:var(--sh)}
+.scard .nm{font-size:1.08rem;font-weight:900;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.scard .lv{font-size:.7rem;font-weight:800;padding:3px 9px;border-radius:20px;background:#EEF2F8;color:var(--mute)}
+.scard .lv.g1{background:#CFEFE0;color:#26705A}
+.scard .lv.g2{background:#CFE3F7;color:#28577F}
+.scard .lv.g3{background:#FFE0C7;color:#96541F}
+.scard .st{font-size:.9rem;color:var(--mute);margin-top:8px}
+.scard.done{border-color:#8FD9BC;background:rgba(233,250,243,.82)}
+.ans{background:rgba(255,255,255,.75);border-radius:14px;padding:9px 12px;margin-top:9px;font-size:1rem}
+.ans .ok{color:#1E8E62;font-weight:900} .ans .no{color:#C0554A;font-weight:900}
+.ans img{max-width:100%;border-radius:10px;border:1px solid var(--line);background:#fff}
+.rub{display:flex;gap:5px;margin-top:9px}
+.rub button{flex:1;border:1px solid var(--line);border-radius:11px;padding:8px 0;
+  font-weight:900;font-size:1rem;background:rgba(255,255,255,.8)}
+.rub button.on{background:linear-gradient(180deg,#BFEFDA,#7FD3B0);color:#1B5E45}
+.coin{display:flex;align-items:center;gap:9px;margin-top:9px;font-size:1.02rem;font-weight:900;color:#B7791F}
+.coin button{border:1px solid var(--line);border-radius:11px;width:38px;height:38px;
+  font-size:1.15rem;font-weight:900;background:rgba(255,255,255,.85)}
+
+.pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:16px;padding:20px;
+  max-width:1100px;margin:0 auto}
+.pick button{background:var(--glassb);border-radius:26px;padding:22px 10px;
+  box-shadow:var(--hard);border:1px solid var(--line);transition:transform .1s}
+.pick button:active{transform:translateY(4px)}
+.pick .av{width:74px;height:74px;border-radius:50%;color:#33506E;
+  font-size:1.9rem;font-weight:900;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 10px;border:3px solid #fff;box-shadow:var(--sh)}
+.pick .n{font-size:1.08rem;font-weight:900}
+
+.stu{padding:16px;max-width:940px;margin:0 auto}
+.q{background:var(--glassb);border:1px solid var(--line);border-radius:28px;padding:24px;
+  box-shadow:var(--sh);margin-bottom:16px}
+.q .qt{font-size:.98rem;color:var(--mute);font-weight:800;margin-bottom:10px}
+.q .qq{font-size:1.6rem;font-weight:900;line-height:2.1}
+.q .qq .blank{display:inline-block;min-width:116px;border-bottom:5px solid #7FB6D9;
+  text-align:center;color:#2A6E9E}
+.q .qq .blank.filled{border-bottom-color:#F4B740;color:#8A5B12}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(152px,1fr));gap:14px;margin-top:18px}
+.opt{background:rgba(255,255,255,.82);border:4px solid rgba(200,215,235,.85);border-radius:20px;
+  padding:16px 10px;font-size:1.6rem;font-weight:900;text-align:center;min-height:88px;
+  box-shadow:var(--hard);transition:transform .1s}
+.opt:active{transform:translateY(3px)}
+.opt.pickd{border-color:#F4B740;background:linear-gradient(180deg,#FFF6DC,#FFEBB8)}
+.opt.used{opacity:.34}
+.opt img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;margin-bottom:6px}
+.pad{border:5px solid #fff;border-radius:22px;background:#fff;touch-action:none;
+  display:block;width:100%;max-width:820px;margin:14px auto;box-shadow:var(--sh)}
+.bigword{text-align:center;font-size:4.2rem;font-weight:900;line-height:2.1;letter-spacing:6px}
+.bigword ruby rt{font-size:.30em;color:#3C7AA8}
+.dual{display:grid;gap:14px;margin-top:12px}
+.way{border:2px solid rgba(200,215,235,.7);border-radius:20px;padding:12px;
+  background:rgba(255,255,255,.5);transition:opacity .2s}
+.way.off{opacity:.32;pointer-events:none;filter:grayscale(1)}
+.way .waylb{font-size:1rem;font-weight:800;color:var(--mute);margin-bottom:4px;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.way .lock{font-size:.8rem;font-weight:800;background:#E7ECF3;color:#6B7280;
+  border-radius:20px;padding:2px 10px}
+.typebox{display:block;width:100%;max-width:820px;margin:10px auto 0;font-family:inherit;
+  font-size:2.4rem;font-weight:900;text-align:center;padding:14px 18px;border-radius:18px;
+  border:4px solid rgba(200,215,235,.9);background:#fff;letter-spacing:6px}
+.typebox:focus{outline:none;border-color:#F4B740}
+.padbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.waitbox{text-align:center;padding:54px 20px;max-width:640px;margin:0 auto}
+.waitbox .em{font-size:4.4rem}
+.waitbox .t{font-size:1.6rem;font-weight:900;margin-top:14px}
+.waitbox .d{font-size:1rem;color:var(--mute);margin-top:8px;line-height:1.8}
+.hintbox{margin-top:14px;background:rgba(255,243,205,.82);border:2px dashed #F4C95D;
+  border-radius:16px;padding:13px 16px;font-size:1.1rem;font-weight:700;text-align:center}
+.hintbox img{max-width:210px;border-radius:12px;display:block;margin:8px auto 0}
+.ticket{background:repeating-linear-gradient(135deg,#FFF6DC 0 14px,#FFEFC4 14px 28px);
+  border:4px dashed #F4B740;border-radius:22px;padding:20px;text-align:center;
+  margin-bottom:16px;box-shadow:var(--sh);animation:pop .5s}
+
+.pdots{display:flex;gap:7px;flex-wrap:wrap;margin-left:auto}
+.pdot{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.7);
+  border:3px solid #C3CFE0;display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:900;color:var(--mute)}
+.pdot.cur{border-color:#5FA8D3;background:#DCEEF9;color:#28577F;transform:scale(1.22)}
+.pdot.ok{background:#7FD3B0;border-color:#4FB894;color:#fff}
+
+.opt.right{border-color:#7FD3B0!important;
+  background:linear-gradient(180deg,#E4F8EE,#BFEFDA)!important;
+  box-shadow:0 0 0 5px rgba(127,211,176,.35),var(--hard)}
+.opt.wrong{animation:shake .5s;border-color:#E7746A!important;
+  background:linear-gradient(180deg,#FDE4E1,#F8CFCA)!important}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-12px)}
+  40%,80%{transform:translateX(12px)}}
+.wrongmask{position:fixed;inset:0;z-index:69;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:rgba(231,116,106,.24);
+  pointer-events:none;animation:shake .5s}
+.wrongmask .wx{font-size:5rem}
+.wrongmask .wt{font-size:1.7rem;font-weight:900;color:#B03A2E;margin-top:8px}
+#cheer{display:none;position:fixed;inset:0;z-index:70;align-items:center;justify-content:center;
+  flex-direction:column;text-align:center;background:rgba(127,211,176,.94);color:#fff}
+#cheer.show{display:flex}
+#cheer .big{font-size:5.2rem;animation:pop .5s}
+#cheer h2{font-size:2.3rem;margin:12px 0 20px;animation:pop .6s}
+@keyframes pop{0%{transform:scale(.2)}70%{transform:scale(1.14)}100%{transform:scale(1)}}
+.confetti{position:fixed;top:-60px;font-size:2.1rem;z-index:71;animation:fall linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(115vh) rotate(720deg)}}
+
+.admin{max-width:1180px;margin:0 auto;padding:18px}
+table.adm{width:100%;border-collapse:separate;border-spacing:0 8px}
+table.adm th{font-size:.83rem;color:var(--mute);text-align:left;padding:0 10px 4px;font-weight:800}
+table.adm td{background:var(--glassb);padding:11px 10px;border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);font-size:.96rem}
+table.adm td:first-child{border-left:1px solid var(--line);border-radius:16px 0 0 16px;font-weight:900}
+table.adm td:last-child{border-right:1px solid var(--line);border-radius:0 16px 16px 0}
+table.adm select{font-family:inherit;font-size:.93rem;padding:7px 9px;border-radius:11px;
+  border:1px solid var(--line);background:rgba(255,255,255,.85);font-weight:700}
+.nmbox{font-family:inherit;font-size:1rem;font-weight:900;padding:7px 10px;border-radius:11px;
+  border:1px solid var(--line);background:rgba(255,255,255,.85);width:100%;max-width:170px}
+.nmbox:focus{outline:none;border-color:#F4B740}
+.sw{position:relative;display:inline-block;width:54px;height:30px}
+.sw input{opacity:0;width:0;height:0}
+.sw span{position:absolute;inset:0;background:#CFD8E3;border-radius:30px;transition:.2s}
+.sw span:before{content:"";position:absolute;height:24px;width:24px;left:3px;top:3px;
+  background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.sw input:checked+span{background:#7FD3B0}
+.sw input:checked+span:before{transform:translateX(24px)}
+
+.filewarn{position:fixed;left:0;right:0;bottom:0;z-index:90;
+  background:linear-gradient(180deg,#FFE2DC,#FFC9BE);border-top:3px solid #E7746A;
+  color:#7A2E22;padding:14px 18px;font-size:1rem;font-weight:700;line-height:1.7;
+  box-shadow:0 -6px 20px rgba(0,0,0,.12)}
+.filewarn code{background:rgba(255,255,255,.8);border-radius:8px;padding:2px 8px;
+  font-size:.85rem;word-break:break-all}
+.filewarn button{background:#fff;border-radius:12px;padding:7px 16px;margin-left:10px;
+  font-weight:800;box-shadow:0 3px 0 rgba(0,0,0,.15)}
+
+.hello{text-align:center;padding:34px 20px 26px;background:var(--glassb);
+  border:1px solid var(--line);border-radius:28px;box-shadow:var(--sh);margin-bottom:16px}
+.hello .sun{font-size:5rem;line-height:1;animation:bob 2.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(4deg)}}
+.hello .hi{font-size:3rem;font-weight:900;margin-top:8px;letter-spacing:3px}
+.hello .hisub{font-size:1.05rem;color:var(--mute);font-weight:700;margin-top:4px}
+.hello .wave{margin-top:12px;font-size:1.9rem;display:flex;gap:4px;justify-content:center;flex-wrap:wrap}
+.hello .wave span{display:inline-block;animation:wv 1.4s ease-in-out infinite;transform-origin:70% 70%}
+@keyframes wv{0%,100%{transform:rotate(0)}25%{transform:rotate(22deg)}75%{transform:rotate(-14deg)}}
+
+.qrow{display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap}
+.qrbox{background:#fff;border:1px solid var(--line);border-radius:24px;padding:16px;
+  box-shadow:var(--sh);text-align:center;flex-shrink:0}
+.qrsvg{width:clamp(180px,22vw,260px);aspect-ratio:1}
+.qrsvg svg{width:100%;height:100%;display:block}
+.qrcap{font-size:.95rem;font-weight:800;color:var(--mute);margin-top:8px}
+.qrwarn{font-size:.85rem;font-weight:800;color:#C0554A;margin-top:6px;max-width:240px}
+.qrtext{flex:1;min-width:280px}
+.qrzoom{position:fixed;inset:0;z-index:80;background:rgba(255,255,255,.97);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px}
+.qrzin{width:min(74vh,74vw)}
+.qrzin svg{width:100%;height:100%;display:block}
+.qrzcap{font-size:1.6rem;font-weight:900}
+
+.goals{display:flex;flex-direction:column;gap:11px}
+.goal{display:flex;align-items:center;gap:14px;text-align:left;width:100%;
+  background:var(--glassb);border:2px solid var(--line);border-radius:20px;
+  padding:14px 18px;box-shadow:var(--sh)}
+.goal .gico{font-size:2.1rem;flex-shrink:0}
+.goal .gtxt{flex:1;font-size:1.15rem;font-weight:800;line-height:1.9}
+.goal .gno{width:38px;height:38px;border-radius:50%;flex-shrink:0;
+  background:#EEF2F8;color:var(--mute);font-weight:900;font-size:1.05rem;
+  display:flex;align-items:center;justify-content:center}
+.goal.tick{cursor:pointer;transition:transform .1s}
+.goal.tick:active{transform:translateY(3px)}
+.goal.on{border-color:#7FD3B0;background:linear-gradient(100deg,rgba(233,250,243,.95),rgba(255,255,255,.8))}
+.goal.on .gno{background:#7FD3B0;color:#fff}
+
+.ranklist{display:flex;flex-direction:column;gap:10px}
+.rank{display:grid;grid-template-columns:56px 128px 1fr 92px auto;
+  grid-template-areas:"pos who bar amt ctl" ". det det det det";
+  align-items:center;gap:6px 12px;background:var(--glassb);border:1px solid var(--line);
+  border-radius:20px;padding:12px 16px;box-shadow:var(--sh)}
+.rank .pos{grid-area:pos;font-size:1.9rem;font-weight:900;text-align:center}
+.rank .who{grid-area:who;font-size:1.25rem;font-weight:900}
+.rank .bar{grid-area:bar;height:16px;background:rgba(180,195,220,.3);border-radius:20px;overflow:hidden}
+.rank .fill{height:100%;border-radius:20px;background:linear-gradient(90deg,#BFEFDA,#7FD3B0);
+  transition:width .35s}
+.rank .amt{grid-area:amt;font-size:1.7rem;font-weight:900;color:#B7791F;text-align:right}
+.rank .det{grid-area:det;font-size:.82rem;color:var(--mute);font-weight:700}
+.rank .ctl{grid-area:ctl;display:flex;gap:6px}
+.rank.gold{border-color:#F0C24B;background:linear-gradient(100deg,rgba(255,246,220,.95),rgba(255,255,255,.8))}
+.rank.gold .fill{background:linear-gradient(90deg,#FFE9A8,#F0C24B)}
+.rank.silver{border-color:#C6CDD6;background:linear-gradient(100deg,rgba(244,247,250,.95),rgba(255,255,255,.8))}
+.rank.silver .fill{background:linear-gradient(90deg,#E3E9F0,#B9C2CE)}
+.rank.bronze{border-color:#D9A273;background:linear-gradient(100deg,rgba(253,240,228,.95),rgba(255,255,255,.8))}
+.rank.bronze .fill{background:linear-gradient(90deg,#F5D6B8,#D9A273)}
+@media(max-width:620px){.rank{grid-template-columns:44px 1fr auto;
+  grid-template-areas:"pos who amt" "pos bar bar" ". det ctl"}}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(206px,1fr));gap:15px}
+.wcard{background:var(--glassb);border:1px solid var(--line);border-radius:24px;padding:18px;
+  box-shadow:var(--sh);text-align:center}
+.wcard .n{font-size:1.08rem;font-weight:900}
+.wcard .today{font-size:2.3rem;font-weight:900;color:#B7791F;margin:6px 0}
+.wcard .bal{font-size:.88rem;color:var(--mute)}
+.shop{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:15px;margin-top:14px}
+.shop .item{background:var(--glassb);border:1px solid var(--line);border-radius:22px;
+  padding:16px;text-align:center;box-shadow:var(--sh)}
+.shop .item .e{font-size:2.6rem}
+.shop .item .n{font-weight:900;font-size:1.02rem;margin-top:6px}
+.shop .item .p{color:#B7791F;font-weight:900;font-size:1.15rem}
+table.tx{width:100%;border-collapse:collapse;margin-top:12px;font-size:.92rem}
+table.tx th,table.tx td{border-bottom:1px solid rgba(180,195,220,.4);padding:9px 8px;text-align:left}
+table.tx td.amt{text-align:right;font-weight:900}
+.pos{color:#1E8E62} .neg{color:#C0554A}
+h3.sec{font-size:1.12rem;margin:22px 0 10px;padding-bottom:7px;
+  border-bottom:2px solid rgba(180,195,220,.4);color:#33506E}
+
+#print{display:none}
+@media print{
+  @page{ size:A4; margin:12mm 12.7mm; }
+  body{background:#fff}
+  #roles,#teacher,#student,#adminv,.top,.steps,#cheer{display:none!important}
+  #print{display:block!important}
+  #print ruby rt{display:none}                 /* 紙本不印粵拼，留空間書寫 */
+
+  .sheet{page-break-after:always;font-size:13pt;color:#000}
+  .sheet:last-child{page-break-after:auto}
+  .hd{text-align:center;font-size:15pt;font-weight:700}
+  .hd2{text-align:center;font-size:12pt;margin:2pt 0 10pt;padding-bottom:5pt;
+       border-bottom:1.5pt solid #000}
+
+  .sec{font-size:13.5pt;font-weight:700;margin:13pt 0 7pt;
+       background:#E8E8E8;padding:4pt 8pt;border-radius:3pt;
+       page-break-after:avoid}
+
+  .fld{display:flex;align-items:flex-start;gap:8pt;margin-bottom:9pt}
+  .fld .lb{font-size:12.5pt;font-weight:700;width:40pt;flex-shrink:0;padding-top:22pt}
+
+  /* 書寫格：約 24mm 見方；格數與字數一一對應 */
+  .cells{display:flex;flex-wrap:wrap;gap:4pt}
+  .cell{width:68pt;height:68pt;border:1.2pt solid #555;flex-shrink:0;
+        display:flex;align-items:center;justify-content:center;
+        font-size:44pt;line-height:1;font-family:"PingFang HK",sans-serif;
+        background:repeating-linear-gradient(45deg,transparent 0 34pt,#F2F2F2 34pt 34.4pt)}
+  .cell.narrow{width:40pt;font-size:30pt}
+  .cell.grey{color:#C8C8C8}
+
+  .text{font-size:19pt;line-height:1.9;padding:6pt 9pt;border:1pt solid #999;border-radius:4pt}
+
+  .wrow{display:flex;align-items:flex-start;gap:8pt;margin-bottom:9pt;
+        page-break-inside:avoid}
+  .wrow .wlab{font-size:19pt;font-weight:700;width:86pt;flex-shrink:0;padding-top:20pt}
+
+  .q{margin-bottom:13pt;padding-bottom:10pt;border-bottom:1pt dashed #BBB;
+     page-break-inside:avoid}
+  .q .qn{font-size:14pt;font-weight:700;margin-bottom:5pt}
+  .q .opts{display:flex;flex-wrap:wrap;gap:6pt 20pt;margin-top:3pt}
+  .q .opt{font-size:15pt}
+  .q .line{font-size:16pt;line-height:2.4}
+  .q .bank{border:1pt dashed #666;border-radius:4pt;padding:5pt;text-align:center;
+           font-size:15pt;margin-top:5pt}
+  .q .pic{display:block;max-width:56mm;max-height:36mm;margin:4pt 0}
+  .q .pic.sm{max-width:30mm;max-height:22mm;display:inline-block;vertical-align:middle}
+  .q .pairrow{display:flex;align-items:center;gap:10pt;margin-bottom:5pt}
+  .q .ansline{display:flex;align-items:flex-start;gap:6pt;margin-top:7pt;flex-wrap:wrap}
+  .q .ansline .alab{font-size:14pt;font-weight:700;padding-top:22pt;flex-shrink:0}
+
+  .hint{border-left:3pt solid #999;background:#F6F6F6;padding:5pt 8pt;margin-top:5pt;
+        border-radius:0 4pt 4pt 0}
+  .hint .htag{font-size:9.5pt;font-weight:700;background:#666;color:#fff;
+              padding:1pt 6pt;border-radius:8pt;margin-right:5pt}
+  .hint .hsent{font-size:14pt;line-height:1.9;display:inline}
+  .hint .htext{font-size:12pt;margin-top:3pt}
+  .hint .hcards{display:flex;gap:12pt;margin-top:4pt}
+  .hint .hcard{text-align:center}
+  .hint .hcard img{width:30mm;height:22mm;object-fit:cover;border:1pt solid #999}
+  .hint .hcard .sw{width:30mm;height:22mm;border:1pt solid #999}
+  .hint .hcard .hlab{font-size:12pt;font-weight:700}
+}
+/* ══ 職位申請表專用（新加）══ */
+.tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.adminput{width:100%;min-width:7em;border:1px solid #DCE5F0;border-radius:8px;
+  padding:6px 8px;font:inherit;background:#fff}
+.cvgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.cvcard{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.9);
+  border-radius:16px;padding:14px 16px;box-shadow:0 6px 18px rgba(90,110,150,.10)}
+.cvcard h3{font-size:1.05rem;margin-bottom:8px;color:#3B5570}
+.cvrow{display:flex;gap:8px;padding:4px 0;border-bottom:1px dashed #E3E9F2;font-size:.95rem}
+.cvrow:last-child{border-bottom:none}
+.cvlab{flex:0 0 6em;color:#4C7FA8;font-weight:700}
+.cvval{flex:1;word-break:break-word}
+@media print{
+  .sheet .ptier{font-size:12pt;font-weight:700;margin:2pt 0 10pt;color:#333}
+  .sheet .prow{display:flex;gap:8pt;margin-bottom:9pt;page-break-inside:avoid;align-items:stretch}
+  .sheet .plab{flex:0 0 34mm;font-size:12pt;font-weight:700;padding-top:3pt}
+  .sheet .plab .pen{font-size:8.5pt;font-weight:400;color:#666}
+  .sheet .pbox{flex:1;border:1pt solid #999;border-radius:2pt;min-height:15mm;position:relative}
+  .sheet .peg{position:absolute;left:3pt;top:2pt;font-size:8.5pt;color:#aaa}
+  .sheet .pcirc{flex:1;display:flex;flex-wrap:wrap;gap:6pt;align-items:center;padding-top:2pt}
+  .sheet .pop{font-size:13pt;border:1pt solid #999;border-radius:14pt;padding:2pt 10pt}
+  .sheet .psign{margin-top:14pt;font-size:12pt}
+}
+
+</style>
+<body>
+
+<div id="roles">
+  <h1>職位申請表</h1>
+  <div class="sub">賽馬會匡智學校 · 其他學習經歷（OLE）· 2026–2027</div>
+  <div class="rolebtns">
+    <button class="rolecard" onclick="setRole('t')">
+      <div class="ico">📺</div><div class="t">教師版</div>
+      <div class="d">大電視顯示<br>派題 · 鎖機 · 評分 · 派錢</div></button>
+    <button class="rolecard" onclick="setRole('s')">
+      <div class="ico">📱</div><div class="t">學生版</div>
+      <div class="d">平板電腦使用<br>寫出或圈出個人資料</div></button>
+    <button class="rolecard" onclick="setRole('a')">
+      <div class="ico">⚙️</div><div class="t">後台設定</div>
+      <div class="d">設定每位學生的<br>能力 · 書寫支援 · 個人資料</div></button>
+  </div>
+</div>
+
+<div id="teacher" class="hide">
+  <div class="top">
+    <div>
+      <div class="ttl">職位申請表</div>
+      <div class="meta"><select id="tPick"></select></div>
+    </div>
+    <div class="sp">
+      <div class="dots" id="tDots"></div>
+      <button class="btn sm" id="bHold" onclick="toggleHold()">🔒 鎖住學生機</button>
+      <span id="tNet"></span>
+      <button class="btn sm" id="bJy" onclick="toggleJy()">拼</button>
+      <button class="btn sm" id="bLang" onclick="toggleLang()">🌐 EN</button>
+      <button class="btn sm" onclick="doPrint()">🖨 列印</button>
+      <button class="btn sm" onclick="resetAll()">↺ 重設</button>
+      <button class="btn sm" onclick="location.reload()">✕</button>
+    </div>
+  </div>
+  <div class="steps" id="tSteps"></div>
+  <div class="panel glass" id="tPanel"></div>
+</div>
+
+<div id="student" class="hide">
+  <div class="top">
+    <div><div class="ttl" id="sName">請選擇你的名字</div><div class="meta" id="sMeta"></div></div>
+    <div class="sp">
+      <span id="sNet"></span>
+      <button class="btn sm" id="bJy2" onclick="toggleJy()">拼</button>
+      <button class="btn sm" id="bLang2" onclick="toggleLang()">🌐 EN</button>
+      <button class="btn sm lemon" id="sPurse">💰 $0</button>
+      <button class="btn sm" onclick="location.reload()">✕</button>
+    </div>
+  </div>
+  <div id="sBody"></div>
+</div>
+
+<div id="adminv" class="hide">
+  <div class="top">
+    <div><div class="ttl">⚙️ 後台設定</div>
+      <div class="meta">只有教師可見；學生的平板電腦不會顯示任何組別字眼</div></div>
+    <div class="sp"><button class="btn sm" onclick="location.reload()">✕</button></div>
+  </div>
+  <div id="aBody" class="admin"></div>
+</div>
+
+<div id="cheer"><div class="big">🎉</div><h2 id="cheerTxt">答對了！</h2></div>
+<div id="print"></div>
+
+<script>
+'use strict';
+/* ══════════════════════════════════════════════════════════════════
+   OLE · 職位申請表　—— 起步檔
+
+   引擎由「中文堂即時互動」v29 搬過嚟 —— 嗰個係實戰用緊、
+   踩過好多坑先穩定落嚟嘅版本。呢個檔案分兩層：
+
+     ① 引擎層（下面大部分）—— 唔使改：
+        雲端同步、粵拼注音、中英切換、手寫／打字二選一、
+        代幣銀包、獎品店、鎖機、後台設定、A4 列印
+     ② 內容層（檔案最尾，有 ★★★ 標示）—— 改呢度就得：
+        AF（申請表欄目）、STEPS（分頁）、GOALS（學習目標）、
+        t*／s*（教師版／學生版每頁點顯示）
+
+   ⚠️ 未接後端之前係純本機運作（同一部電腦開兩個視窗都同步到）。
+      要全班平板電腦同步，睇《交接說明》「共用後端」嗰段。
+   ══════════════════════════════════════════════════════════════════ */
+
+const JYUT = {"我": "ngo5", "你": "nei5", "佢": "keoi5", "他": "taa1", "她": "taa1", "它": "taa1", "哋": "dei6", "們": "mun4", "大": "daai6", "家": "gaa1", "自": "zi6", "己": "gei2", "個": "go3", "是": "si6", "係": "hai6", "有": "jau5", "冇": "mou5", "不": "bat1", "唔": "m4", "了": "liu5", "在": "zoi6", "和": "wo4", "與": "jyu5", "及": "kap6", "或": "waak6", "但": "daan6", "因": "jan1", "為": "wai6", "所": "so2", "以": "ji5", "如": "jyu4", "果": "gwo2", "就": "zau6", "先": "sin1", "再": "zoi3", "又": "jau6", "也": "jaa5", "都": "dou1", "很": "han2", "太": "taai3", "最": "zeoi3", "更": "gang3", "非": "fei1", "常": "soeng4", "好": "hou2", "壞": "waai6", "多": "do1", "少": "siu2", "高": "gou1", "低": "dai1", "長": "coeng4", "短": "dyun2", "快": "faai3", "慢": "maan6", "新": "san1", "舊": "gau6", "靚": "leng3", "美": "mei5", "麗": "lai6", "開": "hoi1", "心": "sam1", "樂": "lok6", "傷": "soeng1", "嬲": "nau1", "驚": "geng1", "怕": "paa3", "悶": "mun6", "攰": "gui6", "易": "ji6", "難": "naan4", "勤": "kan4", "力": "lik6", "專": "zyun1", "認": "jing6", "真": "zan1", "負": "fu6", "責": "zaak3", "主": "zyu2", "動": "dung6", "積": "zik1", "極": "gik6", "合": "hap6", "群": "kwan4", "友": "jau5", "善": "sin6", "禮": "lai5", "貌": "maau6", "乖": "gwaai1", "靜": "zing6", "嘈": "cou4", "吵": "caau2", "凍": "dung3", "熱": "jit6", "暖": "nyun5", "涼": "loeng4", "乾": "gon1", "濕": "sap1", "香": "hoeng1", "臭": "cau3", "甜": "tim4", "酸": "syun1", "苦": "fu2", "辣": "laat6", "鹹": "haam4", "做": "zou6", "造": "zou6", "到": "dou3", "得": "dak1", "的": "dik1", "地": "dei6", "想": "soeng2", "要": "jiu3", "愛": "oi3", "鍾": "zung1", "意": "ji3", "喜": "hei2", "歡": "fun1", "識": "sik1", "嘗": "soeng4", "試": "si3", "學": "hok6", "寫": "se2", "讀": "duk6", "講": "gong2", "說": "syut3", "話": "waa6", "聽": "teng1", "睇": "tai2", "看": "hon3", "見": "gin3", "玩": "waan2", "食": "sik6", "吃": "hek3", "飲": "jam2", "喝": "hot3", "去": "heoi3", "來": "loi4", "嚟": "lai4", "返": "faan1", "回": "wui4", "行": "haang4", "走": "zau2", "跑": "paau2", "跳": "tiu3", "游": "jau4", "泳": "wing6", "水": "seoi2", "踩": "caai2", "騎": "ke4", "打": "daa2", "關": "gwaan1", "幫": "bong1", "助": "zo6", "教": "gaau3", "完": "jyun4", "成": "sing4", "工": "gung1", "作": "zok3", "放": "fong3", "收": "sau1", "拾": "sap6", "整": "zing2", "理": "lei5", "清": "cing1", "潔": "git3", "洗": "sai2", "煮": "zyu2", "種": "zung3", "植": "zik6", "畫": "waak6", "唱": "coeng3", "舞": "mou5", "影": "jing2", "拍": "paak3", "買": "maai5", "賣": "maai6", "搬": "bun1", "運": "wan6", "包": "baau1", "裝": "zong1", "摺": "zip3", "貼": "tip3", "剪": "zin2", "住": "zyu6", "企": "kei5", "坐": "co5", "瞓": "fan3", "睡": "seoi6", "起": "hei2", "身": "san1", "著": "zoek3", "穿": "cyun1", "戴": "daai3", "攞": "lo2", "拿": "naa4", "搵": "wan2", "找": "zaau2", "畀": "bei2", "給": "kap1", "受": "sau6", "接": "zip3", "送": "sung3", "等": "dang2", "候": "hau6", "排": "paai4", "隊": "deoi2", "輪": "leon4", "流": "lau4", "分": "fan1", "享": "hoeng2", "報": "bou3", "告": "gou3", "檢": "gim2", "查": "caa4", "改": "goi2", "正": "zing3", "變": "bin3", "通": "tung1", "適": "sik1", "應": "jing3", "努": "nou5", "加": "gaa1", "油": "jau4", "繼": "gai3", "續": "zuk6", "棄": "hei3", "堅": "gin1", "持": "ci4", "人": "jan4", "生": "saang1", "老": "lou5", "師": "si1", "同": "tung4", "朋": "pang4", "爸": "baa4", "媽": "maa4", "哥": "go1", "姐": "ze2", "弟": "dai6", "妹": "mui6", "爺": "je4", "嫲": "maa4", "公": "gung1", "婆": "po4", "庭": "ting4", "校": "haau6", "班": "baan1", "級": "kap1", "課": "fo3", "室": "sat1", "操": "cou1", "場": "coeng4", "堂": "tong4", "圖": "tou4", "書": "syu1", "館": "gun2", "超": "ciu1", "市": "si5", "商": "soeng1", "餐": "caan1", "廳": "teng1", "茶": "caa4", "樓": "lau4", "園": "jyun4", "屋": "uk1", "港": "gong2", "職": "zik1", "業": "jip6", "中": "zung1", "司": "si1", "辦": "baan6", "飯": "faan6", "車": "ce1", "站": "zaam6", "巴": "baa1", "士": "si2", "鐵": "tit3", "單": "daan1", "波": "bo1", "球": "kau4", "足": "zuk1", "籃": "laam4", "乒": "bing1", "乓": "bam1", "羽": "jyu5", "毛": "mou4", "音": "jam1", "歌": "go1", "故": "gu3", "事": "si6", "電": "din6", "腦": "nou5", "平": "ping4", "板": "baan2", "視": "si6", "手": "sau2", "機": "gei1", "相": "soeng2", "片": "pin2", "時": "si4", "間": "gaan1", "日": "jat6", "年": "nin4", "月": "jyut6", "星": "sing1", "期": "kei4", "今": "gam1", "明": "ming4", "昨": "zok6", "早": "zou2", "午": "ng5", "晚": "maan5", "朝": "ziu1", "夜": "je6", "目": "muk6", "標": "biu1", "能": "nang4", "性": "sing3", "格": "gaak3", "興": "hing3", "趣": "ceoi3", "望": "mong6", "夢": "mung6", "未": "mei6", "出": "ceot1", "路": "lou6", "實": "sat6", "習": "zaap6", "體": "tai2", "驗": "jim6", "活": "wut6", "任": "jam6", "務": "mou6", "經": "ging1", "歷": "lik6", "進": "zeon3", "步": "bou6", "功": "gung1", "嘢": "je5", "物": "mat6", "件": "gin6", "具": "geoi6", "模": "mou4", "型": "jing4", "花": "faa1", "草": "cou2", "樹": "syu6", "貓": "maau1", "狗": "gau2", "魚": "jyu2", "鳥": "niu5", "馬": "maa5", "雀": "zoek3", "蟲": "cung4", "米": "mai5", "麵": "min6", "蘋": "ping4", "橙": "caang2", "蕉": "ziu1", "蛋": "daan6", "糕": "gou1", "餅": "beng2", "糖": "tong4", "朱": "zyu1", "古": "gu2", "奶": "naai5", "咖": "gaa3", "啡": "fe1", "顏": "ngaan4", "色": "sik1", "紅": "hung4", "黃": "wong4", "綠": "luk6", "青": "cing1", "藍": "laam4", "紫": "zi2", "黑": "hak1", "白": "baak6", "灰": "fui1", "粉": "fan2", "頭": "tau4", "面": "min6", "眼": "ngaan5", "耳": "ji5", "口": "hau2", "鼻": "bei6", "腳": "goek3", "錢": "cin2", "文": "man4", "筆": "bat1", "紙": "zi2", "簿": "bou2", "枱": "toi2", "櫈": "dang3", "門": "mun4", "窗": "coeng1", "服": "fuk6", "衫": "saam1", "褲": "fu3", "鞋": "haai4", "袋": "doi2", "一": "jat1", "二": "ji6", "三": "saam1", "四": "sei3", "五": "ng5", "六": "luk6", "七": "cat1", "八": "baat3", "九": "gau2", "十": "sap6", "百": "baak3", "千": "cin1", "零": "ling4", "兩": "loeng5", "第": "dai6", "次": "ci3", "每": "mui5", "這": "ze5", "那": "naa5", "呢": "ni1", "邊": "bin1", "裡": "leoi5", "內": "noi6", "外": "ngoi6", "上": "soeng6", "下": "haa6", "左": "zo2", "右": "jau6", "前": "cin4", "後": "hau6", "旁": "pong4", "度": "dou6", "嗰": "go2", "啲": "di1", "乜": "mat1", "點": "dim2", "樣": "joeng6", "咁": "gam3", "噉": "gam2", "仲": "zung6", "已": "ji5", "將": "zoeng1", "會": "wui5", "可": "ho2", "該": "goi1", "必": "bit1", "須": "seoi1", "用": "jung6", "使": "sai2", "比": "bei2", "從": "cung4", "向": "hoeng3", "對": "deoi3", "錯": "co3", "啱": "ngaam1", "知": "zi1", "道": "dou6", "記": "gei3", "忘": "mong4", "思": "si1", "考": "haau2", "覺": "gok3", "感": "gam2", "希": "hei1", "信": "seon3", "法": "faat3", "方": "fong1", "別": "bit6", "特": "dak6", "質": "zat1", "表": "biu2", "現": "jin6", "評": "ping4", "估": "gu2", "數": "sou3", "練": "lin6", "訓": "fan3", "指": "zi2", "引": "jan5", "安": "on1", "全": "cyun4", "危": "ngai4", "險": "him2", "注": "zyu3", "細": "sai3", "聲": "seng1", "答": "daap3", "問": "man6", "題": "tai4", "卡": "kaat1", "盒": "hap2", "箱": "soeng1", "罐": "gun3", "樽": "zeon1", "杯": "bui1", "碗": "wun2", "碟": "dip6", "筷": "faai3", "匙": "ci4", "叉": "caa1", "刀": "dou1", "床": "cong4", "被": "pei5", "枕": "zam2", "巾": "gan1", "梳": "so1", "鏡": "geng3", "燈": "dang1", "掣": "zai3", "鎖": "so2", "梯": "tai1", "廁": "ci3", "房": "fong2", "廚": "cyu4", "客": "haak3", "衣": "ji1", "育": "juk6", "醫": "ji1", "護": "wu6", "警": "ging2", "消": "siu1", "防": "fong4", "員": "jyun4", "售": "sau6", "貨": "fo3", "倉": "cong1", "廠": "cong2", "農": "nung4", "漁": "jyu4", "林": "lam4", "牧": "muk6", "髮": "faat3", "設": "cit3", "計": "gai3", "秘": "bei3", "訪": "fong2", "招": "ziu1", "呼": "fu1", "謝": "ze6", "請": "cing2", "晨": "san4", "拜": "baai1", "街": "gaai1", "巷": "hong6", "橋": "kiu4", "海": "hoi2", "山": "saan1", "河": "ho4", "湖": "wu4", "島": "dou2", "沙": "saa1", "灘": "taan1", "田": "tin4", "天": "tin1", "空": "hung1", "雲": "wan4", "雨": "jyu5", "風": "fung1", "雪": "syut3", "雷": "leoi4", "陽": "joeng4", "光": "gwong1", "暗": "am3", "夏": "haa6", "秋": "cau1", "冬": "dung1", "春": "ceon1", "節": "zit3", "假": "gaa3", "慶": "hing3", "祝": "zuk1", "願": "jyun6", "康": "hong1", "健": "gin6", "味": "mei6", "區": "keoi1", "元": "jyun4", "角": "gok3", "毫": "hou4", "蚊": "man1", "貴": "gwai3", "減": "gaam2", "折": "zit3", "算": "syun3", "乘": "sing4", "除": "ceoi4", "於": "jyu1", "半": "bun3", "部": "bou6", "份": "fan6", "組": "zou2", "副": "fu3", "共": "gung6", "總": "zung2", "結": "git3", "束": "cuk1", "始": "ci2", "終": "zung1", "段": "dyun6", "落": "lok6", "篇": "pin1", "章": "zoeng1", "頁": "jip6", "列": "lit6", "欄": "laan4", "項": "hong6", "條": "tiu4", "款": "fun2", "類": "leoi6", "由": "jau4", "至": "zi3", "直": "zik6", "約": "joek3", "準": "zeon2", "確": "kok3", "案": "on3", "測": "cak1", "卷": "gyun2", "默": "mak6", "溫": "wan1", "復": "fuk6", "預": "jyu6", "備": "bei6", "棒": "paang5", "勁": "ging6", "叻": "lek1", "醒": "sing2", "聰": "cung1", "慧": "wai6", "智": "zi3", "障": "zoeng3", "殘": "caan4", "疾": "zat6", "殊": "syu4", "需": "seoi1", "求": "kau4", "支": "zi1", "援": "wun4", "輔": "fu6", "導": "dou6", "顧": "gu3", "照": "ziu3", "料": "liu6", "養": "joeng5", "培": "pui4", "規": "kwai1", "劃": "waak6", "涯": "ngaai4", "檔": "dong3", "簡": "gaan2", "介": "gaai3", "資": "zi1", "喺": "hai2", "嘅": "ge3", "嘛": "maa3", "喎": "wo3", "囉": "lo1", "啦": "laa1", "喇": "laa3", "嘞": "laak3", "㗎": "gaa3", "啊": "aa3", "吖": "aa1", "喂": "wai3", "哦": "o4", "嗯": "ng6", "哈": "haa1", "嘻": "hei1", "嘩": "waa1", "互": "wu6", "亮": "loeng6", "仔": "zai2", "位": "wai2", "保": "bou2", "原": "jyun4", "子": "zi2", "小": "siu2", "愁": "sau4", "愉": "jyu6", "憂": "jau1", "才": "coi4", "擔": "daam1", "暇": "haa6", "木": "muk6", "歉": "hip3", "淚": "leoi6", "渾": "wan4", "烏": "wu1", "爆": "baau3", "睛": "zing1", "睫": "zit6", "良": "loeng4", "誰": "seoi4", "誼": "ji4", "諒": "loeng6", "谷": "guk1", "踢": "tek3", "還": "waan4", "閱": "jyut6", "院": "jyun2", "餘": "jyu4", "輩": "bui3", "東": "dung1", "西": "sai1", "閃": "sim2", "其": "kei4", "郁": "juk1", "強": "koeng4", "借": "ze3", "字": "zi6", "皮": "pei4", "氣": "hei3", "圓": "jyun4", "形": "jing4", "銀": "ngan4", "幕": "mok6", "裏": "leoi5", "把": "baa2", "情": "cing4", "承": "sing4", "忙": "mong4", "掛": "gwaa3", "怪": "gwaai3", "維": "wai4", "之": "zi1", "哪": "naa5", "入": "jap6", "容": "jung4", "填": "tin4", "充": "cung1", "即": "zik1", "張": "zoeng1", "嘴": "zeoi2", "淡": "daam6", "而": "ji4", "沒": "mut6", "澤": "zaak6", "甚": "sam6", "麼": "mo1", "徵": "zing1", "句": "geoi3", "圈": "hyun1", "詞": "ci4", "語": "jyu5", "選": "syun2", "名": "ming4", "稱": "cing1", "聆": "ling4", "何": "ho4", "陳": "can4", "宇": "jyu5", "楊": "joeng4", "銘": "ming4", "昆": "kwan1", "城": "sing4", "李": "lei5", "卓": "coek3", "熙": "hei1", "管": "gun2", "恩": "jan1", "泓": "wang4", "霖": "lam4", "彤": "tung4", "蕭": "siu1", "戶": "wu6", "賺": "zaan6", "換": "wun6", "獎": "zoeng2", "品": "ban2", "票": "piu3", "過": "gwo3", "遊": "jau4", "戲": "hei3", "鼓": "gu2", "勵": "lai6", "按": "on3", "調": "tiu4", "重": "cung4", "帳": "zoeng3", "閉": "bai3", "店": "dim3", "交": "gaau1", "紀": "gei2", "錄": "luk6", "兌": "deoi3", "價": "gaa3", "鉛": "jyun4", "修": "sau1", "神": "san4", "增": "zang1", "待": "doi6", "處": "cyu2", "申": "san1", "暫": "zaam6", "夠": "gau3", "賽": "coi3", "匡": "hong1", "國": "gwok3", "科": "fo1", "連": "lin4", "抄": "caau1", "姓": "sing3", "提": "tai4", "示": "si6", "朵": "do2", "初": "co1", "階": "gaai1", "朗": "long5", "解": "gaai2", "釋": "sik1", "複": "fuk1", "製": "zai3", "令": "ling6", "逐": "zuk6", "啟": "kai2", "並": "bing6", "帶": "daai3", "英": "jing1", "若": "joek6", "隻": "zek3", "怎": "zam2", "疲": "pei4", "倦": "gyun6", "肚": "tou5", "餓": "ngo6", "定": "ding6", "爭": "zang1", "金": "gam1", "取": "ceoi2", "笑": "siu3", "困": "kwan3", "睬": "coi2", "罵": "maa6", "逃": "tou4", "破": "po3", "普": "pou2", "差": "caa1", "劣": "lyut3", "叫": "giu3", "久": "gau2", "嗎": "maa1", "證": "zing3", "楷": "kaai2", "男": "naam4", "女": "neoi5", "齡": "ling4", "號": "hou6", "碼": "maa5", "址": "zi2", "居": "geoi1", "龍": "lung4", "界": "gaai3", "聯": "lyun4", "絡": "lok3", "僱": "gu3", "籍": "zik6", "技": "gei6", "懂": "dung2", "掃": "sou3", "抹": "mut3", "擬": "ji5", "庶": "syu3", "烘": "hung3", "焙": "bui6", "丁": "ding1", "本": "bun2", "派": "paai3", "發": "faat3", "印": "jan3", "描": "miu4", "例": "lai6", "各": "gok3"};
+/* 儲存鍵前綴。⚠️ 必須同中文堂嗰個唔同，
+   否則兩個程式會互相蓋過對方喺試算表同本機嘅資料。 */
+const KPFX = 'ole26';
+
+const WD = ['日','一','二','三','四','五','六'];   /* 星期 */
+
+/* ── 學生名單 ──
+   真實姓名唔喺程式檔（GitHub Pages 係公開），存喺試算表，後台可改。
+   lv：1＝H組自己寫　2＝M組寫出資料　3＝M組圈出資料
+   wlv：0＝直接抄寫　1＝灰階摹寫　2＝陰影跟寫 */
+const STUDENTS0 = [
+  {id:'s01', n:'學生 01', cls:'甲', lv:1, wlv:0, en:false},
+  {id:'s02', n:'學生 02', cls:'甲', lv:1, wlv:0, en:true},
+  {id:'s03', n:'學生 03', cls:'乙', lv:1, wlv:0, en:true},
+  {id:'s04', n:'學生 04', cls:'乙', lv:1, wlv:0, en:false},
+  {id:'s05', n:'學生 05', cls:'乙', lv:2, wlv:1, en:true},
+  {id:'s06', n:'學生 06', cls:'乙', lv:2, wlv:1, en:true},
+  {id:'s07', n:'學生 07', cls:'乙', lv:2, wlv:1, en:true},
+  {id:'s08', n:'學生 08', cls:'乙', lv:2, wlv:1, en:true},
+  {id:'s09', n:'學生 09', cls:'甲', lv:3, wlv:2, en:false},
+  {id:'s10', n:'學生 10', cls:'甲', lv:3, wlv:2, en:false},
+  {id:'s11', n:'學生 11', cls:'甲', lv:3, wlv:2, en:false},
+  {id:'s12', n:'學生 12', cls:'甲', lv:3, wlv:2, en:false}
+];
+
+/* ── 上課網址 QR 碼：新系統要重新產生（見《交接說明》）── */
+const QR_URL = "https://mcchan1001.github.io/chi/ole.html?role=s";
+const QR_SVG = `<div style="width:150px;height:150px;display:flex;align-items:center;
+  justify-content:center;background:#fff;border:2px dashed #C9D6E8;border-radius:12px;
+  color:#8FA3BF;font-size:.85rem;text-align:center;padding:8px">二維碼<br>未產生</div>`;
+
+let PAD = null;   /* 現時嘅手寫板 */
+let TX = [];      /* 交易紀錄（由試算表載入）*/
+/* ============ 介面英文對照（內置，離線可用） ============ */
+const L10N = {
+  '教師版':'Teacher','學生版':'Student','後台設定':'Settings',
+  '課文':'Text','字詞':'Vocabulary','寫字＋選字':'Write & Choose','問答':'Questions',
+  '評分':'Marking','今日進帳':'Today’s Earnings',
+  '請選擇你的名字':'Please choose your name',
+  '等待老師開始':'Waiting for the teacher','請看大電視':'Please look at the big screen',
+  '老師正在教授字詞':'The teacher is teaching vocabulary',
+  '一起檢視同學的書寫':'Reviewing everyone’s writing',
+  '朗讀全句':'Read the whole sentence','再聽一次':'Listen again','聽一次':'Listen',
+  '擦掉重寫':'Clear and rewrite','寫好了':'Done writing','已提交，可再書寫':'Submitted, you may write again',
+  '提示':'Hint','答對了！':'Correct!','排列正確！':'Correct order!','書寫完成！':'Writing done!',
+  '寫一次這個詞語':'Write this word once',
+  '聆聽老師朗讀，選出該詞語':'Listen to the teacher and choose the word',
+  '這一題沒有你的題目':'No question for you this time','請等待下一題':'Please wait for the next question',
+  '返回課文':'Back to text','下一題':'Next','上一題':'Previous',
+  '列印':'Print','重設':'Reset'
+};
+
+let LANG = localStorage.getItem(KPFX+'.lang') || 'zh';
+
+let JYON = localStorage.getItem(KPFX+'.jy') !== '0';
+
+function T(s){ return LANG==='en' ? (L10N[s]||s) : s; }
+
+/* 網上翻譯（有快取；離線時自動略過） */
+const TRC = JSON.parse(localStorage.getItem(KPFX+'.trc')||'{}');
+async function gtx(text){
+  if(!text) return null;
+  if(TRC[text]!=null) return TRC[text];
+  try{
+    const r = await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&dt=t&q='
+      + encodeURIComponent(text));
+    if(!r.ok) return null;
+    const j = await r.json();
+    const out = (j[0]||[]).map(x=>(x&&x[0])||'').join('').trim();
+    if(out){ TRC[text]=out; localStorage.setItem(KPFX+'.trc', JSON.stringify(TRC)); return out; }
+  }catch(e){}
+  return null;
+}
+
+/* 補譯：畫面上凡有 data-tr 而未有英文的，向網上翻譯查一次 */
+async function fillTr(){
+  if(LANG!=='en' && !document.querySelector('[data-tr]')) return;
+  for(const el of document.querySelectorAll('[data-tr]:not([data-done])')){
+    const src = el.getAttribute('data-tr'); if(!src) continue;
+    el.setAttribute('data-done','1');
+    const t = await gtx(src);
+    if(t){ const d=document.createElement('span'); d.className='tr'; d.textContent=t; el.appendChild(d); }
+  }
+}
+
+function toggleLang(){
+  LANG = LANG==='zh' ? 'en' : 'zh';
+  localStorage.setItem(KPFX+'.lang', LANG); render();
+}
+
+function toggleJy(){
+  JYON = !JYON; localStorage.setItem(KPFX+'.jy', JYON?'1':'0');
+  document.body.classList.toggle('nojy', !JYON); render();
+}
+
+/* ==================================================================
+   狀態 + 同步（分權儲存）
+   ================================================================== */
+const K = KPFX;
+
+const KC = K+'.ctrl', KB = K+'.bank', KP = K+'.pulse', KS = K+'.stu';
+
+const KA = sid => K+'.ans.'+sid;
+
+function rd(key, dflt){
+  try{ const r = JSON.parse(localStorage.getItem(key)); return r ? Object.assign({}, dflt, r) : {...dflt}; }
+  catch(e){ return {...dflt}; }
+}
+
+function wr(key, obj, noPush){
+  localStorage.setItem(key, JSON.stringify(obj));
+  const now = String(Date.now());
+  localStorage.setItem(KP, now);
+  lastPulse = now;              /* 記住是自己寫的，避免自己觸發重繪令輸入框失焦 */
+  try{ CH && CH.postMessage(1); }catch(e){}
+  if(!noPush) NET.push(key, obj);   /* 有連線就同步上雲端；無連線會排隊等候 */
+}
+
+let lastPulse = localStorage.getItem(KP)||'';
+
+const CTRL0 = {phase:'idle', hold:false, goalDone:{}, shopOpen:false,
+               fieldIdx:0, sub:'write',
+               marks:{}, coins:{}, adj:{}, paid:{}};
+
+const BANK0 = {wallet:{}};   /* 交易紀錄改存試算表獨立工作表，唔會寫爆一格 */
+
+const MINE0 = {a:{}, prog:''};
+
+let CTRL = rd(KC, CTRL0);
+
+let BANK = rd(KB, BANK0);
+
+let STUDENTS = JSON.parse(localStorage.getItem(KS)||'null') || STUDENTS0.map(s=>({...s}));
+
+let ANS = {};
+
+function pullAns(){ STUDENTS.forEach(s => ANS[s.id] = rd(KA(s.id), MINE0)); }
+function pullAll(){
+  CTRL = rd(KC, CTRL0); BANK = rd(KB, BANK0);
+  const pz = rd(K+'.prizes', {list:null});
+  if(pz.list && pz.list.length) PRIZES = pz.list;
+  STUDENTS = JSON.parse(localStorage.getItem(KS)||'null') || STUDENTS0.map(s=>({...s}));
+  pullAns();
+}
+
+/* 凍結期間，老師點揀邊一頁都唔傳送落學生機（佢哋停喺「望大電視」）。
+   解凍時一次過送出當時嘅畫面 —— 所以轉幾多頁都好，只傳兩次。 */
+function saveCtrl(opt){
+  wr(KC, CTRL, CTRL.hold && !(opt && opt.force));
+}
+
+function saveBank(){ wr(KB, BANK); }
+function saveStu(){  wr(KS, STUDENTS); }
+function saveMine(){ if(ME) wr(KA(ME), ANS[ME]); }
+
+let CH = null;
+try{ CH = new BroadcastChannel(K); CH.onmessage = () => { pullAll(); renderSafe(); }; }catch(e){}
+setInterval(()=>{
+  const p = localStorage.getItem(KP)||'';
+  if(p!==lastPulse){ lastPulse=p; pullAll(); renderSafe(); }
+}, 500);
+window.addEventListener('storage', e=>{ if(e.key && e.key.startsWith(K)){ pullAll(); renderSafe(); } });
+
+/* ==================================================================
+   網絡同步層
+   未填網址 → 純本機運作（一部電腦開多個視窗，同以前一樣）
+   已填網址 → Google Apps Script ＋ 試算表，全班平板電腦即時同步
+   本機永遠保留一份，斷網時學生仍可繼續作答，回復連線後自動補傳
+   ================================================================== */
+/* 後端（Apps Script ＋ 你的 Google 試算表）網址。
+   寫死在此，平板電腦開啟網頁即已連線，不用逐部設定。
+   將來若重新建立部署而網址改變，只需改這一行。 */
+/* ⚠️ 起步檔刻意留空 —— 未接後端之前純本機運作，
+   同一部電腦開兩個視窗（教師版／學生版）一樣同步得到，可以完整試堂。
+   接後端時先填呢兩行（值喺中文堂系統嗰邊，或者新開一個部署）。
+   千萬唔好喺未諗清楚之前指住中文堂嗰個部署 —— 會向正式試算表寫入資料。 */
+const GAS_KEY = '';
+const GAS_DEFAULT = '';
+const NET = {
+  url: localStorage.getItem(K+'.url') || window.__GAS_URL__ || GAS_DEFAULT,
+  auto: !localStorage.getItem(K+'.url'),
+  v: -1, t: 0, pulled:false, busy:false, q:[], status:'local', lastErr:'',
+  seen:{}, sending:false, beat:'', beating:false, fails:0, lastMs:0, log:[],
+  on(){ return !!this.url; },
+  setUrl(u){
+    this.url = (u||'').trim();
+    if(this.url) localStorage.setItem(K+'.url', this.url);
+    else { localStorage.removeItem(K+'.url'); this.url = window.__GAS_URL__ || GAS_DEFAULT; }
+    this.auto = !localStorage.getItem(K+'.url');
+    this.v = -1; this.t = 0; this.pulled = false; this.status = this.url ? 'connecting' : 'local';
+    render();
+  },
+  async call(body, ms){
+    body = Object.assign({k: GAS_KEY}, body);   /* 每個請求都帶鎖匙 */
+    const ctl = new AbortController();
+    const timer = setTimeout(()=>ctl.abort(), ms||25000);
+    const t0 = Date.now();
+    try{
+      const r = await fetch(this.url, {method:'POST', redirect:'follow', signal:ctl.signal,
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body: JSON.stringify(body)});
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      const out = await r.json();
+      this.note(body.fn, Date.now()-t0, true);
+      return out;
+    } catch(e){
+      this.note(body.fn, Date.now()-t0, false);
+      throw e;
+    } finally { clearTimeout(timer); }
+  },
+  /* 記低每次來回耗時，方便睇出慢喺邊 */
+  note(fn, ms, ok){
+    if(fn==='sync' || fn==='push') this.lastMs = ms;
+    this.log.unshift({fn, ms, ok, at:new Date().toLocaleTimeString('zh-HK')});
+    if(this.log.length > 12) this.log.pop();
+    document.querySelectorAll('.netms').forEach(e=> e.textContent = msLabel());
+  },
+  push(key, obj){
+    if(!this.on()) return;
+    this.q = this.q.filter(x=>x.key!==key);   /* 同一格只留最新一次 */
+    this.q.push({key, data:obj});
+    this.sending = true; paintSend();
+    setTimeout(()=>this.tick(), 0);           /* 即刻傳，唔等下一次輪詢 */
+  },
+  /* 學生報到：話畀老師知自己已經跳到邊一頁。
+     刻意用獨立指令，唔會更新版本號，所以唔會令全班重新同步。
+     ⚠️ 必須防止重複發送：瀏覽器對同一網域只准約六條連線，
+        報到請求一旦疊住晒，同步請求就攞唔到連線，學生機會好似死咗咁。 */
+  async sendBeat(){
+    if(!this.on() || ROLE!=='s' || !ME) return;
+    if(this.beating || this.busy) return;      /* 有報到未完、或正在同步，就唔好插隊 */
+    const s = phaseKey();
+    if(s === this.beat) return;
+    const prev = this.beat;
+    this.beat = s;                             /* 先記低，避免同一頁重複發 */
+    this.beating = true;
+    try{ await this.call({fn:'beat', me:ME, s}, 15000); }
+    catch(e){ this.beat = prev; }              /* 失敗就還原，下次重試 */
+    finally{ this.beating = false; }
+  },
+  async txAdd(rows){
+    if(!this.on() || !rows.length) return;
+    try{ await this.call({fn:'tx', rows}, 20000); }catch(e){}
+  },
+  async txList(n){
+    if(!this.on()) return [];
+    try{ const r = await this.call({fn:'txlist', n:n||30}, 20000);
+         return (r && r.rows) || []; }catch(e){ return []; }
+  },
+  async tick(){
+    if(!this.on() || this.busy) return;
+    this.busy = true;
+    try{
+      while(this.q.length){
+        const it = this.q[0];
+        const res = await this.call({fn:'push', key:it.key, data:it.data});
+        if(!res || !res.ok) throw new Error(res && res.err || 'push failed');
+        this.q.shift();
+        /* 注意：唔可以喺呢度更新 this.v。
+           上傳成功後如果當自己已經最新，就會永遠唔落去攞其他資料
+           （例如全新平板永遠攞唔到學生名單）。留返畀下面對版本號時觸發下載。 */
+      }
+      /* 一次來回搞掂：帶住自己嘅版本號同上次同步時間，
+         冇變就只回一個版本號；有變就順便把「變咗嗰幾格」一齊送返。 */
+      const res = await this.call({fn:'sync', v:this.v, t:(this.pulled ? this.t : 0),
+                                   role:ROLE, me:ME}, 25000);
+      if(res && res.ok){
+        if(res.seen) this.seen = res.seen;
+        if(res.data && Object.keys(res.data).length){
+          for(const [key,val] of Object.entries(res.data)){
+            if(!key.startsWith(K)) continue;
+            /* 自己的答案格：如果本機仲有未傳上去的新內容，或者正在打字，
+               就唔好用雲端舊版蓋過，否則同學啱啱寫的會不見了 */
+            if(ME && key===KA(ME) && (TYPING || COMPOSING || this.q.some(x=>x.key===key))) continue;
+            localStorage.setItem(key, JSON.stringify(val));
+          }
+          pullAll(); renderSafe();
+        }
+        this.v = res.v; if(res.t) this.t = res.t;
+        this.pulled = true;
+      }
+      this.fails = 0;
+      if(this.status!=='ok'){ this.status='ok'; render(); }
+      this.lastErr='';
+      if(!this.q.length && this.sending){ this.sending=false; paintSend(); }
+    }catch(e){
+      this.lastErr = String(e.message||e);
+      /* 網絡有時會慢或抖一抖。一次唔通就報「中斷」會嚇親人，
+         連續兩次先當中斷，中間顯示「較慢」。 */
+      this.fails++;
+      const want = this.fails >= 2 ? 'err' : 'slow';
+      if(this.status !== want){ this.status = want; try{ render(); }catch(_){} }
+    }finally{
+      /* 必須在 finally 重設：否則畫面一旦出錯，同步會就此停頓，整堂課失聯 */
+      this.busy = false;
+      if(!this.q.length && this.sending){ this.sending=false; paintSend(); }
+    }
+  }
+};
+
+function netChip(){
+  if(!NET.on()) return `<button class="btn sm" onclick="setRole('a')" title="尚未連接雲端">📴 本機</button>`;
+  const m = {connecting:['⏳','連線中'], ok:['🟢','已連線'],
+             slow:['🟡','網絡較慢'], err:['🔴','連線中斷']}[NET.status]||['⏳',''];
+  const qn = NET.q.length ? `（${NET.q.length} 項待傳）` : '';
+  return `<button class="btn sm netbtn" onclick="alert('${NET.status==='err'||NET.status==='slow'
+    ? '連線中斷：'+String(NET.lastErr).replace(/'/g,'') + String.fromCharCode(92)+'n學生的作答已暫存在平板電腦，回復連線後會自動補傳。'
+    : '雲端同步正常。'}')">${m[0]} ${m[1]}${qn}</button>`;
+}
+
+/* 老師同學生用同一條字串識別「而家喺邊一頁」，方便點算幾多人已收到 */
+function phaseKey(){
+  return [CTRL.hold?'HOLD':CTRL.phase, CTRL.fieldIdx, CTRL.sub].join('|');
+}
+
+/* 只更新「傳送中」字樣，唔重畫成頁 */
+function paintSend(){
+  document.querySelectorAll('.sendchip').forEach(e=>{
+    e.textContent = NET.sending ? '📤 傳送中…' : '✅ 已送出';
+    e.classList.toggle('on', NET.sending);
+  });
+  document.querySelectorAll('.gotchip').forEach(e=> e.innerHTML = gotHTML());
+}
+
+function msLabel(){
+  if(!NET.on() || !NET.lastMs) return '';
+  return ' · ' + (NET.lastMs/1000).toFixed(1) + '秒';
+}
+
+function gotHTML(){
+  if(!NET.on() || ROLE!=='t') return '';
+  const n = gotCount(), tot = STUDENTS.length;
+  const dots = STUDENTS.map(s=>
+    `<i class="${NET.seen[s.id]===phaseKey()?'y':''}" title="${s.n}"></i>`).join('');
+  return `<span class="gotnum ${n===tot?'all':''}">${n} / ${tot}</span>
+    <span class="gotdots">${dots}</span>`;
+}
+
+let ROLE=null, ME=null, STEP='hello';
+
+function setRole(r){
+  ROLE = r;
+  document.getElementById('roles').classList.add('hide');
+  document.getElementById(r==='t'?'teacher':r==='s'?'student':'adminv').classList.remove('hide');
+  if(r==='t'){
+    /* 教師版一開就把目前步驟同日期推給學生機，否則學生機停在「等待老師開始」 */
+    CTRL.phase = STEP;
+    if(!CTRL.lessonDate) CTRL.lessonDate = todayStr();
+    saveCtrl();
+  }
+  render();
+}
+
+function stu(id){ return STUDENTS.find(x=>x.id===id); }
+function myAns(){ return (ANS[ME] = ANS[ME] || {a:{},prog:''}).a; }
+function myA(sid){ return (ANS[sid]||{a:{}}).a || {}; }
+
+function beMe(id){ ME=id; ANS[id]=rd(KA(id),MINE0); ANS[id].prog='on'; saveMine(); render(); }
+
+const AV = ['#FBD5E4','#CFE8FA','#D8F2E4','#FFF0C9','#E4D7F5','#FFE0C7'];
+
+const LVNAME  = {1:'高組', 2:'中組', 3:'初組'};
+
+const WLVNAME = {0:'直接抄寫', 1:'灰階摹寫', 2:'陰影跟寫'};
+
+const NOPT    = {1:6, 2:4, 3:3};
+
+function render(){
+  fileWarn();
+  document.querySelectorAll('#tNet,#sNet').forEach(e=>{ if(e) e.innerHTML = netChip(); });
+  document.querySelectorAll('#bJy,#bJy2').forEach(b=>{
+    if(b){ b.textContent = JYON?'拼 ✓':'拼'; }});
+  document.querySelectorAll('#bLang,#bLang2').forEach(b=>{
+    if(b){ b.textContent = LANG==='en'?'🌐 中文':'🌐 EN'; }});
+  if(ROLE==='t') renderTeacher();
+  else if(ROLE==='s') renderStudent();
+  else if(ROLE==='a') renderAdmin();
+  fillTr();
+}
+
+function renderSafe(){
+  if(busyNow()){ RENDER_WANTED = true; return; }
+  /* 同步密集時唔好一有變動就重建整版畫面；最多每 400 毫秒畫一次 */
+  const gap = Date.now() - LAST_RENDER;
+  if(gap >= 400){ LAST_RENDER = Date.now(); render(); return; }
+  if(RENDER_TIMER) return;
+  RENDER_TIMER = setTimeout(()=>{
+    RENDER_TIMER = null; LAST_RENDER = Date.now();
+    if(!busyNow()) render(); else RENDER_WANTED = true;
+  }, 400 - gap);
+}
+
+function flushRender(){
+  if(RENDER_WANTED){ RENDER_WANTED = false; render(); }
+}
+
+/* ══ 學生機「死機」防護 ══
+   重畫會因為三件事被押後：學生打緊字、輸入法組緊字、手指喺度寫緊字。
+   問題係「結束」嘅事件唔一定嚟到 —— iPad 上第二隻手指掂到或者掃屏，
+   系統會取消觸控（冇 touchend）；輸入框亦可能連焦點一齊被刪走（冇 blur）。
+   一旦收唔到結束事件，旗標就永遠停喺 true，之後每次重畫都被押後，
+   部機好似死咗咁，老師轉幾多頁都唔會郁。
+   所以唔再淨靠旗標，改為問「而家真係咁咩」，同埋加時限。 */
+let TYPE_TS = 0, DRAW_TS = 0;
+
+function typingNow(){
+  const a = document.activeElement;
+  if(!(a && a.classList && a.classList.contains('typebox'))) return false;
+  return Date.now() - TYPE_TS < 8000;      /* 八秒冇撳過掣就當佢唔係打緊 */
+}
+
+function drawingNow(){
+  return DRAWING && Date.now() - DRAW_TS < 2000;   /* 兩秒冇郁過就當佢放咗手 */
+}
+
+function busyNow(){ return typingNow() || drawingNow(); }
+
+/* 看門狗：押後咗嘅重畫，一冇人打字寫字就即刻補畫，
+   確保學生機唔會永久停喺舊畫面。 */
+setInterval(()=>{
+  if(!RENDER_WANTED || busyNow()) return;
+  RENDER_WANTED = false;
+  TYPING = COMPOSING = DRAWING = false;
+  const el = document.activeElement;
+  if(el && el.classList && el.classList.contains('typebox') && el.dataset.key)
+    typeSave(el.dataset.key, el.value);          /* 打咗嘅字唔好唔見咗 */
+  try{ render(); }catch(e){}
+}, 1200);
+
+
+/* ==================================================================
+   打字保護
+   同學用輸入法打字時，中文字要經「組字」階段才成形。
+   如果這一刻因為雲端同步而重畫畫面，輸入框會被拆掉重建，
+   正在組的字就會散掉（例如「亮」變回「卜山」）。
+   所以：有輸入框在使用時，一律押後重畫，等離開輸入框才補畫。
+   ================================================================== */
+let TYPING = false;       /* 輸入框有焦點 */
+
+let COMPOSING = false;    /* 輸入法正在組字 */
+
+let RENDER_WANTED = false;
+
+let LAST_RENDER = 0, RENDER_TIMER = null;
+
+/* ================================================================
+   後台設定
+   ================================================================ */
+function renderAdmin(){
+  document.getElementById('aBody').innerHTML = `
+  <div class="note">在此修改的設定會即時生效。
+    學生的平板電腦不會顯示「高組／中組／初組」等字眼。</div>
+  <table class="adm">
+    <tr><th>學生姓名（可直接修改）</th><th>班別</th><th>問答難度</th><th>書寫支援</th><th>同步顯示英文</th></tr>
+    ${STUDENTS.map(s=>`
+    <tr><td><input class="nmbox" value="${String(s.n).replace(/"/g,'&quot;')}"
+        onchange="setName('${s.id}',this.value)"></td>
+      <td><select onchange="setF('${s.id}','cls',this.value)">
+        ${['甲','乙'].map(c=>`<option ${s.cls===c?'selected':''}>${c}</option>`).join('')}
+      </select></td>
+      <td><select onchange="setF('${s.id}','lv',this.value)">
+        ${[1,2,3].map(v=>`<option value="${v}" ${s.lv==v?'selected':''}>${LVNAME[v]}（${NOPT[v]} 選 1）</option>`).join('')}
+      </select></td>
+      <td><select onchange="setF('${s.id}','wlv',this.value)">
+        ${[0,1,2].map(v=>`<option value="${v}" ${s.wlv==v?'selected':''}>${WLVNAME[v]}</option>`).join('')}
+      </select></td>
+      <td><label class="sw"><input type="checkbox" ${s.en?'checked':''}
+        onchange="setEn('${s.id}',this.checked)"><span></span></label></td>
+    </tr>`).join('')}
+  </table>
+  <h3 class="sec">☁️ 雲端同步（Google 試算表）</h3>
+  <div class="note">
+    未填網址時，程式只在本機運作（一部電腦開多個視窗仍可試用）。<br>
+    填上 Apps Script 的部署網址後，全班平板電腦即可即時同步；資料存放在你自己的
+    Google 試算表，不經任何第三方。設定步驟見同一資料夾的《雲端設定教學》。
+  </div>
+  ${NET.auto?`<div class="note" style="border-left-color:#7FD3B0">
+    ✅ <b>已自動連線</b> —— 後端網址已內置，平板電腦開啟網頁即可使用，不用逐部設定。
+    下面的欄位只在需要改用其他後端時才填。</div>`:''}
+  <div class="row" style="margin-bottom:10px">
+    <input id="netUrl" placeholder="貼上 Apps Script 部署網址（https://script.google.com/macros/s/.../exec）"
+      value="${NET.url}" style="flex:1;min-width:280px;font-family:inherit;font-size:.95rem;
+      padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.85)">
+    <button class="btn mint" onclick="NET.setUrl(document.getElementById('netUrl').value)">儲存</button>
+    <button class="btn" onclick="testNet()">測試連線</button>
+    <button class="btn" onclick="NET.setUrl('')">清除</button>
+  </div>
+  <div id="netMsg" class="note" style="border-left-color:var(--blue)">
+    現時狀態：<b>${NET.on()? ({ok:'🟢 已連線',slow:'🟡 網絡較慢',err:'🔴 連線中斷'}[NET.status]||'⏳ 連線中') : '📴 本機模式'}</b>${
+      NET.auto?'（自動）':''}
+    ${NET.lastErr?`<br><span style="color:#C0554A">${NET.lastErr}</span>`:''}
+  </div>
+
+  <div class="note" style="border-left-color:#F7B7CB">
+    🔒 <b>學生姓名只儲存在你的 Google 試算表</b>，不會寫進公開的程式檔案。
+    在此修改姓名後會自動同步到所有平板電腦。</div>
+
+  <h3 class="sec">📶 連線速度（最近 12 次）</h3>
+  <div class="note">每次來回嘅實際耗時。<b>2 秒左右屬正常</b>；如果經常 5 秒以上，
+    即係你嗰邊去 Google 伺服器嘅網絡較慢，可以試下用手機熱點比較。</div>
+  <table class="tx"><tr><th>時間</th><th>指令</th><th style="text-align:right">耗時</th><th>結果</th></tr>
+  ${NET.log.length ? NET.log.map(x=>`<tr><td>${x.at}</td><td>${x.fn}</td>
+    <td class="amt" style="color:${x.ms>5000?'#C0554A':x.ms>3000?'#B7791F':'#1E8E62'}">${(x.ms/1000).toFixed(1)} 秒</td>
+    <td>${x.ok?'✅':'❌'}</td></tr>`).join('')
+    : '<tr><td colspan="4" style="color:#999">未有紀錄</td></tr>'}
+  </table>
+
+  ${profPanel()}
+
+  <h3 class="sec">說明</h3>
+  <div class="note">
+    <b>問答難度</b>決定該學生用哪一份申請表：
+      高組＝自己寫出全部；中組＝姓名等自己寫、其餘圈選；初組＝全部二選一圈出。<br>
+    <b>書寫支援</b>決定手寫格的提示：直接抄寫沒有底稿；灰階摹寫有淺灰底稿；陰影跟寫有較深底稿。<br>
+    <b>同步顯示英文</b>開啟後，該學生的畫面會在中文下面加一行英文。<br>
+    右上角的 <b>🌐</b> 可把整個介面切換成英文，<b>拼</b> 可開關粵語拼音。
+  </div>`;
+}
+
+function renderTeacher(){
+  const tp = document.getElementById('tPick');
+  if(tp) tp.innerHTML = `<option>${lessonDate()}</option>`;
+  document.getElementById('tDots').innerHTML = STUDENTS.map(s=>{
+    const p=ANS[s.id].prog;
+    return `<div class="dot ${p==='done'?'done':p?'on':''}" title="${s.n}"></div>`;
+  }).join('');
+  document.getElementById('tSteps').innerHTML = STEPS.map(([k,l])=>
+    `<button class="step ${STEP===k?'on':''}" onclick="tStep('${k}')">${l}</button>`).join('')
+    + `<div class="sendbox">
+         <span class="sendchip ${NET.sending?'on':''}">${NET.sending?'📤 傳送中…':'✅ 已送出'}</span>
+         <span class="gotchip">${gotHTML()}</span>
+       </div>`;
+  const bh = document.getElementById('bHold');
+  if(bh){
+    bh.textContent = CTRL.hold ? '🔓 解鎖，繼續互動' : '🔒 鎖住學生機';
+    bh.className = 'btn sm' + (CTRL.hold ? ' peach holdon' : '');
+  }
+  /* 鎖機時只靠右上角個掣著色提示；唔喺內容區加橫額，避免誤撳解鎖 */
+  document.getElementById('tPanel').innerHTML =
+    ({hello:tHello, field:tField, preview:tPreview,
+      review:tReview, wallet:tWallet, goals:tGoals}[STEP] || tHello)();
+}
+
+/* ================================================================
+   學生版 —— 不顯示任何組別字眼
+   ================================================================ */
+function renderStudent(){
+  const B=document.getElementById('sBody');
+  if(!ME){
+    document.getElementById('sName').textContent = T('請選擇你的名字');
+    document.getElementById('sMeta').textContent = '';
+    B.innerHTML = `<div class="pick">`+STUDENTS.map((s,i)=>
+      `<button onclick="beMe('${s.id}')">
+        <div class="av" style="background:${AV[i%AV.length]}">${s.n[0]}</div>
+        <div class="n">${s.n}</div></button>`).join('')+`</div>`;
+    return;
+  }
+  const me=stu(ME);
+  document.getElementById('sName').textContent = me.n;
+  document.getElementById('sMeta').textContent = lessonDate();
+  /* 錢包平時淨係顯示餘額，撳唔到 —— 同學唔會上堂上到一半走咗入去。
+     老師打開獎品店嗰陣先變成可以撳入去換獎品。 */
+  const purse = document.getElementById('sPurse');
+  purse.textContent = `💰 $${BANK.wallet[ME]||0}` + (CTRL.shopOpen ? ' 🎁' : '');
+  purse.onclick = CTRL.shopOpen ? toggleShopS : null;
+  purse.style.pointerEvents = CTRL.shopOpen ? 'auto' : 'none';
+  purse.classList.toggle('peach', !!CTRL.shopOpen);
+  if(!CTRL.shopOpen && SHOP_S) SHOP_S = false;   /* 老師收舖，同學跟住返課堂 */
+  if(CTRL.hold){                       /* 老師鎖住咗：唔好畀學生撳嘢 */
+    stashPad();                        /* 寫緊嘅字先儲起，唔好因為突然鎖機而白寫 */
+    B.innerHTML = `<div class="waitbox holdwait"><div class="em">👀</div>
+      <div class="t">${ruby('請望大電視')}</div>
+      <div class="d">${ruby('老師正在講解')}</div></div>`;
+    NET.sendBeat();
+    return;
+  }
+  if(SHOP_S){ B.innerHTML = sShop(me); return; }
+  const f = {hello:sHello, field:sField, preview:sPreview, goals:sGoals}[CTRL.phase];
+  B.innerHTML = f ? f(me) : wait('😊','等待老師開始','請看大電視');
+  /* 有手寫板嘅頁一定要叫 initPad，否則個板唔會出到筆劃 */
+  if(CTRL.phase==='field' && modeFor(me)==='write') initPad(me);
+  bindTypeBoxes();
+  NET.sendBeat();
+}
+
+function wait(em,t,d){
+  return `<div class="waitbox"><div class="em">${em}</div>
+    <div class="t">${ruby(T(t))}</div><div class="d">${T(d)}</div></div>`;
+}
+
+function cheer(txt){
+  const c=document.getElementById('cheer');
+  document.getElementById('cheerTxt').textContent = T(txt||'答對了！');
+  c.classList.add('show');
+  for(let i=0;i<18;i++){
+    const d=document.createElement('div'); d.className='confetti';
+    d.textContent=['🎊','⭐','🎉','💛','💙'][i%5];
+    d.style.left=Math.random()*100+'vw';
+    d.style.animationDuration=(1.6+Math.random()*1.4)+'s';
+    document.body.appendChild(d); setTimeout(()=>d.remove(),3200);
+  }
+  setTimeout(()=>c.classList.remove('show'),1500);
+}
+
+/* 雙擊本機檔案開啟（file://）連不到雲端，平板電腦也開不到；一定要用網址 */
+function fileWarn(){
+  if(location.protocol !== 'file:') return;
+  if(document.getElementById('filewarn')) return;
+  const d = document.createElement('div');
+  d.id = 'filewarn'; d.className = 'filewarn';
+  d.innerHTML = `⚠️ <b>你正用「開啟檔案」的方式執行本程式，這樣連不到雲端</b>，
+    平板電腦也不會同步。請改用網址開啟：
+    <code>${QR_URL.split('?')[0]}</code>
+    <button onclick="this.parentNode.remove()">知道了</button>`;
+  document.body.appendChild(d);
+}
+
+/* 🔒 鎖住學生機：學生畫面即刻變「望大電視」，撳唔到嘢 */
+function toggleHold(){
+  CTRL.hold = !CTRL.hold;
+  saveCtrl({force:true});          /* 鎖同解鎖本身一定要即刻傳送 */
+  render();
+}
+
+function tStep(k){
+  STEP=k;
+  if(['hello','notes','text','vocab','round','qa','goals'].includes(k)) CTRL.phase=k;
+  if(!CTRL.lessonDate) CTRL.lessonDate = todayStr();
+  saveCtrl(); render();
+}
+
+/* 每次畫完學生版，把事件掛回輸入框（不用 inline oninput，才管得住組字） */
+function bindTypeBoxes(){
+  document.querySelectorAll('.typebox').forEach(el=>{
+    if(el.dataset.bound) return; el.dataset.bound = '1';
+    const key = el.dataset.key;
+    el.addEventListener('focus', ()=>{ TYPING = true; TYPE_TS = Date.now(); });
+    el.addEventListener('keydown', ()=>{ TYPE_TS = Date.now(); });
+    el.addEventListener('compositionupdate', ()=>{ TYPE_TS = Date.now(); });
+    el.addEventListener('blur',  ()=>{ TYPING = false; typeSave(key, el.value); flushRender(); });
+    el.addEventListener('compositionstart', ()=>{ COMPOSING = true; });
+    el.addEventListener('compositionend', e=>{
+      COMPOSING = false; typeSave(key, e.target.value);
+    });
+    el.addEventListener('input', e=>{
+      TYPE_TS = Date.now();
+      if(COMPOSING) return;          /* 組字途中不儲存，避免存了半截 */
+      typeSave(key, e.target.value);
+    });
+  });
+}
+
+function typeSave(key, v){
+  const a = myAns();
+  if(String(v).trim()) a['t_'+key] = v; else delete a['t_'+key];
+  saveMine();
+  paintDual();                    /* 只改灰階，不重畫整頁，游標不會走位 */
+}
+
+/* ================================================================
+   書寫／打字二選一元件（全程式統一）
+   兩種方式同時顯示；學生一旦用了其中一種，另一種即變灰不可用，
+   直到按「重新選擇」為止。
+   key = 答案的儲存鍵；手寫存 key，打字存 't_'+key
+   ================================================================ */
+function inputBlock(key, target, wlv, padId, opt){
+  opt = opt||{};
+  const a = myAns();
+  const hasPad  = a[key]!==undefined;
+  const hasType = a['t_'+key]!==undefined && String(a['t_'+key]).trim()!=='';
+  const w = Math.max(760, target.length*250);
+  return `
+  <div class="dual">
+    <div class="way ${hasType?'off':''}">
+      <div class="waylb">✍️ ${ruby('用手寫')}${hasType?`<span class="lock">已選用打字</span>`:''}</div>
+      <canvas class="pad" id="${padId}" data-key="${key}" data-txt="${target}"
+        width="${w}" height="280"></canvas>
+      <div class="padbar">
+        <button class="btn" ${hasType?'disabled':''} onclick="${opt.clear||`clearPad()`}">🧹 ${T('擦掉重寫')}</button>
+        <button class="btn mint" ${hasType?'disabled':''} onclick="${opt.save||`savePad()`}">
+          ✔ ${T(hasPad?'已提交，可再書寫':'寫好了')}</button>
+      </div>
+    </div>
+    <div class="way ${hasPad?'off':''}">
+      <div class="waylb">⌨️ ${ruby('用鍵盤打字')}${hasPad?`<span class="lock">已選用手寫</span>`:''}</div>
+      <input class="typebox" id="ti_${key}" data-key="${key}" ${hasPad?'disabled':''}
+        value="${String(a['t_'+key]||'').replace(/"/g,'&quot;')}"
+        placeholder="可用粵語拼音輸入法">
+    </div>
+  </div>
+  ${(hasPad||hasType)?`<div class="row" style="justify-content:center;margin-top:8px">
+    <button class="btn sm" onclick="resetInput('${key}')">↺ ${ruby('重新選擇')}</button></div>`:''}`;
+}
+
+/* 不重繪整頁，只更新兩邊的可用狀態 */
+function paintDual(){
+  document.querySelectorAll('.dual').forEach(d=>{
+    const inp = d.querySelector('.typebox'); if(!inp) return;
+    const key = inp.id.slice(3);
+    const a = myAns();
+    const hasPad  = a[key]!==undefined;
+    const hasType = a['t_'+key]!==undefined && String(a['t_'+key]).trim()!=='';
+    const ways = d.querySelectorAll('.way');
+    ways[0].classList.toggle('off', hasType);
+    ways[1].classList.toggle('off', hasPad);
+    ways[0].querySelectorAll('button').forEach(b=>b.disabled = hasType);
+    inp.disabled = hasPad;
+  });
+}
+
+function strokesSVG(rec, h){
+  if(!rec || !rec.s || !rec.s.length) return '';
+  const d = rec.s.map(st=>{
+    let p=''; for(let i=0;i<st.length;i+=2) p += (i?'L':'M')+st[i]+' '+st[i+1];
+    return p;
+  }).join(' ');
+  return `<svg viewBox="0 0 ${rec.w} ${rec.h}" preserveAspectRatio="xMidYMid meet"
+    style="width:100%;${h?`max-height:${h}px;`:''}background:#fff;border-radius:10px;display:block">
+    <path d="${d}" fill="none" stroke="#2E3440" stroke-width="${SW}"
+      stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+}
+
+/* 共用手寫板：課堂筆記與抄寫詞語都用這個 */
+function makePad(c, target, wlv, saved, key){
+  const x = c.getContext('2d');
+  const bg = ()=>{
+    x.clearRect(0,0,c.width,c.height);
+    x.fillStyle='#fff'; x.fillRect(0,0,c.width,c.height);
+    const n=target.length, w=c.width/n;
+    x.strokeStyle='#E3E9F2'; x.lineWidth=2;
+    for(let k=0;k<n;k++){
+      x.strokeRect(k*w+4,4,w-8,c.height-8);
+      x.beginPath(); x.setLineDash([8,8]);
+      x.moveTo(k*w+w/2,4); x.lineTo(k*w+w/2,c.height-4);
+      x.moveTo(k*w+4,c.height/2); x.lineTo(k*w+w-4,c.height/2);
+      x.stroke(); x.setLineDash([]);
+    }
+    if(wlv>0){
+      x.fillStyle = wlv===1?'rgba(60,80,110,.15)':'rgba(60,80,110,.30)';
+      x.font=`${Math.min(w,c.height)*.76}px "PingFang HK",sans-serif`;
+      x.textAlign='center'; x.textBaseline='middle';
+      [...target].forEach((ch,k)=>x.fillText(ch,k*w+w/2,c.height/2));
+    }
+    /* 每格底部標粵拼 —— 同學一路照住寫一路要讀得出，
+       顏色用返畫面其他地方注音同一隻藍。 */
+    if(!document.body.classList.contains('nojy')){
+      x.fillStyle = '#4C7FA8';                 /* 同畫面其他注音同一隻藍 */
+      x.font = `700 ${Math.max(14, Math.min(w, c.height)*0.15)}px "PingFang HK",sans-serif`;
+      x.textAlign='center'; x.textBaseline='alphabetic';
+      [...target].forEach((ch,k)=>{
+        if(JYUT[ch]) x.fillText(JYUT[ch], k*w+w/2, c.height-10);
+      });
+    }
+  };
+  const seed = (key && PADBUF[key]) || (saved && saved.s) || [];
+  const P = {c, x, key:c.dataset.key, bufKey:key, strokes: seed.map(a=>[...a])};
+  P.repaint = ()=>{
+    bg();
+    x.strokeStyle='#2E3440'; x.lineWidth=SW; x.lineCap='round'; x.lineJoin='round';
+    for(const st of P.strokes){
+      x.beginPath(); x.moveTo(st[0],st[1]);
+      for(let i=2;i<st.length;i+=2) x.lineTo(st[i],st[i+1]);
+      x.stroke();
+    }
+  };
+  P.repaint();
+  let on=false, cur=null;
+  const pos=e=>{ const r=c.getBoundingClientRect(), q=e.touches?e.touches[0]:e;
+    return [Math.round((q.clientX-r.left)*c.width/r.width),
+            Math.round((q.clientY-r.top)*c.height/r.height)]; };
+  const start=e=>{ e.preventDefault(); on=true; DRAWING=true; DRAW_TS=Date.now();
+    const [px,py]=pos(e); cur=[px,py]; P.strokes.push(cur);
+    x.strokeStyle='#2E3440'; x.lineWidth=SW; x.lineCap='round'; x.lineJoin='round';
+    x.beginPath(); x.moveTo(px,py); };
+  const move=e=>{ if(!on) return; e.preventDefault(); DRAW_TS=Date.now();
+    const [px,py]=pos(e), lx=cur[cur.length-2], ly=cur[cur.length-1];
+    if(Math.abs(px-lx)+Math.abs(py-ly) < 3) return;
+    cur.push(px,py); x.lineTo(px,py); x.stroke(); };
+  const end=()=>{
+    on=false; cur=null; DRAWING=false;
+    if(key) PADBUF[key] = P.strokes;    /* 每寫完一筆即刻記低 */
+  };
+  c.addEventListener('pointerdown',start); c.addEventListener('pointermove',move);
+  c.addEventListener('touchstart',start,{passive:false});
+  c.addEventListener('touchmove',move,{passive:false});
+  c.addEventListener('touchend',end);
+  /* 觸控被系統取消（第二隻手指掂到、掃屏手勢）唔會有 touchend，
+     一定要當佢收咗筆，否則之後成部機都唔會再重畫。 */
+  c.addEventListener('touchcancel',end);
+  c.addEventListener('pointercancel',end);
+  /* 放手事件要掛喺 window（手指可能移出格外先放手），
+     但畫面每次重畫都會再造一次手寫板 —— 舊嗰個監聽器一定要移除，
+     否則會越積越多，用得耐就會越嚟越窒。 */
+  if(window.__padUp){
+    window.removeEventListener('pointerup', window.__padUp);
+    window.removeEventListener('pointercancel', window.__padUp);
+    window.removeEventListener('touchcancel', window.__padUp);
+  }
+  window.__padUp = end;
+  window.addEventListener('pointerup', end);
+  window.addEventListener('pointercancel', end);
+  window.addEventListener('touchcancel', end);
+  return P;
+}
+
+function initPad(me){
+  const c=document.getElementById('pad'); if(!c) return;
+  const k = curF().k;
+  PAD = makePad(c, curF().eg || curF().lab, me.wlv, myAns()[k], k);
+}
+
+/* 突然鎖機／轉頁時，把未按「寫好了」嘅筆劃悄悄儲起，避免同學白寫 */
+function stashPad(){
+  if(!ME || !PAD || !PAD.strokes || !PAD.strokes.length) return;
+  const key = curF().k;
+  const cur = myAns()[key];
+  const now = JSON.stringify(PAD.strokes);
+  if(cur && cur.s && JSON.stringify(cur.s)===now) return;   /* 同已儲存嘅一樣就唔使再存 */
+  myAns()[key] = {s:PAD.strokes, w:PAD.c.width, h:PAD.c.height};
+  PAD = null;
+  saveMine();
+}
+
+function clearPad(){
+  if(!PAD) return;
+  PAD.strokes=[]; if(PAD.bufKey) delete PADBUF[PAD.bufKey];
+  PAD.repaint();
+}
+
+function savePad(){
+  if(!PAD || !PAD.strokes.length){ alert('請先書寫，然後才按「寫好了」。'); return; }
+  const k = curF().k;
+  myAns()[k] = {s:PAD.strokes, w:PAD.c.width, h:PAD.c.height};
+  delete PADBUF[k];
+  ANS[ME].prog='done'; saveMine(); render(); cheer('書寫完成！');
+}
+
+function resetInput(key){
+  const a = myAns(); delete a[key]; delete a['t_'+key];
+  saveMine(); render();
+}
+
+/* 學生寫咗但未撳「寫好了」嘅筆劃。
+   畫面每次重畫（老師轉頁、其他同學交嘢）都會造一個新手寫板；
+   如果只由「已儲存」嘅內容開始，學生啱啱寫嗰幾筆就會不見了 ——
+   十二個人一齊上堂時同步好密，所以寫寫下就會消失。
+   未提交嘅筆劃留喺呢度，重畫幾多次都攞得返。
+   只存喺本機記憶，唔會上雲端；換連堂或重新載入就清走。 */
+const PADBUF = {};
+
+let DRAWING = false;
+
+/* ---------- 手寫板 ----------
+   書寫以「筆劃座標」儲存，不用 PNG：體積小約十倍，
+   可放進 Google 試算表的儲存格，列印時亦是向量，不會鋸齒。 */
+const SW = 8;   /* 筆畫粗細 */
+
+const PRIZES0 = [
+  {e:'✏️',n:'鉛筆',ne:'Pencil',p:10},{e:'🍬',n:'糖果',ne:'Candy',p:15},
+  {e:'📒',n:'筆記簿',ne:'Notebook',p:25},{e:'🧃',n:'飲品',ne:'Drink',p:30},
+  {e:'🎨',n:'顏色筆',ne:'Colour pens',p:50},{e:'🎁',n:'神秘禮物',ne:'Mystery gift',p:100}
+];
+
+let PRIZES = PRIZES0.map(p=>({...p}));
+
+function savePrizes(){ wr(K+'.prizes', {list:PRIZES}); }
+function editPrize(i){
+  const p=PRIZES[i];
+  const n=prompt('獎品名稱：', p.n); if(n===null) return;
+  const v=prompt('價錢（數字）：', p.p); if(v===null) return;
+  p.n=n.trim()||p.n; p.p=Math.max(0, parseInt(v,10)||p.p);
+  savePrizes(); render();
+}
+
+/* ---------- 獎品店（老師可自訂圖片、名稱、價錢） ---------- */
+function shopPanel(){
+  return `<h3 class="sec">🎁 獎品店</h3>
+    <div class="note">獎品店平時收起，你想開兌換的時候才打開。
+      按獎品可改名稱、價錢，或換一張相片。</div>
+    <div class="shop">
+      ${PRIZES.map((p,i)=>`<div class="item">
+        ${p.img?`<img src="${p.img}" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:14px">`
+               :`<div class="e">${p.e}</div>`}
+        <div class="n">${p.n}</div><div class="p">$${p.p}</div>
+        <div class="row" style="justify-content:center;margin-top:8px">
+          <button class="btn sm" onclick="editPrize(${i})">✏️ 修改</button>
+          <button class="btn sm" onclick="prizePhoto(${i})">📷 相片</button>
+          <button class="btn sm mint" onclick="buy(${i})">兌換</button>
+        </div></div>`).join('')}
+      <div class="item" style="display:flex;align-items:center;justify-content:center">
+        <button class="btn mint" onclick="addPrize()">＋ 新增獎品</button></div>
+    </div>
+    <h3 class="sec">待處理的兌換申請</h3>
+    ${pendingList()}`;
+}
+
+function prizePhoto(i){
+  const inp=document.createElement('input'); inp.type='file'; inp.accept='image/*';
+  inp.onchange=()=>{
+    const f=inp.files[0]; if(!f) return;
+    const rd2=new FileReader();
+    rd2.onload=()=>{
+      const im=new Image();
+      im.onload=()=>{
+        const cv=document.createElement('canvas');
+        const w=Math.min(360, im.width); cv.width=w; cv.height=Math.round(im.height*w/im.width);
+        cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);
+        PRIZES[i].img = cv.toDataURL('image/jpeg', .75);
+        savePrizes(); render();
+      };
+      im.src=rd2.result;
+    };
+    rd2.readAsDataURL(f);
+  };
+  inp.click();
+}
+
+/* ---------- 兌換申請：學生按掣申請，老師確認才扣錢 ---------- */
+function pendingList(){
+  const reqs = [];
+  STUDENTS.forEach(s=>{
+    (ANS[s.id].req||[]).forEach((r,j)=>{ if(!r.done) reqs.push({s, r, j}); });
+  });
+  if(!reqs.length) return `<div class="note">暫時沒有兌換申請。</div>`;
+  return `<div class="sgrid">${reqs.map(({s,r,j})=>`
+    <div class="scard" style="border-color:#F4B740">
+      <div class="nm">🎫 ${s.n}</div>
+      <div class="st" style="font-size:1.1rem;font-weight:900">${r.n}　$${r.p}</div>
+      <div class="st">戶口 $${BANK.wallet[s.id]||0}</div>
+      <div class="row" style="margin-top:9px">
+        <button class="btn sm mint" onclick="approveReq('${s.id}',${j})">✅ 換給他</button>
+        <button class="btn sm" onclick="rejectReq('${s.id}',${j})">✕ 取消</button>
+      </div></div>`).join('')}</div>`;
+}
+
+function payout(){
+  CTRL.paid=CTRL.paid||{};
+  const day = new Date().toISOString().slice(0,10);
+  if(CTRL.paid[day] &&
+     !confirm(`今日（${day}）已經入過帳。\n再入一次？（會重複入帳）`)) return;
+  CTRL.paid[day]=true;
+  recalcAll();
+  const list=[];
+  STUDENTS.forEach(s=>{
+    const c=CTRL.coins[s.id]||0; if(!c) return;
+    BANK.wallet[s.id]=(BANK.wallet[s.id]||0)+c;
+    list.push({sid:s.id, d:new Date().toLocaleDateString('zh-HK'),
+               t:`${lessonDate()} 完成${scoreOf(s.id).right}項`, a:c});
+  });
+  addTx(list);
+  saveCtrl(); saveBank(); render(); cheer('已存入戶口！');
+}
+
+function tWallet(){
+  const cards = STUDENTS.map(s=>`<div class="wcard"><div class="n">${s.n}</div>
+    <div class="today">$${BANK.wallet[s.id]||0}</div>
+    <div class="bal">今日 +$${CTRL.coins[s.id]||0}</div></div>`).join('');
+  const tx = TX.slice(0,25).map(x=>
+    `<tr><td>${x.d}</td><td>${x.n || (stu(x.sid)||{}).n || ''}</td><td>${x.t}</td>
+     <td class="amt ${x.a>0?'pos':'neg'}">${x.a>0?'+':''}$${x.a}</td></tr>`).join('');
+  return `<h3 class="sec">全班戶口</h3><div class="wgrid">${cards}</div>
+    <div class="row" style="margin-top:14px">
+      <button class="btn" onclick="STEP='review';render()">← 返回今日進帳</button></div>
+    <h3 class="sec">交易紀錄
+      <button class="btn sm" style="margin-left:10px" onclick="loadTx()">↻ 由試算表載入</button></h3>
+    <div class="note">交易紀錄一筆一行存喺試算表嘅「交易紀錄」工作表，可以直接打開查閱全年紀錄。</div>
+    <table class="tx"><tr><th>日期</th><th>學生</th><th>項目</th><th style="text-align:right">金額</th></tr>
+    ${tx||'<tr><td colspan="4" style="color:#999">按上面「↻ 由試算表載入」查閱</td></tr>'}</table>`;
+}
+
+function buy(i){
+  const p=PRIZES[i];
+  const pick=prompt(`哪位學生兌換「${p.n}」$${p.p}？\n\n`+
+    STUDENTS.map((s,j)=>`${j+1}. ${s.n}（$${BANK.wallet[s.id]||0}）`).join('\n')+'\n\n請輸入編號：');
+  const j=parseInt(pick,10)-1; if(isNaN(j)||!STUDENTS[j]) return;
+  const s=STUDENTS[j];
+  if((BANK.wallet[s.id]||0)<p.p){ alert(`${s.n} 的金額不足，尚差 $${p.p-(BANK.wallet[s.id]||0)}`); return; }
+  BANK.wallet[s.id]-=p.p;
+  addTx([{sid:s.id,d:new Date().toLocaleDateString('zh-HK'),t:`兌換 ${p.n}`,a:-p.p}]);
+  saveBank(); render();
+}
+
+/* 學生的獎品兌換：按下即產生一張電子票，交老師確認 */
+function sShop(me){
+  const bal = BANK.wallet[ME]||0;
+  const reqs = (ANS[ME].req||[]);
+  const pend = reqs.filter(r=>!r.done);
+  const done = reqs.filter(r=>r.done && r.ok);
+  return `<div class="stu">
+    <div class="q" style="text-align:center;background:linear-gradient(180deg,#FFF6DC,#FFEBB8)">
+      <div style="font-size:1.1rem;font-weight:800;color:#8A5B12">${ruby('我的戶口')}</div>
+      <div style="font-size:4.2rem;font-weight:900;color:#B7791F;line-height:1.2">$${bal}</div>
+      <div class="tr">My balance</div>
+    </div>
+    ${pend.map(r=>`<div class="ticket">
+      <div style="font-size:2.6rem">🎫</div>
+      <div style="font-size:1.5rem;font-weight:900">${ruby(r.n)}</div>
+      <div style="font-size:1.1rem;color:#8A5B12;font-weight:800">$${r.p}</div>
+      <div style="margin-top:8px;font-weight:800">${ruby('請把這張票給老師')}</div>
+      <div class="tr">Show this ticket to your teacher</div>
+    </div>`).join('')}
+    <div class="q">
+      <div class="qt">${ruby('用我賺到的錢換獎品')}</div>
+      <div class="shop">${PRIZES.map((p,i)=>{
+        const afford = bal>=p.p;
+        return `<div class="item" style="${afford?'':'opacity:.45'}">
+          ${p.img?`<img src="${p.img}" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:14px">`
+                 :`<div class="e">${p.e}</div>`}
+          <div class="n">${ruby(p.n)}</div>
+          <div class="p">$${p.p}</div>
+          <button class="btn sm ${afford?'mint':''}" ${afford?'':'disabled'}
+            onclick="reqPrize(${i})">${afford?'我要換':'錢未夠'}</button>
+        </div>`;
+      }).join('')}</div>
+    </div>
+    ${done.length?`<div class="q"><div class="qt">${ruby('我換過的獎品')}</div>
+      <div class="row">${done.map(r=>`<span class="btn sm lemon">🎁 ${r.n}</span>`).join('')}</div></div>`:''}
+    <div class="row" style="justify-content:center">
+      <button class="btn" onclick="toggleShopS()">← ${ruby('返回課堂')}</button></div>
+  </div>`;
+}
+
+let SHOP_S = false;
+
+function toggleShopS(){ SHOP_S=!SHOP_S; render(); }
+
+
+/* ============ 粵拼 · 朗讀 ============ */
+function ruby(s){
+  return [...String(s)].map(c=> JYUT[c] ? `<ruby>${c}<rt>${JYUT[c]}</rt></ruby>` : c).join('');
+}
+
+/* 為已含 HTML 標籤的字串注音（只處理標籤以外的文字） */
+function rubyKeepTags(s){
+  return String(s).split(/(<[^>]+>)/).map(x => x.startsWith('<') ? x : ruby(x)).join('');
+}
+
+/* ── 粵語語音：揀最接近粵語嘅系統聲音 ── */
+let VOICE = null;
+function pickVoice(){
+  const vs = speechSynthesis.getVoices();
+  VOICE = vs.find(v=>/zh[-_]HK|yue/i.test(v.lang)) || vs.find(v=>/Sinji|善怡/i.test(v.name))
+       || vs.find(v=>/zh/i.test(v.lang)) || null;
+}
+pickVoice(); speechSynthesis.onvoiceschanged = pickVoice;
+
+function speak(t){
+  try{ speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(t); u.lang='zh-HK'; u.rate=.8;
+    if(VOICE) u.voice=VOICE; speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+function unsort(k,x){
+  const a=myAns(); if(!a[k]) return;
+  a[k]=a[k].filter(y=>y!==x); if(!a[k].length) delete a[k];
+  saveMine(); render();
+}
+
+function resetAll(){
+  if(!confirm('清除本節課的答案及評分？（銀包及交易紀錄會保留）')) return;
+  CTRL={...CTRL0, paid:CTRL.paid||{}};
+  STUDENTS.forEach(s=>{ ANS[s.id]={a:{},prog:''}; localStorage.removeItem(KA(s.id)); });
+  saveCtrl(); render();
+}
+
+/* 問候語按時間自動變 */
+function greeting(){
+  const h = new Date().getHours();
+  if(h < 12) return {zh:'早安', en:'Good morning', ico:'🌅'};
+  if(h < 18) return {zh:'午安', en:'Good afternoon', ico:'☀️'};
+  return {zh:'晚安', en:'Good evening', ico:'🌙'};
+}
+
+function addPrize(){
+  const n=prompt('新獎品名稱：'); if(!n) return;
+  const v=parseInt(prompt('價錢（數字）：','20'),10)||20;
+  PRIZES.push({e:'🎁', n:n.trim(), ne:'', p:v});
+  savePrizes(); render();
+}
+
+function approveReq(sid, j){
+  const rec = ANS[sid], r = rec.req[j];
+  if((BANK.wallet[sid]||0) < r.p){ alert(`${stu(sid).n} 的金額不足。`); return; }
+  BANK.wallet[sid] -= r.p;
+  addTx([{sid, d:new Date().toLocaleDateString('zh-HK'), t:`兌換 ${r.n}`, a:-r.p}]);
+  r.done=true; r.ok=true;
+  wr(KA(sid), rec); saveBank(); render();
+  cheer('兌換成功！');
+}
+
+function rejectReq(sid, j){
+  const rec = ANS[sid]; rec.req[j].done=true; rec.req[j].ok=false;
+  wr(KA(sid), rec); render();
+}
+
+function reqPrize(i){
+  const p = PRIZES[i], bal = BANK.wallet[ME]||0;
+  if(bal < p.p) return;
+  if(!confirm(`用 $${p.p} 換「${p.n}」？\n換完之後會剩返 $${bal-p.p}。`)) return;
+  const rec = ANS[ME]; rec.req = rec.req||[];
+  rec.req.push({n:p.n, p:p.p, done:false, ok:false, d:new Date().toLocaleDateString('zh-HK')});
+  saveMine(); render(); cheer('已交票給老師！');
+}
+
+function addTx(list){
+  TX = list.concat(TX).slice(0, 60);
+  NET.txAdd(list.map(x=>[x.d, (stu(x.sid)||{}).n || x.sid, x.t, x.a]));
+}
+
+async function loadTx(){
+  const rows = await NET.txList(40);
+  TX = rows.reverse().map(r=>({d:fmtDate(r[0]), n:String(r[1]), t:String(r[2]), a:Number(r[3])}));
+  render();
+}
+
+/* 已有幾多部平板收到現時這一頁 */
+function gotCount(){
+  const key = phaseKey();
+  return STUDENTS.filter(s=>NET.seen[s.id]===key).length;
+}
+
+function recalcCoins(sid){
+  CTRL.adj = CTRL.adj||{};
+  CTRL.coins[sid] = Math.max(0, scoreOf(sid).right + (CTRL.adj[sid]||0));
+}
+
+/* 試算表會把「18/8/2026」自動當成日期，讀返嚟係內部格式，要還原做人睇得明嘅樣 */
+function fmtDate(v){
+  const s = String(v);
+  if(/^\d{4}-\d{2}-\d{2}T/.test(s)){
+    const d = new Date(s);
+    if(!isNaN(d)) return `${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`;
+  }
+  return s;
+}
+
+function recalcAll(){ STUDENTS.forEach(s=>recalcCoins(s.id)); }
+function addCoin(sid,d){
+  CTRL.adj = CTRL.adj||{}; CTRL.adj[sid]=(CTRL.adj[sid]||0)+d;
+  recalcCoins(sid); saveCtrl(); render();
+}
+
+function setEn(id,v){ stu(id).en=v; saveStu(); render(); }
+
+/* ================================================================
+   教師版
+   ================================================================ */
+/* STEPS 由內容層定義 */
+
+/* ── 引擎啟動（原本喺主程式頂層，抽取時要記得帶埋）── */
+if(NET.on()) NET.status='connecting';
+setInterval(()=>NET.tick(), 900);
+
+function setF(id,f,v){ const s=stu(id); s[f] = (f==='cls') ? v : +v; saveStu(); render(); }
+function setName(id,v){ stu(id).n = String(v).trim() || stu(id).n; saveStu(); render(); }
+
+async function testNet(){
+  const m = document.getElementById('netMsg');
+  if(!NET.on()){ m.innerHTML='請先填上網址並按「儲存」。'; return; }
+  m.innerHTML='⏳ 測試中…';
+  try{
+    const t0 = Date.now();
+    const r = await NET.call({fn:'ver'}, 20000);
+    if(!r || !r.ok) throw new Error(JSON.stringify(r));
+    m.innerHTML = `🟢 連線成功，來回需時 ${Date.now()-t0} 毫秒。`;
+    NET.status='ok'; NET.v=-1;
+  }catch(e){
+    m.innerHTML = `🔴 連線失敗：${String(e.message||e)}<br>
+      請檢查：部署時「誰可存取」是否設為 <b>任何人</b>，以及網址是否以 <b>/exec</b> 結尾。`;
+  }
+}
+
+function todayStr(){
+  const d = new Date();
+  return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${WD[d.getDay()]}）`;
+}
+/* ==================================================================
+   ★★★ 內容層 ★★★
+   由呢一行開始至檔案末，全部係「職位申請表」嘅課堂內容。
+   上面全部係引擎（由中文堂即時互動 v29 搬過嚟，實戰驗證過）。
+   要改課堂，改呢一段就夠，引擎唔使郁。
+   ================================================================== */
+
+/* ── 三個能力層，直接對應紙本三份表 ──
+   lv1 = H 組　　　　自己寫全部（陳亮宇、Paul、蕭子信、何樂天）
+   lv2 = M 組·寫出　姓名等自己寫，其餘圈選（Jelvin、楊師銘、Hubert、Supratik）
+   lv3 = M 組·圈出　全部二選一圈出（昆城、Makenna、何泓霖）
+   ※ 學生真實姓名唔放喺程式檔（GitHub Pages 係公開），喺後台或試算表設定。 */
+
+/* ── 申請表欄目 ──
+   lv:{1:'write'} = 只有 H 組要填，而且要自己寫
+   opts           = 圈選用嘅固定選項
+   personal:true  = 屬於學生自己嘅資料（姓名／電話／生日），
+                    圈選版嘅選項＝真實答案 ＋ 一個好似嘅誘答（後台可自訂） */
+const AF = [
+  {k:'cname', lab:'中文姓名', en:'Chinese name', eg:'陳大文', personal:true,
+   tip:'請寫上你的中文全名，與身分證相同。',
+   lv:{1:'write', 2:'write', 3:'pick'}},
+  {k:'ename', lab:'英文姓名', en:'English name', eg:'CHAN TAI MAN',
+   tip:'請用英文正楷寫出你的姓名。',
+   lv:{1:'write'}},
+  {k:'sex',   lab:'性別', en:'Sex',
+   tip:'請選出你的性別。', opts:['男','女'],
+   lv:{1:'pick', 2:'pick', 3:'pick'}},
+  {k:'age',   lab:'年齡', en:'Age',
+   tip:'請選出你的年齡。', opts:['17','18','19'],
+   lv:{2:'pick', 3:'pick'}},
+  {k:'hkid',  lab:'身份證號碼', en:'HKID number', eg:'A123456(7)',
+   tip:'請照身分證抄寫號碼。',
+   lv:{1:'write'}},
+  {k:'dob',   lab:'出生日期', en:'Date of birth', eg:'2008年10月11日', personal:true,
+   tip:'請寫出你出生的年、月、日。',
+   lv:{1:'write', 2:'write', 3:'pick'}},
+  {k:'pob',   lab:'出生地點', en:'Place of birth', eg:'香港',
+   tip:'請寫出你出生的地方。',
+   lv:{1:'write'}},
+  {k:'addr',  lab:'地址', en:'Address', eg:'元朗',
+   tip:'請寫出你居住的地址。',
+   lv:{1:'write'}},
+  {k:'area',  lab:'居住地區', en:'District',
+   tip:'請選出你居住的地區。', opts:['港島區','九龍區','新界區'],
+   lv:{2:'pick', 3:'pick'}},
+  {k:'tel',   lab:'聯絡電話', en:'Phone number', eg:'6771 9892', personal:true,
+   tip:'請寫出僱主可以聯絡到你的電話號碼。',
+   lv:{1:'write', 2:'write', 3:'pick'}},
+  {k:'nat',   lab:'國籍', en:'Nationality', eg:'中國',
+   tip:'請寫出你的國籍。',
+   lv:{1:'write'}},
+  {k:'sch',   lab:'就讀學校', en:'School', eg:'賽馬會匡智學校',
+   tip:'請寫出學校的全名。',
+   lv:{1:'write', 2:'write'}},
+  {k:'hobby', lab:'興趣', en:'Interests',
+   tip:'請選出你喜歡做的事。', opts:['畫畫','唱歌','運動'],
+   lv:{2:'pick', 3:'pick'}},
+  {k:'skill', lab:'工作技能', en:'Work skills',
+   tip:'請選出你懂得做的工作。', opts:['包裝','種植','食品製作','掃地','抹枱'],
+   lv:{2:'pick', 3:'pick'}},
+  {k:'job',   lab:'擬申請職位', en:'Position applied for',
+   tip:'請選出你想申請的職位。', opts:['庶務','烘焙','園丁'],
+   lv:{1:'pick', 2:'pick', 3:'pick'}}
+];
+function curF(){ return AF[CTRL.fieldIdx] || AF[0]; }
+/* 呢個學生喺呢一欄要用邊種作答方式；null＝呢欄唔關佢事 */
+function modeFor(me, f){ f = f || curF(); return (f.lv && f.lv[me.lv]) || null; }
+
+/* ── 學生個人資料（老師喺後台輸入，存喺試算表，唔喺程式檔）── */
+const KPROF = K + '.prof';
+let PROF = rd(KPROF, {});
+function saveProf(){ wr(KPROF, PROF); }
+function profOf(sid, k){ return ((PROF[sid]||{})[k]) || ''; }
+function setProf(sid, k, v){ PROF[sid] = PROF[sid]||{}; PROF[sid][k]=v; saveProf(); render(); }
+
+/* 圈選版嘅選項。個人資料就用「真實答案 ＋ 一個好似嘅誘答」，
+   同紙本「陳加敏／陳嘉敏」嘅做法一樣。老師可以喺後台自訂誘答。 */
+function optsFor(me, f){
+  f = f || curF();
+  if(!f.personal) return f.opts || [];
+  const real  = profOf(me.id, f.k) || f.eg;
+  const decoy = profOf(me.id, 'x_'+f.k) || nearMiss(real);
+  const seed  = [...me.id].reduce((a,c)=>a+c.charCodeAt(0),0);
+  return seed % 2 ? [real, decoy] : [decoy, real];   /* 位置唔好次次一樣 */
+}
+/* 自動整一個「好似但唔啱」嘅誘答。
+   有數字（電話、出生日期）就改最尾嗰組數 —— 直接調轉字元會出現
+   「20081年0月11日」呢啲一睇就知假嘅嘢，做唔到辨認練習。
+   純文字（姓名）就調轉姓氏之後兩個字；老師可以喺後台自訂更似嘅誘答。 */
+function nearMiss(s){
+  s = String(s); if(s.length < 2) return s + '　';
+  const runs = [...s.matchAll(/\d+/g)];
+  if(runs.length){
+    const r = runs[runs.length-1], num = r[0];
+    const alt = String(Math.max(1, (+num) + (num.length > 4 ? 1 : (+num > 1 ? -1 : 1))))
+                .padStart(num.length, '0');
+    return s.slice(0, r.index) + alt + s.slice(r.index + num.length);
+  }
+  const i = s.length > 2 ? 1 : 0;
+  return s.slice(0,i) + s[i+1] + s[i] + s.slice(i+2);
+}
+function isRight(me, f, v){
+  if(!f.personal) return v !== undefined && v !== '';
+  return v === (profOf(me.id, f.k) || f.eg);
+}
+
+/* ── 教師版分頁 ── */
+const STEPS = [['hello','① 打招呼'],['field','② 逐項填寫'],['preview','③ 預覽申請表'],
+               ['review','④ 評分派錢'],['wallet','⑤ 今日進帳'],['goals','⑥ 課堂總結']];
+
+const GOALS = [
+  {ico:'📋', zh:'認識職位申請表的必要項目', en:'Know what a job application form needs'},
+  {ico:'✍️', zh:'寫出或圈出自己的個人資料', en:'Write or circle your own details'},
+  {ico:'💼', zh:'選出一個自己想申請的職位', en:'Choose a job to apply for'}
+];
+function goalsOf(){ return GOALS; }
+function greetingIco(){ const h=new Date().getHours();
+  return h<12?{ico:'🌅',zh:'早安',en:'Good morning'}
+       : h<18?{ico:'☀️',zh:'午安',en:'Good afternoon'}
+             :{ico:'🌙',zh:'晚安',en:'Good evening'}; }
+function lessonDate(){ const d=new Date();
+  const wd='日一二三四五六'[d.getDay()];
+  return `${d.getMonth()+1} 月 ${d.getDate()} 日（星期${wd}）· OLE 職位申請表`; }
+
+/* ── 作答 ── */
+function pickAns(k, j){
+  const me = stu(ME), f = AF.find(x=>x.k===k);
+  const v = optsFor(me, f)[j];
+  if(v === undefined) return;
+  myAns()[k] = v; saveMine();
+  /* 個人資料（姓名／電話／生日）有啱錯之分，即刻畀回應；
+     性別、興趣、職位係佢自己揀，冇所謂啱錯，唔好扮啱。 */
+  if(f.personal) cheer(isRight(me, f, v) ? '答得好！' : '再看真一點');
+  render();
+}
+/* ── 評分：老師逐格打勾，一格 $1 ── */
+function scoreOf(sid){
+  const s = stu(sid), a = myA(sid);
+  let right=0, total=0, det=[];
+  AF.forEach(f=>{
+    if(!modeFor(s, f)) return;                  /* 呢欄唔關呢個學生事 */
+    total++;
+    const done = a[f.k]!==undefined || (a['t_'+f.k]||'').trim()!=='';
+    const ok = CTRL.marks[sid+'|'+f.k] === 1;
+    if(ok) right++;
+    det.push({lb:f.lab, ok, done});
+  });
+  return {right, total, det};
+}
+function markF(sid, k){
+  CTRL.marks[sid+'|'+k] = CTRL.marks[sid+'|'+k]===1 ? 0 : 1;
+  saveCtrl({force:true}); render();
+}
+/* 學生答案化成文字 */
+function ansText(sid, k){
+  const a = myA(sid), t = (a['t_'+k]||'').trim();
+  if(a[k]!==undefined && typeof a[k]==='string') return a[k];   /* 圈選 */
+  if(t) return t;                                               /* 打字 */
+  if(a[k]!==undefined) return '（已手寫）';                      /* 手寫 */
+  return '';
+}
+
+/* ══════════ 教師版 ══════════ */
+function tHello(){
+  const g=greetingIco();
+  return `<div class="teach"><div class="hello">
+      <div class="sun">${g.ico}</div>
+      <div class="hi">${ruby(g.zh)}${ruby('，各位同學')}</div>
+      <div class="hisub">${lessonDate()}</div></div>
+    <div class="q"><div class="qt">🎯 ${ruby('本節課的學習目標')}</div>
+      <div class="goals">${GOALS.map((x,i)=>`
+        <div class="goal"><div class="gico">${x.ico}</div>
+          <div class="gtxt">${ruby(x.zh)}<div class="tr">${x.en}</div></div>
+          <div class="gno">${i+1}</div></div>`).join('')}</div></div>
+    <div class="q"><div class="qt">📱 ${ruby('請用平板電腦掃描下面的二維碼')}</div>
+      <div class="qrbox">${QR_SVG}<div class="qrurl">${QR_URL}</div></div></div></div>`;
+}
+function pickField(i){ CTRL.fieldIdx=+i; saveCtrl(); render(); }
+function tField(){
+  const f = curF();
+  return `<div class="teach">
+    <div class="row" style="flex-wrap:wrap;gap:6px;margin-bottom:10px">
+      ${AF.map((x,i)=>`<button class="btn sm ${i===CTRL.fieldIdx?'mint':''}"
+        onclick="pickField(${i})">${i+1}. ${x.lab}</button>`).join('')}
+    </div>
+    <div class="q">
+      <div class="qt">${ruby('現在填寫：')}${ruby(f.lab)}<span class="tr">${f.en}</span></div>
+      <div class="bigword">${ruby(f.lab)}</div>
+      <div class="hint">💡 ${ruby(f.tip)}</div>
+      ${f.opts?`<div class="hint" style="margin-top:6px">🔘 ${ruby('選項：')}${f.opts.map(o=>ruby(o)).join('　／　')}</div>`:''}
+      ${f.eg&&!f.opts?`<div class="hint" style="margin-top:6px">✏️ ${ruby('例：')}${ruby(f.eg)}</div>`:''}
+      <div class="row" style="justify-content:center;margin-top:10px">
+        <button class="btn mint" onclick="speak('${f.lab}')">🔊 ${T('聽一次')}</button></div>
+    </div>
+    <div class="q"><div class="qt">👀 ${ruby('全班的作答')}</div>
+      <table class="adm"><tr><th>學生</th><th>作答方式</th><th>${f.lab}</th></tr>
+      ${STUDENTS.map(s=>{
+        const m = modeFor(s, f);
+        if(!m) return `<tr><td>${s.n}</td><td colspan="2" style="opacity:.35">此欄不適用</td></tr>`;
+        const t = ansText(s.id, f.k);
+        return `<tr><td>${s.n}</td><td>${m==='write'?'✍️ 書寫':'🔘 圈選'}</td>
+          <td>${t||'<span style="opacity:.4">—</span>'}</td></tr>`;
+      }).join('')}</table></div></div>`;
+}
+function tPreview(){
+  return `<div class="teach"><div class="q">
+    <div class="qt">📄 ${ruby('全班的職位申請表')}</div>
+    <div class="cvgrid">${STUDENTS.map(s=>cvCard(s)).join('')}</div></div></div>`;
+}
+function cvCard(s){
+  const rows = AF.filter(f=>modeFor(s,f)).map(f=>{
+    const t = ansText(s.id, f.k);
+    return `<div class="cvrow"><span class="cvlab">${f.lab}</span>
+      <span class="cvval">${t||'<span style="opacity:.35">未填</span>'}</span></div>`;
+  }).join('');
+  return `<div class="cvcard"><h3>${s.n}</h3>${rows}</div>`;
+}
+function tReview(){
+  return `<div class="teach"><div class="q">
+    <div class="qt">✅ ${ruby('逐格檢查，做得好就給一個 $1')}</div>
+    <div class="tblwrap"><table class="adm">
+      <tr><th>學生</th>${AF.map(f=>`<th>${f.lab}</th>`).join('')}<th>今日</th></tr>
+      ${STUDENTS.map(s=>{ const sc=scoreOf(s.id);
+        return `<tr><td>${s.n}</td>${AF.map(f=>{
+          if(!modeFor(s,f)) return `<td style="opacity:.25">—</td>`;
+          const t=ansText(s.id,f.k), on=CTRL.marks[s.id+'|'+f.k]===1;
+          return `<td><button class="btn sm ${on?'mint':''}" title="${t||'未填'}"
+            onclick="markF('${s.id}','${f.k}')">${on?'✔':'　'}</button></td>`;
+        }).join('')}<td><b>$${sc.right}</b></td></tr>`;
+      }).join('')}</table></div>
+    <div class="row" style="justify-content:center;margin-top:12px">
+      <button class="btn peach" onclick="payout()">💰 ${ruby('派發今日進帳')}</button></div>
+  </div></div>`;
+}
+function tGoals(){
+  return `<div class="teach"><div class="q">
+    <div class="qt">🏁 ${ruby('課堂總結：今日我們做到了甚麼？')}</div>
+    <div class="goals">${GOALS.map((x,i)=>`
+      <div class="goal ${CTRL.goalDone[i]?'done':''}" onclick="tickGoal(${i})">
+        <div class="gico">${CTRL.goalDone[i]?'✅':x.ico}</div>
+        <div class="gtxt">${ruby(x.zh)}<div class="tr">${x.en}</div></div>
+        <div class="gno">${i+1}</div></div>`).join('')}</div>
+    <div class="row" style="justify-content:center;margin-top:14px">
+      <button class="btn" onclick="doPrint()">🖨 ${ruby('列印紙本申請表')}</button></div>
+  </div></div>`;
+}
+function tickGoal(i){ CTRL.goalDone[i]=!CTRL.goalDone[i]; saveCtrl({force:true}); render(); }
+
+/* ══════════ 學生版（唔顯示任何組別字眼）══════════ */
+function sHello(me){
+  const g=greetingIco(), showEn=me.en||LANG==='en';
+  return `<div class="stu"><div class="hello">
+      <div class="sun">${g.ico}</div>
+      <div class="hi">${ruby(g.zh)}${ruby('，')}${ruby(me.n)}</div>
+      <div class="hisub">${showEn?g.en+'　·　':''}${lessonDate()}</div>
+      <div class="wave"><span>👋</span></div></div>
+    <div class="q"><div class="qt">🎯 ${ruby('本節課的學習目標')}</div>
+      <div class="goals">${GOALS.map((x,i)=>`
+        <div class="goal"><div class="gico">${x.ico}</div>
+          <div class="gtxt">${ruby(x.zh)}${showEn?`<div class="tr">${x.en}</div>`:''}</div>
+          <div class="gno">${i+1}</div></div>`).join('')}</div></div></div>`;
+}
+function sField(me){
+  const f = curF(), m = modeFor(me, f), showEn = me.en||LANG==='en';
+  if(!m) return wait('😊','請等待下一項','請看大電視');
+  const head = `<div class="qt">${ruby(m==='write'?'請寫出：':'請選出：')}${ruby(f.lab)}${
+      showEn?`<span class="tr">${f.en}</span>`:''}</div>
+    <div class="bigword">${ruby(f.lab)}</div>
+    <div class="hint">💡 ${ruby(f.tip)}</div>
+    <div class="row" style="justify-content:center;margin:10px 0">
+      <button class="btn mint" onclick="speak('${f.lab}')">🔊 ${T('聽一次')}</button></div>`;
+  if(m === 'pick'){
+    const opts = optsFor(me, f), v = myAns()[f.k];
+    return `<div class="stu"><div class="q">${head}
+      <div class="opts">${opts.map((o,j)=>
+        /* 傳選項編號，唔傳文字 —— 文字入面嘅引號會爆開 onclick 屬性 */
+        `<button class="opt ${v===o?'pickd':''}" onclick="pickAns('${f.k}',${j})">
+          ${ruby(o)}</button>`).join('')}</div></div></div>`;
+  }
+  return `<div class="stu"><div class="q">${head}
+    ${f.eg?`<div class="hint" style="margin-bottom:8px">✏️ ${ruby('例：')}${ruby(f.eg)}</div>`:''}
+    ${inputBlock(f.k, f.eg || f.lab, me.wlv, 'pad')}</div></div>`;
+}
+function sPreview(me){
+  return `<div class="stu"><div class="q">
+    <div class="qt">📄 ${ruby('這是你的職位申請表')}</div>
+    ${cvCard(me)}</div></div>`;
+}
+function sGoals(me){
+  const showEn=me.en||LANG==='en';
+  return `<div class="stu"><div class="q">
+    <div class="qt">🏁 ${ruby('今日我們學會了')}</div>
+    <div class="goals">${GOALS.map((x,i)=>`
+      <div class="goal ${CTRL.goalDone[i]?'done':''}">
+        <div class="gico">${CTRL.goalDone[i]?'✅':x.ico}</div>
+        <div class="gtxt">${ruby(x.zh)}${showEn?`<div class="tr">${x.en}</div>`:''}</div>
+        <div class="gno">${i+1}</div></div>`).join('')}</div></div></div>`;
+}
+
+/* ══════════ 紙本（冇平板電腦嗰堂用）══════════
+   三個能力層各印一份，同現有 Word 版一樣。 */
+function sheetFor(lv, title){
+  const rows = AF.filter(f=>f.lv[lv]).map(f=>{
+    const m = f.lv[lv];
+    if(m === 'pick'){
+      const opts = f.personal ? ['＿＿＿＿＿＿','＿＿＿＿＿＿'] : f.opts;
+      return `<div class="prow"><div class="plab">${f.lab}<br><span class="pen">${f.en}</span></div>
+        <div class="pcirc">${opts.map(o=>`<span class="pop">${o}</span>`).join('')}</div></div>`;
+    }
+    return `<div class="prow"><div class="plab">${f.lab}<br><span class="pen">${f.en}</span></div>
+      <div class="pbox">${f.eg?`<div class="peg">例：${f.eg}</div>`:''}</div></div>`;
+  }).join('');
+  return `<div class="sheet"><h2>職位申請表　Job Application Form</h2>
+    <div class="ptier">${title}</div>${rows}
+    <div class="psign">申請人簽署：＿＿＿＿＿＿＿＿　日期：＿＿＿＿＿＿</div></div>`;
+}
+function doPrint(){
+  document.getElementById('print').innerHTML =
+      sheetFor(1, 'H 組 —— 自己寫出全部資料')
+    + sheetFor(2, 'M 組 —— 寫出資料')
+    + sheetFor(3, 'M 組 —— 圈出資料');
+  setTimeout(()=>window.print(), 150);
+}
+
+/* ── 後台：學生個人資料 ──
+   圈選版要有真實答案，先至整到「真答案 ＋ 似樣誘答」嗰兩個選項
+   （同紙本「陳加敏／陳嘉敏」一樣）。誘答留空就自動生成。 */
+const PF = AF.filter(f=>f.personal);
+function profPanel(){
+  return `<h3 class="sec">🪪 學生個人資料（圈選版要用）</h3>
+  <div class="note">只有選「圈出資料」嘅同學要用到。填咗真實答案，程式會自動配一個
+    <b>好似但唔啱</b>嘅選項畀佢圈（例如「陳加敏／陳嘉敏」）。
+    想自己指定嗰個錯嘅選項，就填埋右邊嗰欄。<br>
+    🔒 呢啲資料同姓名一樣，只存喺你嘅 Google 試算表，唔會寫入公開嘅程式檔。</div>
+  <div class="tblwrap"><table class="adm">
+    <tr><th>學生</th>${PF.map(f=>`<th>${f.lab}（真實）</th><th>誘答（可留空）</th>`).join('')}</tr>
+    ${STUDENTS.map(s=>`<tr><td>${s.n}</td>${PF.map(f=>`
+      <td><input class="adminput" value="${String(profOf(s.id,f.k)).replace(/"/g,'&quot;')}"
+        placeholder="${f.eg}"
+        onchange="setProf('${s.id}','${f.k}',this.value)"></td>
+      <td><input class="adminput" value="${String(profOf(s.id,'x_'+f.k)).replace(/"/g,'&quot;')}"
+        placeholder="自動"
+        onchange="setProf('${s.id}','x_${f.k}',this.value)"></td>`).join('')}</tr>`).join('')}
+  </table></div>`;
+}
+
+/* ══ 開機（呢幾句係由原程式帶過嚟嘅頂層啟動語句，缺一唔可）══ */
+document.body.classList.toggle('nojy', !JYON);   /* 套用粵拼開關 */
+pullAns();                                       /* 載入全班答案，否則 ANS 係空 */
+try{ fileWarn(); }catch(e){}
+if(new URLSearchParams(location.search).get('role')==='s') setRole('s');
+render();
+</script>
+</body>
+</html>
