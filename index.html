@@ -399,6 +399,21 @@ h3.sec{font-size:1.12rem;margin:22px 0 10px;padding-bottom:7px;
   .hint .hcard .hlab{font-size:12pt;font-weight:700}
 }
 
+/* ══ 工作紙檢視器 ══ */
+.wsview{display:flex;flex-direction:column;gap:8px}
+.wsbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;position:sticky;top:0;z-index:5;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(8px);padding:8px 10px;border-radius:16px;
+  box-shadow:0 4px 14px rgba(90,110,150,.12)}
+.wstitle{flex:1;font-weight:800;font-size:1.1rem;min-width:8em}
+.wspg{font-weight:600;color:var(--mute);font-size:.9rem}
+.wspages{display:flex;gap:6px;justify-content:center}
+.wswrap{overflow:auto;-webkit-overflow-scrolling:touch;background:#8FA3BF22;border-radius:16px;padding:10px}
+.wspaper{position:relative;margin:0 auto;background:#fff;box-shadow:0 6px 24px rgba(60,80,110,.18);border-radius:6px}
+.wspaper img{display:block;width:100%;height:auto;border-radius:6px}
+.wspaper canvas{position:absolute;left:0;top:0;touch-action:none;cursor:crosshair}
+.wstip{text-align:center;color:var(--mute);font-weight:700}
+.wslink{color:var(--blue);font-weight:800;text-decoration:none;margin-left:6px}
+
 /* ══ 工作紙 ══ */
 .wstbl td{vertical-align:middle}
 .wsn{white-space:nowrap;font-weight:800}
@@ -1571,6 +1586,9 @@ const WS = {"1":{"H":[{"t":"閱讀句子","d":"高組 › 1. 閱讀句子","f":"
    · 學生只可以按次序做：而家嗰張做完，下一張先出「我做完了」。
    · 學生撳「我做完了」＝🙋；老師撳一下確認＝✔，計入今日進帳 $1。
    ================================================================== */
+/* 邊啲工作紙已經轉咗做圖（id → 頁數）。圖放喺網站嘅 ws/ 資料夾，
+   檔名 <id>-p1.jpg、<id>-p2.jpg…；冇圖嘅仍然當紙本用。 */
+const WSIMG = {"h1-1":1,"h1-2":1,"h1-3":1,"h1-4":1,"m1-1":1,"m1-2":1,"m1-3":1,"m1-4":1,"m1-big1":1,"m1-big2":1,"m1-big3":1,"m1-big4":1,"m1-big5":1,"m1-big6":1,"m1-copyS1":1,"m1-copyS2":1,"m1-copyS3":1,"m1-copyS4":1,"m1-copyS5":1,"m1-copyS6":1,"m1-copyS7":1,"m1-grey1":1,"m1-grey2":1,"m1-grey3":1,"m1-grey4":1,"m1-grey5":1,"m1-grey6":1,"m1-copy1":1,"m1-copy2":1,"m1-copy3":1,"m1-copy4":1,"m1-copy5":1,"m1-copy6":1,"h2-1":1,"h2-2":1,"h2-3":1,"h2-4":1,"m2-1":1,"m2-2":1,"m2-3":1,"m2-4":1,"m2-big1":1,"m2-big2":1,"m2-copyS1":1,"m2-copyS2":1,"m2-copyS3":1,"m2-copyS4":1,"m2-copyS5":1,"m2-grey1":1,"m2-grey2":1,"m2-grey3":1,"m2-copy1":1,"m2-copy2":1,"m2-copy3":1,"m2-copy4":1,"m2-copy5":1,"h3-1":1,"h3-2":1,"h3-3":1,"h3-4":1,"m3-1":1,"m3-2":1,"m3-3":1,"m3-big1":1,"m3-big2":1,"m3-copyS1":1,"m3-copyS2":1,"m3-copyS3":1,"m3-copyS4":1,"m3-grey1":1,"m3-grey2":1,"m3-grey3":1,"m3-copy1":1,"m3-copy2":1,"m3-copy3":1,"h4-1":1,"h4-2":1,"h4-3":1,"h4-4":1,"m4-1":1,"m4-2":1,"m4-3":1,"m4-4":1,"m4-big1":1,"m4-big2":1,"m4-copyS1":1,"m4-copyS2":1,"m4-copyS3":1,"m4-grey1":1,"m4-grey2":1,"m4-copy1":1,"m4-copy2":1,"h5-1":1,"h5-2":1,"h5-3":1,"m5-1":1,"m5-2":1,"m5-big1":1,"m5-big2":1,"m5-copyS1":1,"m5-copyS2":1,"m5-copyS3":1,"m5-grey1":1,"m5-grey2":1,"m5-grey3":1,"m5-copy1":1,"m5-copy2":1,"m5-copy3":1,"h6-1":1,"h6-2":1,"h6-3":1,"h6-4":1,"m6-1":1,"m6-2":1,"m6-3":1,"m6-big1":1,"m6-big2":1,"m6-copyS1":1,"m6-copyS2":1,"m6-copyS3":1,"m6-grey1":1,"m6-grey2":1,"m6-copy1":1,"m6-copy2":1,"h7-1":1,"h7-2":1,"h7-3":1,"h7-4":1,"m7-1":1,"m7-2":1,"m7-3":1,"m7-big1":1,"m7-big2":1,"m7-copyS1":1,"m7-copyS2":1,"m7-copyS3":1,"m7-grey1":1,"m7-grey2":1,"m7-copy1":1,"m7-copy2":1,"h8-1":1,"h8-2":1,"h8-3":1,"m8-1":1,"m8-2":1,"m8-3":1,"m8-big1":1,"m8-big2":1,"m8-copyS1":1,"m8-copyS2":1,"m8-copyS3":1,"m8-grey1":1,"m8-grey2":1,"m8-copy1":1,"m8-copy2":1,"h9-1":1,"h9-2":1,"h9-3":1,"h9-4":1,"m9-1":1,"m9-2":1,"m9-3":1,"m9-copyS1":1,"m9-copyS2":1,"m9-copyS3":1,"m9-grey1":1,"m9-copy1":1,"m9-copy2":1,"h10-1":1,"h10-2":1,"h10-3":1,"h10-4":1,"m10-1":1,"m10-2":1,"m10-3":1,"m10-copyS1":1,"m10-copyS2":1,"m10-copyS3":1,"m10-copy1":1,"m10-copy2":1,"h11-1":1,"h11-2":1,"h11-3":1,"h11-4":1,"m11-1":1,"m11-2":1,"m11-3":1,"m11-copyS1":1,"m11-copyS2":1,"m11-copy1":1,"he-1":1,"he-2":1,"he-3":1,"he-4":1,"he-5":1,"he-6":1,"he-7":1,"me-1":1,"me-2":1,"me-3":1,"me-4":1};
 const WS_TRACK = {H:'高組工作紙', M:'中組工作紙', '':'不派工作紙'};
 const WS_VAR   = {copyS:'抄寫句子及字詞', copy:'抄寫字詞', grey:'灰階字詞', big:'放大字詞'};
 /* 睇英文嘅同學：工作紙標題英文 */
@@ -1663,8 +1681,12 @@ function wsNeedHTML(set){
   if(!need.length) return '';
   return `<h3 class="sec">🖨 ${wsSetName(set)}：要印的份數</h3>
     <table class="adm"><tr><th>Drive 資料夾</th><th>檔名</th><th>份數</th><th>給誰</th></tr>
-    ${need.map(n=>`<tr><td>${n.x.d}</td><td>${n.x.f}</td><td><b>${n.who.length}</b></td>
-      <td style="font-size:.85rem">${n.who.join('、')}</td></tr>`).join('')}</table>`;
+    ${need.map(n=>`<tr><td>${n.x.d}</td>
+      <td>${n.x.f}${WSIMG[n.x.id]?` <a class="wslink" href="ws/${n.x.id}.jpg" target="_blank">📄 看</a>`:''}</td>
+      <td><b>${n.who.length}</b></td>
+      <td style="font-size:.85rem">${n.who.join('、')}</td></tr>`).join('')}</table>
+    <div class="note">📄 按一下可以打開那張工作紙放大在大電視上講解。
+      有 📄 的表示學生可以直接在平板電腦上做；沒有的仍然要印紙本。</div>`;
 }
 function wsPrint(){
   const set = wsSet();
@@ -1681,6 +1703,175 @@ function wsPrint(){
   setTimeout(()=>window.print(), 150);
 }
 
+
+/* ==================================================================
+   工作紙檢視器 —— 直接喺程式入面做工作紙
+   ------------------------------------------------------------------
+   張工作紙就係 Drive 嗰份本身（Word → PDF → 圖），所以樣一模一樣，
+   同學返到屋企見到張紙都係同一個樣。
+   圖上面疊住一塊透明畫布，可以好似小畫家咁寫字、圈、擦。
+   筆跡用座標存喺學生部機（localStorage），唔上雲端 ——
+   一版工作紙嘅筆跡太大，會塞爆試算表嗰格。
+   ================================================================== */
+let WSV = null;   /* {id, tool, zoom} 開緊嘅工作紙 */
+let WINK = null;  /* 筆跡：[stroke…]，stroke = [顏色, 粗幼, x,y, x,y…] */
+let WTXT = null;  /* 打字答案：[{x,y,t,s}…] */
+const WS_COLS = {ink:'#1A2733', red:'#D3453B', blue:'#2F6FB0'};
+
+function wsInkKey(id){ return K+'.wsink.'+ME+'.'+id; }
+function wsLoadInk(id){
+  try{ const r=JSON.parse(localStorage.getItem(wsInkKey(id)));
+    if(r){ WINK=Array.isArray(r.k)?r.k:[]; WTXT=Array.isArray(r.t)?r.t:[]; return; } }catch(e){}
+  WINK=[]; WTXT=[];
+}
+function wsSaveInk(){
+  if(!WSV) return;
+  try{ localStorage.setItem(wsInkKey(WSV.id), JSON.stringify({k:WINK,t:WTXT})); }catch(e){}
+}
+function wsHasInk(id){
+  try{ const r=JSON.parse(localStorage.getItem(wsInkKey(id)));
+    return !!(r && ((r.k&&r.k.length) || (r.t&&r.t.length)));
+  }catch(e){ return false; }
+}
+/* 打開一張工作紙 */
+function wsOpen(id){
+  if(!WSIMG[id]) return;
+  WSV = {id, tool:'ink', zoom:1};
+  wsLoadInk(id);
+  render();
+}
+function wsBack(){ wsSaveInk(); WSV=null; render(); }
+function wsTool(t){ WSV.tool=t; render(); }
+function wsZoom(d){ WSV.zoom=Math.min(3, Math.max(1, +(WSV.zoom+d).toFixed(1))); render(); }
+function wsUndo(){ if(WINK.length){ WINK.pop(); wsSaveInk(); wsPaint(); } }
+function wsClearPage(){
+  if(!confirm('清除這張工作紙上所有筆跡？')) return;
+  WINK=[]; WTXT=[]; wsSaveInk(); wsPaint();
+}
+/* 學生話做完 */
+function wsFinish(){
+  const id=WSV.id; wsSaveInk();
+  const a=myAns(); a['ws:'+id]=1; saveMine();
+  WSV=null; cheer('做得好！'); render();
+}
+
+/* ── 畫面 ── */
+function sWSView(me){
+  const v=WSV;
+  const it=(wsList(me, wsSet())||[]).find(x=>x.id===v.id) || {t:''};
+  const tools=[['ink','🖊','黑筆'],['red','🔴','紅筆（圈）'],['blue','🔵','藍筆'],
+               ['erase','🧽','擦膠'],['type','⌨️','打字']];
+  return `<div class="wsview">
+    <div class="wsbar">
+      <button class="btn sm" onclick="wsBack()">← ${ruby('返回')}</button>
+      <div class="wstitle">${ruby(it.t||'')}</div>
+      ${tools.map(([k,ic,lb])=>`<button class="btn sm ${v.tool===k?'mint':''}" title="${lb}"
+         onclick="wsTool('${k}')">${ic}</button>`).join('')}
+      <button class="btn sm" onclick="wsUndo()">↩︎</button>
+      <button class="btn sm" onclick="wsClearPage()">🧹</button>
+      <button class="btn sm" onclick="wsZoom(-0.5)">➖</button>
+      <button class="btn sm" onclick="wsZoom(0.5)">➕</button>
+      <button class="btn mint" onclick="wsFinish()">✔ ${ruby('做完了')}</button>
+    </div>
+    <div class="wswrap" id="wswrap">
+      <div class="wspaper" id="wspaper">
+        <img id="wsimg" src="${wsImgSrc(v.id)}" alt="">
+        <canvas id="wsink"></canvas>
+      </div>
+    </div>
+    <div class="wstip">${ruby(v.tool==='type'?'在工作紙上點一下，就可以打字':'用手指在工作紙上書寫或圈出答案')}</div>
+  </div>`;
+}
+function wsImgSrc(id){ return `ws/${id}.jpg`; }
+
+/* 圖載入之後先對齊畫布 */
+function initWSView(){
+  const img=document.getElementById('wsimg'), c=document.getElementById('wsink');
+  if(!img||!c) return;
+  const fit=()=>{
+    const paper=document.getElementById('wspaper');
+    const wrap=document.getElementById('wswrap');
+    const w=Math.round(wrap.clientWidth*WSV.zoom);
+    paper.style.width=w+'px';
+    c.width=img.naturalWidth; c.height=img.naturalHeight;   /* 畫布用原圖座標 */
+    c.style.width='100%'; c.style.height='auto';
+    wsPaint();
+  };
+  if(img.complete && img.naturalWidth) fit(); else img.onload=fit;
+  bindWSInk(c);
+}
+function wsPaint(){
+  const c=document.getElementById('wsink'); if(!c) return;
+  const x=c.getContext('2d');
+  x.clearRect(0,0,c.width,c.height);
+  x.lineCap='round'; x.lineJoin='round';
+  WINK.forEach(s=>{
+    x.strokeStyle=WS_COLS[s[0]]||'#1A2733'; x.lineWidth=s[1];
+    x.beginPath(); x.moveTo(s[2],s[3]);
+    for(let i=4;i<s.length;i+=2) x.lineTo(s[i],s[i+1]);
+    x.stroke();
+  });
+  WTXT.forEach(t=>{
+    x.fillStyle='#1A2733'; x.font=`700 ${t.s||34}px "PingFang HK",sans-serif`;
+    x.textBaseline='top'; x.fillText(t.t, t.x, t.y);
+  });
+}
+function bindWSInk(c){
+  if(c.dataset.bound) return; c.dataset.bound='1';
+  let on=false, cur=null;
+  const pos=e=>{ const r=c.getBoundingClientRect(), q=e.touches?e.touches[0]:e;
+    return [Math.round((q.clientX-r.left)*c.width/r.width),
+            Math.round((q.clientY-r.top)*c.height/r.height)]; };
+  const start=e=>{
+    const [px,py]=pos(e);
+    if(WSV.tool==='type'){ e.preventDefault(); wsAddText(px,py); return; }
+    e.preventDefault(); on=true; DRAWING=true; DRAW_TS=Date.now();
+    if(WSV.tool==='erase'){ wsErase(px,py); return; }
+    const w = WSV.tool==='red' ? 6 : 4;
+    cur=[WSV.tool, w, px, py];
+    WINK.push(cur);
+    wsPaint();
+  };
+  const move=e=>{
+    if(!on) return; e.preventDefault(); DRAW_TS=Date.now();
+    const [px,py]=pos(e);
+    if(WSV.tool==='erase'){ wsErase(px,py); return; }
+    const lx=cur[cur.length-2], ly=cur[cur.length-1];
+    if(Math.abs(px-lx)+Math.abs(py-ly)<2) return;
+    cur.push(px,py); wsPaint();
+  };
+  const end=()=>{ if(!on) return; on=false; cur=null; DRAWING=false; wsSaveInk(); };
+  c.addEventListener('pointerdown',start); c.addEventListener('pointermove',move);
+  c.addEventListener('touchstart',start,{passive:false});
+  c.addEventListener('touchmove',move,{passive:false});
+  ['touchend','touchcancel','pointercancel'].forEach(ev=>c.addEventListener(ev,end));
+  if(window.__wsUp){ ['pointerup','pointercancel','touchcancel'].forEach(ev=>window.removeEventListener(ev,window.__wsUp)); }
+  window.__wsUp=end;
+  ['pointerup','pointercancel','touchcancel'].forEach(ev=>window.addEventListener(ev,end));
+}
+/* 擦膠：擦走碰到嘅筆劃 */
+function wsErase(px,py){
+  const R=18, a=WINK;
+  let hit=false;
+  for(let i=a.length-1;i>=0;i--){
+    const s=a[i];
+    for(let j=2;j<s.length;j+=2){
+      if(Math.abs(s[j]-px)<R && Math.abs(s[j+1]-py)<R){ a.splice(i,1); hit=true; break; }
+    }
+  }
+  const t=WTXT;
+  for(let i=t.length-1;i>=0;i--){
+    if(Math.abs(t[i].x-px)<60 && Math.abs(t[i].y-py)<40){ t.splice(i,1); hit=true; }
+  }
+  if(hit){ wsSaveInk(); wsPaint(); }
+}
+function wsAddText(px,py){
+  const s=prompt('打你的答案（可用粵語拼音輸入法）：');
+  if(!s || !s.trim()) return;
+  WTXT.push({x:px, y:py, t:s.trim(), s:34});
+  wsSaveInk(); wsPaint();
+}
+
 /* ══ 學生版：只見自己嗰疊，按次序；唔顯示任何組別字眼 ══ */
 function sWS(me){
   const set = wsSet(), list = wsList(me, set);
@@ -1691,13 +1882,17 @@ function sWS(me){
     <div class="qt">📄 ${ruby('今日的工作紙')}　<span class="wsprog">${done}／${list.length}</span></div>
     <div class="wslist">${list.map((x,i)=>{
       const st = wsState(me.id, x.id), now = i===cur;
+      const hasImg = !!WSIMG[x.id];
       return `<div class="wsitem s${st} ${now?'now':''}">
         <div class="wsno">${st===2?'⭐':st===1?'✋':i+1}</div>
         <div class="wst">${ruby(x.t)}
           ${(me.en||LANG==='en')&&wsEn(x.t)?`<div class="tr">${wsEn(x.t)}</div>`:''}
-          ${now?`<div class="wshint">${ruby('現在做這一張')}</div>`:''}
-          ${st===1?`<div class="wshint">${ruby('等老師檢查')}</div>`:''}</div>
-        ${now?`<button class="btn mint" onclick="wsDone('${x.id}')">✋ ${ruby('我做完了')}</button>`:''}
+          ${now?`<div class="wshint">${ruby(hasImg?'現在做這一張':'現在做這一張（紙本）')}</div>`:''}
+          ${st===1?`<div class="wshint">${ruby('等老師檢查')}</div>`:''}
+          ${hasImg&&wsHasInk(x.id)?`<div class="wshint">${ruby('已經寫了一些')}</div>`:''}</div>
+        ${hasImg?`<button class="btn ${now?'mint':'sm'}" onclick="wsOpen('${x.id}')">
+           📄 ${ruby(st>0?'再看一次':'打開做')}</button>`:''}
+        ${now&&!hasImg?`<button class="btn mint" onclick="wsDone('${x.id}')">✋ ${ruby('我做完了')}</button>`:''}
         ${st===1?`<button class="btn sm" onclick="wsDone('${x.id}')">↺ ${ruby('按錯了')}</button>`:''}
       </div>`;
     }).join('')}</div>
@@ -2441,6 +2636,8 @@ function renderStudent(){
     NET.sendBeat();
     return;
   }
+  if(WSV && CTRL.phase!=='ws') WSV=null;          /* 老師轉去第二頁，就退返出嚟 */
+  if(WSV){ B.innerHTML = sWSView(me); initWSView(); NET.sendBeat(); return; }
   if(SHOP_S){ B.innerHTML = sShop(me); return; }
   const f={hello:sHello,notes:sNotes,text:sText,vocab:sVocab,round:sRound,
            qa:sQA,ws:sWS,goals:sGoals}[CTRL.phase];
