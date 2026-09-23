@@ -1788,16 +1788,20 @@ function wsImgSrc(id){ return `ws/${id}.jpg`; }
 function initWSView(){
   const img=document.getElementById('wsimg'), c=document.getElementById('wsink');
   if(!img||!c) return;
+  /* 用百分比定闊度，唔好量容器像素 ——
+     圖由網絡載入返嚟嗰刻版面未排好，量到嘅闊度會係 0，張紙就會縮成一條。 */
   const fit=()=>{
     const paper=document.getElementById('wspaper');
-    const wrap=document.getElementById('wswrap');
-    const w=Math.round(wrap.clientWidth*WSV.zoom);
-    paper.style.width=w+'px';
+    if(!paper) return;
+    paper.style.width = Math.round(100*(WSV?WSV.zoom:1))+'%';
     c.width=img.naturalWidth; c.height=img.naturalHeight;   /* 畫布用原圖座標 */
     c.style.width='100%'; c.style.height='auto';
     wsPaint();
   };
   if(img.complete && img.naturalWidth) fit(); else img.onload=fit;
+  if(window.__wsFit) window.removeEventListener('resize', window.__wsFit);
+  window.__wsFit = fit;
+  window.addEventListener('resize', fit);
   bindWSInk(c);
 }
 function wsPaint(){
