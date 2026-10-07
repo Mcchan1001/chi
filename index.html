@@ -1483,6 +1483,7 @@ function fileWarn(){
 }
 
 function render(){
+  wsKeepPos();
   fileWarn();
   document.querySelectorAll('#tNet,#sNet').forEach(e=>{ if(e) e.innerHTML = netChip(); });
   document.querySelectorAll('#bJy,#bJy2').forEach(b=>{
@@ -1798,6 +1799,31 @@ async function selfCheck(){
    一版工作紙嘅筆跡太大，會塞爆試算表嗰格。
    ================================================================== */
 let WSV = null;   /* {id, tool, zoom} 開緊嘅工作紙 */
+let WS_POS = null; /* 工作紙拉到邊度：{id, t:上下, l:左右}，重畫後用嚟拉返去 */
+let WS_HTML = '';  /* 上一次砌好嘅工作紙畫面，用嚟判斷有冇變 */
+/* 【修正：拉桿過幾秒彈返頂】
+   網絡同步、連線狀態轉變等等，都會令整個畫面重畫，工作紙被拆咗重砌，
+   捲動位置就歸零。現在：
+   ① 工作紙畫面如果完全冇變，就原封不動，唔拆唔砌；
+   ② 真係要重砌（轉筆、放大縮小）嗰陣，先記低位置，砌完拉返去。 */
+function wsMount(box, html){
+  const w = document.getElementById('wswrap');
+  const sig = html + '|zoom' + WSV.zoom;     /* 放大縮小唔喺 html 入面，要另外計 */
+  if(w && box.contains(w) && sig === WS_HTML) return;   /* 冇變：唔郁 */
+  box.innerHTML = html; WS_HTML = sig;
+  initWSView();
+}
+function wsKeepPos(){
+  if(!WSV) return;
+  const w = document.getElementById('wswrap');
+  if(w && w.dataset.ready) WS_POS = {id:WSV.id, t:w.scrollTop, l:w.scrollLeft};
+}
+function wsRestorePos(){
+  const w = document.getElementById('wswrap'); if(!w) return;
+  if(WSV && WS_POS && WS_POS.id===WSV.id){ w.scrollTop = WS_POS.t; w.scrollLeft = WS_POS.l; }
+  w.dataset.ready = '1';
+  wsThumbFit();
+}
 let WINK = null;  /* 筆跡：[stroke…]，stroke = [顏色, 粗幼, x,y, x,y…] */
 let WTXT = null;  /* 打字答案：[{x,y,t,s}…] */
 const WS_COLS = {ink:'#1A2733', red:'#D3453B', blue:'#2F6FB0'};
@@ -1820,11 +1846,11 @@ function wsHasInk(id){
 /* 打開一張工作紙 */
 function wsOpen(id){
   if(!WSIMG[id]) return;
-  WSV = {id, tool:'ink', zoom:1};
+  WSV = {id, tool:'ink', zoom:1}; WS_POS = null; WS_HTML = '';
   wsLoadInk(id);
   render();
 }
-function wsBack(){ wsSaveInk(); WSV=null; render(); }
+function wsBack(){ wsSaveInk(); WSV=null; WS_POS=null; WS_HTML=''; render(); }
 function wsTool(t){ WSV.tool=t; render(); }
 function wsZoom(d){ WSV.zoom=Math.min(3, Math.max(1, +(WSV.zoom+d).toFixed(1))); render(); }
 function wsUndo(){ if(WINK.length){ WINK.pop(); wsSaveInk(); wsPaint(); } }
@@ -1836,7 +1862,7 @@ function wsClearPage(){
 function wsFinish(){
   const id=WSV.id; wsSaveInk();
   const a=myAns(); a['ws:'+id]=1; saveMine();
-  WSV=null; cheer('做得好！'); render();
+  WSV=null; WS_POS=null; WS_HTML=''; cheer('做得好！'); render();
 }
 
 /* ── 畫面 ── */
@@ -1893,7 +1919,8 @@ function initWSView(){
     c.style.width='100%'; c.style.height='auto';
     wsPaint(); wsThumbFit();
   };
-  if(img.complete && img.naturalWidth) fit(); else img.onload=fit;
+  const first=()=>{ fit(); wsRestorePos(); };
+  if(img.complete && img.naturalWidth) first(); else img.onload=first;
   bindWSScroll();
   if(window.__wsFit) window.removeEventListener('resize', window.__wsFit);
   window.__wsFit = fit;
@@ -2132,10 +2159,10 @@ function renderTeacher(){
     bh.className = 'btn sm' + (CTRL.hold ? ' peach holdon' : '');
   }
   /* 鎖機時只靠右上角個掣著色提示；唔喺內容區加橫額，避免誤撳解鎖 */
-  document.getElementById('tPanel').innerHTML = WSV ? tWSView() :
-    ({hello:tHello,notes:tNotes,text:tText,vocab:tVocab,round:tRound,qa:tQA,ws:tWS,
+  const tp = document.getElementById('tPanel');
+  if(WSV) wsMount(tp, tWSView());
+  else tp.innerHTML = ({hello:tHello,notes:tNotes,text:tText,vocab:tVocab,round:tRound,qa:tQA,ws:tWS,
       review:tReview,wallet:tWallet,goals:tGoals}[STEP]||tHello)();
-  if(WSV) initWSView();
 }
 function pickLesson(n){
   CTRL.wsEnd=false;
@@ -2822,7 +2849,7 @@ function renderStudent(){
     return;
   }
   if(WSV && CTRL.phase!=='ws') WSV=null;          /* 老師轉去第二頁，就退返出嚟 */
-  if(WSV){ B.innerHTML = sWSView(me); initWSView(); NET.sendBeat(); return; }
+  if(WSV){ wsMount(B, sWSView(me)); NET.sendBeat(); return; }
   if(SHOP_S){ B.innerHTML = sShop(me); return; }
   const f={hello:sHello,notes:sNotes,text:sText,vocab:sVocab,round:sRound,
            qa:sQA,ws:sWS,goals:sGoals}[CTRL.phase];
