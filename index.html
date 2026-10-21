@@ -463,6 +463,150 @@ h3.sec{font-size:1.12rem;margin:22px 0 10px;padding-bottom:7px;
   .wsslip li{font-size:13pt;margin:2pt 0}
   .wsslip li span{font-size:9pt;color:#888;margin-left:10pt}
 }
+
+/* ================= 🎧 聆聽專題 ================= */
+.lispath{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.lisstage{padding:9px 18px;border-radius:18px;font-size:1rem;font-weight:800;
+  background:rgba(255,255,255,.55);color:#52627A;border:2px solid transparent}
+.lisstage.on{background:#fff;border-color:#7FB6D9;color:#244E70;box-shadow:var(--sh)}
+.lisstage.done{background:#DDF5EA;color:#2B7A5D}
+.lisbadge{display:inline-block;padding:7px 18px;border-radius:20px;font-size:1.05rem;font-weight:900;
+  background:#E4ECF7;color:#3B4F6E}
+.lisbadge.st-listen{background:#CFE8FA;color:#1F5C86}
+.lisbadge.st-answer{background:#FFEDB5;color:#8A5B12}
+.lisbadge.st-reveal{background:#CBEFDC;color:#216B50}
+.lisbadge.st-teach{background:#E3D8F5;color:#5A3F8C}
+.lisbadge.playing{background:#FFD9D2;color:#A5382C;animation:lispulse 1s ease-in-out infinite}
+@keyframes lispulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.lishead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.lismeta{font-weight:800;color:var(--mute)}
+.lisdots{display:flex;gap:5px;flex-wrap:wrap;margin-left:auto}
+.lisdot{min-width:30px;height:30px;border-radius:50%;font-size:.82rem;font-weight:900;
+  background:rgba(255,255,255,.7);border:3px solid #C3CFE0;color:var(--mute)}
+.lisdot.tc{border-radius:10px}
+.lisdot.cur{border-color:#5FA8D3;background:#DCEEF9;color:#28577F;transform:scale(1.2)}
+.lisdot.ok{background:#7FD3B0;border-color:#4FB894;color:#fff}
+
+.lisbox{background:var(--glassb);border:1px solid var(--line);border-radius:30px;
+  padding:26px 22px;box-shadow:var(--sh);margin-bottom:14px;text-align:center}
+.lisbox.tips{text-align:left;border:2px dashed #F4C95D;background:rgba(255,248,222,.9)}
+.lisbox.tips .note{margin:8px 0 0;font-size:1rem;line-height:1.8}
+.lisbox.tips .qt{font-weight:900;color:#8A5B12;font-size:1.05rem}
+.lisbox.boss{background:linear-gradient(180deg,#FFF4D8,#FFE9B0);border:3px solid #F4B740}
+.lisbossbar{display:inline-block;background:#E38A1F;color:#fff;font-weight:900;font-size:1.3rem;
+  padding:6px 22px;border-radius:20px;margin-bottom:10px}
+.lishero{font-size:4.6rem;line-height:1.15}
+.lishero.sm{font-size:3rem;margin:2px 0}
+.lishero.pulse{animation:lispulse 1.1s ease-in-out infinite}
+.listitle{font-size:2.4rem;font-weight:900;line-height:2.1;margin-top:4px}
+.lisline{font-size:1.6rem;font-weight:800;line-height:2.2;color:#33506E;margin-top:4px}
+.liscap{display:inline-block;max-width:100%;margin:10px auto;padding:10px 22px;border-radius:20px;
+  background:#FFF8DE;border:2px solid #F6DD8E;font-size:1.7rem;font-weight:800;line-height:2.3}
+.lisask{font-size:1.9rem;font-weight:900;line-height:2.1;margin:4px 0 2px}
+.lisfb{margin:8px auto 8px;max-width:820px;background:#E4F8EE;border:3px solid #7FD3B0;color:#216B50;
+  border-radius:20px;padding:12px 20px;font-size:1.45rem;font-weight:800;line-height:2.1;animation:lispop .35s}
+.lisfb.miss{background:#FDECE9;border-color:#E7A39B;color:#A5382C}
+@keyframes lispop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.lishint{margin-top:12px;font-size:1.15rem;font-weight:800;color:var(--mute)}
+
+.listag{display:inline-block;font-size:1.2rem;font-weight:900;padding:2px 14px;border-radius:14px;
+  margin-right:8px;vertical-align:middle}
+.tg-a{background:#FFE08A;color:#7A5200}.tg-b{background:#FFC2D6;color:#8C2B54}
+.tg-c{background:#B9E6CF;color:#1E6A4B}.tg-d{background:#BFDDF7;color:#1F4F7C}
+.tg-e{background:#E0CFF5;color:#573B8A}.tg-f{background:#FFD3B3;color:#8A4A17}
+
+.lisfive{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.lisfive .lf{width:104px;padding:10px 4px;border-radius:20px;background:rgba(255,255,255,.7);
+  border:3px solid #D5DEEB;opacity:.55}
+.lisfive .lf .e{font-size:2.3rem}.lisfive .lf .t{font-size:1.5rem;font-weight:900}
+.lisfive .lf.on{opacity:1;border-color:#F4B740;background:#FFF3CF;transform:scale(1.12);
+  box-shadow:0 0 0 5px rgba(244,183,64,.25)}
+
+.liscards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:14px}
+.liscard{background:#fff;border-radius:22px;padding:14px 8px;border:3px solid #D5DEEB;box-shadow:var(--hard)}
+.liscard.tap{cursor:pointer}.liscard.tap:active{transform:translateY(3px)}
+.liscard .e{font-size:2.8rem}.liscard .t{font-weight:900;line-height:2.1}
+.liscard .d{font-size:1.05rem;font-weight:700;color:var(--mute);line-height:2;margin-top:2px}
+.lischunks{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:14px 0}
+.lischunk{font-size:1.7rem;font-weight:900;padding:6px 16px;border-radius:18px;line-height:2.2}
+.lischunk b{font-size:1rem;margin-right:8px;background:rgba(255,255,255,.7);border-radius:10px;padding:0 8px}
+.lis-plain{font-size:1.6rem;font-weight:800;line-height:2.2}
+
+.lisoptgrid{margin-top:14px}
+.lisopt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  padding:12px 8px;position:relative}
+.lisopt img{max-width:150px}
+.lisopt .lisemo{line-height:1.2}
+.lisopt .lt{font-weight:900;line-height:2.1}
+.lisopt .lt .tr{font-size:.55em}
+.opt.dim{opacity:.38}
+.opt.lisopt.right::after{content:'✅';position:absolute;top:6px;right:10px;font-size:1.6rem}
+.opt.lisopt.wrong::after{content:'❌';position:absolute;top:6px;right:10px;font-size:1.6rem}
+.liscnt{position:absolute;left:8px;top:8px;background:#fff;border:2px solid #C3CFE0;border-radius:14px;
+  font-size:.95rem;font-weight:900;padding:1px 9px}
+
+.lisslots{display:flex;align-items:stretch;justify-content:center;gap:8px;flex-wrap:wrap;margin:8px 0}
+.lisslots .arrow{align-self:center;font-size:1.8rem;color:#8BA3C0}
+.lisslot{min-width:130px;min-height:112px;border-radius:22px;border:4px dashed #B9C8DD;
+  background:rgba(255,255,255,.55);padding:8px 10px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;font-family:inherit}
+.lisslot .no{font-size:1.05rem;font-weight:900;color:#5A6B86;background:#E6EDF7;
+  border-radius:12px;padding:0 12px;margin-bottom:2px}
+.lisslot .e{font-size:2.4rem;line-height:1.2}.lisslot .t{font-size:1.25rem;font-weight:900;line-height:2}
+.lisslot.full{border-style:solid;border-color:#F4B740;background:#FFF3CF}
+.lisslot.ok{border-style:solid;border-color:#7FD3B0;background:#E4F8EE}
+.lisslot.bad{border-style:solid;border-color:#E7746A;background:#FDE4E1}
+.liscardsrow{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+.lisstepcard{width:136px;border-radius:20px;background:#fff;border:4px solid #D5DEEB;
+  box-shadow:var(--hard);padding:8px 6px;font-family:inherit}
+.lisstepcard:active{transform:translateY(3px)}
+.lisstepcard .e{font-size:2.3rem;line-height:1.2}.lisstepcard .t{font-size:1.15rem;font-weight:900;line-height:2}
+.lisstepcard.used{opacity:.3}
+.lisstepcard.right{border-color:#7FD3B0;background:#E4F8EE}
+.lisstepcard.decoy{opacity:.45}
+.lisstepcard .x{font-size:.85rem;font-weight:800;color:#A5382C}
+
+.lisbar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between}
+.listools{gap:8px;margin-left:auto}
+.lisbox{padding:20px 20px}
+.liscontrol{position:sticky;bottom:6px;z-index:8;margin-top:16px;padding:10px 14px;border-radius:24px;
+  background:rgba(255,255,255,.95);border:1px solid var(--line);box-shadow:0 -4px 24px rgba(90,110,160,.25)}
+.btn.lisbig{font-size:1.5rem;padding:16px 38px}
+.lisbanner{margin:6px auto 10px;padding:10px 20px;border-radius:20px;background:#E3D8F5;color:#4A3277;
+  font-weight:900;font-size:1.3rem;text-align:center;display:flex;gap:10px;align-items:center;
+  justify-content:center;flex-wrap:wrap}
+.lisbanner.big{font-size:1.9rem;line-height:2.2}
+.lisbanner.me{background:#FFE08A;color:#7A5200;font-size:1.7rem;animation:lispulse 1s ease-in-out infinite}
+.lispickbtn{margin-left:auto;font-size:1.05rem;opacity:.55;padding:0 4px}
+.lispickbtn:hover{opacity:1}
+
+.lisprog{display:flex;align-items:center;gap:7px;justify-content:center;margin-bottom:8px}
+.lisprog .stg{font-size:.95rem;font-weight:900;color:#33506E;margin-right:4px}
+.lisprog i{width:14px;height:14px;border-radius:50%;background:#D5DEEB}
+.lisprog i.ok{background:#7FD3B0}.lisprog i.cur{background:#F4B740;transform:scale(1.4)}
+
+.lisstrats{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px;margin-top:8px}
+.lisstrat{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,.7);
+  border-radius:16px;padding:10px 12px}
+.lisstrat .e{font-size:1.9rem}.lisstrat .d{font-size:.92rem;color:#4A5568;line-height:1.7;margin-top:2px}
+.obsbtn{width:44px;height:44px;border-radius:12px;border:3px solid #C3CFE0;background:#fff;
+  font-size:1.4rem;font-weight:900;color:#216B50}
+.obsbtn.on{background:#BFEFDA;border-color:#4FB894}
+table.obs td{padding:6px 10px}
+
+/* 證書（列印） */
+@media print{
+  .sheet.cert{border:5pt double #B7791F;padding:36pt 30pt;text-align:center;height:240mm;
+    display:flex;flex-direction:column;justify-content:center;align-items:center}
+  .cert .c1{font-size:16pt;letter-spacing:3pt}
+  .cert .c2{font-size:34pt;font-weight:900;margin:18pt 0 20pt}
+  .cert .c3{font-size:40pt;font-weight:900;border-bottom:1.5pt solid #000;padding:0 36pt 4pt;margin-bottom:20pt}
+  .cert .c4{font-size:16pt;line-height:2}
+  .cert .c5{font-size:18pt;font-weight:700;margin-top:18pt}
+  .cert .c6{font-size:64pt;margin:14pt 0}
+  .cert .c7{font-size:14pt;margin-top:20pt}
+}
+
 </style>
 </head>
 <body>
@@ -486,7 +630,7 @@ h3.sec{font-size:1.12rem;margin:22px 0 10px;padding-bottom:7px;
 <div id="teacher" class="hide">
   <div class="top">
     <div>
-      <div class="ttl">單元一 · 朋輩在我心</div>
+      <div class="ttl" id="tTtl">單元一 · 朋輩在我心</div>
       <div class="meta"><select id="tPick" onchange="pickLesson(this.value)"></select></div>
     </div>
     <div class="sp">
@@ -536,6 +680,7 @@ const A = {"img":{"一邊":"img/01.jpg","互相":"img/02.jpg","他":"img/03.jpg"
 const IMG = A.img, JYUT = A.jyut;
 /* 工作紙標題用到、原本粵拼表未有嘅字 */
 Object.assign(JYUT, {'代':'doi6','尋':'cam4','便':'bin6','仿':'fong2'});
+Object.assign(JYUT, {"曲":"kuk1","態":"taai3","停":"ting4","辨":"bin6","楚":"co2","傅":"fu6","摸":"mo2","雙":"soeng1","遍":"bin3","抹":"maat3","桌":"coek3","亂":"lyun6","懂":"dung2","範":"faan6","庫":"fu3","掃":"sou3","汽":"hei3","然":"jin4","序":"zeoi6","例":"lai6","倒":"dou2","套":"tou3","籤":"cim1","只":"zi2","戰":"zin3","挑":"tiu1","器":"hei3","架":"gaa3","桶":"tung2","隨":"ceoi4"});
 
 /* 圖片原本以 base64 文字內嵌。每次重畫都把幾十至一百多 KB 文字塞入畫面，
    瀏覽器要重新解碼，機器唔夠快就會窒。開機時轉換一次，
@@ -1033,6 +1178,7 @@ const CTRL0 = {phase:'idle', lessonNo:1, vocabIdx:-1, showHint:false, lessonDate
                gemini:false,        /* 學生版 Gemini 掣：老師開放先出 */
                wsEnd:false, wsOk:{},  /* 工作紙：單元完結模式、老師已確認嘅工作紙 */
                wordIdx:0, sub:'write', qIdx:0, qLocked:false,
+               mode:'', lis:null, lobs:{},   /* 聆聽專題：mode='lis' 時用聆聽闖關 */
                marks:{}, coins:{}, adj:{}, paid:{}};
 const BANK0 = {wallet:{}};   /* 交易紀錄改存試算表獨立工作表，唔會寫爆一格 */
 const MINE0 = {a:{}, prog:''};
@@ -1205,7 +1351,9 @@ setInterval(()=>NET.tick(), 900);
 /* 老師同學生用同一條字串識別「而家喺邊一頁」，方便點算幾多人已收到 */
 function phaseKey(){
   return [CTRL.hold?'HOLD':CTRL.phase, CTRL.lessonNo, CTRL.vocabIdx, CTRL.wordIdx,
-          CTRL.sub, CTRL.qIdx, CTRL.game?CTRL.game.w:''].join('|');
+          CTRL.sub, CTRL.qIdx, CTRL.game?CTRL.game.w:'',
+          (CTRL.mode==='lis' && CTRL.lis) ? [CTRL.lis.s,CTRL.lis.run,CTRL.lis.i,CTRL.lis.st,CTRL.lis.plays,
+            CTRL.lis.pick,CTRL.lis.tx?1:0,CTRL.lis.sp?1:0].join('.') : ''].join('|');
 }
 /* 只更新「傳送中」字樣，唔重畫成頁 */
 function paintSend(){
@@ -2123,6 +2271,7 @@ function greeting(){
 }
 /* 本節課的學習目標：按當堂內容自動生成，一至三項 */
 function goalsOf(){
+  if(lisOn()) return lisSess().goals;
   const l = L(), ks = l.keys;
   const g = [
     {ico:'📖', zh:`讀出課文：${l.sentence}`, en:'Read the text aloud'},
@@ -2140,14 +2289,20 @@ function todayStr(){
 }
 function lessonDate(){ return CTRL.lessonDate || todayStr(); }
 function renderTeacher(){
-  document.getElementById('tPick').innerHTML = LESSONS.map(l=>
-    `<option value="${l.no}" ${l.no===CTRL.lessonNo?'selected':''}>第 ${l.no} 連堂 — ${
-      l.sentence.slice(0,15)}${l.sentence.length>15?'…':''}${hasQA(l.no)?'':'（問答未編）'}</option>`).join('');
+  document.getElementById('tPick').innerHTML =
+    `<optgroup label="📖 單元一 · 朋輩在我心">` + LESSONS.map(l=>
+    `<option value="${l.no}" ${(!lisOn() && l.no===CTRL.lessonNo)?'selected':''}>第 ${l.no} 連堂 — ${
+      l.sentence.slice(0,15)}${l.sentence.length>15?'…':''}${hasQA(l.no)?'':'（問答未編）'}</option>`).join('')
+    + `</optgroup><optgroup label="🎧 聆聽專題 · 聽指示做得到">` + LIS.map(x=>
+    `<option value="L${x.s}" ${(lisOn() && lisS().s===x.s)?'selected':''}>聆聽第 ${x.s} 節 — ${x.title}</option>`).join('')
+    + `</optgroup>`;
+  const tt = document.getElementById('tTtl');
+  if(tt) tt.textContent = lisOn() ? '聆聽專題 · 聽指示做得到' : '單元一 · 朋輩在我心';
   document.getElementById('tDots').innerHTML = STUDENTS.map(s=>{
     const p=ANS[s.id].prog;
     return `<div class="dot ${p==='done'?'done':p?'on':''}" title="${s.n}"></div>`;
   }).join('');
-  document.getElementById('tSteps').innerHTML = STEPS.map(([k,l])=>
+  document.getElementById('tSteps').innerHTML = stepsNow().map(([k,l])=>
     `<button class="step ${STEP===k?'on':''}" onclick="tStep('${k}')">${l}</button>`).join('')
     + `<div class="sendbox">
          <span class="sendchip ${NET.sending?'on':''}">${NET.sending?'📤 傳送中…':'✅ 已送出'}</span>
@@ -2162,9 +2317,12 @@ function renderTeacher(){
   const tp = document.getElementById('tPanel');
   if(WSV) wsMount(tp, tWSView());
   else tp.innerHTML = ({hello:tHello,notes:tNotes,text:tText,vocab:tVocab,round:tRound,qa:tQA,ws:tWS,
-      review:tReview,wallet:tWallet,goals:tGoals}[STEP]||tHello)();
+      review:tReview,wallet:tWallet,goals:tGoals,lis:tLis}[STEP]||tHello)();
 }
 function pickLesson(n){
+  if(/^L\d+$/.test(String(n))) return pickLis(+String(n).slice(1));
+  lisStop(); LIS_PLAYING = false;
+  if(lisOn()){ lisClearPaid(); CTRL.goalDone={}; CTRL.mode=''; STEP='hello'; CTRL.phase='hello'; }     /* 由聆聽專題轉返去讀課文 */
   CTRL.wsEnd=false;
   CTRL.lessonNo=+n; CTRL.vocabIdx=-1; CTRL.wordIdx=0; CTRL.lessonDate=todayStr();
   CTRL.sub='write'; CTRL.qIdx=0; CTRL.qLocked=false;
@@ -2173,11 +2331,14 @@ function pickLesson(n){
 function tStep(k){
   if(k!=='ws') WSV=null;          /* 轉去其他頁就收起工作紙 */
   STEP=k;
-  if(['hello','notes','text','vocab','round','qa','ws','goals'].includes(k)) CTRL.phase=k;
+  if(k!=='lis'){ lisStop(); LIS_PLAYING = false; }
+  if(['hello','notes','text','vocab','round','qa','ws','goals','lis'].includes(k)) CTRL.phase=k;
+  if(lisOn() && k==='review') CTRL.phase='lisend';            /* 學生機：請望大電視 */
   if(!CTRL.lessonDate) CTRL.lessonDate = todayStr();
   saveCtrl(); render();
 }
-function tHello(){
+function tHello(){ return tHello0() + (lisOn() ? lisHelloExtra() : ''); }
+function tHello0(){
   const g = greeting(), goals = goalsOf();
   return `
     <div class="hello">
@@ -2253,7 +2414,7 @@ function zoomQR(){
   document.body.appendChild(d);
 }
 function tNotes(){
-  const d = lessonDate(), u = '朋輩在我心';
+  const d = lessonDate(), u = unitName();
   const big = (label, txt, sz) => `
     <div style="margin-bottom:22px">
       <div class="qt" style="font-size:1rem">${label}</div>
@@ -2274,7 +2435,8 @@ function tNotes(){
     <div class="row">
       <button class="btn mint" onclick="speak('${d}')">🔊 讀出日期</button>
       <button class="btn mint" onclick="speak('${u}')">🔊 讀出單元名稱</button>
-      <button class="btn blue" onclick="tStep('text')">下一步：讀課文 →</button>
+      ${lisOn() ? `<button class="btn blue" onclick="tStep('lis')">下一步：聽力闖關 →</button>`
+                : `<button class="btn blue" onclick="tStep('text')">下一步：讀課文 →</button>`}
     </div>
     <div class="sgrid" style="margin-top:18px">${STUDENTS.map(s=>{
       const a = myA(s.id);
@@ -2584,6 +2746,7 @@ function showAns(q, v){
    ⑥ 今日進帳 — 答對一題即 $1，不需再逐項評 0–4 分
    ================================================================ */
 function scoreOf(sid){
+  if(lisOn()) return lisScore(sid);
   const s=stu(sid), a=myA(sid), set=qaSet();
   let right=0, total=0, det=[];
   words().forEach((w,i)=>{
@@ -2642,15 +2805,15 @@ function tReview(){
         <button class="btn sm mint" onclick="addCoin('${r.s.id}',1)">＋</button>
       </div>
     </div>`).join('');
-  return `<div class="note">答對一題自動 $1（選字、問答、小遊戲都計）。
+  return `<div class="note">答對一題自動 $1（${lisOn()?'聽力闖關':'選字、問答、小遊戲'}都計）。
       需要鼓勵或調整，按 <b>＋</b> ／ <b>−</b>，總數即時重算。</div>
     <div class="row" style="margin-bottom:16px">
       <button class="btn lemon" onclick="payout()">💰 ${
-        (CTRL.paid||{})[CTRL.lessonNo]?'已入帳 — 再入一次':'確認入帳，存入戶口 →'}</button>
+        (CTRL.paid||{})[payKey()]?'已入帳 — 再入一次':'確認入帳，存入戶口 →'}</button>
       <button class="btn peach" onclick="toggleShop()">🎁 ${CTRL.shopOpen?'關閉獎品店':'打開獎品店'}</button>
       <button class="btn" onclick="STEP='wallet';render()">📒 交易紀錄</button>
     </div>
-    <div class="ranklist">${rows}</div>
+    <div class="ranklist">${rows}</div>${lisOn()?lisReviewExtra():''}
     ${CTRL.shopOpen?shopPanel():''}`;
 }
 function toggleShop(){ CTRL.shopOpen=!CTRL.shopOpen; saveCtrl(); render(); }
@@ -2764,16 +2927,16 @@ async function loadTx(){
 }
 function payout(){
   CTRL.paid=CTRL.paid||{};
-  if(CTRL.paid[CTRL.lessonNo] &&
-     !confirm(`第 ${CTRL.lessonNo} 連堂已經入過帳。\n再入一次？（會重複入帳）`)) return;
-  CTRL.paid[CTRL.lessonNo]=true;
+  if(CTRL.paid[payKey()] &&
+     !confirm(`${lessonLabel()}已經入過帳。\n再入一次？（會重複入帳）`)) return;
+  CTRL.paid[payKey()]=true;
   recalcAll();
   const list=[];
   STUDENTS.forEach(s=>{
     const c=CTRL.coins[s.id]||0; if(!c) return;
     BANK.wallet[s.id]=(BANK.wallet[s.id]||0)+c;
     list.push({sid:s.id, d:new Date().toLocaleDateString('zh-HK'),
-               t:`第${CTRL.lessonNo}連堂 答對${scoreOf(s.id).right}題`, a:c});
+               t:`${lessonLabel()} 答對${scoreOf(s.id).right}題`, a:c});
   });
   addTx(list);
   saveCtrl(); saveBank(); render(); cheer('已存入戶口！');
@@ -2807,7 +2970,11 @@ function buy(i){
 }
 function resetAll(){
   if(!confirm('清除本節課的答案及評分？（銀包及交易紀錄會保留）')) return;
-  CTRL={...CTRL0, paid:CTRL.paid||{}};
+  const keepLis = (CTRL.mode==='lis' && CTRL.lis)
+    ? {mode:'lis', lis:{...CTRL.lis, i:0, plays:0, pick:null, run:Date.now().toString(36)}} : {};
+  lisStop(); LIS_PLAYING = false;
+  CTRL={...CTRL0, paid:CTRL.paid||{}, ...keepLis};
+  if(keepLis.mode){ STEP='hello'; CTRL.phase='hello'; CTRL.lis.st = lisFresh(lisItem()); }
   STUDENTS.forEach(s=>{ ANS[s.id]={a:{},prog:''}; localStorage.removeItem(KA(s.id)); });
   saveCtrl(); render();
 }
@@ -2831,7 +2998,7 @@ function renderStudent(){
   }
   const me=stu(ME);
   document.getElementById('sName').textContent = me.n;
-  document.getElementById('sMeta').textContent = `單元一 · 第 ${L().no} 連堂`;
+  document.getElementById('sMeta').textContent = lisOn() ? `聆聽專題 · 第 ${lisS().s} 節` : `單元一 · 第 ${L().no} 連堂`;
   /* 錢包平時淨係顯示餘額，撳唔到 —— 同學唔會上堂上到一半走咗入去。
      老師打開獎品店嗰陣先變成可以撳入去換獎品。 */
   const purse = document.getElementById('sPurse');
@@ -2852,7 +3019,8 @@ function renderStudent(){
   if(WSV){ wsMount(B, sWSView(me)); NET.sendBeat(); return; }
   if(SHOP_S){ B.innerHTML = sShop(me); return; }
   const f={hello:sHello,notes:sNotes,text:sText,vocab:sVocab,round:sRound,
-           qa:sQA,ws:sWS,goals:sGoals}[CTRL.phase];
+           qa:sQA,ws:sWS,goals:sGoals,lis:sLis,
+           lisend:()=>wait('🏆','做得好！','請看大電視')}[CTRL.phase];
   B.innerHTML = f ? f(me) : wait('😊','等待老師開始','請看大電視');
   if(CTRL.phase==='round' && CTRL.sub==='write') initPad(me);
   if(CTRL.phase==='notes') NOTE_FIELDS.forEach((f2,i)=>initNotePad(me,i));
@@ -2957,7 +3125,7 @@ function sGoals(me){
 const NOTE_FIELDS = [
   {k:'nName', lb:'寫自己的姓名', lbe:'Write your name', val:s=>s.n},
   {k:'nDate', lb:'寫今日的日期', lbe:'Write today’s date', val:()=>lessonDate()},
-  {k:'nUnit', lb:'寫單元名稱',   lbe:'Write the unit title', val:()=>'朋輩在我心'}
+  {k:'nUnit', lb:'寫單元名稱',   lbe:'Write the unit title', val:()=>unitName()}
 ];
 function sNotes(me){
   const showEn = me.en||LANG==='en';
@@ -3546,10 +3714,936 @@ function sheetFor(lv, grey, title){
   </div>`;
 }
 function doPrint(){
+  if(lisOn()){
+    document.getElementById('print').innerHTML = lisCertHTML();
+    setTimeout(()=>window.print(),150); return;
+  }
   document.getElementById('print').innerHTML =
       sheetFor(1, false, '高組（直接抄寫）')
     + sheetFor(3, true,  '初組（灰階字）');
   setTimeout(()=>window.print(),150);
+}
+
+/* ================================================================
+   🎧 聆聽專題：聽指示做得到（轉銜準備）
+   對應教學計劃「聆聽」範疇（理解語意、聆聽態度，共 4 節）：
+     第 1 節 專心聽五步曲（聆聽態度）
+     第 2 節 聽出重點「時人地事」
+     第 3 節 聽指示做事（次序）＋「經理話」
+     第 4 節 職場實戰：我是新員工（聽不清楚就問）
+
+   教學策略：視覺提示、一次一步、教師示範、手勢與順口溜、正反例對比、
+             時人地事圖式、先／然後／最後線索詞、複述、求助說話、
+             字幕逐步撤除、指示由短到長、真實職場情景。
+
+   題目格式（每一項 item）：
+     k      teach 講解 ／ choice 選擇 ／ order 排次序 ／ boss 經理話
+     say    聽到的內容；「｜」表示停一停；同一段話的追問用 same:true 沿用上一項
+     ask    問題；opts 選項（a = 正確答案在 opts 的位置）
+     steps  次序題的步驟；decoys 干擾圖卡
+     tx     這一項預設是否顯示字幕（1 顯示／0 不顯示；不寫則沿用）
+     tip    給老師看的教學技巧（不會給學生看到）
+   ================================================================ */
+const LIS_FIVE = [{e:'✋',t:'停',d:'停一停'},{e:'👀',t:'望',d:'望一望'},{e:'👂',t:'聽',d:'聽清楚'},
+                  {e:'🗣️',t:'說',d:'說一說'},{e:'💪',t:'做',d:'就去做'}];
+const LIS_TAGC = {'時':'a','人':'b','地':'c','事':'d','物':'e','量':'f'};
+const LP   = n => ({t:n, img:n, e:{'成仔':'🧒','小愉':'👧','健仔':'👦'}[n]||'🙂'});
+const MGR  = {t:'經理', e:'🧑‍💼'};
+const GOOD = {e:'👍',t:'好'}, BAD = {e:'👎',t:'不好'};
+const DO   = {e:'👍',t:'做'}, NODO = {e:'✋',t:'不做'};
+const CLK  = {'九':'🕘','十':'🕙','兩':'🕑','三':'🕒'};
+
+const LIS = [
+/* ───────────────────────── 第 1 節 ───────────────────────── */
+{ s:1, title:'專心聽五步曲', sub:'聆聽態度：停・望・聽・說・做', ico:'✋', tx:1,
+  unit:'專心聽五步曲',
+  goals:[
+    {ico:'✋', zh:'認識專心聽的五步：停、望、聽、說、做', en:'Learn the 5 steps of good listening'},
+    {ico:'👀', zh:'眼睛望向說話的人，安靜地聽', en:'Look at the speaker and listen quietly'},
+    {ico:'🙌', zh:'分辨誰聽得好', en:'Tell who is listening well'}],
+  stages:['準備好','五步曲','誰聽得好','試一試'],
+  strat:[
+    '引起動機：連結「將來工作要聽指示」；先動一動，建立「聽完才做」的習慣。',
+    '步驟視覺化＋手勢＋順口溜：一次只教一步，邊說邊做手勢，重複多次。',
+    '正例／反例對比：用短故事讓學生判斷，建立聆聽態度的標準，並請學生說出原因。',
+    '應用與遷移：把五步曲用在突發情況，肯定「不明白就問」。'],
+  items:[
+  {st:0,k:'teach',e:'🎧',t:'聽得清楚，做得準確',
+   line:'將來工作，經理和師傅會說話。我們要專心聽，才做得準確。',
+   say:'今天，我們學習專心聽。｜將來工作的時候，經理和師傅會說話。｜我們要聽得清楚，才做得準確。',
+   tip:'引起動機：先問「你有沒有聽錯過老師的話？」，請兩三位同學分享；說明聽得準，工作才做得好。'},
+  {st:0,k:'teach',e:'🙋',t:'老師說，你做',line:'聽老師說，聽完才做動作。',
+   cards:[{e:'👏',t:'拍拍手'},{e:'🙂',t:'摸摸頭'},{e:'🧍',t:'站起來'},{e:'🪑',t:'坐下來'}],
+   say:'請聽老師說。聽完，才做動作。',
+   tip:'逐張按卡片，由電腦讀出指示；同學聽完才做動作。強調「聽完才做」；未聽完就動的同學，請他再試一次，並稱讚能等待的同學。'},
+  {st:1,k:'teach',strip:0,e:'✋',t:'停一停',line:'雙手放好，嘴巴不說話。',
+   say:'第一步，停一停。｜雙手放好，嘴巴不說話。',
+   tip:'手勢：手掌向前。示範放下手上的東西、坐正；可安排 5 秒安靜練習，讓學生體驗「停」。'},
+  {st:1,k:'teach',strip:1,e:'👀',t:'望一望',line:'眼睛望向說話的人。',
+   say:'第二步，望一望。｜眼睛望向說話的人。',
+   tip:'手勢：指指自己的眼睛，再指向說話的人。目光接觸可由「望向對方的臉」開始，不必長時間直視（照顧有感官需要的學生）。'},
+  {st:1,k:'teach',strip:2,e:'👂',t:'聽清楚',line:'耳朵專心聽，等他說完。',
+   say:'第三步，聽清楚。｜耳朵專心聽，等他說完。',
+   tip:'手勢：手放耳邊。強調「等他說完才開口」，減少搶答。'},
+  {st:1,k:'teach',strip:3,e:'🗣️',t:'說一說',line:'把聽到的說一遍：「我聽到……」',
+   say:'第四步，說一說。｜把聽到的說一遍。｜我聽到，先洗手，再拿杯子。',
+   tip:'手勢：手由嘴邊向外。複述有助記憶和確認。先由老師示範，再請學生跟說。'},
+  {st:1,k:'teach',strip:4,e:'💪',t:'就去做',line:'聽完才做。不明白，就問。',
+   say:'第五步，就去做。｜聽完才做。｜不明白，就問。',
+   tip:'手勢：握拳。提醒學生：不明白而發問，是好員工的表現，不是不乖。'},
+  {st:1,k:'teach',strip:-1,e:'🎵',t:'五步曲歌',line:'停一停，望一望，聽清楚，說一說，就去做！',
+   cards:[{e:'✋',t:'停'},{e:'👀',t:'望'},{e:'👂',t:'聽'},{e:'🗣️',t:'說'},{e:'💪',t:'做'}],
+   say:'停一停，｜望一望，｜聽清楚，｜說一說，｜就去做！',
+   tip:'配合手勢，全班一起唸兩至三次；之後可請個別同學帶領。重複是學習的關鍵。'},
+  {st:2,k:'choice',scene:'📱',say:'成仔在聽經理說話。｜他一邊聽，一邊玩手機。',ask:'成仔聽得好嗎？',
+   opts:[GOOD,BAD],a:1,fb:'成仔一邊聽，一邊玩手機，沒有專心。要先「停一停」，放下手機。',
+   tip:'請學生說說「為甚麼不好」，再請他示範正確做法。'},
+  {st:2,k:'choice',scene:'👧',say:'小愉在聽師傅說話。｜她望向師傅，安靜地聽。',ask:'小愉聽得好嗎？',
+   opts:[GOOD,BAD],a:0,fb:'小愉望向師傅，安靜地聽，做到了「望一望」和「聽清楚」。'},
+  {st:2,k:'choice',scene:'🗣️',say:'經理還沒說完，健仔就大聲說話。',ask:'健仔聽得好嗎？',
+   opts:[GOOD,BAD],a:1,fb:'要等經理說完，才可以開口。這是「聽清楚」。'},
+  {st:2,k:'choice',scene:'🙋',say:'經理說完了。｜成仔說：我明白了，先洗杯子，再抹桌子。',ask:'成仔聽得好嗎？',
+   opts:[GOOD,BAD],a:0,fb:'成仔把聽到的說了一遍，這是「說一說」，經理會很放心。'},
+  {st:2,k:'choice',scene:'🙈',say:'師傅說話的時候，小愉望向地下，又不停玩頭髮。',ask:'小愉聽得好嗎？',
+   opts:[GOOD,BAD],a:1,fb:'聽人說話，要望向說話的人。這是「望一望」。'},
+  {st:3,k:'choice',scene:'🧑‍💼',say:'經理開始說話了。',ask:'你第一步要做甚麼？',
+   opts:[{e:'💪',t:'馬上去做'},{e:'📱',t:'玩手機'},{e:'✋',t:'停一停'}],a:2,
+   fb:'第一步是「停一停」：雙手放好，嘴巴不說話。'},
+  {st:3,k:'choice',scene:'🤔',say:'師傅說完了。你有一件事不明白。',ask:'你應該怎麼做？',
+   opts:[{e:'🤷',t:'亂做一通'},{e:'🙋',t:'問一問師傅'},{e:'😶',t:'甚麼也不說'}],a:1,
+   fb:'不明白就問，是好員工的表現。'},
+  {st:3,k:'teach',e:'🏅',t:'我會專心聽',line:'停一停，望一望，聽清楚，說一說，就去做。',
+   say:'今天，我們學會了專心聽。｜停一停，望一望，聽清楚，說一說，就去做。',
+   tip:'請學生分享：「我會在哪裏用五步曲？」（課堂、家中、實習）。鼓勵他們留意別人怎樣聽。'}
+  ]},
+
+/* ───────────────────────── 第 2 節 ───────────────────────── */
+{ s:2, title:'聽出重點：時人地事', sub:'聽一句話，找出四個重點', ico:'🎯', tx:1,
+  unit:'聽出時人地事',
+  goals:[
+    {ico:'🎯', zh:'認識聽話的四個重點：時、人、地、事', en:'Learn the 4 key points: when, who, where, what'},
+    {ico:'🔍', zh:'聽完一句話，找出時間、人物、地點和事情', en:'Find the time, person, place and event'},
+    {ico:'🧑‍💼', zh:'聽懂同事和經理的工作安排', en:'Understand work arrangements'}],
+  stages:['認識重點','聽一聽 ①','聽一聽 ②','聽一聽 ③'],
+  strat:[
+    '圖式組織：用顏色和圖示把「時人地事」視覺化，老師出聲思考示範。',
+    '有字幕支援：先看着字幕聽，再逐題找出重點。',
+    '撤除字幕：只聽不看，老師可重播一次。',
+    '遷移到真實語氣：用經理指示的說話方式，聽出工作安排。'],
+  items:[
+  {st:0,k:'teach',e:'🎯',t:'聽話要找重點',line:'經理一次說很多話。我們要找出四個重點。',
+   say:'經理一次會說很多話。｜我們要找出四個重點：｜時間，人物，地點，事情。',
+   tip:'類比：寄信要有「甚麼時候、寄給誰、寄去哪裏、寄甚麼」。可請同學說說手機訊息裏的重點。'},
+  {st:0,k:'teach',e:'🔎',t:'四個重點',line:'每個重點有一個顏色。',
+   cards:[{k:'時',e:'⏰',t:'時',d:'甚麼時候？',s:'時，甚麼時候？'},{k:'人',e:'🧑',t:'人',d:'是誰？',s:'人，是誰？'},
+          {k:'地',e:'📍',t:'地',d:'在哪裏？',s:'地，在哪裏？'},{k:'事',e:'🛠️',t:'事',d:'做甚麼？',s:'事，做甚麼？'}],
+   say:'四個重點：｜時，甚麼時候？｜人，是誰？｜地，在哪裏？｜事，做甚麼？',
+   tip:'逐張卡片按，讀出問題。之後的題目沿用同一顏色，幫助學生記憶。'},
+  {st:0,k:'teach',e:'🔍',t:'示範：找出四個重點',
+   chunks:[{k:'時',t:'上午九點',post:'，'},{k:'人',t:'成仔'},{k:'地',t:'餐廳',pre:'在'},{k:'事',t:'洗杯子',post:'。'}],
+   say:'上午九點，成仔在餐廳洗杯子。',
+   tip:'老師出聲思考示範：「我聽到『上午九點』，這是時間；『成仔』是人物；『餐廳』是地點；『洗杯子』是事情。」逐一點出顏色。'},
+  /* 句子 A：有字幕 */
+  {st:1,k:'choice',tag:'時',scene:'🍽️',tx:1,say:'上午九點，成仔在餐廳洗杯子。',ask:'是甚麼時候？',
+   opts:[{e:'🕙',t:'上午十點'},{e:'🕘',t:'上午九點'},{e:'🕑',t:'下午兩點'},{e:'🕒',t:'下午三點'}],a:1,fb:'是上午九點。',
+   tip:'先請學生看字幕，找出「時間」的詞語並圈出，再作答。'},
+  {st:1,k:'choice',tag:'人',same:1,ask:'是誰在做事？',
+   opts:[LP('小愉'),LP('健仔'),LP('成仔'),MGR],a:2,fb:'是成仔。'},
+  {st:1,k:'choice',tag:'地',same:1,ask:'在哪裏？',
+   opts:[{e:'📦',t:'倉庫'},{e:'🍽️',t:'餐廳'},{e:'🏪',t:'超級市場'},{e:'📚',t:'圖書館'}],a:1,fb:'在餐廳。'},
+  {st:1,k:'choice',tag:'事',same:1,ask:'做甚麼？',
+   opts:[{e:'🧹',t:'掃地'},{e:'🛒',t:'排貨品'},{e:'📦',t:'搬箱子'},{e:'🥛',t:'洗杯子'}],a:3,fb:'是洗杯子。'},
+  /* 句子 B：無字幕 */
+  {st:2,k:'choice',tag:'時',scene:'🏪',tx:0,say:'下午兩點，小愉在超級市場排貨品。',ask:'是甚麼時候？',
+   opts:[{e:'🕘',t:'上午九點'},{e:'🕒',t:'下午三點'},{e:'🕑',t:'下午兩點'},{e:'🕙',t:'上午十點'}],a:2,fb:'是下午兩點。',
+   tip:'這一組不顯示字幕，只聽。可重播一次；請同學邊聽邊用手指數出「時、人、地、事」。'},
+  {st:2,k:'choice',tag:'人',same:1,ask:'是誰在做事？',
+   opts:[LP('成仔'),LP('小愉'),MGR,LP('健仔')],a:1,fb:'是小愉。'},
+  {st:2,k:'choice',tag:'地',same:1,ask:'在哪裏？',
+   opts:[{e:'🏪',t:'超級市場'},{e:'🍽️',t:'餐廳'},{e:'📦',t:'倉庫'},{e:'🏫',t:'學校'}],a:0,fb:'在超級市場。'},
+  {st:2,k:'choice',tag:'事',same:1,ask:'做甚麼？',
+   opts:[{e:'🥛',t:'洗杯子'},{e:'🛒',t:'排貨品'},{e:'🧹',t:'掃地'},{e:'📦',t:'搬箱子'}],a:1,fb:'是排貨品。'},
+  /* 句子 C：經理指示語氣 */
+  {st:3,k:'choice',tag:'時',scene:'🧑‍💼',tx:0,say:'經理說：｜明天早上十點，｜健仔到倉庫搬汽水。',ask:'甚麼時候去？',
+   opts:[{e:'🕘',t:'明天早上九點'},{e:'🕙',t:'明天早上十點'},{e:'🕑',t:'明天下午兩點'},{e:'🕒',t:'明天下午三點'}],a:1,fb:'是明天早上十點。',
+   tip:'用經理說話的語氣讀。提醒學生：經理說話，要用五步曲，先「停一停」。'},
+  {st:3,k:'choice',tag:'人',same:1,ask:'誰要去？',
+   opts:[LP('成仔'),LP('健仔'),LP('小愉'),MGR],a:1,fb:'是健仔。'},
+  {st:3,k:'choice',tag:'地',same:1,ask:'去哪裏？',
+   opts:[{e:'📚',t:'圖書館'},{e:'🍽️',t:'餐廳'},{e:'📦',t:'倉庫'},{e:'🏪',t:'超級市場'}],a:2,fb:'去倉庫。'},
+  {st:3,k:'choice',tag:'事',same:1,ask:'去做甚麼？',
+   opts:[{e:'🥤',t:'搬汽水'},{e:'🥛',t:'洗杯子'},{e:'🧹',t:'掃地'},{e:'🛒',t:'排貨品'}],a:0,fb:'去搬汽水。'},
+  {st:3,k:'teach',e:'🏅',t:'我找到四個重點',line:'時、人、地、事。',
+   cards:[{k:'時',e:'⏰',t:'時'},{k:'人',e:'🧑',t:'人'},{k:'地',e:'📍',t:'地'},{k:'事',e:'🛠️',t:'事'}],
+   say:'今天，我們學會了找重點。｜時，人，地，事。',
+   tip:'請學生選一個重點，向旁邊的同學說一說：「我聽到……」。'}
+  ]},
+
+/* ───────────────────────── 第 3 節 ───────────────────────── */
+{ s:3, title:'聽指示做事', sub:'先、然後、最後＋「經理話」', ico:'🔢', tx:0,
+  unit:'聽指示做事',
+  goals:[
+    {ico:'🔢', zh:'聽出先做甚麼、然後做甚麼、最後做甚麼', en:'Hear what to do first, next and last'},
+    {ico:'🧩', zh:'按次序完成一步、兩步和三步指示', en:'Follow one-, two- and three-step instructions'},
+    {ico:'📢', zh:'玩「經理話」，專心聽才不會中計', en:'Play “Manager says” and listen carefully'}],
+  stages:['次序詞','一步指示','兩步指示','三步指示','經理話'],
+  strat:[
+    '線索詞：「先、然後、最後」是次序的提示，用手指數一數幫助記憶。',
+    '一步指示：圖片選擇，先建立「聽到就找圖」的習慣。',
+    '兩步指示：逐步加長；聽完才排次序。',
+    '三步指示：加入干擾圖卡；初組只需完成第一步，中組完成前兩步。',
+    '選擇性注意：只有「經理說」才行動，訓練抓住關鍵詞和控制衝動。'],
+  items:[
+  {st:0,k:'teach',e:'🔢',t:'先、然後、最後',line:'聽到「先、然後、最後」，就要記住次序。',tx:1,
+   cards:[{e:'1️⃣',t:'先',d:'第一步'},{e:'2️⃣',t:'然後',d:'第二步'},{e:'3️⃣',t:'最後',d:'第三步'}],
+   say:'聽到，先，然後，最後，｜就要記住次序。｜例如：先洗手，然後倒水，最後拿杯子。',
+   tip:'邊聽邊用手指數：先（1隻手指）、然後（2隻）、最後（3隻）。這是常用的記憶技巧。'},
+  {st:1,k:'choice',scene:'🥛',tx:0,say:'請把杯子放在桌子上。',ask:'經理要你做甚麼？',
+   opts:[{e:'🧹',t:'拿掃把'},{e:'🥛',t:'放杯子'},{e:'🧼',t:'洗手'},{e:'🚪',t:'開門'}],a:1,fb:'要把杯子放在桌子上。',
+   tip:'先讓學生預測，再作答。聽不清楚的同學，請他用「請再說一次」發問。'},
+  {st:1,k:'choice',scene:'📦',say:'請把箱子搬到門口。',ask:'經理要你做甚麼？',
+   opts:[{e:'🧽',t:'抹桌子'},{e:'🥛',t:'洗杯子'},{e:'🧹',t:'掃地'},{e:'📦',t:'搬箱子'}],a:3,fb:'要把箱子搬到門口。'},
+  {st:1,k:'choice',scene:'🧼',say:'請你先去洗手。',ask:'經理要你做甚麼？',
+   opts:[{e:'🥛',t:'洗杯子'},{e:'🧼',t:'洗手'},{e:'🧽',t:'抹桌子'},{e:'📦',t:'搬箱子'}],a:1,fb:'要先去洗手。',
+   tip:'「洗手」和「洗杯子」開頭相同，要聽到最後才知道，是專心聽的好例子。'},
+  {st:2,k:'order',scene:'🧑‍💼',say:'先戴手套，｜然後抹桌子。',
+   steps:[{e:'🧤',t:'戴手套'},{e:'🧽',t:'抹桌子'}],decoys:[{e:'🧹',t:'掃地'}],
+   tip:'請同學邊聽邊用手指數「先、然後」。公佈答案後，請一位同學複述：「先……，然後……」。'},
+  {st:2,k:'order',scene:'🧑‍💼',say:'先拿清單，｜然後拿貨品。',
+   steps:[{e:'📋',t:'拿清單'},{e:'🛒',t:'拿貨品'}],decoys:[{e:'🥤',t:'倒水'}]},
+  {st:2,k:'order',scene:'🧑‍💼',say:'先洗手，｜然後拿杯子。',
+   steps:[{e:'🧼',t:'洗手'},{e:'🥛',t:'拿杯子'}],decoys:[{e:'🚪',t:'開門'}]},
+  {st:3,k:'order',scene:'☕',say:'先洗手，｜然後拿杯子，｜最後放在桌上。',
+   steps:[{e:'🧼',t:'洗手'},{e:'🥛',t:'拿杯子'},{e:'🍽️',t:'放在桌上'}],decoys:[{e:'🧹',t:'掃地'}],
+   tip:'三步指示較長：可分段重播（每步之間停一停）。初組同學只需聽出第一步。'},
+  {st:3,k:'order',scene:'📦',say:'先戴手套，｜然後搬箱子，｜最後貼標籤。',
+   steps:[{e:'🧤',t:'戴手套'},{e:'📦',t:'搬箱子'},{e:'🏷️',t:'貼標籤'}],decoys:[{e:'🧽',t:'抹桌子'}]},
+  {st:3,k:'order',scene:'🏪',say:'先看清單，｜然後拿貨品，｜最後放進籃子。',
+   steps:[{e:'📋',t:'看清單'},{e:'🛒',t:'拿貨品'},{e:'🧺',t:'放進籃子'}],decoys:[{e:'🥛',t:'洗杯子'}]},
+  {st:4,k:'teach',e:'📢',t:'經理話',line:'經理說，才做；沒有說「經理說」，就不做！',
+   say:'我們來玩，經理話。｜只有聽到，經理說，才做動作。｜沒有聽到，經理說，就不要動！',
+   tip:'先全班試玩兩輪（不用平板），讓每位同學明白規則。玩的時候，做動作的同學站起來，按掣選「做」或「不做」；沒有「經理說」要保持不動。'},
+  {st:4,k:'boss',scene:'📢',say:'經理說：站起來。',ask:'要做嗎？',opts:[DO,NODO],a:0,fb:'有「經理說」，要做。'},
+  {st:4,k:'boss',scene:'📢',say:'拍拍手。',ask:'要做嗎？',opts:[DO,NODO],a:1,fb:'沒有「經理說」，不用做。'},
+  {st:4,k:'boss',scene:'📢',say:'經理說：摸摸頭。',ask:'要做嗎？',opts:[DO,NODO],a:0,fb:'有「經理說」，要做。'},
+  {st:4,k:'boss',scene:'📢',say:'經理說：拍拍手，｜然後坐下來。',ask:'要做嗎？',opts:[DO,NODO],a:0,fb:'有「經理說」，要做兩件事：先拍拍手，然後坐下來。'},
+  {st:4,k:'boss',scene:'📢',say:'坐下來。',ask:'要做嗎？',opts:[DO,NODO],a:1,fb:'沒有「經理說」，不用做。'},
+  {st:4,k:'boss',scene:'📢',say:'摸摸鼻子。',ask:'要做嗎？',opts:[DO,NODO],a:1,fb:'沒有「經理說」，不用做。'},
+  {st:4,k:'teach',e:'🏅',t:'我會聽指示',line:'先、然後、最後；經理說，才做。',
+   cards:[{e:'1️⃣',t:'先'},{e:'2️⃣',t:'然後'},{e:'3️⃣',t:'最後'}],
+   say:'今天，我們學會了聽指示。｜先，然後，最後。｜聽清楚，才去做。',
+   tip:'請學生說說：「剛才哪一題最難？我是怎樣聽的？」培養自我檢視。'}
+  ]},
+
+/* ───────────────────────── 第 4 節 ───────────────────────── */
+{ s:4, title:'職場實戰：我是新員工', sub:'聽經理和師傅的指示；聽不清楚就問', ico:'🧑‍💼', tx:0,
+  unit:'我是新員工',
+  goals:[
+    {ico:'🧑‍💼', zh:'用五步曲聽經理和師傅的指示', en:'Use the 5 steps to listen to your manager'},
+    {ico:'🙋', zh:'聽不清楚時，禮貌地問一問', en:'Politely ask when you did not hear clearly'},
+    {ico:'🏆', zh:'完成新員工聽指示挑戰', en:'Complete the new-employee listening challenge'}],
+  stages:['新員工第一天','聽不清楚怎麼辦','職場任務','新員工挑戰'],
+  strat:[
+    '連結實習經驗：回顧五步曲，建立「工作就是聽指示」的概念。',
+    '求助技巧：練習「請再說一次」等說話，認識「不明白就問」是好員工的表現。',
+    '真實情景：在不同工作場所聽三步指示，並請同學複述（說一說）。',
+    '綜合挑戰：運用時人地事、次序和求助技巧，減少提示；可加背景聲增加難度。'],
+  items:[
+  {st:0,k:'teach',e:'🏢',t:'新員工第一天',line:'今天我們是新員工，要聽經理和師傅的指示。',tx:1,
+   cards:[{e:'☕',t:'咖啡店'},{e:'🏪',t:'超級市場'},{e:'📦',t:'倉庫'},{e:'🧹',t:'清潔'}],
+   say:'今天，我們是新員工。｜我們會在咖啡店、超級市場、倉庫和清潔公司工作。｜要聽清楚經理和師傅的指示。',
+   tip:'連結學生的實習或職業訓練經驗：問「你在哪個地方實習過？經理有沒有叫你做事？」'},
+  {st:0,k:'teach',e:'✋',t:'記得五步曲嗎？',line:'停、望、聽、說、做。',strip:-1,
+   cards:[{e:'✋',t:'停'},{e:'👀',t:'望'},{e:'👂',t:'聽'},{e:'🗣️',t:'說'},{e:'💪',t:'做'}],
+   say:'還記得五步曲嗎？｜停，望，聽，說，做。',
+   tip:'全班一起唸並做手勢，由學生帶領。'},
+  {st:1,k:'teach',e:'🙋',t:'聽不清楚，我會問',line:'不明白，不用怕。可以說：',
+   cards:[{e:'🔁',t:'請再說一次'},{e:'🙏',t:'對不起，我沒聽清楚'},{e:'❓',t:'請問在哪裏？'},{e:'✅',t:'我說一次，對嗎？'}],
+   say:'聽不清楚，不用怕。｜我們可以說：請再說一次。｜對不起，我沒聽清楚。｜請問在哪裏？｜我說一次，對嗎？',
+   tip:'逐句跟讀，配合禮貌的語氣、微笑和望向對方。可兩人一組角色扮演：一人當經理，一人當新員工。'},
+  {st:1,k:'choice',scene:'🔊',say:'經理說話的時候，外面很嘈吵。你聽不清楚。',ask:'你應該怎麼做？',
+   opts:[{e:'🤷',t:'亂做一通'},{e:'🙏',t:'請再說一次'},{e:'😶',t:'不說話'}],a:1,fb:'聽不清楚，可以說：「請再說一次。」',
+   tip:'請學生說出完整句子：「請再說一次。」並注意語氣有禮貌。'},
+  {st:1,k:'choice',scene:'⚙️',say:'經理說：請把箱子搬到……｜機器聲很大，你聽不到最後一句。你不知道要搬去哪裏。',ask:'你應該問甚麼？',
+   opts:[{e:'🤷',t:'自己亂搬'},{e:'❓',t:'請問搬到哪裏？'},{e:'😶',t:'不說話'}],a:1,fb:'可以問：「請問搬到哪裏？」'},
+  {st:1,k:'choice',scene:'🧑‍💼',say:'經理一口氣說了三件事。你只記得兩件。',ask:'你應該怎麼做？',
+   opts:[{e:'🤥',t:'假裝記得'},{e:'🙋',t:'請問第三件是甚麼？'},{e:'🏃',t:'走開'}],a:1,fb:'可以問：「請問第三件是甚麼？」'},
+  {st:1,k:'choice',scene:'🤔',say:'你聽完經理的指示。你想知道自己有沒有聽對。',ask:'你可以怎麼說？',
+   opts:[{e:'😴',t:'我不想聽'},{e:'🤐',t:'甚麼也不說'},{e:'✅',t:'我說一次，對嗎？'}],a:2,fb:'說一次，經理就知道你有沒有聽對。'},
+  {st:2,k:'order',scene:'☕',say:'咖啡店經理說：｜先洗手，｜然後倒咖啡，｜最後送上桌。',
+   steps:[{e:'🧼',t:'洗手'},{e:'☕',t:'倒咖啡'},{e:'🍽️',t:'送上桌'}],decoys:[{e:'🧹',t:'掃地'}],
+   tip:'公佈答案後，用「🎲 抽同學」請一位同學複述指示（說一說），再請全班說一次。'},
+  {st:2,k:'order',scene:'🏪',say:'超級市場師傅說：｜先拿貨品，｜然後貼價錢紙，｜最後排在架上。',
+   steps:[{e:'📦',t:'拿貨品'},{e:'🏷️',t:'貼價錢紙'},{e:'🛒',t:'排在架上'}],decoys:[{e:'🥛',t:'洗杯子'}]},
+  {st:2,k:'order',scene:'🧹',say:'清潔師傅說：｜先拿水桶，｜然後裝水，｜最後抹窗。',
+   steps:[{e:'🪣',t:'拿水桶'},{e:'💧',t:'裝水'},{e:'🪟',t:'抹窗'}],decoys:[{e:'🧤',t:'戴手套'}]},
+  {st:3,k:'teach',e:'🏆',t:'新員工挑戰',line:'運用今天和以前學到的，聽清楚經理的話。',
+   say:'新員工挑戰開始。｜請你用五步曲，聽清楚經理的話。',
+   tip:'可按「🔈 背景聲」加上輕微的環境聲，模擬職場；有感官敏感的學生不適合，請先留意學生反應。'},
+  {st:3,k:'choice',tag:'時',scene:'📦',tx:0,say:'經理說：｜下午兩點，｜請把三箱汽水，｜搬進倉庫。',ask:'甚麼時候搬？',
+   opts:[{e:'🕙',t:'上午十點'},{e:'🕑',t:'下午兩點'},{e:'🕒',t:'下午三點'},{e:'🕘',t:'上午九點'}],a:1,fb:'是下午兩點。'},
+  {st:3,k:'choice',tag:'物',same:1,ask:'搬甚麼？',
+   opts:[{e:'🥛',t:'杯子'},{e:'🧻',t:'紙巾'},{e:'🥤',t:'汽水'},{e:'🍞',t:'麵包'}],a:2,fb:'搬汽水。'},
+  {st:3,k:'choice',tag:'量',same:1,ask:'搬多少？',
+   opts:[{e:'📦📦',t:'兩箱'},{e:'📦📦📦',t:'三箱'},{e:'📦📦📦📦',t:'四箱'},{e:'📦',t:'一箱'}],a:1,fb:'搬三箱。'},
+  {st:3,k:'choice',tag:'地',same:1,ask:'搬到哪裏？',
+   opts:[{e:'📦',t:'倉庫'},{e:'🍽️',t:'餐廳'},{e:'🚪',t:'門口'},{e:'🏪',t:'超級市場'}],a:0,fb:'搬進倉庫。'},
+  {st:3,k:'order',scene:'🍞',say:'師傅說：｜先洗手，｜然後戴手套，｜最後包好麵包。',
+   steps:[{e:'🧼',t:'洗手'},{e:'🧤',t:'戴手套'},{e:'🍞',t:'包麵包'}],decoys:[{e:'🧹',t:'掃地'}]},
+  {st:3,k:'choice',scene:'🧑‍💼',say:'師傅說：把那個放在那裏。你不知道「那個」是甚麼，也不知道「那裏」在哪裏。',ask:'你應該怎麼做？',
+   opts:[{e:'🤷',t:'隨便放'},{e:'🙋',t:'請問是哪一個？放在哪裏？'},{e:'😶',t:'不問'}],a:1,
+   fb:'要問清楚：「請問是哪一個？放在哪裏？」'},
+  {st:3,k:'teach',e:'🎓',t:'聆聽小員工',line:'你做到了！停、望、聽、說、做。',cert:1,
+   cards:[{e:'✋',t:'停'},{e:'👀',t:'望'},{e:'👂',t:'聽'},{e:'🗣️',t:'說'},{e:'💪',t:'做'}],
+   say:'你們是聆聽小員工。｜聽清楚，做得準確。',
+   tip:'可按「🖨 列印」為全班列印「聆聽小員工證書」，放入學生的轉銜／學習檔案。'}
+  ]}
+];
+
+/* 整理：同一段話的追問沿用上一項的 say；加上序號 */
+LIS.forEach(S=>{
+  let last='';
+  S.items.forEach((it,i)=>{
+    if(it.same) it.say = last; else if(it.say!==undefined) last = it.say;
+    it.i = i;
+  });
+});
+
+
+/* ================================================================
+   🎧 聆聽專題：程式
+   老師：一個大掣依次「播放指示 → 請同學作答 → 公佈答案 → 下一題」
+   學生：聽完才作答；高／中／初組按各自能力調整選項數目和指示長短
+   答案存在各人的 ANS（key = L<節>_<項>），答對一題 $1，沿用「今日進帳」
+   ================================================================ */
+const LIS_NOPT  = {1:4, 2:3, 3:2};   /* 選擇題：高組 4 選 1、中組 3 選 1、初組 2 選 1 */
+const LIS_NSTEP = {1:3, 2:2, 3:1};   /* 排次序：高組三步、中組兩步、初組一步 */
+const LIS_STEPS = [['hello','① 打招呼'],['notes','② 課堂筆記'],['lis','③ 聽力闖關'],
+                   ['review','④ 今日進帳'],['goals','⑤ 課堂總結']];
+/* 粵拼表是逐字查的，遇到讀音會變的詞語在此指定 */
+const LIS_FIX = {'應該':['jing1','goi1'], '時間':['si4','gaan3'], '重點':['zung6','dim2'],
+                 '假裝':['gaa2','zong1']};
+const LIS_FIXRE = new RegExp('('+Object.keys(LIS_FIX).join('|')+')');
+let LIS_TIPS = false, LIS_THEORY = false, LIS_SEEN = '', LIS_PLAYING = false, LIS_NOISE = null;
+const LIS_TTS = {tok:0, timer:null};
+
+function lr(s){
+  return String(s==null?'':s).split(LIS_FIXRE).map(p=> LIS_FIX[p]
+    ? [...p].map((c,j)=>`<ruby>${c}<rt>${LIS_FIX[p][j]}</rt></ruby>`).join('')
+    : ruby(p)).join('');
+}
+function lisCap(s){ return lr(String(s||'').replace(/｜/g,'　')); }
+function lisOn(){ return CTRL.mode==='lis'; }
+function lisS(){
+  if(!CTRL.lis) CTRL.lis = {s:1, i:0, st:'listen', tx:true, sp:false, pick:null, plays:0, run:'0'};
+  return CTRL.lis;
+}
+function lisSess(){ return LIS[(lisS().s||1)-1] || LIS[0]; }
+function lisItem(){ const S=lisSess(); return S.items[Math.min(Math.max(0,lisS().i), S.items.length-1)]; }
+function lisKey(s,i){ return 'L'+s+'_'+i; }
+/* 每次「開始一節」都有一個新的場次編號；學生答案連同編號一起存，
+   舊場次的答案自動當作沒有，不用逐部平板清除 */
+function lisGet(sid, i){
+  const L = lisS(), a = myA(sid);
+  if(a['L'+L.s+'r'] !== L.run) return undefined;
+  return a[lisKey(L.s,i)];
+}
+function lisPut(i, v){
+  const L = lisS(), a = myAns(), stamp = 'L'+L.s+'r';
+  if(a[stamp] !== L.run){
+    Object.keys(a).forEach(k=>{ if(k.indexOf('L'+L.s+'_')===0) delete a[k]; });
+    a[stamp] = L.run;
+  }
+  if(v===undefined || v===null || (Array.isArray(v) && !v.length)) delete a[lisKey(L.s,i)];
+  else a[lisKey(L.s,i)] = v;
+  saveMine();
+}
+function stepsNow(){ return lisOn() ? LIS_STEPS : STEPS; }
+function unitName(){ return lisOn() ? lisSess().unit : '朋輩在我心'; }
+function lisFresh(it){ return (it.k==='teach' || it.same) ? 'answer' : 'listen'; }
+
+/* ── 語音：「｜」處停一停；逐段播放，播完才通知 ── */
+function lisStop(){
+  LIS_TTS.tok++; clearTimeout(LIS_TTS.timer);
+  try{ speechSynthesis.cancel(); }catch(e){}
+}
+function lisSpeak(text, done, o){
+  o = o||{};
+  lisStop(); try{ stopRead(true); }catch(e){}
+  const tok = LIS_TTS.tok;
+  const parts = String(text||'').split('｜').map(x=>x.trim()).filter(Boolean);
+  if(!parts.length || typeof speechSynthesis==='undefined'){ if(done) done(); return; }
+  const gap = o.gap==null ? 700 : o.gap;
+  let k = 0;
+  const fin = ()=>{ if(tok!==LIS_TTS.tok) return; LIS_TTS.tok++; if(done) done(); };
+  const next = ()=>{
+    if(tok!==LIS_TTS.tok) return;
+    if(k>=parts.length) return fin();
+    const txt = parts[k++], last = k>=parts.length;
+    const u = new SpeechSynthesisUtterance(txt);
+    u.lang = 'zh-HK'; u.rate = o.rate || .78; if(VOICE) u.voice = VOICE;
+    let moved = false, fb = null;
+    const go = ()=>{
+      if(moved || tok!==LIS_TTS.tok) return; moved = true; clearTimeout(fb);
+      clearTimeout(LIS_TTS.timer); LIS_TTS.timer = setTimeout(next, last ? 250 : gap);
+    };
+    u.onend = go; u.onerror = go;
+    /* 保險：個別語音若沒有回應（沒有粵語語音檔等），按字數估時後照樣繼續 */
+    fb = setTimeout(go, txt.length*600 + 4000);
+    try{ speechSynthesis.speak(u); }catch(e){ go(); }
+  };
+  next();
+}
+
+/* ── 老師：選節、翻頁、播放 ── */
+function pickLis(s, again){
+  lisStop(); LIS_PLAYING=false;
+  const S = LIS[s-1] || LIS[0];
+  if(lisOn() && lisS().s===S.s && !again){ saveCtrl(); render(); return; }   /* 同一節：不重新開始 */
+  lisClearPaid();
+  CTRL.goalDone = {};
+  CTRL.mode = 'lis';
+  CTRL.lis = {s:S.s, i:0, st:lisFresh(S.items[0]), tx:!!S.tx, sp:false, pick:null, plays:0,
+              run:Date.now().toString(36)};
+  CTRL.lessonDate = todayStr();
+  STEP = 'hello'; CTRL.phase = 'hello';
+  saveCtrl(); render();
+}
+/* 上一節已入帳：新的一節由 $0 開始（未入帳的就保留，免得白做） */
+function lisClearPaid(){
+  if((CTRL.paid||{})[payKey()]){ CTRL.adj = {}; CTRL.coins = {}; }
+}
+function lisRestart(){
+  if(!confirm('由頭開始這一節？\n（同學這一節的答案會當作清空，重新作答。）')) return;
+  pickLis(lisS().s, true);
+}
+function lisGo(i){
+  const L = lisS(), S = lisSess();
+  lisStop(); LIS_PLAYING = false;
+  if(i >= S.items.length){ tStep('review'); return; }
+  i = Math.max(0, i); L.i = i;
+  const it = S.items[i];
+  L.st = lisFresh(it);
+  if(it.tx!==undefined) L.tx = !!it.tx;
+  L.plays = 0; L.pick = null;
+  saveCtrl(); render();
+}
+function lisBack(){ const L=lisS(); if(L.i>0) lisGo(L.i-1); }
+function lisMain(){
+  const L = lisS(), it = lisItem();
+  if(it.k==='teach') return lisGo(L.i+1);
+  if(L.st==='listen') return lisPlay();
+  if(L.st==='answer') return lisReveal();
+  return lisGo(L.i+1);
+}
+function lisPlay(replay){
+  const L = lisS(), it = lisItem(), idx = L.i;
+  if(!it.say) return;
+  const askPart = (it.k==='choice' && it.ask && L.st==='listen' && !replay) ? '｜'+it.ask : '';
+  L.plays = (L.plays||0) + 1; LIS_PLAYING = true;
+  saveCtrl(); render();
+  lisSpeak(it.say + askPart, ()=>{
+    LIS_PLAYING = false;
+    const c = lisS();
+    if(CTRL.mode==='lis' && c.i===idx && c.st==='listen'){ c.st = 'answer'; saveCtrl(); }
+    render();
+  });
+}
+function lisAsk(){ const it = lisItem(); if(it.ask) lisSpeak(it.ask); }
+function lisOwn(){ const L=lisS(); lisStop(); LIS_PLAYING=false; L.st='answer'; saveCtrl(); render(); }
+function lisOrderFb(it){
+  const w = it.steps.length===2 ? ['先','然後'] : ['先','然後','最後'];
+  return '正確次序：' + it.steps.map((x,j)=>w[j]+x.t).join('，') + '。';
+}
+function lisReveal(){
+  const L = lisS(), it = lisItem();
+  lisStop(); LIS_PLAYING = false; L.st = 'reveal'; saveCtrl(); render();
+  const t = it.k==='order' ? lisOrderFb(it) : it.fb;
+  if(t) setTimeout(()=>lisSpeak(t), 350);
+}
+function lisCard(j){            /* 按講解頁的卡片：讀出該卡片 */
+  const c = (lisItem().cards||[])[j]; if(c) lisSpeak(c.s || c.t);
+}
+function lisSayOpt(j){ const o = lisItem().opts[j]; if(o) lisSpeak(o.t); }
+function lisSayStep(txt){ lisSpeak(txt); }
+function lisToggle(k){ const L=lisS(); L[k]=!L[k]; saveCtrl(); render(); }
+function lisTips(){ LIS_TIPS=!LIS_TIPS; render(); }
+function lisTheory(){ LIS_THEORY=!LIS_THEORY; render(); }
+function lisRand(){
+  const L = lisS();
+  let pool = STUDENTS.filter(s=>lisGet(s.id, L.i)!==undefined);
+  if(!pool.length) pool = STUDENTS.slice();
+  if(L.pick && pool.length>1) pool = pool.filter(s=>s.id!==L.pick);
+  L.pick = pool[Math.floor(Math.random()*pool.length)].id;
+  saveCtrl(); render();
+}
+function lisPickSet(sid){ const L=lisS(); L.pick = (L.pick===sid ? null : sid); saveCtrl(); render(); }
+/* 背景聲（可選）：低音量的環境噪音，用來模擬職場。只在老師這部電腦播放 */
+function lisNoise(){
+  if(LIS_NOISE){
+    try{ LIS_NOISE.src.stop(); LIS_NOISE.ctx.close(); }catch(e){}
+    LIS_NOISE = null; render(); return;
+  }
+  try{
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    const ctx = new Ctx(), len = ctx.sampleRate*4;
+    const buf = ctx.createBuffer(1, len, ctx.sampleRate), d = buf.getChannelData(0);
+    let last = 0, peak = 0;
+    for(let i=0;i<len;i++){ last = (last + 0.02*(Math.random()*2-1)) / 1.02; d[i] = last; peak = Math.max(peak, Math.abs(last)); }
+    for(let i=0;i<len;i++) d[i] = d[i]/peak*0.5;           /* 正規化，音量在下面的增益控制 */
+    const src = ctx.createBufferSource(); src.buffer = buf; src.loop = true;
+    const g = ctx.createGain(); g.gain.value = 0.10;        /* 很輕 */
+    src.connect(g); g.connect(ctx.destination); src.start();
+    LIS_NOISE = {ctx, src};
+  }catch(e){ alert('這部電腦不能播放背景聲。'); }
+  render();
+}
+
+/* ── 判斷與計分 ── */
+function lisNSteps(it, lv){ return Math.min(it.steps.length, LIS_NSTEP[lv]||2); }
+function lisOptsFor(it, lv){            /* 學生看到的選項：保留次序，一定包括正確答案 */
+  const n = LIS_NOPT[lv]||3;
+  if(it.opts.length <= n) return it.opts.map((o,j)=>({o,j}));
+  const keep = new Set([it.a]);
+  for(let j=0;j<it.opts.length && keep.size<n;j++) keep.add(j);
+  return it.opts.map((o,j)=>({o,j})).filter(x=>keep.has(x.j));
+}
+function lisCards(it){ return it.steps.concat(it.decoys||[]); }
+function lisShuffle(arr, seed){
+  const a = arr.slice(); let x = (seed*9301 + 49297) % 233280;
+  for(let i=a.length-1;i>0;i--){ x = (x*9301 + 49297) % 233280; const j = x % (i+1); [a[i],a[j]] = [a[j],a[i]]; }
+  return a;
+}
+function lisPool(it, lv, base){         /* 排次序的圖卡池：要用的步驟 ＋ 一張干擾圖卡，次序打亂 */
+  const n = lisNSteps(it, lv);
+  const cards = it.steps.slice(0,n).concat((it.decoys||[]).slice(0,1));
+  let a = lisShuffle(cards, base + it.i*7 + n);
+  if(cards.length>1 && a.every((c,j)=>c===cards[j])) a = a.slice(1).concat(a[0]);   /* 不要剛好是答案次序 */
+  return a;
+}
+function lisJudge(it, v, lv){
+  if(v===undefined || v===null) return null;
+  if(it.k==='order'){
+    if(!Array.isArray(v)) return null;
+    const n = lisNSteps(it, lv), want = it.steps.slice(0,n).map(x=>x.t);
+    if(v.length < n) return null;
+    return v.length===n && v.every((x,j)=>x===want[j]);
+  }
+  return v === it.opts[it.a].t;
+}
+function lisDone(it, v, lv){ return lisJudge(it, v, lv)!==null; }
+function lisShowAns(it, v){ return Array.isArray(v) ? v.join('→') : String(v); }
+function lisScore(sid){
+  const s = stu(sid), S = lisSess();
+  let right = 0, total = 0; const det = [];
+  S.items.forEach((it,i)=>{
+    if(it.k==='teach') return;
+    total++;
+    const v = lisGet(sid, i), ok = lisJudge(it, v, s.lv)===true;
+    if(ok) right++;
+    det.push({lb:`聽力第 ${i+1} 項`, ok, done:v!==undefined});
+  });
+  return {right, total, det};
+}
+function lisCounts(it){                  /* 各選項有幾多人揀 */
+  const i = lisItem().i, c = {};
+  STUDENTS.forEach(s=>{ const v = lisGet(s.id, i); if(v!==undefined && !Array.isArray(v)) c[v] = (c[v]||0)+1; });
+  return c;
+}
+
+/* ── 學生作答 ── */
+function lisChoose(i, j){
+  const L = lisS(), it = lisItem();
+  if(CTRL.hold || L.st!=='answer' || L.i!==i) return;
+  const o = it.opts[j]; if(!o) return;
+  lisPut(i, o.t); render();
+}
+function lisAddCard(i, k){
+  const L = lisS(), it = lisItem(), me = stu(ME);
+  if(CTRL.hold || L.st!=='answer' || L.i!==i || !me) return;
+  const card = lisCards(it)[k]; if(!card) return;
+  const n = lisNSteps(it, me.lv), v = lisGet(ME, i);
+  const cur = Array.isArray(v) ? v.slice() : [];
+  if(cur.includes(card.t) || cur.length>=n) return;
+  cur.push(card.t); lisPut(i, cur); render();
+}
+function lisDelCard(i, j){
+  const L = lisS();
+  if(CTRL.hold || L.st!=='answer' || L.i!==i) return;
+  const v = lisGet(ME, i);
+  if(!Array.isArray(v)) return;
+  const cur = v.slice(); cur.splice(j,1);
+  lisPut(i, cur); render();
+}
+function lisMiss(){
+  const d = document.createElement('div'); d.className = 'wrongmask';
+  d.innerHTML = '<div class="wx">🤔</div><div class="wt">沒關係，下次再專心聽</div>';
+  document.body.appendChild(d); setTimeout(()=>d.remove(), 1400);
+}
+function lisSelfPlay(){                  /* 學生機自己再聽（老師開放才有此掣） */
+  const it = lisItem(); if(it.say) lisSpeak(it.say);
+}
+
+/* ── 畫面：共用小件 ── */
+function lisStrip(hl){
+  return `<div class="lisfive">${LIS_FIVE.map((f,i)=>
+    `<div class="lf ${(hl||[]).includes(i)?'on':''}"><div class="e">${f.e}</div><div class="t">${f.t}</div></div>`).join('')}</div>`;
+}
+function lisTagHTML(tag){
+  return tag ? `<span class="listag tg-${LIS_TAGC[tag]||'a'}">${tag}</span>` : '';
+}
+function lisEn(txt, show){ return show ? `<span data-tr="${String(txt).replace(/"/g,'&quot;')}"></span>` : ''; }
+function lisOptHTML(o, cls, click, big, extra, showEn){
+  const pic = (o.img && IMG[o.img]) ? `<img src="${IMG[o.img]}" alt="">`
+            : `<div class="lisemo" style="font-size:${big?4.2:3.2}rem">${o.e}</div>`;
+  const len = String(o.t).length, fs = len>9 ? 1.1 : len>5 ? 1.35 : (big?2:1.6);
+  return `<button class="opt lisopt ${cls||''}" onclick="${click}">${pic}
+    <div class="lt" style="font-size:${fs}rem">${lr(o.t)}${lisEn(o.t, showEn)}</div>${extra||''}</button>`;
+}
+function lisCardsHTML(it, click){
+  return `<div class="liscards">${it.cards.map((c,j)=>`
+    <div class="liscard ${c.k?'tg-'+(LIS_TAGC[c.k]||'a'):''} ${click?'tap':''}" ${click?`onclick="lisCard(${j})"`:''}>
+      <div class="e">${c.e}</div>
+      <div class="t" style="font-size:${String(c.t).length>7?1.15:String(c.t).length>3?1.6:2.4}rem">${lr(c.t)}</div>
+      ${c.d?`<div class="d">${lr(c.d)}</div>`:''}</div>`).join('')}</div>`;
+}
+function lisChunksHTML(it){
+  return `<div class="lischunks">${it.chunks.map(c=>`
+    ${c.pre?`<span class="lis-plain">${lr(c.pre)}</span>`:''}
+    <span class="lischunk tg-${LIS_TAGC[c.k]||'a'}"><b>${c.k}</b>${lr(c.t)}</span>
+    ${c.post?`<span class="lis-plain">${lr(c.post)}</span>`:''}`).join('')}</div>`;
+}
+/* 講解頁（老師大電視 ＋ 學生平板共用） */
+function lisTeachHTML(it, who, me){
+  const showEn = who==='s' && me && (me.en||LANG==='en');
+  const L = lisS();
+  return `<div class="lisbox">
+    <div class="lishero">${it.e}</div>
+    <div class="listitle">${lr(it.t)}${lisEn(it.t, showEn)}</div>
+    ${it.line?`<div class="lisline">${lr(it.line)}${lisEn(it.line, showEn)}</div>`:''}
+    ${typeof it.strip==='number' && it.strip>=0 ? lisStrip([it.strip]) : ''}
+    ${it.chunks ? lisChunksHTML(it) : ''}
+    ${it.cards ? lisCardsHTML(it, who==='t' || (who==='s' && L.sp)) : ''}
+    ${it.cert && who==='t' ? `<div class="row" style="justify-content:center;margin-top:12px">
+        <button class="btn lemon" onclick="doPrint()">🖨 列印聆聽小員工證書</button></div>` : ''}
+  </div>`;
+}
+
+/* ── 老師版：聽力闖關 ── */
+function lisPathHTML(S, L){
+  return S.stages.map((nm,j)=>{
+    const ix = S.items.map((x,k)=>x.st===j?k:-1).filter(k=>k>=0);
+    if(!ix.length) return '';
+    const st = L.i>ix[ix.length-1] ? 'done' : (L.i>=ix[0] ? 'on' : '');
+    return `<button class="lisstage ${st}" onclick="lisGo(${ix[0]})">${st==='done'?'✅':(j+1)}　${nm}</button>`;
+  }).join('');
+}
+function lisDotsHTML(S, L){
+  return `<div class="lisdots">${S.items.map((x,k)=>
+    `<button class="lisdot ${x.k==='teach'?'tc':''} ${k===L.i?'cur':k<L.i?'ok':''}" onclick="lisGo(${k})">${k+1}</button>`).join('')}</div>`;
+}
+function tLis(){
+  const L = lisS(), S = lisSess(), it = lisItem(), n = S.items.length;
+  const st = it.k==='teach' ? 'teach' : L.st;
+  const badge = {teach:'📖 講解', listen:'🎧 請專心聽', answer:'✋ 請同學作答', reveal:'✅ 公佈答案'}[st];
+  let tv = '';
+  if(it.k==='teach') tv = lisTeachHTML(it, 't');
+  else tv = lisQuestionTV(it, L);
+  const pick = L.pick ? (()=>{ const s = stu(L.pick) || {n:'', id:''};
+      return `<div class="lisbanner big">🎤 ${lr('請')} ${s.n} ${lr('說一說（複述）')}
+        <button class="btn sm mint" onclick="addCoin('${s.id}',1)">👍 +$1</button>
+        <button class="btn sm" onclick="lisPickSet('${s.id}')">✕ 取消</button></div>`; })() : '';
+  return `<div class="lispath">${lisPathHTML(S,L)}</div>
+    <div class="lishead">
+      <div class="lisbadge st-${st}">${badge}</div>
+      <div class="lismeta">第 ${L.i+1} ／ ${n} 項${L.plays?`　·　已播 ${L.plays} 次`:''}</div>
+      ${LIS_PLAYING?'<div class="lisbadge playing">🔊 播放中…</div>':''}
+      ${lisDotsHTML(S,L)}
+    </div>
+    ${pick}
+    ${tv}
+    ${LIS_TIPS ? lisTipsCard(S, it) : ''}
+    ${it.k==='teach' ? '' : lisGridHTML(it, L)}
+    ${lisCtl(it, L, S)}`;
+}
+function lisTipsCard(S, it){
+  const defTip = {choice:'播放後請同學安靜思考，聽完才作答；可重播一次。作答後先不要說答案，等「公佈答案」。',
+                  order:'三步指示可分段重播（每步之間停一停）；請同學邊聽邊用手指數「先、然後、最後」。公佈後請同學複述。',
+                  boss:'做動作的同學站起來，並按「做」或「不做」；沒有「經理說」要保持不動。'}[it.k]||'';
+  return `<div class="lisbox tips"><div class="qt">📖 教師提示（只在你的畫面顯示）</div>
+    <div class="note"><b>本階段策略：</b>${S.strat[it.st]||''}</div>
+    ${it.say?`<div class="note"><b>老師讀稿：</b>${String(it.say).replace(/｜/g,'　／　')}${it.ask&&it.k==='choice'?`　→　<b>${it.ask}</b>`:''}</div>`:''}
+    <div class="note"><b>教學技巧：</b>${it.tip||defTip}</div></div>`;
+}
+/* 大電視上的題目畫面 */
+function lisQuestionTV(it, L){
+  const rev = L.st==='reveal';
+  const cap = (L.tx && it.say) ? `<div class="liscap">${lisCap(it.say)}</div>` : '';
+  const scene = it.scene ? `<div class="lishero sm">${it.scene}</div>` : '';
+  if(L.st==='listen'){
+    return `<div class="lisbox">
+      <div class="lishero ${LIS_PLAYING?'pulse':''}">🎧</div>
+      <div class="listitle">${lr('請專心聽')}</div>
+      ${lisStrip([0,1,2])}
+      ${scene}${cap}</div>`;
+  }
+  const head = `<div class="lisask">${lisTagHTML(it.tag)}${lr(it.ask || (it.k==='order' ? (it.steps.length===2 ? '先做甚麼？然後做甚麼？' : '先做甚麼？然後？最後？') : ''))}</div>`;
+  if(it.k==='order'){
+    const total = it.steps.length;
+    const w = total===2 ? ['先','然後'] : ['先','然後','最後'];
+    const slots = it.steps.map((x,j)=> rev
+      ? `<div class="lisslot full"><div class="no">${w[j]}</div><div class="e">${x.e}</div><div class="t">${lr(x.t)}</div></div>`
+      : `<div class="lisslot"><div class="no">${w[j]}</div><div class="e">？</div></div>`).join('<div class="arrow">➜</div>');
+    const cards = lisShuffle(lisCards(it), it.i*7+3).map((c)=>{
+      const isDecoy = !it.steps.includes(c);
+      return `<button class="lisstepcard ${rev&&isDecoy?'decoy':''}" onclick="lisSayStep('${c.t}')">
+        <div class="e">${c.e}</div><div class="t">${lr(c.t)}</div>${rev&&isDecoy?'<div class="x">沒有說到</div>':''}</button>`;
+    }).join('');
+    return `<div class="lisbox">${scene}${cap}${head}
+      <div class="lisslots">${slots}</div>
+      ${rev?`<div class="lisfb">${lr(lisOrderFb(it))}</div>`:''}
+      <div class="liscardsrow">${cards}</div></div>`;
+  }
+  const counts = lisCounts(it), big = it.k==='boss';
+  const opts = it.opts.map((o,j)=>{
+    const right = rev && j===it.a, dim = rev && j!==it.a;
+    const extra = rev && counts[o.t] ? `<span class="liscnt">👥 ${counts[o.t]}</span>` : '';
+    return lisOptHTML(o, right?'right':dim?'dim':'', `lisSayOpt(${j})`, big, extra, false);
+  }).join('');
+  return `<div class="lisbox ${it.k==='boss'?'boss':''}">
+    ${it.k==='boss'?'<div class="lisbossbar">📢 經理話</div>':''}
+    ${scene}${cap}${head}
+    <div class="opts lisoptgrid" style="grid-template-columns:repeat(auto-fit,minmax(${it.opts.length>3?190:230}px,1fr))">${opts}</div>
+    ${rev&&it.fb?`<div class="lisfb">${lr(it.fb)}</div>`:''}</div>`;
+}
+function lisGridHTML(it, L){
+  const rev = L.st==='reveal';
+  const done = STUDENTS.filter(s=>lisDone(it, lisGet(s.id, L.i), s.lv)).length;
+  return `<div class="row" style="margin:6px 0"><b>${rev?'全班結果':'作答情況'}</b>
+      <span class="gotnum ${done===STUDENTS.length?'all':''}">${done} ／ ${STUDENTS.length} 已作答</span></div>
+    <div class="sgrid">${STUDENTS.map(s=>{
+      const v = lisGet(s.id, L.i), has = lisDone(it, v, s.lv);
+      let txt = L.st==='listen' ? '🎧 聽緊…' : '⏳ 思考中…', cls = '';
+      if(has){ cls = 'done';
+        if(!rev) txt = '✅ 已作答';
+        else { const ok = lisJudge(it, v, s.lv);
+          txt = `<span class="${ok?'ok':'no'}">${ok?'✅ ':'❌ '}${lisShowAns(it, v)}</span>`; } }
+      else if(v!==undefined && rev) txt = '⚠️ 未完成';
+      const lvTag = it.k==='order' ? `${lisNSteps(it,s.lv)} 步` : it.k==='choice' ? `${Math.min(it.opts.length,LIS_NOPT[s.lv]||3)} 選 1` : '';
+      return `<div class="scard ${cls}"><div class="nm">${s.n}${lvTag?`<span class="lv g${s.lv}">${lvTag}</span>`:''}
+        ${L.pick===s.id?' 🎤':''}<button class="lispickbtn" title="請這位同學複述" onclick="lisPickSet('${s.id}')">🎤</button></div>
+        <div class="st">${txt}</div></div>`;
+    }).join('')}</div>`;
+}
+function lisCtl(it, L, S){
+  const last = L.i >= S.items.length-1;
+  const B = (txt, cls, fn)=>`<button class="btn ${cls}" onclick="${fn}">${txt}</button>`;
+  let main = '', sec = '';
+  if(it.k==='teach'){
+    main = B(last?'🎯 完成，去「今日進帳」 →':'下一頁 →', last?'mint lisbig':'blue lisbig', 'lisMain()');
+    if(it.say) sec += B('🔊 朗讀', 'mint', 'lisPlay(true)');
+  } else if(L.st==='listen'){
+    main = B('🔊 播放指示', 'mint lisbig', 'lisMain()');
+    sec += B('🗣️ 老師自己讀（讀完請同學作答）', 'lemon', 'lisOwn()');
+  } else if(L.st==='answer'){
+    main = B('✅ 公佈答案', 'peach lisbig', 'lisMain()');
+    sec += B('🔁 重播指示', 'mint', 'lisPlay(true)');
+    if(it.k==='choice' && it.ask) sec += B('🔊 讀題', 'mint', 'lisAsk()');
+  } else {
+    main = B(last?'完成 → 今日進帳':'下一題 →', last?'mint lisbig':'blue lisbig', 'lisMain()');
+    sec += B('🔁 再聽一次', 'mint', 'lisPlay(true)');
+  }
+  const tg = (on, txt, fn)=>`<button class="btn sm ${on?'lemon':''}" onclick="${fn}">${on?'✔ ':''}${txt}</button>`;
+  return `<div class="liscontrol"><div class="lisbar">
+    <div class="row">
+      <button class="btn" onclick="lisBack()" ${L.i?'':'disabled'}>← 上一項</button>
+      ${main}${sec}
+    </div>
+    <div class="row listools">
+      ${tg(L.tx,'字幕',"lisToggle('tx')")}
+      <button class="btn sm" onclick="lisRand()">🎲 抽同學複述</button>
+      ${tg(LIS_TIPS,'教師提示','lisTips()')}
+      ${tg(L.sp,'學生機自行再聽',"lisToggle('sp')")}
+      ${tg(!!LIS_NOISE,'背景聲','lisNoise()')}
+    </div></div></div>`;
+}
+
+/* 打招呼頁加上「這節學甚麼」及教學策略說明（老師用） */
+const LIS_THEORY_ITEMS = [
+  ['🧘','聆聽準備','停、望、聽：減少干擾、坐正、望向說話的人。目光接觸由「望向對方的臉」開始，照顧有感官需要的學生。'],
+  ['🖼️','視覺支援・化整為零','每項指示配圖片和短句，一次只處理一步；用顏色、手勢和順口溜幫助記憶。'],
+  ['🎯','聚焦重點','用「時人地事」四色圖式找重點；留意關鍵詞（先、然後、最後、數字、地點）。'],
+  ['🔁','記住與複述','邊聽邊用手指數；聽完說一遍「我聽到……」，老師先示範，再請同學複述。'],
+  ['🙋','確認與求助','練習「請再說一次」「我說一次，對嗎？」；肯定「不明白就問」是好員工的表現。'],
+  ['📉','逐步撤除支援','字幕 → 只有圖 → 只有聲音；一步 → 兩步 → 三步；安靜 → 背景聲。'],
+  ['🏢','真實情景遷移','咖啡店、超級市場、倉庫、清潔；連結實習、職業訓練和轉銜。'],
+  ['⭐','即時回饋與強化','答對 +$1、讚賞和證書；用老師觀察表記錄安靜、專注、目光接觸和複述。']
+];
+function lisHelloExtra(){
+  const S = lisSess();
+  const rows = S.stages.map((nm,j)=>{
+    const ix = S.items.map((x,k)=>x.st===j?k:-1).filter(k=>k>=0);
+    return `<div class="goal"><div class="gico">${['①','②','③','④','⑤'][j]}</div>
+      <div class="gtxt" style="font-size:1.05rem">${nm}<div class="tr" style="font-size:.78em">${S.strat[j]||''}</div></div>
+      <div class="gno">${ix.length}</div></div>`; }).join('');
+  return `<h3 class="sec">🎧 本節流程：${S.title}（共 ${S.items.length} 項）</h3>
+    <div class="goals">${rows}</div>
+    <div class="row" style="margin-top:12px">
+      <button class="btn ${LIS_THEORY?'lemon':''}" onclick="lisTheory()">📖 ${LIS_THEORY?'收起':'顯示'}「聆聽」教學策略說明（老師用）</button>
+      <button class="btn blue" onclick="tStep('lis')">⏭ 直接進入聽力闖關</button>
+      <button class="btn sm" onclick="lisRestart()">🔄 由頭開始本節</button>
+    </div>
+    ${LIS_THEORY ? `<div class="lisbox tips"><div class="qt">教學策略（對應轉銜、職業環境及聆聽指導者指示）</div>
+      <div class="lisstrats">${LIS_THEORY_ITEMS.map(x=>`<div class="lisstrat"><div class="e">${x[0]}</div>
+        <div><b>${x[1]}</b><div class="d">${x[2]}</div></div></div>`).join('')}</div>
+      <div class="note"><b>對應教學計劃「聆聽」預期學習成果：</b><br>
+        ‧ 理解話語中「時人地事」其中四個要素，並回應相關問句 → 第 2、4 節<br>
+        ‧ 聽出故事或課文的重點 → 第 2、3 節<br>
+        ‧ 安靜地聆聽、專注地聆聽 → 第 1 節，並用「聆聽觀察表」記錄<br>
+        ‧ 與人交流時，保持適當的目光接觸 → 第 1 節「望一望」，並用「聆聽觀察表」記錄<br>
+        <b>分層：</b>高組 4 選 1／三步指示；中組 3 選 1／兩步指示；初組 2 選 1／一步指示。</div></div>` : ''}`;
+}
+
+/* ── 今日進帳：聆聽觀察表（老師打勾）── */
+const LIS_OBS = [['🤫','安靜聆聽'],['🎯','專注'],['👀','目光接觸'],['🔁','複述／發問']];
+function lisObsGet(sid){ const o = ((CTRL.lobs||{})[lisS().s]||{})[sid]; return o || [0,0,0,0]; }
+function lisObsTog(sid, j){
+  CTRL.lobs = CTRL.lobs||{}; const s = lisS().s; CTRL.lobs[s] = CTRL.lobs[s]||{};
+  const a = lisObsGet(sid).slice(); a[j] = a[j] ? 0 : 1; CTRL.lobs[s][sid] = a;
+  saveCtrl(); render();
+}
+function lisObsHTML(){
+  return `<h3 class="sec">📋 聆聽觀察表（第 ${lisS().s} 節）</h3>
+    <div class="note">老師按課堂觀察打勾，這些態度無法由平板記錄。按一下打勾，再按取消。</div>
+    <table class="adm obs"><tr><th>學生</th>${LIS_OBS.map(x=>`<th style="text-align:center">${x[0]}<br>${x[1]}</th>`).join('')}</tr>
+    ${STUDENTS.map(s=>{ const a = lisObsGet(s.id);
+      return `<tr><td>${s.n}</td>${LIS_OBS.map((x,j)=>`<td style="text-align:center">
+        <button class="obsbtn ${a[j]?'on':''}" onclick="lisObsTog('${s.id}',${j})">${a[j]?'✔':''}</button></td>`).join('')}</tr>`;
+    }).join('')}</table>`;
+}
+
+/* ── 證書（列印）── */
+function lisCertHTML(){
+  const S = lisSess();
+  return STUDENTS.map(s=>{
+    const sc = lisScore(s.id);
+    return `<div class="sheet cert">
+      <div class="c1">賽馬會匡智學校</div>
+      <div class="c2">聆聽小員工證書</div>
+      <div class="c3">${s.n}</div>
+      <div class="c4">完成「聽指示做得到」第 ${S.s} 節：${S.title}<br>
+        做到：停一停・望一望・聽清楚・說一說・就去做</div>
+      <div class="c5">答對 ${sc.right} ／ ${sc.total} 題</div>
+      <div class="c6">🏅</div>
+      <div class="c7">老師簽名：＿＿＿＿＿＿＿＿　　日期：${lessonDate()}</div></div>`;
+  }).join('');
+}
+
+/* ── 學生版 ── */
+function lisProgChips(S, L){
+  const ix = S.items.map((x,k)=>x.st===S.items[L.i].st?k:-1).filter(k=>k>=0);
+  return `<div class="lisprog"><span class="stg">${S.stages[S.items[L.i].st]||''}</span>
+    ${ix.map(k=>`<i class="${k===L.i?'cur':k<L.i?'ok':''}"></i>`).join('')}</div>`;
+}
+function sLis(me){
+  const L = lisS(), S = lisSess(), it = lisItem(), showEn = me.en||LANG==='en';
+  const banner = L.pick===ME ? `<div class="lisbanner me">🎤 ${lr('輪到你了！說一說你聽到甚麼')}</div>`
+               : L.pick ? `<div class="lisbanner">👂 ${lr('請聽')} ${(stu(L.pick)||{n:''}).n} ${lr('說')}</div>` : '';
+  let body = '';
+  if(it.k==='teach'){ body = lisTeachHTML(it, 's', me); }
+  else if(L.st==='listen'){
+    body = `<div class="lisbox"><div class="lishero pulse">🎧</div>
+      <div class="listitle">${lr('請專心聽')}${lisEn('請專心聽', showEn)}</div>
+      ${lisStrip([0,1,2])}
+      ${it.scene?`<div class="lishero sm">${it.scene}</div>`:''}
+      ${L.tx&&it.say?`<div class="liscap">${lisCap(it.say)}</div>`:''}
+      ${L.sp?`<div class="row" style="justify-content:center"><button class="btn mint" onclick="lisSelfPlay()">🔊 ${T('再聽一次')}</button></div>`:''}
+    </div>`;
+  } else body = it.k==='order' ? lisOrderStudent(it, L, me, showEn) : lisChoiceStudent(it, L, me, showEn);
+
+  /* 公佈答案那一刻，答對的同學有慶祝；只出現一次 */
+  const key = L.s+'.'+L.i;
+  if(L.st==='reveal' && it.k!=='teach'){
+    if(LIS_SEEN!==key){
+      LIS_SEEN = key;
+      const ok = lisJudge(it, lisGet(ME, L.i), me.lv);
+      if(ok) setTimeout(()=>cheer('答對了！'), 250); else if(ok===false) setTimeout(lisMiss, 250);
+    }
+  } else LIS_SEEN = '';
+  return `<div class="stu" data-lis="${L.s}.${L.i}.${L.st}">${lisProgChips(S,L)}${banner}${body}</div>`;
+}
+function lisChoiceStudent(it, L, me, showEn){
+  const rev = L.st==='reveal', v = lisGet(ME, L.i);
+  const list = lisOptsFor(it, me.lv), big = it.k==='boss';
+  const opts = list.map(({o,j})=>{
+    let cls = '';
+    if(rev){ if(j===it.a) cls = 'right'; else if(v===o.t) cls = 'wrong'; else cls = 'dim'; }
+    else if(v===o.t) cls = 'pickd';
+    return lisOptHTML(o, cls, `lisChoose(${L.i},${j})`, big, '', showEn);
+  }).join('');
+  const mine = rev ? (v===undefined ? `<div class="lisfb miss">${lr('你沒有作答')}</div>` : '') : '';
+  return `<div class="lisbox ${big?'boss':''}">
+    ${big?'<div class="lisbossbar">📢 經理話</div>':''}
+    ${it.scene?`<div class="lishero sm">${it.scene}</div>`:''}
+    ${L.tx&&it.say?`<div class="liscap">${lisCap(it.say)}</div>`:''}
+    <div class="lisask">${lisTagHTML(it.tag)}${lr(it.ask||'')}${lisEn(it.ask, showEn)}</div>
+    ${L.sp&&!rev?`<div class="row" style="justify-content:center"><button class="btn mint" onclick="lisSelfPlay()">🔊 ${T('再聽一次')}</button></div>`:''}
+    <div class="opts lisoptgrid" style="grid-template-columns:repeat(auto-fit,minmax(${list.length>3?150:big?170:200}px,1fr))">${opts}</div>
+    ${rev&&it.fb?`<div class="lisfb">${lr(it.fb)}</div>`:''}${mine}
+    ${rev?'':`<div class="lishint">${v===undefined?lr('聽完，才按答案'):lr('已選好，等老師公佈')}</div>`}
+  </div>`;
+}
+function lisOrderStudent(it, L, me, showEn){
+  const rev = L.st==='reveal', v = lisGet(ME, L.i);
+  const n = lisNSteps(it, me.lv), cur = Array.isArray(v) ? v : [];
+  const want = it.steps.slice(0,n);
+  const w = n===1 ? ['先'] : (it.steps.length===2 ? ['先','然後'] : ['先','然後','最後']);
+  const find = t => lisCards(it).find(c=>c.t===t);
+  const slots = Array.from({length:n}, (_,j)=>{
+    const c = cur[j] ? find(cur[j]) : null;
+    if(rev){
+      const ok = cur[j]===want[j].t;
+      return `<div class="lisslot ${c?(ok?'ok':'bad'):''}"><div class="no">${w[j]}</div>
+        ${c?`<div class="e">${c.e}</div><div class="t">${lr(c.t)}</div>`:'<div class="e">？</div>'}</div>`;
+    }
+    return c ? `<button class="lisslot full" onclick="lisDelCard(${L.i},${j})"><div class="no">${w[j]}</div>
+        <div class="e">${c.e}</div><div class="t">${lr(c.t)}</div></button>`
+             : `<div class="lisslot"><div class="no">${w[j]}</div><div class="e">？</div></div>`;
+  }).join('<div class="arrow">➜</div>');
+  const pool = lisPool(it, me.lv, 11).map(c=>{
+    const k = lisCards(it).indexOf(c), used = cur.includes(c.t);
+    const isRight = rev && want.includes(c);
+    return `<button class="lisstepcard ${used?'used':''} ${rev&&isRight?'right':''}" ${rev||used?'disabled':''} onclick="lisAddCard(${L.i},${k})">
+      <div class="e">${c.e}</div><div class="t">${lr(c.t)}${lisEn(c.t, showEn)}</div></button>`;
+  }).join('');
+  const ask = n===1 ? '先做甚麼？' : `按次序點出前 ${n} 件事`;
+  return `<div class="lisbox">
+    ${it.scene?`<div class="lishero sm">${it.scene}</div>`:''}
+    ${L.tx&&it.say?`<div class="liscap">${lisCap(it.say)}</div>`:''}
+    <div class="lisask">${lr(ask)}${lisEn(ask, showEn)}</div>
+    ${L.sp&&!rev?`<div class="row" style="justify-content:center"><button class="btn mint" onclick="lisSelfPlay()">🔊 ${T('再聽一次')}</button></div>`:''}
+    <div class="lisslots">${slots}</div>
+    <div class="liscardsrow">${pool}</div>
+    ${rev?`<div class="lisfb">${lr(lisOrderFb(it))}</div>`:`<div class="lishint">${
+      cur.length>=n ? lr('已排好，等老師公佈') : lr('聽完，才點圖卡')}</div>`}
+  </div>`;
+}
+
+/* 老師按鍵盤／簡報筆：→ 或 PageDown 下一步，← 或 PageUp 上一項 */
+document.addEventListener('keydown', e=>{
+  if(ROLE!=='t' || !lisOn() || STEP!=='lis') return;
+  const a = document.activeElement, tag = a && a.tagName;
+  if(tag==='INPUT' || tag==='TEXTAREA' || tag==='SELECT') return;
+  if(e.key==='ArrowRight' || e.key==='PageDown'){ e.preventDefault(); lisMain(); }
+  else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); lisBack(); }
+});
+
+/* 共用：入帳識別、課節名稱 */
+function payKey(){ return lisOn() ? 'L'+lisS().s+'.'+lisS().run : CTRL.lessonNo; }
+function lessonLabel(){ return lisOn() ? `聆聽第 ${lisS().s} 節` : `第 ${CTRL.lessonNo} 連堂`; }
+function lisReviewExtra(){
+  return `<div class="row" style="margin:14px 0">
+      <button class="btn lemon" onclick="doPrint()">🖨 列印聆聽小員工證書</button></div>` + lisObsHTML();
 }
 
 render();
