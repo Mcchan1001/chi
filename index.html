@@ -607,6 +607,36 @@ table.obs td{padding:6px 10px}
   .cert .c7{font-size:14pt;margin-top:20pt}
 }
 
+/* ===== 第二版：60／90 分鐘、課堂活動、多選、計時 ===== */
+.lisclock{font-weight:900;color:#33506E;background:rgba(255,255,255,.7);border-radius:16px;padding:5px 14px;font-size:1rem}
+.lislen{display:inline-flex;border-radius:18px;overflow:hidden;border:3px solid #9DBBD8;background:#fff}
+.lislen button{padding:7px 16px;font-size:1rem;font-weight:900;color:#3B4F6E;background:#fff;font-family:inherit}
+.lislen button.on{background:#5FA8D3;color:#fff}
+.lisbadge.st-act{background:#FFD9B8;color:#8A4A17}
+.lisdot.ac{border-radius:6px;transform:rotate(45deg) scale(.9)}
+.lisdot.ac.cur{transform:rotate(45deg) scale(1.1)}
+.lisdot.xt{border-style:dashed}
+.lisbox.act{background:linear-gradient(180deg,#FFF8EC,#FFEBD2);border:3px solid #F2B880}
+.lisactbar{display:inline-block;background:#E38A1F;color:#fff;font-weight:900;font-size:1.15rem;padding:5px 20px;border-radius:18px;margin-bottom:6px}
+.lisactsteps{list-style:none;margin:12px auto;padding:0;max-width:860px;text-align:left}
+.lisactsteps li{display:flex;gap:14px;align-items:flex-start;background:#fff;border-radius:20px;padding:10px 18px;margin-bottom:8px;border:2px solid #F2D2B0}
+.lisactsteps .n{flex:none;width:40px;height:40px;border-radius:50%;background:#E38A1F;color:#fff;font-weight:900;font-size:1.3rem;display:flex;align-items:center;justify-content:center;margin-top:6px}
+.lisactsteps .tx{font-size:1.5rem;font-weight:800;line-height:2.2}
+.lismat{display:inline-block;margin-top:6px;padding:6px 16px;border-radius:14px;background:#EEF3FA;color:#3B4F6E;font-weight:800;font-size:1.05rem}
+.listm{margin-top:12px}
+.lisbigtm{font-size:5rem;font-weight:900;color:#244E70;font-variant-numeric:tabular-nums;line-height:1.3}
+.lisbigtm.end{color:#C0392B;animation:lispulse .6s ease-in-out infinite}
+.lispicknote{font-size:1.25rem;font-weight:900;color:#8A5B12;margin:2px 0 6px}
+.lisclkbtn{font-weight:900;color:#33506E;background:none;border:0;font-family:inherit;font-size:1rem;cursor:pointer}
+
+/* 課堂活動頁：電視上一屏盡量看得完 */
+.lisbox.act .lishero{font-size:3.2rem}
+.lisbox.act .listitle{font-size:2.1rem;line-height:1.9;margin-top:0}
+.lisbox.act .lisline{font-size:1.35rem;line-height:2}
+.lisactsteps .tx{font-size:1.35rem;line-height:2.1}
+.lisactsteps li{padding:6px 16px;margin-bottom:6px}
+.lisbigtm{font-size:4rem;line-height:1.2}
+
 </style>
 </head>
 <body>
@@ -680,7 +710,7 @@ const A = {"img":{"一邊":"img/01.jpg","互相":"img/02.jpg","他":"img/03.jpg"
 const IMG = A.img, JYUT = A.jyut;
 /* 工作紙標題用到、原本粵拼表未有嘅字 */
 Object.assign(JYUT, {'代':'doi6','尋':'cam4','便':'bin6','仿':'fong2'});
-Object.assign(JYUT, {"曲":"kuk1","態":"taai3","停":"ting4","辨":"bin6","楚":"co2","傅":"fu6","摸":"mo2","雙":"soeng1","遍":"bin3","抹":"maat3","桌":"coek3","亂":"lyun6","懂":"dung2","範":"faan6","庫":"fu3","掃":"sou3","汽":"hei3","然":"jin4","序":"zeoi6","例":"lai6","倒":"dou2","套":"tou3","籤":"cim1","只":"zi2","戰":"zin3","挑":"tiu1","器":"hei3","架":"gaa3","桶":"tung2","隨":"ceoi4"});
+Object.assign(JYUT, {"曲":"kuk1","態":"taai3","停":"ting4","辨":"bin6","楚":"co2","傅":"fu6","摸":"mo2","雙":"soeng1","遍":"bin3","抹":"maat3","桌":"coek3","亂":"lyun6","懂":"dung2","範":"faan6","庫":"fu3","掃":"sou3","汽":"hei3","然":"jin4","序":"zeoi6","例":"lai6","倒":"dou2","套":"tou3","籤":"cim1","只":"zi2","戰":"zin3","挑":"tiu1","器":"hei3","架":"gaa3","桶":"tung2","隨":"ceoi4","膝":"sik1","秒":"miu5","冷":"laang5","讚":"zaan3","賞":"soeng2","舉":"geoi2","着":"zoek6","輕":"hing1","聊":"liu4","漏":"lau6","麻":"maa4","煩":"faan4","些":"se1","局":"guk6","領":"ling5","當":"dong1","響":"hoeng2","扮":"baan6","演":"jin2","眾":"zung3","插":"caap3","猜":"caai1","台":"toi4","掌":"zoeng2","量":"loeng6","似":"ci5","像":"zoeng6","肌":"gei1","肉":"juk6","靈":"ling4","敏":"man5","背":"bui3","本":"bun2","擋":"dong2","搖":"jiu4","鑰":"jeuk6","撕":"si1","敲":"haau1","讓":"joeng6","幾":"gei2","較":"gaau3","播":"bo3","緊":"gan2","線":"sin3","贏":"jing4","核":"hat6","菜":"coi3","迴":"wui4","紋":"man4","針":"zam1","鼠":"syu2","號":"hou6","牛":"ngau4","汁":"zap1","櫃":"gwai6","訊":"seon3","息":"sik1","則":"zak1","印":"jan3","集":"zaap6","搭":"daap3","廊":"long4","傳":"cyun4","抽":"cau1","各":"gok3","派":"paai3","發":"faat3","掉":"diu6","爛":"laan6","訴":"sou3","遲":"ci4","鐘":"zung1","累":"leoi6","傘":"saan3","拖":"to1","晴":"cing4","颳":"gwaat3","漢":"hon3","堡":"bou2","阿":"aa3","談":"taam4","轉":"zyun3","展":"zin2","擠":"zai1","述":"seot6","龍":"lung4","剛":"gong1","垃":"laap6","圾":"saap3","喉":"hau4","冰":"bing1","塊":"faai3","椅":"ji2","悄":"ciu2","此":"ci2","推":"teoi1","熟":"suk6","扇":"sin3","免":"min5","跌":"dit3","燙":"tong3","夾":"gaap3","留":"lau4","言":"jin4","廣":"gwong2","帽":"mou6","碼":"maa5","郵":"jau4","訂":"ding6","往":"wong5","旺":"wong6","達":"daat6","塘":"tong4","屯":"tyun4","付":"fu6","離":"lei4","決":"kyut3","噴":"pan3","嚏":"dai3","糾":"gau2","式":"sik1","含":"ham4","糊":"wu4","擦":"caat3","擺":"baai2","景":"ging2","紹":"siu6","微":"mei4","迎":"jing4","跟":"gan1","豆":"dau6","布":"bou3","淨":"zing6","休":"jau1","供":"gung1","另":"ling6","辛":"san1","退":"teoi3","搶":"coeng2","討":"tou2","論":"leon6","牌":"paai4","頒":"baan1","佳":"gaai1"});
 
 /* 圖片原本以 base64 文字內嵌。每次重畫都把幾十至一百多 KB 文字塞入畫面，
    瀏覽器要重新解碼，機器唔夠快就會窒。開機時轉換一次，
@@ -3724,323 +3754,59 @@ function doPrint(){
   setTimeout(()=>window.print(),150);
 }
 
-/* ================================================================
-   🎧 聆聽專題：聽指示做得到（轉銜準備）
-   對應教學計劃「聆聽」範疇（理解語意、聆聽態度，共 4 節）：
-     第 1 節 專心聽五步曲（聆聽態度）
-     第 2 節 聽出重點「時人地事」
-     第 3 節 聽指示做事（次序）＋「經理話」
-     第 4 節 職場實戰：我是新員工（聽不清楚就問）
-
-   教學策略：視覺提示、一次一步、教師示範、手勢與順口溜、正反例對比、
-             時人地事圖式、先／然後／最後線索詞、複述、求助說話、
-             字幕逐步撤除、指示由短到長、真實職場情景。
-
-   題目格式（每一項 item）：
-     k      teach 講解 ／ choice 選擇 ／ order 排次序 ／ boss 經理話
-     say    聽到的內容；「｜」表示停一停；同一段話的追問用 same:true 沿用上一項
-     ask    問題；opts 選項（a = 正確答案在 opts 的位置）
-     steps  次序題的步驟；decoys 干擾圖卡
-     tx     這一項預設是否顯示字幕（1 顯示／0 不顯示；不寫則沿用）
-     tip    給老師看的教學技巧（不會給學生看到）
-   ================================================================ */
-const LIS_FIVE = [{e:'✋',t:'停',d:'停一停'},{e:'👀',t:'望',d:'望一望'},{e:'👂',t:'聽',d:'聽清楚'},
-                  {e:'🗣️',t:'說',d:'說一說'},{e:'💪',t:'做',d:'就去做'}];
-const LIS_TAGC = {'時':'a','人':'b','地':'c','事':'d','物':'e','量':'f'};
-const LP   = n => ({t:n, img:n, e:{'成仔':'🧒','小愉':'👧','健仔':'👦'}[n]||'🙂'});
-const MGR  = {t:'經理', e:'🧑‍💼'};
-const GOOD = {e:'👍',t:'好'}, BAD = {e:'👎',t:'不好'};
-const DO   = {e:'👍',t:'做'}, NODO = {e:'✋',t:'不做'};
-const CLK  = {'九':'🕘','十':'🕙','兩':'🕑','三':'🕒'};
-
-const LIS = [
-/* ───────────────────────── 第 1 節 ───────────────────────── */
-{ s:1, title:'專心聽五步曲', sub:'聆聽態度：停・望・聽・說・做', ico:'✋', tx:1,
-  unit:'專心聽五步曲',
-  goals:[
-    {ico:'✋', zh:'認識專心聽的五步：停、望、聽、說、做', en:'Learn the 5 steps of good listening'},
-    {ico:'👀', zh:'眼睛望向說話的人，安靜地聽', en:'Look at the speaker and listen quietly'},
-    {ico:'🙌', zh:'分辨誰聽得好', en:'Tell who is listening well'}],
-  stages:['準備好','五步曲','誰聽得好','試一試'],
-  strat:[
-    '引起動機：連結「將來工作要聽指示」；先動一動，建立「聽完才做」的習慣。',
-    '步驟視覺化＋手勢＋順口溜：一次只教一步，邊說邊做手勢，重複多次。',
-    '正例／反例對比：用短故事讓學生判斷，建立聆聽態度的標準，並請學生說出原因。',
-    '應用與遷移：把五步曲用在突發情況，肯定「不明白就問」。'],
-  items:[
-  {st:0,k:'teach',e:'🎧',t:'聽得清楚，做得準確',
-   line:'將來工作，經理和師傅會說話。我們要專心聽，才做得準確。',
-   say:'今天，我們學習專心聽。｜將來工作的時候，經理和師傅會說話。｜我們要聽得清楚，才做得準確。',
-   tip:'引起動機：先問「你有沒有聽錯過老師的話？」，請兩三位同學分享；說明聽得準，工作才做得好。'},
-  {st:0,k:'teach',e:'🙋',t:'老師說，你做',line:'聽老師說，聽完才做動作。',
-   cards:[{e:'👏',t:'拍拍手'},{e:'🙂',t:'摸摸頭'},{e:'🧍',t:'站起來'},{e:'🪑',t:'坐下來'}],
-   say:'請聽老師說。聽完，才做動作。',
-   tip:'逐張按卡片，由電腦讀出指示；同學聽完才做動作。強調「聽完才做」；未聽完就動的同學，請他再試一次，並稱讚能等待的同學。'},
-  {st:1,k:'teach',strip:0,e:'✋',t:'停一停',line:'雙手放好，嘴巴不說話。',
-   say:'第一步，停一停。｜雙手放好，嘴巴不說話。',
-   tip:'手勢：手掌向前。示範放下手上的東西、坐正；可安排 5 秒安靜練習，讓學生體驗「停」。'},
-  {st:1,k:'teach',strip:1,e:'👀',t:'望一望',line:'眼睛望向說話的人。',
-   say:'第二步，望一望。｜眼睛望向說話的人。',
-   tip:'手勢：指指自己的眼睛，再指向說話的人。目光接觸可由「望向對方的臉」開始，不必長時間直視（照顧有感官需要的學生）。'},
-  {st:1,k:'teach',strip:2,e:'👂',t:'聽清楚',line:'耳朵專心聽，等他說完。',
-   say:'第三步，聽清楚。｜耳朵專心聽，等他說完。',
-   tip:'手勢：手放耳邊。強調「等他說完才開口」，減少搶答。'},
-  {st:1,k:'teach',strip:3,e:'🗣️',t:'說一說',line:'把聽到的說一遍：「我聽到……」',
-   say:'第四步，說一說。｜把聽到的說一遍。｜我聽到，先洗手，再拿杯子。',
-   tip:'手勢：手由嘴邊向外。複述有助記憶和確認。先由老師示範，再請學生跟說。'},
-  {st:1,k:'teach',strip:4,e:'💪',t:'就去做',line:'聽完才做。不明白，就問。',
-   say:'第五步，就去做。｜聽完才做。｜不明白，就問。',
-   tip:'手勢：握拳。提醒學生：不明白而發問，是好員工的表現，不是不乖。'},
-  {st:1,k:'teach',strip:-1,e:'🎵',t:'五步曲歌',line:'停一停，望一望，聽清楚，說一說，就去做！',
-   cards:[{e:'✋',t:'停'},{e:'👀',t:'望'},{e:'👂',t:'聽'},{e:'🗣️',t:'說'},{e:'💪',t:'做'}],
-   say:'停一停，｜望一望，｜聽清楚，｜說一說，｜就去做！',
-   tip:'配合手勢，全班一起唸兩至三次；之後可請個別同學帶領。重複是學習的關鍵。'},
-  {st:2,k:'choice',scene:'📱',say:'成仔在聽經理說話。｜他一邊聽，一邊玩手機。',ask:'成仔聽得好嗎？',
-   opts:[GOOD,BAD],a:1,fb:'成仔一邊聽，一邊玩手機，沒有專心。要先「停一停」，放下手機。',
-   tip:'請學生說說「為甚麼不好」，再請他示範正確做法。'},
-  {st:2,k:'choice',scene:'👧',say:'小愉在聽師傅說話。｜她望向師傅，安靜地聽。',ask:'小愉聽得好嗎？',
-   opts:[GOOD,BAD],a:0,fb:'小愉望向師傅，安靜地聽，做到了「望一望」和「聽清楚」。'},
-  {st:2,k:'choice',scene:'🗣️',say:'經理還沒說完，健仔就大聲說話。',ask:'健仔聽得好嗎？',
-   opts:[GOOD,BAD],a:1,fb:'要等經理說完，才可以開口。這是「聽清楚」。'},
-  {st:2,k:'choice',scene:'🙋',say:'經理說完了。｜成仔說：我明白了，先洗杯子，再抹桌子。',ask:'成仔聽得好嗎？',
-   opts:[GOOD,BAD],a:0,fb:'成仔把聽到的說了一遍，這是「說一說」，經理會很放心。'},
-  {st:2,k:'choice',scene:'🙈',say:'師傅說話的時候，小愉望向地下，又不停玩頭髮。',ask:'小愉聽得好嗎？',
-   opts:[GOOD,BAD],a:1,fb:'聽人說話，要望向說話的人。這是「望一望」。'},
-  {st:3,k:'choice',scene:'🧑‍💼',say:'經理開始說話了。',ask:'你第一步要做甚麼？',
-   opts:[{e:'💪',t:'馬上去做'},{e:'📱',t:'玩手機'},{e:'✋',t:'停一停'}],a:2,
-   fb:'第一步是「停一停」：雙手放好，嘴巴不說話。'},
-  {st:3,k:'choice',scene:'🤔',say:'師傅說完了。你有一件事不明白。',ask:'你應該怎麼做？',
-   opts:[{e:'🤷',t:'亂做一通'},{e:'🙋',t:'問一問師傅'},{e:'😶',t:'甚麼也不說'}],a:1,
-   fb:'不明白就問，是好員工的表現。'},
-  {st:3,k:'teach',e:'🏅',t:'我會專心聽',line:'停一停，望一望，聽清楚，說一說，就去做。',
-   say:'今天，我們學會了專心聽。｜停一停，望一望，聽清楚，說一說，就去做。',
-   tip:'請學生分享：「我會在哪裏用五步曲？」（課堂、家中、實習）。鼓勵他們留意別人怎樣聽。'}
-  ]},
-
-/* ───────────────────────── 第 2 節 ───────────────────────── */
-{ s:2, title:'聽出重點：時人地事', sub:'聽一句話，找出四個重點', ico:'🎯', tx:1,
-  unit:'聽出時人地事',
-  goals:[
-    {ico:'🎯', zh:'認識聽話的四個重點：時、人、地、事', en:'Learn the 4 key points: when, who, where, what'},
-    {ico:'🔍', zh:'聽完一句話，找出時間、人物、地點和事情', en:'Find the time, person, place and event'},
-    {ico:'🧑‍💼', zh:'聽懂同事和經理的工作安排', en:'Understand work arrangements'}],
-  stages:['認識重點','聽一聽 ①','聽一聽 ②','聽一聽 ③'],
-  strat:[
-    '圖式組織：用顏色和圖示把「時人地事」視覺化，老師出聲思考示範。',
-    '有字幕支援：先看着字幕聽，再逐題找出重點。',
-    '撤除字幕：只聽不看，老師可重播一次。',
-    '遷移到真實語氣：用經理指示的說話方式，聽出工作安排。'],
-  items:[
-  {st:0,k:'teach',e:'🎯',t:'聽話要找重點',line:'經理一次說很多話。我們要找出四個重點。',
-   say:'經理一次會說很多話。｜我們要找出四個重點：｜時間，人物，地點，事情。',
-   tip:'類比：寄信要有「甚麼時候、寄給誰、寄去哪裏、寄甚麼」。可請同學說說手機訊息裏的重點。'},
-  {st:0,k:'teach',e:'🔎',t:'四個重點',line:'每個重點有一個顏色。',
-   cards:[{k:'時',e:'⏰',t:'時',d:'甚麼時候？',s:'時，甚麼時候？'},{k:'人',e:'🧑',t:'人',d:'是誰？',s:'人，是誰？'},
-          {k:'地',e:'📍',t:'地',d:'在哪裏？',s:'地，在哪裏？'},{k:'事',e:'🛠️',t:'事',d:'做甚麼？',s:'事，做甚麼？'}],
-   say:'四個重點：｜時，甚麼時候？｜人，是誰？｜地，在哪裏？｜事，做甚麼？',
-   tip:'逐張卡片按，讀出問題。之後的題目沿用同一顏色，幫助學生記憶。'},
-  {st:0,k:'teach',e:'🔍',t:'示範：找出四個重點',
-   chunks:[{k:'時',t:'上午九點',post:'，'},{k:'人',t:'成仔'},{k:'地',t:'餐廳',pre:'在'},{k:'事',t:'洗杯子',post:'。'}],
-   say:'上午九點，成仔在餐廳洗杯子。',
-   tip:'老師出聲思考示範：「我聽到『上午九點』，這是時間；『成仔』是人物；『餐廳』是地點；『洗杯子』是事情。」逐一點出顏色。'},
-  /* 句子 A：有字幕 */
-  {st:1,k:'choice',tag:'時',scene:'🍽️',tx:1,say:'上午九點，成仔在餐廳洗杯子。',ask:'是甚麼時候？',
-   opts:[{e:'🕙',t:'上午十點'},{e:'🕘',t:'上午九點'},{e:'🕑',t:'下午兩點'},{e:'🕒',t:'下午三點'}],a:1,fb:'是上午九點。',
-   tip:'先請學生看字幕，找出「時間」的詞語並圈出，再作答。'},
-  {st:1,k:'choice',tag:'人',same:1,ask:'是誰在做事？',
-   opts:[LP('小愉'),LP('健仔'),LP('成仔'),MGR],a:2,fb:'是成仔。'},
-  {st:1,k:'choice',tag:'地',same:1,ask:'在哪裏？',
-   opts:[{e:'📦',t:'倉庫'},{e:'🍽️',t:'餐廳'},{e:'🏪',t:'超級市場'},{e:'📚',t:'圖書館'}],a:1,fb:'在餐廳。'},
-  {st:1,k:'choice',tag:'事',same:1,ask:'做甚麼？',
-   opts:[{e:'🧹',t:'掃地'},{e:'🛒',t:'排貨品'},{e:'📦',t:'搬箱子'},{e:'🥛',t:'洗杯子'}],a:3,fb:'是洗杯子。'},
-  /* 句子 B：無字幕 */
-  {st:2,k:'choice',tag:'時',scene:'🏪',tx:0,say:'下午兩點，小愉在超級市場排貨品。',ask:'是甚麼時候？',
-   opts:[{e:'🕘',t:'上午九點'},{e:'🕒',t:'下午三點'},{e:'🕑',t:'下午兩點'},{e:'🕙',t:'上午十點'}],a:2,fb:'是下午兩點。',
-   tip:'這一組不顯示字幕，只聽。可重播一次；請同學邊聽邊用手指數出「時、人、地、事」。'},
-  {st:2,k:'choice',tag:'人',same:1,ask:'是誰在做事？',
-   opts:[LP('成仔'),LP('小愉'),MGR,LP('健仔')],a:1,fb:'是小愉。'},
-  {st:2,k:'choice',tag:'地',same:1,ask:'在哪裏？',
-   opts:[{e:'🏪',t:'超級市場'},{e:'🍽️',t:'餐廳'},{e:'📦',t:'倉庫'},{e:'🏫',t:'學校'}],a:0,fb:'在超級市場。'},
-  {st:2,k:'choice',tag:'事',same:1,ask:'做甚麼？',
-   opts:[{e:'🥛',t:'洗杯子'},{e:'🛒',t:'排貨品'},{e:'🧹',t:'掃地'},{e:'📦',t:'搬箱子'}],a:1,fb:'是排貨品。'},
-  /* 句子 C：經理指示語氣 */
-  {st:3,k:'choice',tag:'時',scene:'🧑‍💼',tx:0,say:'經理說：｜明天早上十點，｜健仔到倉庫搬汽水。',ask:'甚麼時候去？',
-   opts:[{e:'🕘',t:'明天早上九點'},{e:'🕙',t:'明天早上十點'},{e:'🕑',t:'明天下午兩點'},{e:'🕒',t:'明天下午三點'}],a:1,fb:'是明天早上十點。',
-   tip:'用經理說話的語氣讀。提醒學生：經理說話，要用五步曲，先「停一停」。'},
-  {st:3,k:'choice',tag:'人',same:1,ask:'誰要去？',
-   opts:[LP('成仔'),LP('健仔'),LP('小愉'),MGR],a:1,fb:'是健仔。'},
-  {st:3,k:'choice',tag:'地',same:1,ask:'去哪裏？',
-   opts:[{e:'📚',t:'圖書館'},{e:'🍽️',t:'餐廳'},{e:'📦',t:'倉庫'},{e:'🏪',t:'超級市場'}],a:2,fb:'去倉庫。'},
-  {st:3,k:'choice',tag:'事',same:1,ask:'去做甚麼？',
-   opts:[{e:'🥤',t:'搬汽水'},{e:'🥛',t:'洗杯子'},{e:'🧹',t:'掃地'},{e:'🛒',t:'排貨品'}],a:0,fb:'去搬汽水。'},
-  {st:3,k:'teach',e:'🏅',t:'我找到四個重點',line:'時、人、地、事。',
-   cards:[{k:'時',e:'⏰',t:'時'},{k:'人',e:'🧑',t:'人'},{k:'地',e:'📍',t:'地'},{k:'事',e:'🛠️',t:'事'}],
-   say:'今天，我們學會了找重點。｜時，人，地，事。',
-   tip:'請學生選一個重點，向旁邊的同學說一說：「我聽到……」。'}
-  ]},
-
-/* ───────────────────────── 第 3 節 ───────────────────────── */
-{ s:3, title:'聽指示做事', sub:'先、然後、最後＋「經理話」', ico:'🔢', tx:0,
-  unit:'聽指示做事',
-  goals:[
-    {ico:'🔢', zh:'聽出先做甚麼、然後做甚麼、最後做甚麼', en:'Hear what to do first, next and last'},
-    {ico:'🧩', zh:'按次序完成一步、兩步和三步指示', en:'Follow one-, two- and three-step instructions'},
-    {ico:'📢', zh:'玩「經理話」，專心聽才不會中計', en:'Play “Manager says” and listen carefully'}],
-  stages:['次序詞','一步指示','兩步指示','三步指示','經理話'],
-  strat:[
-    '線索詞：「先、然後、最後」是次序的提示，用手指數一數幫助記憶。',
-    '一步指示：圖片選擇，先建立「聽到就找圖」的習慣。',
-    '兩步指示：逐步加長；聽完才排次序。',
-    '三步指示：加入干擾圖卡；初組只需完成第一步，中組完成前兩步。',
-    '選擇性注意：只有「經理說」才行動，訓練抓住關鍵詞和控制衝動。'],
-  items:[
-  {st:0,k:'teach',e:'🔢',t:'先、然後、最後',line:'聽到「先、然後、最後」，就要記住次序。',tx:1,
-   cards:[{e:'1️⃣',t:'先',d:'第一步'},{e:'2️⃣',t:'然後',d:'第二步'},{e:'3️⃣',t:'最後',d:'第三步'}],
-   say:'聽到，先，然後，最後，｜就要記住次序。｜例如：先洗手，然後倒水，最後拿杯子。',
-   tip:'邊聽邊用手指數：先（1隻手指）、然後（2隻）、最後（3隻）。這是常用的記憶技巧。'},
-  {st:1,k:'choice',scene:'🥛',tx:0,say:'請把杯子放在桌子上。',ask:'經理要你做甚麼？',
-   opts:[{e:'🧹',t:'拿掃把'},{e:'🥛',t:'放杯子'},{e:'🧼',t:'洗手'},{e:'🚪',t:'開門'}],a:1,fb:'要把杯子放在桌子上。',
-   tip:'先讓學生預測，再作答。聽不清楚的同學，請他用「請再說一次」發問。'},
-  {st:1,k:'choice',scene:'📦',say:'請把箱子搬到門口。',ask:'經理要你做甚麼？',
-   opts:[{e:'🧽',t:'抹桌子'},{e:'🥛',t:'洗杯子'},{e:'🧹',t:'掃地'},{e:'📦',t:'搬箱子'}],a:3,fb:'要把箱子搬到門口。'},
-  {st:1,k:'choice',scene:'🧼',say:'請你先去洗手。',ask:'經理要你做甚麼？',
-   opts:[{e:'🥛',t:'洗杯子'},{e:'🧼',t:'洗手'},{e:'🧽',t:'抹桌子'},{e:'📦',t:'搬箱子'}],a:1,fb:'要先去洗手。',
-   tip:'「洗手」和「洗杯子」開頭相同，要聽到最後才知道，是專心聽的好例子。'},
-  {st:2,k:'order',scene:'🧑‍💼',say:'先戴手套，｜然後抹桌子。',
-   steps:[{e:'🧤',t:'戴手套'},{e:'🧽',t:'抹桌子'}],decoys:[{e:'🧹',t:'掃地'}],
-   tip:'請同學邊聽邊用手指數「先、然後」。公佈答案後，請一位同學複述：「先……，然後……」。'},
-  {st:2,k:'order',scene:'🧑‍💼',say:'先拿清單，｜然後拿貨品。',
-   steps:[{e:'📋',t:'拿清單'},{e:'🛒',t:'拿貨品'}],decoys:[{e:'🥤',t:'倒水'}]},
-  {st:2,k:'order',scene:'🧑‍💼',say:'先洗手，｜然後拿杯子。',
-   steps:[{e:'🧼',t:'洗手'},{e:'🥛',t:'拿杯子'}],decoys:[{e:'🚪',t:'開門'}]},
-  {st:3,k:'order',scene:'☕',say:'先洗手，｜然後拿杯子，｜最後放在桌上。',
-   steps:[{e:'🧼',t:'洗手'},{e:'🥛',t:'拿杯子'},{e:'🍽️',t:'放在桌上'}],decoys:[{e:'🧹',t:'掃地'}],
-   tip:'三步指示較長：可分段重播（每步之間停一停）。初組同學只需聽出第一步。'},
-  {st:3,k:'order',scene:'📦',say:'先戴手套，｜然後搬箱子，｜最後貼標籤。',
-   steps:[{e:'🧤',t:'戴手套'},{e:'📦',t:'搬箱子'},{e:'🏷️',t:'貼標籤'}],decoys:[{e:'🧽',t:'抹桌子'}]},
-  {st:3,k:'order',scene:'🏪',say:'先看清單，｜然後拿貨品，｜最後放進籃子。',
-   steps:[{e:'📋',t:'看清單'},{e:'🛒',t:'拿貨品'},{e:'🧺',t:'放進籃子'}],decoys:[{e:'🥛',t:'洗杯子'}]},
-  {st:4,k:'teach',e:'📢',t:'經理話',line:'經理說，才做；沒有說「經理說」，就不做！',
-   say:'我們來玩，經理話。｜只有聽到，經理說，才做動作。｜沒有聽到，經理說，就不要動！',
-   tip:'先全班試玩兩輪（不用平板），讓每位同學明白規則。玩的時候，做動作的同學站起來，按掣選「做」或「不做」；沒有「經理說」要保持不動。'},
-  {st:4,k:'boss',scene:'📢',say:'經理說：站起來。',ask:'要做嗎？',opts:[DO,NODO],a:0,fb:'有「經理說」，要做。'},
-  {st:4,k:'boss',scene:'📢',say:'拍拍手。',ask:'要做嗎？',opts:[DO,NODO],a:1,fb:'沒有「經理說」，不用做。'},
-  {st:4,k:'boss',scene:'📢',say:'經理說：摸摸頭。',ask:'要做嗎？',opts:[DO,NODO],a:0,fb:'有「經理說」，要做。'},
-  {st:4,k:'boss',scene:'📢',say:'經理說：拍拍手，｜然後坐下來。',ask:'要做嗎？',opts:[DO,NODO],a:0,fb:'有「經理說」，要做兩件事：先拍拍手，然後坐下來。'},
-  {st:4,k:'boss',scene:'📢',say:'坐下來。',ask:'要做嗎？',opts:[DO,NODO],a:1,fb:'沒有「經理說」，不用做。'},
-  {st:4,k:'boss',scene:'📢',say:'摸摸鼻子。',ask:'要做嗎？',opts:[DO,NODO],a:1,fb:'沒有「經理說」，不用做。'},
-  {st:4,k:'teach',e:'🏅',t:'我會聽指示',line:'先、然後、最後；經理說，才做。',
-   cards:[{e:'1️⃣',t:'先'},{e:'2️⃣',t:'然後'},{e:'3️⃣',t:'最後'}],
-   say:'今天，我們學會了聽指示。｜先，然後，最後。｜聽清楚，才去做。',
-   tip:'請學生說說：「剛才哪一題最難？我是怎樣聽的？」培養自我檢視。'}
-  ]},
-
-/* ───────────────────────── 第 4 節 ───────────────────────── */
-{ s:4, title:'職場實戰：我是新員工', sub:'聽經理和師傅的指示；聽不清楚就問', ico:'🧑‍💼', tx:0,
-  unit:'我是新員工',
-  goals:[
-    {ico:'🧑‍💼', zh:'用五步曲聽經理和師傅的指示', en:'Use the 5 steps to listen to your manager'},
-    {ico:'🙋', zh:'聽不清楚時，禮貌地問一問', en:'Politely ask when you did not hear clearly'},
-    {ico:'🏆', zh:'完成新員工聽指示挑戰', en:'Complete the new-employee listening challenge'}],
-  stages:['新員工第一天','聽不清楚怎麼辦','職場任務','新員工挑戰'],
-  strat:[
-    '連結實習經驗：回顧五步曲，建立「工作就是聽指示」的概念。',
-    '求助技巧：練習「請再說一次」等說話，認識「不明白就問」是好員工的表現。',
-    '真實情景：在不同工作場所聽三步指示，並請同學複述（說一說）。',
-    '綜合挑戰：運用時人地事、次序和求助技巧，減少提示；可加背景聲增加難度。'],
-  items:[
-  {st:0,k:'teach',e:'🏢',t:'新員工第一天',line:'今天我們是新員工，要聽經理和師傅的指示。',tx:1,
-   cards:[{e:'☕',t:'咖啡店'},{e:'🏪',t:'超級市場'},{e:'📦',t:'倉庫'},{e:'🧹',t:'清潔'}],
-   say:'今天，我們是新員工。｜我們會在咖啡店、超級市場、倉庫和清潔公司工作。｜要聽清楚經理和師傅的指示。',
-   tip:'連結學生的實習或職業訓練經驗：問「你在哪個地方實習過？經理有沒有叫你做事？」'},
-  {st:0,k:'teach',e:'✋',t:'記得五步曲嗎？',line:'停、望、聽、說、做。',strip:-1,
-   cards:[{e:'✋',t:'停'},{e:'👀',t:'望'},{e:'👂',t:'聽'},{e:'🗣️',t:'說'},{e:'💪',t:'做'}],
-   say:'還記得五步曲嗎？｜停，望，聽，說，做。',
-   tip:'全班一起唸並做手勢，由學生帶領。'},
-  {st:1,k:'teach',e:'🙋',t:'聽不清楚，我會問',line:'不明白，不用怕。可以說：',
-   cards:[{e:'🔁',t:'請再說一次'},{e:'🙏',t:'對不起，我沒聽清楚'},{e:'❓',t:'請問在哪裏？'},{e:'✅',t:'我說一次，對嗎？'}],
-   say:'聽不清楚，不用怕。｜我們可以說：請再說一次。｜對不起，我沒聽清楚。｜請問在哪裏？｜我說一次，對嗎？',
-   tip:'逐句跟讀，配合禮貌的語氣、微笑和望向對方。可兩人一組角色扮演：一人當經理，一人當新員工。'},
-  {st:1,k:'choice',scene:'🔊',say:'經理說話的時候，外面很嘈吵。你聽不清楚。',ask:'你應該怎麼做？',
-   opts:[{e:'🤷',t:'亂做一通'},{e:'🙏',t:'請再說一次'},{e:'😶',t:'不說話'}],a:1,fb:'聽不清楚，可以說：「請再說一次。」',
-   tip:'請學生說出完整句子：「請再說一次。」並注意語氣有禮貌。'},
-  {st:1,k:'choice',scene:'⚙️',say:'經理說：請把箱子搬到……｜機器聲很大，你聽不到最後一句。你不知道要搬去哪裏。',ask:'你應該問甚麼？',
-   opts:[{e:'🤷',t:'自己亂搬'},{e:'❓',t:'請問搬到哪裏？'},{e:'😶',t:'不說話'}],a:1,fb:'可以問：「請問搬到哪裏？」'},
-  {st:1,k:'choice',scene:'🧑‍💼',say:'經理一口氣說了三件事。你只記得兩件。',ask:'你應該怎麼做？',
-   opts:[{e:'🤥',t:'假裝記得'},{e:'🙋',t:'請問第三件是甚麼？'},{e:'🏃',t:'走開'}],a:1,fb:'可以問：「請問第三件是甚麼？」'},
-  {st:1,k:'choice',scene:'🤔',say:'你聽完經理的指示。你想知道自己有沒有聽對。',ask:'你可以怎麼說？',
-   opts:[{e:'😴',t:'我不想聽'},{e:'🤐',t:'甚麼也不說'},{e:'✅',t:'我說一次，對嗎？'}],a:2,fb:'說一次，經理就知道你有沒有聽對。'},
-  {st:2,k:'order',scene:'☕',say:'咖啡店經理說：｜先洗手，｜然後倒咖啡，｜最後送上桌。',
-   steps:[{e:'🧼',t:'洗手'},{e:'☕',t:'倒咖啡'},{e:'🍽️',t:'送上桌'}],decoys:[{e:'🧹',t:'掃地'}],
-   tip:'公佈答案後，用「🎲 抽同學」請一位同學複述指示（說一說），再請全班說一次。'},
-  {st:2,k:'order',scene:'🏪',say:'超級市場師傅說：｜先拿貨品，｜然後貼價錢紙，｜最後排在架上。',
-   steps:[{e:'📦',t:'拿貨品'},{e:'🏷️',t:'貼價錢紙'},{e:'🛒',t:'排在架上'}],decoys:[{e:'🥛',t:'洗杯子'}]},
-  {st:2,k:'order',scene:'🧹',say:'清潔師傅說：｜先拿水桶，｜然後裝水，｜最後抹窗。',
-   steps:[{e:'🪣',t:'拿水桶'},{e:'💧',t:'裝水'},{e:'🪟',t:'抹窗'}],decoys:[{e:'🧤',t:'戴手套'}]},
-  {st:3,k:'teach',e:'🏆',t:'新員工挑戰',line:'運用今天和以前學到的，聽清楚經理的話。',
-   say:'新員工挑戰開始。｜請你用五步曲，聽清楚經理的話。',
-   tip:'可按「🔈 背景聲」加上輕微的環境聲，模擬職場；有感官敏感的學生不適合，請先留意學生反應。'},
-  {st:3,k:'choice',tag:'時',scene:'📦',tx:0,say:'經理說：｜下午兩點，｜請把三箱汽水，｜搬進倉庫。',ask:'甚麼時候搬？',
-   opts:[{e:'🕙',t:'上午十點'},{e:'🕑',t:'下午兩點'},{e:'🕒',t:'下午三點'},{e:'🕘',t:'上午九點'}],a:1,fb:'是下午兩點。'},
-  {st:3,k:'choice',tag:'物',same:1,ask:'搬甚麼？',
-   opts:[{e:'🥛',t:'杯子'},{e:'🧻',t:'紙巾'},{e:'🥤',t:'汽水'},{e:'🍞',t:'麵包'}],a:2,fb:'搬汽水。'},
-  {st:3,k:'choice',tag:'量',same:1,ask:'搬多少？',
-   opts:[{e:'📦📦',t:'兩箱'},{e:'📦📦📦',t:'三箱'},{e:'📦📦📦📦',t:'四箱'},{e:'📦',t:'一箱'}],a:1,fb:'搬三箱。'},
-  {st:3,k:'choice',tag:'地',same:1,ask:'搬到哪裏？',
-   opts:[{e:'📦',t:'倉庫'},{e:'🍽️',t:'餐廳'},{e:'🚪',t:'門口'},{e:'🏪',t:'超級市場'}],a:0,fb:'搬進倉庫。'},
-  {st:3,k:'order',scene:'🍞',say:'師傅說：｜先洗手，｜然後戴手套，｜最後包好麵包。',
-   steps:[{e:'🧼',t:'洗手'},{e:'🧤',t:'戴手套'},{e:'🍞',t:'包麵包'}],decoys:[{e:'🧹',t:'掃地'}]},
-  {st:3,k:'choice',scene:'🧑‍💼',say:'師傅說：把那個放在那裏。你不知道「那個」是甚麼，也不知道「那裏」在哪裏。',ask:'你應該怎麼做？',
-   opts:[{e:'🤷',t:'隨便放'},{e:'🙋',t:'請問是哪一個？放在哪裏？'},{e:'😶',t:'不問'}],a:1,
-   fb:'要問清楚：「請問是哪一個？放在哪裏？」'},
-  {st:3,k:'teach',e:'🎓',t:'聆聽小員工',line:'你做到了！停、望、聽、說、做。',cert:1,
-   cards:[{e:'✋',t:'停'},{e:'👀',t:'望'},{e:'👂',t:'聽'},{e:'🗣️',t:'說'},{e:'💪',t:'做'}],
-   say:'你們是聆聽小員工。｜聽清楚，做得準確。',
-   tip:'可按「🖨 列印」為全班列印「聆聽小員工證書」，放入學生的轉銜／學習檔案。'}
-  ]}
-];
-
-/* 整理：同一段話的追問沿用上一項的 say；加上序號 */
-LIS.forEach(S=>{
-  let last='';
-  S.items.forEach((it,i)=>{
-    if(it.same) it.say = last; else if(it.say!==undefined) last = it.say;
-    it.i = i;
-  });
-});
-
 
 /* ================================================================
-   🎧 聆聽專題：程式
+   🎧 聆聽專題：程式（第二版）
    老師：一個大掣依次「播放指示 → 請同學作答 → 公佈答案 → 下一題」
    學生：聽完才作答；高／中／初組按各自能力調整選項數目和指示長短
+   每節分「60 分鐘核心版」和「90 分鐘加長版」（題目的 x:1 = 加長版才有）
    答案存在各人的 ANS（key = L<節>_<項>），答對一題 $1，沿用「今日進帳」
    ================================================================ */
 const LIS_NOPT  = {1:4, 2:3, 3:2};   /* 選擇題：高組 4 選 1、中組 3 選 1、初組 2 選 1 */
-const LIS_NSTEP = {1:3, 2:2, 3:1};   /* 排次序：高組三步、中組兩步、初組一步 */
+const LIS_NSTEP = {1:3, 2:2, 3:1};   /* 排次序／多選：高組三項、中組兩項、初組一項 */
+const LIS_MIN   = {teach:2, choice:2, order:3, boss:1.2, multi:2.5, act:5};   /* 每類題目預計分鐘 */
+const LIS_FIXED = 18;   /* 打招呼、課堂筆記、今日進帳、課堂總結及轉頁，合共約 18 分鐘 */
 const LIS_STEPS = [['hello','① 打招呼'],['notes','② 課堂筆記'],['lis','③ 聽力闖關'],
                    ['review','④ 今日進帳'],['goals','⑤ 課堂總結']];
-/* 粵拼表是逐字查的，遇到讀音會變的詞語在此指定 */
-const LIS_FIX = {'應該':['jing1','goi1'], '時間':['si4','gaan3'], '重點':['zung6','dim2'],
-                 '假裝':['gaa2','zong1']};
-const LIS_FIXRE = new RegExp('('+Object.keys(LIS_FIX).join('|')+')');
+/* 粵拼表是逐字查的，遇到讀音會變的詞語在此指定（愈長的詞愈優先） */
+const LIS_FIX = {};
+let LIS_FIXRE = null;
+function lisFixInit(){
+  const ks = Object.keys(LIS_FIX).sort((a,b)=>b.length-a.length);
+  LIS_FIXRE = ks.length ? new RegExp('('+ks.map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')+')') : null;
+}
 let LIS_TIPS = false, LIS_THEORY = false, LIS_SEEN = '', LIS_PLAYING = false, LIS_NOISE = null;
+let LIS_TM = null, LIS_AC = null, LIS_BEEPS = [];
 const LIS_TTS = {tok:0, timer:null};
 
 function lr(s){
-  return String(s==null?'':s).split(LIS_FIXRE).map(p=> LIS_FIX[p]
-    ? [...p].map((c,j)=>`<ruby>${c}<rt>${LIS_FIX[p][j]}</rt></ruby>`).join('')
+  s = String(s==null?'':s);
+  if(!LIS_FIXRE) return ruby(s);
+  return s.split(LIS_FIXRE).map(p=> LIS_FIX[p]
+    ? [...p].map((c,j)=> (LIS_FIX[p][j] || JYUT[c]) ? `<ruby>${c}<rt>${LIS_FIX[p][j] || JYUT[c]}</rt></ruby>` : c).join('')
     : ruby(p)).join('');
 }
 function lisCap(s){ return lr(String(s||'').replace(/｜/g,'　')); }
 function lisOn(){ return CTRL.mode==='lis'; }
 function lisS(){
-  if(!CTRL.lis) CTRL.lis = {s:1, i:0, st:'listen', tx:true, sp:false, pick:null, plays:0, run:'0'};
+  if(!CTRL.lis) CTRL.lis = {s:1, i:0, st:'listen', tx:true, sp:false, pick:null, plays:0, run:'0', len:'60', t0:0};
   return CTRL.lis;
 }
 function lisSess(){ return LIS[(lisS().s||1)-1] || LIS[0]; }
 function lisItem(){ const S=lisSess(); return S.items[Math.min(Math.max(0,lisS().i), S.items.length-1)]; }
 function lisKey(s,i){ return 'L'+s+'_'+i; }
+function lisPage(it){ return it.k==='teach' || it.k==='act'; }
+function lisScored(it){ return !lisPage(it); }
+function lisLen(){ return lisS().len==='90' ? '90' : '60'; }
+function lisShown(it, len){ return len==='90' || !it.x; }
+function lisMin(it){ return it.min || (it.same ? 1 : (it.beep ? 1.5 : (LIS_MIN[it.k]||2))); }
+function lisVis(S, len){ const r=[]; S.items.forEach((it,i)=>{ if(lisShown(it,len)) r.push(i); }); return r; }
+function lisSumMin(S, len, from){
+  let m = 0; S.items.forEach((it,i)=>{ if(i>=(from||0) && lisShown(it,len)) m += lisMin(it); });
+  return Math.round(m);
+}
+function lisNextIdx(i){ const S=lisSess(), len=lisLen(); for(let k=i+1;k<S.items.length;k++) if(lisShown(S.items[k],len)) return k; return S.items.length; }
+function lisPrevIdx(i){ const S=lisSess(), len=lisLen(); for(let k=i-1;k>=0;k--) if(lisShown(S.items[k],len)) return k; return -1; }
 /* 每次「開始一節」都有一個新的場次編號；學生答案連同編號一起存，
    舊場次的答案自動當作沒有，不用逐部平板清除 */
 function lisGet(sid, i){
@@ -4060,32 +3826,53 @@ function lisPut(i, v){
 }
 function stepsNow(){ return lisOn() ? LIS_STEPS : STEPS; }
 function unitName(){ return lisOn() ? lisSess().unit : '朋輩在我心'; }
-function lisFresh(it){ return (it.k==='teach' || it.same) ? 'answer' : 'listen'; }
+function lisFresh(it){ return (lisPage(it) || it.same || (!it.say && !it.beep)) ? 'answer' : 'listen'; }
 
-/* ── 語音：「｜」處停一停；逐段播放，播完才通知 ── */
+/* ── 聲音：語音（「｜」處停一停）、嗶聲、倒數鈴聲 ── */
 function lisStop(){
   LIS_TTS.tok++; clearTimeout(LIS_TTS.timer);
   try{ speechSynthesis.cancel(); }catch(e){}
+  LIS_BEEPS.forEach(o=>{ try{ o.stop(); }catch(e){} }); LIS_BEEPS = [];
 }
-function lisSpeak(text, done, o){
-  o = o||{};
-  lisStop(); try{ stopRead(true); }catch(e){}
-  const tok = LIS_TTS.tok;
+function lisAC(){
+  try{
+    if(!LIS_AC){ const C = window.AudioContext || window.webkitAudioContext; LIS_AC = new C(); }
+    if(LIS_AC.state==='suspended') LIS_AC.resume();
+  }catch(e){ LIS_AC = null; }
+  return LIS_AC;
+}
+/* 嗶聲序列：數字＝頻率（Hz，約 0.3 秒）；{f:頻率, d:秒} 可指定長短 */
+function lisBeepPlay(seq, cont, tok){
+  const ac = lisAC();
+  if(!ac){ setTimeout(()=>{ if(tok===LIS_TTS.tok) cont(); }, 400); return; }
+  let t = ac.currentTime + 0.05;
+  seq.forEach(b=>{
+    const f = typeof b==='number' ? b : b.f, d = typeof b==='number' ? 0.3 : (b.d||0.3);
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type = 'sine'; o.frequency.value = f;
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.35, t+0.02);
+    g.gain.setValueAtTime(0.35, t+d-0.04); g.gain.exponentialRampToValueAtTime(0.0001, t+d);
+    o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t+d+0.02);
+    LIS_BEEPS.push(o); t += d + 0.25;
+  });
+  clearTimeout(LIS_TTS.timer);
+  LIS_TTS.timer = setTimeout(()=>{ if(tok===LIS_TTS.tok) cont(); }, (t-ac.currentTime)*1000 + 150);
+}
+function lisSpeakRaw(text, cont, tok, o){
   const parts = String(text||'').split('｜').map(x=>x.trim()).filter(Boolean);
-  if(!parts.length || typeof speechSynthesis==='undefined'){ if(done) done(); return; }
-  const gap = o.gap==null ? 700 : o.gap;
+  if(!parts.length || typeof speechSynthesis==='undefined'){ cont(); return; }
+  const gap = (o && o.gap!=null) ? o.gap : 700;
   let k = 0;
-  const fin = ()=>{ if(tok!==LIS_TTS.tok) return; LIS_TTS.tok++; if(done) done(); };
   const next = ()=>{
     if(tok!==LIS_TTS.tok) return;
-    if(k>=parts.length) return fin();
+    if(k>=parts.length) return cont();
     const txt = parts[k++], last = k>=parts.length;
     const u = new SpeechSynthesisUtterance(txt);
-    u.lang = 'zh-HK'; u.rate = o.rate || .78; if(VOICE) u.voice = VOICE;
+    u.lang = 'zh-HK'; u.rate = (o && o.rate) || .78; if(VOICE) u.voice = VOICE;
     let moved = false, fb = null;
     const go = ()=>{
       if(moved || tok!==LIS_TTS.tok) return; moved = true; clearTimeout(fb);
-      clearTimeout(LIS_TTS.timer); LIS_TTS.timer = setTimeout(next, last ? 250 : gap);
+      clearTimeout(LIS_TTS.timer); LIS_TTS.timer = setTimeout(next, last ? 150 : gap);
     };
     u.onend = go; u.onerror = go;
     /* 保險：個別語音若沒有回應（沒有粵語語音檔等），按字數估時後照樣繼續 */
@@ -4094,17 +3881,32 @@ function lisSpeak(text, done, o){
   };
   next();
 }
+/* 依次播放：[{say:'…', rate}, {beep:[440,440]}] */
+function lisRun(segs, done){
+  lisStop(); try{ stopRead(true); }catch(e){}
+  const tok = LIS_TTS.tok; let k = 0;
+  const step = ()=>{
+    if(tok!==LIS_TTS.tok) return;
+    if(k>=segs.length){ LIS_TTS.tok++; if(done) done(); return; }
+    const s = segs[k++];
+    const cont = ()=>{ if(tok!==LIS_TTS.tok) return; clearTimeout(LIS_TTS.timer); LIS_TTS.timer = setTimeout(step, 300); };
+    if(s.beep) lisBeepPlay(s.beep, cont, tok); else lisSpeakRaw(s.say, cont, tok, s);
+  };
+  step();
+}
+function lisSpeak(text, done, o){ lisRun([Object.assign({say:text}, o||{})], done); }
 
 /* ── 老師：選節、翻頁、播放 ── */
 function pickLis(s, again){
-  lisStop(); LIS_PLAYING=false;
+  lisStop(); LIS_PLAYING=false; LIS_TM=null;
   const S = LIS[s-1] || LIS[0];
   if(lisOn() && lisS().s===S.s && !again){ saveCtrl(); render(); return; }   /* 同一節：不重新開始 */
   lisClearPaid();
   CTRL.goalDone = {};
+  const keepLen = (CTRL.lis && CTRL.lis.len) || '60';
   CTRL.mode = 'lis';
   CTRL.lis = {s:S.s, i:0, st:lisFresh(S.items[0]), tx:!!S.tx, sp:false, pick:null, plays:0,
-              run:Date.now().toString(36)};
+              run:Date.now().toString(36), len:keepLen, t0:Date.now()};
   CTRL.lessonDate = todayStr();
   STEP = 'hello'; CTRL.phase = 'hello';
   saveCtrl(); render();
@@ -4117,9 +3919,11 @@ function lisRestart(){
   if(!confirm('由頭開始這一節？\n（同學這一節的答案會當作清空，重新作答。）')) return;
   pickLis(lisS().s, true);
 }
+function lisSetLen(v){ const L = lisS(); L.len = (v==='90' ? '90' : '60'); saveCtrl(); render(); }
+function lisClockReset(){ lisS().t0 = Date.now(); saveCtrl(); render(); }
 function lisGo(i){
   const L = lisS(), S = lisSess();
-  lisStop(); LIS_PLAYING = false;
+  lisStop(); LIS_PLAYING = false; LIS_TM = null;
   if(i >= S.items.length){ tStep('review'); return; }
   i = Math.max(0, i); L.i = i;
   const it = S.items[i];
@@ -4128,21 +3932,28 @@ function lisGo(i){
   L.plays = 0; L.pick = null;
   saveCtrl(); render();
 }
-function lisBack(){ const L=lisS(); if(L.i>0) lisGo(L.i-1); }
+function lisBack(){ const p = lisPrevIdx(lisS().i); if(p>=0) lisGo(p); }
 function lisMain(){
   const L = lisS(), it = lisItem();
-  if(it.k==='teach') return lisGo(L.i+1);
+  if(lisPage(it)) return lisGo(lisNextIdx(L.i));
   if(L.st==='listen') return lisPlay();
   if(L.st==='answer') return lisReveal();
-  return lisGo(L.i+1);
+  return lisGo(lisNextIdx(L.i));
+}
+function lisSegs(it, replay, st){
+  const segs = [];
+  if(it.say) segs.push({say:it.say, rate:it.rate, gap:it.gap});
+  if(it.beep) segs.push({beep:it.beep});
+  if((it.k==='choice' || it.k==='multi') && it.ask && st==='listen' && !replay) segs.push({say:it.ask});
+  return segs;
 }
 function lisPlay(replay){
   const L = lisS(), it = lisItem(), idx = L.i;
-  if(!it.say) return;
-  const askPart = (it.k==='choice' && it.ask && L.st==='listen' && !replay) ? '｜'+it.ask : '';
+  const segs = lisSegs(it, replay, L.st);
+  if(!segs.length) return;
   L.plays = (L.plays||0) + 1; LIS_PLAYING = true;
   saveCtrl(); render();
-  lisSpeak(it.say + askPart, ()=>{
+  lisRun(segs, ()=>{
     LIS_PLAYING = false;
     const c = lisS();
     if(CTRL.mode==='lis' && c.i===idx && c.st==='listen'){ c.st = 'answer'; saveCtrl(); }
@@ -4155,14 +3966,16 @@ function lisOrderFb(it){
   const w = it.steps.length===2 ? ['先','然後'] : ['先','然後','最後'];
   return '正確次序：' + it.steps.map((x,j)=>w[j]+x.t).join('，') + '。';
 }
+function lisMultiFb(it){ return it.fb || ('答案：' + it.a.map(j=>it.opts[j].t).join('、') + '。'); }
 function lisReveal(){
   const L = lisS(), it = lisItem();
   lisStop(); LIS_PLAYING = false; L.st = 'reveal'; saveCtrl(); render();
-  const t = it.k==='order' ? lisOrderFb(it) : it.fb;
+  const t = it.k==='order' ? lisOrderFb(it) : (it.k==='multi' ? lisMultiFb(it) : it.fb);
   if(t) setTimeout(()=>lisSpeak(t), 350);
 }
-function lisCard(j){            /* 按講解頁的卡片：讀出該卡片 */
-  const c = (lisItem().cards||[])[j]; if(c) lisSpeak(c.s || c.t);
+function lisCard(j){            /* 按講解頁的卡片：讀出（或播出）該卡片 */
+  const c = (lisItem().cards||[])[j]; if(!c) return;
+  if(c.b) lisRun([{beep:c.b}]); else lisSpeak(c.s || c.t);
 }
 function lisSayOpt(j){ const o = lisItem().opts[j]; if(o) lisSpeak(o.t); }
 function lisSayStep(txt){ lisSpeak(txt); }
@@ -4198,10 +4011,40 @@ function lisNoise(){
   }catch(e){ alert('這部電腦不能播放背景聲。'); }
   render();
 }
+/* 活動倒數計時（只在老師畫面；不用重畫整頁，每 0.25 秒更新數字） */
+function lisFmt(sec){ sec = Math.max(0, Math.ceil(sec)); return Math.floor(sec/60)+':'+String(sec%60).padStart(2,'0'); }
+function lisTmStart(secs){
+  LIS_TM = {key:lisS().s+'.'+lisS().i, end:Date.now()+secs*1000, secs, done:false}; render();
+}
+function lisTmAdd(){ if(LIS_TM){ LIS_TM.end += 60000; LIS_TM.done = false; } render(); }
+function lisTmReset(){ LIS_TM = null; render(); }
+function lisTmTick(){
+  const el = document.getElementById('lisTm'); if(!el || !LIS_TM) return;
+  const rem = (LIS_TM.end - Date.now())/1000;
+  el.textContent = lisFmt(rem);
+  if(rem<=0 && !LIS_TM.done){
+    LIS_TM.done = true; el.classList.add('end'); el.textContent = '時間到！';
+    lisRun([{beep:[880,880,880]}]);
+  }
+}
+function lisClkTick(){
+  const el = document.getElementById('lisClk'), L = CTRL.lis;
+  if(el && L && L.t0) el.textContent = '⏱ 已用 '+Math.floor((Date.now()-L.t0)/60000)+' 分';
+}
+setInterval(lisTmTick, 250);
+setInterval(lisClkTick, 15000);
 
 /* ── 判斷與計分 ── */
 function lisNSteps(it, lv){ return Math.min(it.steps.length, LIS_NSTEP[lv]||2); }
-function lisOptsFor(it, lv){            /* 學生看到的選項：保留次序，一定包括正確答案 */
+function lisNeed(it, lv){ return Math.min(it.a.length, LIS_NSTEP[lv]||2); }
+function lisMultiWant(it, lv){ return it.a.slice(0, lisNeed(it,lv)).map(j=>it.opts[j].t); }
+function lisMultiShown(it, lv){          /* 學生看到的選項：要選的 ＋ 部分干擾項 */
+  const need = lisNeed(it, lv), want = it.a.slice(0, need);
+  const dec = it.opts.map((o,j)=>j).filter(j=>!it.a.includes(j));
+  const kd = lv===1 ? dec.length : lv===2 ? Math.min(2,dec.length) : Math.min(1,dec.length);
+  return want.concat(dec.slice(0,kd)).sort((x,y)=>x-y);
+}
+function lisOptsFor(it, lv){            /* 選擇題：保留次序，一定包括正確答案 */
   const n = LIS_NOPT[lv]||3;
   if(it.opts.length <= n) return it.opts.map((o,j)=>({o,j}));
   const keep = new Set([it.a]);
@@ -4229,17 +4072,25 @@ function lisJudge(it, v, lv){
     if(v.length < n) return null;
     return v.length===n && v.every((x,j)=>x===want[j]);
   }
+  if(it.k==='multi'){
+    if(!Array.isArray(v)) return null;
+    const want = lisMultiWant(it, lv);
+    if(v.length < want.length) return null;
+    return v.length===want.length && want.every(t=>v.includes(t));
+  }
   return v === it.opts[it.a].t;
 }
 function lisDone(it, v, lv){ return lisJudge(it, v, lv)!==null; }
-function lisShowAns(it, v){ return Array.isArray(v) ? v.join('→') : String(v); }
+function lisShowAns(it, v){ return Array.isArray(v) ? v.join(it.k==='multi' ? '、' : '→') : String(v); }
 function lisScore(sid){
-  const s = stu(sid), S = lisSess();
+  const s = stu(sid), S = lisSess(), len = lisLen();
   let right = 0, total = 0; const det = [];
   S.items.forEach((it,i)=>{
-    if(it.k==='teach') return;
+    if(!lisScored(it)) return;
+    const v = lisGet(sid, i);
+    if(!lisShown(it,len) && v===undefined) return;       /* 60 分鐘版沒有播的加長題不計 */
     total++;
-    const v = lisGet(sid, i), ok = lisJudge(it, v, s.lv)===true;
+    const ok = lisJudge(it, v, s.lv)===true;
     if(ok) right++;
     det.push({lb:`聽力第 ${i+1} 項`, ok, done:v!==undefined});
   });
@@ -4247,7 +4098,9 @@ function lisScore(sid){
 }
 function lisCounts(it){                  /* 各選項有幾多人揀 */
   const i = lisItem().i, c = {};
-  STUDENTS.forEach(s=>{ const v = lisGet(s.id, i); if(v!==undefined && !Array.isArray(v)) c[v] = (c[v]||0)+1; });
+  STUDENTS.forEach(s=>{ const v = lisGet(s.id, i);
+    if(v===undefined) return;
+    (Array.isArray(v) ? v : [v]).forEach(x=>{ if(!(it.k==='order')) c[x] = (c[x]||0)+1; }); });
   return c;
 }
 
@@ -4257,6 +4110,17 @@ function lisChoose(i, j){
   if(CTRL.hold || L.st!=='answer' || L.i!==i) return;
   const o = it.opts[j]; if(!o) return;
   lisPut(i, o.t); render();
+}
+function lisPickMulti(i, j){
+  const L = lisS(), it = lisItem(), me = stu(ME);
+  if(CTRL.hold || L.st!=='answer' || L.i!==i || !me) return;
+  const o = it.opts[j]; if(!o) return;
+  const need = lisNeed(it, me.lv), v = lisGet(ME, i);
+  const cur = Array.isArray(v) ? v.slice() : [];
+  const p = cur.indexOf(o.t);
+  if(p>=0) cur.splice(p,1);
+  else { if(cur.length>=need) return; cur.push(o.t); }
+  lisPut(i, cur); render();
 }
 function lisAddCard(i, k){
   const L = lisS(), it = lisItem(), me = stu(ME);
@@ -4281,7 +4145,7 @@ function lisMiss(){
   document.body.appendChild(d); setTimeout(()=>d.remove(), 1400);
 }
 function lisSelfPlay(){                  /* 學生機自己再聽（老師開放才有此掣） */
-  const it = lisItem(); if(it.say) lisSpeak(it.say);
+  const it = lisItem(); const segs = lisSegs(it, true, 'answer'); if(segs.length) lisRun(segs);
 }
 
 /* ── 畫面：共用小件 ── */
@@ -4294,9 +4158,10 @@ function lisTagHTML(tag){
 }
 function lisEn(txt, show){ return show ? `<span data-tr="${String(txt).replace(/"/g,'&quot;')}"></span>` : ''; }
 function lisOptHTML(o, cls, click, big, extra, showEn){
+  const num = !o.e && /^[0-9 \-]+$/.test(o.t);
   const pic = (o.img && IMG[o.img]) ? `<img src="${IMG[o.img]}" alt="">`
-            : `<div class="lisemo" style="font-size:${big?4.2:3.2}rem">${o.e}</div>`;
-  const len = String(o.t).length, fs = len>9 ? 1.1 : len>5 ? 1.35 : (big?2:1.6);
+            : (o.e ? `<div class="lisemo" style="font-size:${big?4.2:(String(o.e).length>6?2.2:3.2)}rem">${o.e}</div>` : '');
+  const len = String(o.t).length, fs = num ? 2.8 : len>9 ? 1.1 : len>5 ? 1.35 : (big?2:1.6);
   return `<button class="opt lisopt ${cls||''}" onclick="${click}">${pic}
     <div class="lt" style="font-size:${fs}rem">${lr(o.t)}${lisEn(o.t, showEn)}</div>${extra||''}</button>`;
 }
@@ -4328,26 +4193,73 @@ function lisTeachHTML(it, who, me){
         <button class="btn lemon" onclick="doPrint()">🖨 列印聆聽小員工證書</button></div>` : ''}
   </div>`;
 }
+/* 課堂活動頁（不計分；老師帶領，同學跟着做） */
+function lisActHTML(it, who, me){
+  const showEn = who==='s' && me && (me.en||LANG==='en');
+  const L = lisS();
+  const tm = (who==='t' && it.timer) ? lisTimerHTML(it) : '';
+  return `<div class="lisbox act">
+    <div class="lisactbar">🎭 課堂活動${who==='t'?`　·　約 ${it.min} 分鐘`:''}</div>
+    <div class="lishero">${it.e}</div>
+    <div class="listitle">${lr(it.t)}${lisEn(it.t, showEn)}</div>
+    ${it.line?`<div class="lisline">${lr(it.line)}${lisEn(it.line, showEn)}</div>`:''}
+    ${it.steps?`<ol class="lisactsteps">${it.steps.map((x,j)=>`<li><span class="n">${j+1}</span><span class="tx">${lr(x)}${lisEn(x, showEn)}</span></li>`).join('')}</ol>`:''}
+    ${it.cards ? lisCardsHTML(it, who==='t' || (who==='s' && L.sp)) : ''}
+    ${(who==='t' && it.mat)?`<div class="lismat">🧰 預備：${it.mat}</div>`:''}
+    ${tm}
+  </div>`;
+}
+function lisTimerHTML(it){
+  const key = lisS().s+'.'+lisS().i, on = LIS_TM && LIS_TM.key===key;
+  const txt = on ? (LIS_TM.done ? '時間到！' : lisFmt((LIS_TM.end-Date.now())/1000)) : lisFmt(it.timer);
+  return `<div class="listm"><div class="lisbigtm ${on&&LIS_TM.done?'end':''}" id="lisTm">${txt}</div>
+    <div class="row" style="justify-content:center">
+      ${on ? `<button class="btn sm" onclick="lisTmAdd()">＋1 分鐘</button><button class="btn sm" onclick="lisTmReset()">↺ 重設</button>`
+           : `<button class="btn mint" onclick="lisTmStart(${it.timer})">▶ 開始倒數 ${lisFmt(it.timer)}</button>`}
+    </div></div>`;
+}
 
 /* ── 老師版：聽力闖關 ── */
+function lisStageIdx(S, j, len, cur){      /* 某階段（可見的）項目 */
+  return S.items.map((x,k)=>(x.st===j && (lisShown(x,len) || k===cur))?k:-1).filter(k=>k>=0);
+}
 function lisPathHTML(S, L){
+  const len = lisLen(), cur = S.items[L.i].st;
+  let n = 0;
   return S.stages.map((nm,j)=>{
-    const ix = S.items.map((x,k)=>x.st===j?k:-1).filter(k=>k>=0);
+    const ix = lisStageIdx(S, j, len, L.i);
     if(!ix.length) return '';
-    const st = L.i>ix[ix.length-1] ? 'done' : (L.i>=ix[0] ? 'on' : '');
-    return `<button class="lisstage ${st}" onclick="lisGo(${ix[0]})">${st==='done'?'✅':(j+1)}　${nm}</button>`;
+    n++;
+    const st = cur===j ? 'on' : (j<cur ? 'done' : '');
+    return `<button class="lisstage ${st}" onclick="lisGo(${ix[0]})">${st==='done'?'✅':n}　${nm}</button>`;
   }).join('');
 }
 function lisDotsHTML(S, L){
-  return `<div class="lisdots">${S.items.map((x,k)=>
-    `<button class="lisdot ${x.k==='teach'?'tc':''} ${k===L.i?'cur':k<L.i?'ok':''}" onclick="lisGo(${k})">${k+1}</button>`).join('')}</div>`;
+  const len = lisLen(), cur = S.items[L.i].st, ix = lisStageIdx(S, cur, len, L.i);
+  return `<div class="lisdots">${ix.map((k,n)=>{
+    const x = S.items[k], shape = x.k==='teach' ? 'tc' : x.k==='act' ? 'ac' : '';
+    return `<button class="lisdot ${shape} ${x.x?'xt':''} ${k===L.i?'cur':k<L.i?'ok':''}" onclick="lisGo(${k})" title="${x.x?'加長版':''}">${n+1}</button>`;
+  }).join('')}</div>`;
+}
+function lisClockHTML(L, S){
+  const mins = L.t0 ? Math.floor((Date.now()-L.t0)/60000) : null;
+  const rem = lisSumMin(S, lisLen(), L.i);
+  return `<div class="lisclock">${mins!==null?`<button class="lisclkbtn" id="lisClk" title="按一下，由現在重新計時" onclick="lisClockReset()">⏱ 已用 ${mins} 分</button>　`:''}<span>預計餘下約 ${rem} 分</span></div>`;
+}
+function lisLenHTML(){
+  const S = lisSess(), len = lisLen();
+  return `<div class="lislen" title="核心版：只播核心題目；加長版：加入延伸題目和活動">
+    <button class="${len==='60'?'on':''}" onclick="lisSetLen('60')">60 分鐘版 · 約 ${lisSumMin(S,'60')+LIS_FIXED}′</button>
+    <button class="${len==='90'?'on':''}" onclick="lisSetLen('90')">90 分鐘版 · 約 ${lisSumMin(S,'90')+LIS_FIXED}′</button></div>`;
 }
 function tLis(){
-  const L = lisS(), S = lisSess(), it = lisItem(), n = S.items.length;
-  const st = it.k==='teach' ? 'teach' : L.st;
-  const badge = {teach:'📖 講解', listen:'🎧 請專心聽', answer:'✋ 請同學作答', reveal:'✅ 公佈答案'}[st];
+  const L = lisS(), S = lisSess(), it = lisItem(), len = lisLen();
+  const vis = lisVis(S, len), pos = vis.filter(k=>k<=L.i).length, tot = vis.length + (lisShown(it,len)?0:1);
+  const st = lisPage(it) ? it.k : L.st;
+  const badge = {teach:'📖 講解', act:'🎭 課堂活動', listen:'🎧 請專心聽', answer:'✋ 請同學作答', reveal:'✅ 公佈答案'}[st];
   let tv = '';
   if(it.k==='teach') tv = lisTeachHTML(it, 't');
+  else if(it.k==='act') tv = lisActHTML(it, 't');
   else tv = lisQuestionTV(it, L);
   const pick = L.pick ? (()=>{ const s = stu(L.pick) || {n:'', id:''};
       return `<div class="lisbanner big">🎤 ${lr('請')} ${s.n} ${lr('說一說（複述）')}
@@ -4356,23 +4268,27 @@ function tLis(){
   return `<div class="lispath">${lisPathHTML(S,L)}</div>
     <div class="lishead">
       <div class="lisbadge st-${st}">${badge}</div>
-      <div class="lismeta">第 ${L.i+1} ／ ${n} 項${L.plays?`　·　已播 ${L.plays} 次`:''}</div>
+      <div class="lismeta">第 ${pos} ／ ${tot} 項${L.plays?`　·　已播 ${L.plays} 次`:''}${lisShown(it,len)?'':'　·　（加長版題目）'}</div>
       ${LIS_PLAYING?'<div class="lisbadge playing">🔊 播放中…</div>':''}
-      ${lisDotsHTML(S,L)}
+      ${lisClockHTML(L,S)}
+      ${lisLenHTML()}
     </div>
+    ${lisDotsHTML(S,L)}
     ${pick}
     ${tv}
     ${LIS_TIPS ? lisTipsCard(S, it) : ''}
-    ${it.k==='teach' ? '' : lisGridHTML(it, L)}
+    ${lisPage(it) ? '' : lisGridHTML(it, L)}
     ${lisCtl(it, L, S)}`;
 }
 function lisTipsCard(S, it){
   const defTip = {choice:'播放後請同學安靜思考，聽完才作答；可重播一次。作答後先不要說答案，等「公佈答案」。',
                   order:'三步指示可分段重播（每步之間停一停）；請同學邊聽邊用手指數「先、然後、最後」。公佈後請同學複述。',
+                  multi:'請同學邊聽邊用手指數聽到的東西；選好才公佈。初組只選最先聽到的一樣。',
                   boss:'做動作的同學站起來，並按「做」或「不做」；沒有「經理說」要保持不動。'}[it.k]||'';
   return `<div class="lisbox tips"><div class="qt">📖 教師提示（只在你的畫面顯示）</div>
     <div class="note"><b>本階段策略：</b>${S.strat[it.st]||''}</div>
-    ${it.say?`<div class="note"><b>老師讀稿：</b>${String(it.say).replace(/｜/g,'　／　')}${it.ask&&it.k==='choice'?`　→　<b>${it.ask}</b>`:''}</div>`:''}
+    ${it.say?`<div class="note"><b>老師讀稿：</b>${String(it.say).replace(/｜/g,'　／　')}${it.ask&&(it.k==='choice'||it.k==='multi')?`　→　<b>${it.ask}</b>`:''}</div>`:''}
+    ${it.mat?`<div class="note"><b>預備物資：</b>${it.mat}</div>`:''}
     <div class="note"><b>教學技巧：</b>${it.tip||defTip}</div></div>`;
 }
 /* 大電視上的題目畫面 */
@@ -4383,11 +4299,12 @@ function lisQuestionTV(it, L){
   if(L.st==='listen'){
     return `<div class="lisbox">
       <div class="lishero ${LIS_PLAYING?'pulse':''}">🎧</div>
-      <div class="listitle">${lr('請專心聽')}</div>
+      <div class="listitle">${lr(it.beep ? '請聽聲音' : '請專心聽')}</div>
       ${lisStrip([0,1,2])}
       ${scene}${cap}</div>`;
   }
-  const head = `<div class="lisask">${lisTagHTML(it.tag)}${lr(it.ask || (it.k==='order' ? (it.steps.length===2 ? '先做甚麼？然後做甚麼？' : '先做甚麼？然後？最後？') : ''))}</div>`;
+  const defAsk = it.k==='order' ? (it.steps.length===2 ? '先做甚麼？然後做甚麼？' : '先做甚麼？然後？最後？') : '';
+  const head = `<div class="lisask">${lisTagHTML(it.tag)}${lr(it.ask || defAsk)}</div>`;
   if(it.k==='order'){
     const total = it.steps.length;
     const w = total===2 ? ['先','然後'] : ['先','然後','最後'];
@@ -4404,17 +4321,19 @@ function lisQuestionTV(it, L){
       ${rev?`<div class="lisfb">${lr(lisOrderFb(it))}</div>`:''}
       <div class="liscardsrow">${cards}</div></div>`;
   }
-  const counts = lisCounts(it), big = it.k==='boss';
+  const counts = lisCounts(it), big = it.k==='boss', multi = it.k==='multi';
+  const isRight = j => multi ? it.a.includes(j) : j===it.a;
   const opts = it.opts.map((o,j)=>{
-    const right = rev && j===it.a, dim = rev && j!==it.a;
+    const right = rev && isRight(j), dim = rev && !isRight(j);
     const extra = rev && counts[o.t] ? `<span class="liscnt">👥 ${counts[o.t]}</span>` : '';
     return lisOptHTML(o, right?'right':dim?'dim':'', `lisSayOpt(${j})`, big, extra, false);
   }).join('');
+  const fb = rev ? (multi ? lisMultiFb(it) : it.fb) : '';
   return `<div class="lisbox ${it.k==='boss'?'boss':''}">
     ${it.k==='boss'?'<div class="lisbossbar">📢 經理話</div>':''}
     ${scene}${cap}${head}
-    <div class="opts lisoptgrid" style="grid-template-columns:repeat(auto-fit,minmax(${it.opts.length>3?190:230}px,1fr))">${opts}</div>
-    ${rev&&it.fb?`<div class="lisfb">${lr(it.fb)}</div>`:''}</div>`;
+    <div class="opts lisoptgrid" style="grid-template-columns:repeat(auto-fit,minmax(${it.opts.length>3?170:230}px,1fr))">${opts}</div>
+    ${fb?`<div class="lisfb">${lr(fb)}</div>`:''}</div>`;
 }
 function lisGridHTML(it, L){
   const rev = L.st==='reveal';
@@ -4429,26 +4348,27 @@ function lisGridHTML(it, L){
         else { const ok = lisJudge(it, v, s.lv);
           txt = `<span class="${ok?'ok':'no'}">${ok?'✅ ':'❌ '}${lisShowAns(it, v)}</span>`; } }
       else if(v!==undefined && rev) txt = '⚠️ 未完成';
-      const lvTag = it.k==='order' ? `${lisNSteps(it,s.lv)} 步` : it.k==='choice' ? `${Math.min(it.opts.length,LIS_NOPT[s.lv]||3)} 選 1` : '';
+      const lvTag = it.k==='order' ? `${lisNSteps(it,s.lv)} 步` : it.k==='choice' ? `${Math.min(it.opts.length,LIS_NOPT[s.lv]||3)} 選 1`
+                  : it.k==='multi' ? `選 ${lisNeed(it,s.lv)} 樣` : '';
       return `<div class="scard ${cls}"><div class="nm">${s.n}${lvTag?`<span class="lv g${s.lv}">${lvTag}</span>`:''}
         ${L.pick===s.id?' 🎤':''}<button class="lispickbtn" title="請這位同學複述" onclick="lisPickSet('${s.id}')">🎤</button></div>
         <div class="st">${txt}</div></div>`;
     }).join('')}</div>`;
 }
 function lisCtl(it, L, S){
-  const last = L.i >= S.items.length-1;
+  const last = lisNextIdx(L.i) >= S.items.length;
   const B = (txt, cls, fn)=>`<button class="btn ${cls}" onclick="${fn}">${txt}</button>`;
   let main = '', sec = '';
-  if(it.k==='teach'){
-    main = B(last?'🎯 完成，去「今日進帳」 →':'下一頁 →', last?'mint lisbig':'blue lisbig', 'lisMain()');
-    if(it.say) sec += B('🔊 朗讀', 'mint', 'lisPlay(true)');
+  if(lisPage(it)){
+    main = B(last?'🎯 完成，去「今日進帳」 →':(it.k==='act'?'活動完成，下一項 →':'下一頁 →'), last?'mint lisbig':'blue lisbig', 'lisMain()');
+    if(it.say || it.beep) sec += B(it.beep ? '🔔 播放聲音' : '🔊 朗讀', 'mint', 'lisPlay(true)');
   } else if(L.st==='listen'){
-    main = B('🔊 播放指示', 'mint lisbig', 'lisMain()');
+    main = B(it.beep?'🔔 播放聲音':'🔊 播放指示', 'mint lisbig', 'lisMain()');
     sec += B('🗣️ 老師自己讀（讀完請同學作答）', 'lemon', 'lisOwn()');
   } else if(L.st==='answer'){
     main = B('✅ 公佈答案', 'peach lisbig', 'lisMain()');
     sec += B('🔁 重播指示', 'mint', 'lisPlay(true)');
-    if(it.k==='choice' && it.ask) sec += B('🔊 讀題', 'mint', 'lisAsk()');
+    if((it.k==='choice'||it.k==='multi') && it.ask) sec += B('🔊 讀題', 'mint', 'lisAsk()');
   } else {
     main = B(last?'完成 → 今日進帳':'下一題 →', last?'mint lisbig':'blue lisbig', 'lisMain()');
     sec += B('🔁 再聽一次', 'mint', 'lisPlay(true)');
@@ -4456,7 +4376,7 @@ function lisCtl(it, L, S){
   const tg = (on, txt, fn)=>`<button class="btn sm ${on?'lemon':''}" onclick="${fn}">${on?'✔ ':''}${txt}</button>`;
   return `<div class="liscontrol"><div class="lisbar">
     <div class="row">
-      <button class="btn" onclick="lisBack()" ${L.i?'':'disabled'}>← 上一項</button>
+      <button class="btn" onclick="lisBack()" ${lisPrevIdx(L.i)>=0?'':'disabled'}>← 上一項</button>
       ${main}${sec}
     </div>
     <div class="row listools">
@@ -4468,25 +4388,35 @@ function lisCtl(it, L, S){
     </div></div></div>`;
 }
 
-/* 打招呼頁加上「這節學甚麼」及教學策略說明（老師用） */
+/* 打招呼頁加上「這節學甚麼」、時間分配及教學策略說明（老師用） */
 const LIS_THEORY_ITEMS = [
   ['🧘','聆聽準備','停、望、聽：減少干擾、坐正、望向說話的人。目光接觸由「望向對方的臉」開始，照顧有感官需要的學生。'],
+  ['👂','聽辨訓練','先聽聲音，再聽數字、時間、方向；把「聽得準」拆成一小步一小步練習。'],
   ['🖼️','視覺支援・化整為零','每項指示配圖片和短句，一次只處理一步；用顏色、手勢和順口溜幫助記憶。'],
-  ['🎯','聚焦重點','用「時人地事」四色圖式找重點；留意關鍵詞（先、然後、最後、數字、地點）。'],
-  ['🔁','記住與複述','邊聽邊用手指數；聽完說一遍「我聽到……」，老師先示範，再請同學複述。'],
+  ['🎯','聚焦重點','用「時人地事」四色圖式找重點；留意關鍵詞（先、然後、最後、數字、地點、不要）。'],
+  ['🔁','記住與複述','邊聽邊用手指數；聽完說一遍「我聽到……」，老師先示範，再請同學複述、傳話。'],
   ['🙋','確認與求助','練習「請再說一次」「我說一次，對嗎？」；肯定「不明白就問」是好員工的表現。'],
   ['📉','逐步撤除支援','字幕 → 只有圖 → 只有聲音；一步 → 兩步 → 三步；安靜 → 背景聲。'],
   ['🏢','真實情景遷移','咖啡店、超級市場、倉庫、清潔；連結實習、職業訓練和轉銜。'],
   ['⭐','即時回饋與強化','答對 +$1、讚賞和證書；用老師觀察表記錄安靜、專注、目光接觸和複述。']
 ];
 function lisHelloExtra(){
-  const S = lisSess();
+  const S = lisSess(), len = lisLen();
+  let sn = 0;
   const rows = S.stages.map((nm,j)=>{
-    const ix = S.items.map((x,k)=>x.st===j?k:-1).filter(k=>k>=0);
-    return `<div class="goal"><div class="gico">${['①','②','③','④','⑤'][j]}</div>
+    const its = S.items.filter(x=>x.st===j && lisShown(x,len));
+    if(!its.length) return '';
+    sn++;
+    const mins = Math.round(its.reduce((a,x)=>a+lisMin(x),0));
+    const acts = its.filter(x=>x.k==='act').length;
+    return `<div class="goal"><div class="gico">${['①','②','③','④','⑤','⑥','⑦','⑧'][sn-1]||'•'}</div>
       <div class="gtxt" style="font-size:1.05rem">${nm}<div class="tr" style="font-size:.78em">${S.strat[j]||''}</div></div>
-      <div class="gno">${ix.length}</div></div>`; }).join('');
-  return `<h3 class="sec">🎧 本節流程：${S.title}（共 ${S.items.length} 項）</h3>
+      <div class="gno" style="width:auto;padding:0 12px;border-radius:14px">${its.length} 項${acts?` · 含 ${acts} 個活動`:''} · 約 ${mins} 分</div></div>`; }).join('');
+  const prep = (S.prep && S.prep.length) ? `<div class="note"><b>🧰 本節預備：</b>${S.prep.join('；')}</div>` : '';
+  return `<h3 class="sec">🎧 本節流程：${S.title}</h3>
+    <div class="row" style="margin-bottom:8px"><b>課堂長度：</b>${lisLenHTML()}
+      <span class="note" style="margin:0">核心版只播核心題目；加長版加入延伸題目和課堂活動。時間已包括打招呼、課堂筆記、今日進帳和課堂總結（約 ${LIS_FIXED} 分鐘）。上課時隨時可在「聽力闖關」畫面轉換。</span></div>
+    ${prep}
     <div class="goals">${rows}</div>
     <div class="row" style="margin-top:12px">
       <button class="btn ${LIS_THEORY?'lemon':''}" onclick="lisTheory()">📖 ${LIS_THEORY?'收起':'顯示'}「聆聽」教學策略說明（老師用）</button>
@@ -4497,10 +4427,14 @@ function lisHelloExtra(){
       <div class="lisstrats">${LIS_THEORY_ITEMS.map(x=>`<div class="lisstrat"><div class="e">${x[0]}</div>
         <div><b>${x[1]}</b><div class="d">${x[2]}</div></div></div>`).join('')}</div>
       <div class="note"><b>對應教學計劃「聆聽」預期學習成果：</b><br>
-        ‧ 理解話語中「時人地事」其中四個要素，並回應相關問句 → 第 2、4 節<br>
-        ‧ 聽出故事或課文的重點 → 第 2、3 節<br>
-        ‧ 安靜地聆聽、專注地聆聽 → 第 1 節，並用「聆聽觀察表」記錄<br>
-        ‧ 與人交流時，保持適當的目光接觸 → 第 1 節「望一望」，並用「聆聽觀察表」記錄<br>
+        ‧ 安靜地聆聽、專注地聆聽 → 第 1 節（五步曲），並在每節用「聆聽觀察表」記錄<br>
+        ‧ 與人交流時，保持適當的目光接觸 → 第 1、9 節（打招呼），並用「聆聽觀察表」記錄<br>
+        ‧ 聽辨聲音、數字、時間 → 第 2 節<br>
+        ‧ 理解話語中「時人地事」的要素，並回應相關問句 → 第 3、7、9 節<br>
+        ‧ 聽出故事或課文的重點 → 第 4 節<br>
+        ‧ 轉銜：聽指示做事（一至三步、「不要」、數量、方向和顏色） → 第 5、6、9 節<br>
+        ‧ 職場常聽到的口訊、電話和廣播 → 第 7 節<br>
+        ‧ 聽不清楚時的求助和確認 → 第 8 節<br>
         <b>分層：</b>高組 4 選 1／三步指示；中組 3 選 1／兩步指示；初組 2 選 1／一步指示。</div></div>` : ''}`;
 }
 
@@ -4541,8 +4475,8 @@ function lisCertHTML(){
 
 /* ── 學生版 ── */
 function lisProgChips(S, L){
-  const ix = S.items.map((x,k)=>x.st===S.items[L.i].st?k:-1).filter(k=>k>=0);
-  return `<div class="lisprog"><span class="stg">${S.stages[S.items[L.i].st]||''}</span>
+  const len = lisLen(), cur = S.items[L.i].st, ix = lisStageIdx(S, cur, len, L.i);
+  return `<div class="lisprog"><span class="stg">${S.stages[cur]||''}</span>
     ${ix.map(k=>`<i class="${k===L.i?'cur':k<L.i?'ok':''}"></i>`).join('')}</div>`;
 }
 function sLis(me){
@@ -4551,19 +4485,22 @@ function sLis(me){
                : L.pick ? `<div class="lisbanner">👂 ${lr('請聽')} ${(stu(L.pick)||{n:''}).n} ${lr('說')}</div>` : '';
   let body = '';
   if(it.k==='teach'){ body = lisTeachHTML(it, 's', me); }
+  else if(it.k==='act'){ body = lisActHTML(it, 's', me); }
   else if(L.st==='listen'){
     body = `<div class="lisbox"><div class="lishero pulse">🎧</div>
-      <div class="listitle">${lr('請專心聽')}${lisEn('請專心聽', showEn)}</div>
+      <div class="listitle">${lr(it.beep ? '請聽聲音' : '請專心聽')}${lisEn(it.beep ? '請聽聲音' : '請專心聽', showEn)}</div>
       ${lisStrip([0,1,2])}
       ${it.scene?`<div class="lishero sm">${it.scene}</div>`:''}
       ${L.tx&&it.say?`<div class="liscap">${lisCap(it.say)}</div>`:''}
       ${L.sp?`<div class="row" style="justify-content:center"><button class="btn mint" onclick="lisSelfPlay()">🔊 ${T('再聽一次')}</button></div>`:''}
     </div>`;
-  } else body = it.k==='order' ? lisOrderStudent(it, L, me, showEn) : lisChoiceStudent(it, L, me, showEn);
+  } else body = it.k==='order' ? lisOrderStudent(it, L, me, showEn)
+              : it.k==='multi' ? lisMultiStudent(it, L, me, showEn)
+              : lisChoiceStudent(it, L, me, showEn);
 
   /* 公佈答案那一刻，答對的同學有慶祝；只出現一次 */
   const key = L.s+'.'+L.i;
-  if(L.st==='reveal' && it.k!=='teach'){
+  if(L.st==='reveal' && lisScored(it)){
     if(LIS_SEEN!==key){
       LIS_SEEN = key;
       const ok = lisJudge(it, lisGet(ME, L.i), me.lv);
@@ -4591,6 +4528,29 @@ function lisChoiceStudent(it, L, me, showEn){
     <div class="opts lisoptgrid" style="grid-template-columns:repeat(auto-fit,minmax(${list.length>3?150:big?170:200}px,1fr))">${opts}</div>
     ${rev&&it.fb?`<div class="lisfb">${lr(it.fb)}</div>`:''}${mine}
     ${rev?'':`<div class="lishint">${v===undefined?lr('聽完，才按答案'):lr('已選好，等老師公佈')}</div>`}
+  </div>`;
+}
+function lisMultiStudent(it, L, me, showEn){
+  const rev = L.st==='reveal', v = lisGet(ME, L.i), cur = Array.isArray(v) ? v : [];
+  const need = lisNeed(it, me.lv), want = lisMultiWant(it, me.lv);
+  const list = lisMultiShown(it, me.lv);
+  const opts = list.map(j=>{
+    const o = it.opts[j], on = cur.includes(o.t);
+    let cls = '';
+    if(rev){ if(want.includes(o.t)) cls = 'right'; else if(on) cls = 'wrong'; else cls = 'dim'; }
+    else if(on) cls = 'pickd';
+    return lisOptHTML(o, cls, `lisPickMulti(${L.i},${j})`, false, '', showEn);
+  }).join('');
+  const ask = `${it.ask||''}`, hint = need===it.a.length ? `選 ${need} 樣` : `選最先聽到的 ${need} 樣`;
+  return `<div class="lisbox">
+    ${it.scene?`<div class="lishero sm">${it.scene}</div>`:''}
+    ${L.tx&&it.say?`<div class="liscap">${lisCap(it.say)}</div>`:''}
+    <div class="lisask">${lisTagHTML(it.tag)}${lr(ask)}${lisEn(ask, showEn)}</div>
+    <div class="lispicknote">${lr(hint)}　${cur.length} ／ ${need}</div>
+    ${L.sp&&!rev?`<div class="row" style="justify-content:center"><button class="btn mint" onclick="lisSelfPlay()">🔊 ${T('再聽一次')}</button></div>`:''}
+    <div class="opts lisoptgrid" style="grid-template-columns:repeat(auto-fit,minmax(${list.length>3?150:180}px,1fr))">${opts}</div>
+    ${rev?`<div class="lisfb">${lr(lisMultiFb(it))}</div>${v===undefined?`<div class="lisfb miss">${lr('你沒有作答')}</div>`:''}`
+         :`<div class="lishint">${cur.length>=need?lr('已選好，等老師公佈'):lr('聽完，才按答案')}</div>`}
   </div>`;
 }
 function lisOrderStudent(it, L, me, showEn){
@@ -4637,6 +4597,928 @@ document.addEventListener('keydown', e=>{
   if(e.key==='ArrowRight' || e.key==='PageDown'){ e.preventDefault(); lisMain(); }
   else if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); lisBack(); }
 });
+
+
+/* ================================================================
+   🎧 聆聽專題：聽指示做得到（轉銜準備）— 9 節，每節可選 60 或 90 分鐘
+   對應教學計劃「聆聽」範疇：理解語意（時人地事、重點、指示）及聆聽態度。
+     第 1 節 專心聽五步曲（聆聽態度）
+     第 2 節 耳朵熱身：聽聲音、數字和時間
+     第 3 節 聽出重點：時人地事
+     第 4 節 聽小故事找重點
+     第 5 節 聽指示做事：先、然後、最後
+     第 6 節 經理話：不要、數量、方向和顏色
+     第 7 節 職場常聽到的話：口訊、電話和廣播
+     第 8 節 聽不清楚怎麼辦：確認和求助
+     第 9 節 新員工挑戰日（綜合）
+
+   寫題目用的簡寫：
+     OPS('🧼洗手|*🥛拿杯子|🚪開門')   選項；開頭加 * = 正確答案；@成仔 = 人物圖
+     TCH 講解頁　ACT 課堂活動　CHQ 選擇題　FUP 同一段話的追問
+     MUL 多選題　ORD 排次序　BOS 經理話　X([…]) = 只在 90 分鐘版出現
+   每項（item）欄位：
+     k   teach 講解／act 課堂活動／choice 選擇／multi 多選／order 排次序／boss 經理話
+     say 聽到的內容（「｜」表示停一停）；beep 嗶聲（數字＝頻率）；ask 問題
+     x   1 = 只在 90 分鐘版出現；min = 預計分鐘；tx = 該項是否顯示字幕
+     tip 給老師看的教學技巧（學生看不到）
+   ================================================================ */
+const LIS_FIVE = [{e:'✋',t:'停',d:'停一停'},{e:'👀',t:'望',d:'望一望'},{e:'👂',t:'聽',d:'聽清楚'},
+                  {e:'🗣️',t:'說',d:'說一說'},{e:'💪',t:'做',d:'就去做'}];
+const LIS_TAGC = {'時':'a','人':'b','地':'c','事':'d','物':'e','量':'f'};
+const LP   = n => ({t:n, img:n, e:{'成仔':'🧒','小愉':'👧','健仔':'👦'}[n]||'🙂'});
+const MGR  = {t:'經理', e:'🧑‍💼'};
+const GOOD = {e:'👍',t:'好'}, BAD = {e:'👎',t:'不好'};
+const DO   = {e:'👍',t:'做'}, NODO = {e:'✋',t:'不做'};
+
+const LIS = [];
+const LIS_CJK = /[\u3400-\u9fff\uff00-\uffef]/;
+/* 選項簡寫 → {opts, a:[正確位置…]} */
+function OPS(str){
+  const opts = [], a = [];
+  String(str).split('|').forEach((p,j)=>{
+    if(p[0]==='*'){ a.push(j); p = p.slice(1); }
+    if(p[0]==='@'){
+      const n = p.slice(1); opts.push(n==='經理' ? MGR : LP(n)); return;
+    }
+    const k = p.search(LIS_CJK);
+    if(k<0){ opts.push({e:'', t:p}); return; }
+    opts.push({e:p.slice(0,k), t:p.slice(k)});
+  });
+  return {opts, a};
+}
+function lisSteps(str){ return String(str).split('|').map(p=>{ const k = p.search(LIS_CJK); return {e:p.slice(0,k), t:p.slice(k)}; }); }
+const TCH = (st,e,t,line,say,tip,o)=>Object.assign({st,k:'teach',e,t,line,say,tip},o||{});
+const ACT = (st,e,t,line,steps,min,o)=>Object.assign({st,k:'act',e,t,line,steps,min},o||{});
+const CHQ = (st,scene,say,ask,ops,fb,o)=>{ const r = OPS(ops);
+  return Object.assign({st,k:'choice',scene,say,ask,opts:r.opts,a:r.a[0],fb},o||{}); };
+const FUP = (st,ask,ops,fb,o)=>{ const r = OPS(ops);
+  return Object.assign({st,k:'choice',same:1,ask,opts:r.opts,a:r.a[0],fb},o||{}); };
+const MUL = (st,scene,say,ask,ops,fb,o)=>{ const r = OPS(ops);
+  return Object.assign({st,k:'multi',scene,say,ask,opts:r.opts,a:r.a,fb},o||{}); };
+const ORD = (st,scene,say,steps,decoys,o)=>Object.assign({st,k:'order',scene,say,steps:lisSteps(steps),
+  decoys:decoys?lisSteps(decoys):[]},o||{});
+const BOS = (st,say,doIt,fb,o)=>Object.assign({st,k:'boss',scene:'📢',say,ask:'要做嗎？',opts:[DO,NODO],a:doIt?0:1,
+  fb:fb||(doIt?'有「經理說」，要做。':'沒有「經理說」，不用做。')},o||{});
+/* 一段話配一組追問：GRP(階段, 圖示, 聽到的話, [[標籤,問題,選項,答案說明],…], 第一項的額外設定) */
+function GRP(st, scene, say, qs, o){
+  return qs.map((q,j)=> j===0
+    ? CHQ(st, scene, say, q[1], q[2], q[3], Object.assign({tag:q[0]}, o||{}))
+    : FUP(st, q[1], q[2], q[3], {tag:q[0]}));
+}
+/* 嗶聲：BP([頻率…], 每聲長度秒)；高音約 880，低音約 330 */
+const BP = (a,d)=>a.map(f=>({f,d:d||.45}));
+/* 一句話配「時人地事」四問：SENT(階段, 圖示, 聽到的話, [時選項,人選項,地選項,事選項], 問題(可省), 第一項額外設定) */
+function SENT(st, scene, say, o4, asks, o){
+  const A = asks || ['是甚麼時候？','是誰在做事？','在哪裏？','做甚麼？'], T = ['時','人','地','事'];
+  return GRP(st, scene, say, o4.map((ops,j)=>[T[j], A[j], ops]), o);
+}
+const X = arr => arr.map(it=>Object.assign(it,{x:1}));
+
+/* ───────────────────────── 第 1 節 專心聽五步曲 ───────────────────────── */
+LIS.push({ s:1, title:'專心聽五步曲', sub:'聆聽態度：停・望・聽・說・做', ico:'✋', tx:1,
+  unit:'專心聽五步曲',
+  goals:[
+    {ico:'✋', zh:'認識專心聽的五步：停、望、聽、說、做', en:'Learn the 5 steps of good listening'},
+    {ico:'👀', zh:'眼睛望向說話的人，安靜地聽', en:'Look at the speaker and listen quietly'},
+    {ico:'🙌', zh:'分辨誰聽得好，聽完才做', en:'Tell who is listening well and wait until the end'}],
+  prep:['計時用的鐘或本課件的倒數計時','（加長版）一張紙和筆，用來記錄「好聽眾」的做法'],
+  stages:['引起動機','五步曲','誰聽得好','動動身體','試一試'],
+  strat:[
+    '引起動機：連結「將來工作要聽指示」；先靜一靜、聽一聽，建立聆聽的課堂常規。',
+    '步驟視覺化＋手勢＋順口溜：一次只教一步，邊說邊做手勢，重複多次。',
+    '正例／反例對比：用短故事讓學生判斷，建立聆聽態度的標準，並請學生說出原因。',
+    '身體參與：用動作指令練習「聽完才做」，在遊戲中控制衝動、練習等待。',
+    '應用與遷移：把五步曲用在突發情況，肯定「不明白就問」；用角色扮演鞏固。'],
+  items:[
+  TCH(0,'🎧','聽得清楚，做得準確','將來工作，經理和師傅會說話。我們要專心聽，才做得準確。',
+   '今天，我們學習專心聽。｜將來工作的時候，經理和師傅會說話。｜我們要聽得清楚，才做得準確。',
+   '引起動機：先問「你有沒有聽錯過老師的話？」，請兩三位同學分享；說明聽得準，工作才做得好。'),
+  ACT(0,'🤫','靜一靜，聽一聽','先安靜下來，才聽得到更多聲音。',
+   ['全班坐好，雙手放膝上，安靜 30 秒（可閉上眼睛或望向地下）。','時間到，請同學說：「我聽到……」（冷氣聲、腳步聲、風聲、說話聲）。','老師把同學聽到的聲音記在白板上，讚賞安靜和能說出聲音的同學。','總結：安靜，我們才聽得到更多。'],
+   4,{timer:30,tip:'有感官敏感的同學可以望向地下，不必勉強閉眼。若有同學忍不住說話，輕聲提示「停一停」即可。'}),
+  TCH(0,'🙋','老師說，你做','聽老師說，聽完才做動作。',
+   '請聽老師說。聽完，才做動作。',
+   '逐張按卡片，由電腦讀出指示；同學聽完才做動作。強調「聽完才做」；未聽完就動的同學，請他再試一次，並稱讚能等待的同學。',
+   {cards:[{e:'👏',t:'拍拍手'},{e:'🙂',t:'摸摸頭'},{e:'🧍',t:'站起來'},{e:'🪑',t:'坐下來'},{e:'🙌',t:'舉高手'},{e:'👃',t:'摸摸鼻'}]}),
+  /* 五步曲 */
+  TCH(1,'✋','停一停','雙手放好，嘴巴不說話。','第一步，停一停。｜雙手放好，嘴巴不說話。',
+   '手勢：手掌向前。示範放下手上的東西、坐正；可安排 5 秒安靜練習，讓學生體驗「停」。',{strip:0}),
+  TCH(1,'👀','望一望','眼睛望向說話的人。','第二步，望一望。｜眼睛望向說話的人。',
+   '手勢：指指自己的眼睛，再指向說話的人。目光接觸可由「望向對方的臉」開始，不必長時間直視（照顧有感官需要的學生）。',{strip:1}),
+  TCH(1,'👂','聽清楚','耳朵專心聽，等他說完。','第三步，聽清楚。｜耳朵專心聽，等他說完。',
+   '手勢：手放耳邊。強調「等他說完才開口」，減少搶答。',{strip:2}),
+  TCH(1,'🗣️','說一說','把聽到的說一遍：「我聽到……」','第四步，說一說。｜把聽到的說一遍。｜我聽到，先洗手，再拿杯子。',
+   '手勢：手由嘴邊向外。複述有助記憶和確認。先由老師示範，再請學生跟說。',{strip:3}),
+  TCH(1,'💪','就去做','聽完才做。不明白，就問。','第五步，就去做。｜聽完才做。｜不明白，就問。',
+   '手勢：握拳。提醒學生：不明白而發問，是好員工的表現，不是不乖。',{strip:4}),
+  TCH(1,'🎵','五步曲歌','停一停，望一望，聽清楚，說一說，就去做！','停一停，｜望一望，｜聽清楚，｜說一說，｜就去做！',
+   '配合手勢，全班一起唸兩至三次；之後可請個別同學帶領。重複是學習的關鍵。',
+   {strip:-1,cards:[{e:'✋',t:'停'},{e:'👀',t:'望'},{e:'👂',t:'聽'},{e:'🗣️',t:'說'},{e:'💪',t:'做'}]}),
+  /* 誰聽得好 */
+  CHQ(2,'📱','成仔在聽經理說話。｜他一邊聽，一邊玩手機。','成仔聽得好嗎？','👍好|*👎不好',
+   '成仔一邊聽，一邊玩手機，沒有專心。要先「停一停」，放下手機。',{tip:'請學生說說「為甚麼不好」，再請他示範正確做法。'}),
+  CHQ(2,'👧','小愉在聽師傅說話。｜她望向師傅，安靜地聽。','小愉聽得好嗎？','*👍好|👎不好',
+   '小愉望向師傅，安靜地聽，做到了「望一望」和「聽清楚」。'),
+  CHQ(2,'🗣️','經理還沒說完，健仔就大聲說話。','健仔聽得好嗎？','👍好|*👎不好',
+   '要等經理說完，才可以開口。這是「聽清楚」。'),
+  CHQ(2,'🙋','經理說完了。｜成仔說：我明白了，先洗杯子，再抹桌子。','成仔聽得好嗎？','*👍好|👎不好',
+   '成仔把聽到的說了一遍，這是「說一說」，經理會很放心。'),
+  CHQ(2,'🙈','師傅說話的時候，小愉望向地下，又不停玩頭髮。','小愉聽得好嗎？','👍好|*👎不好',
+   '聽人說話，要望向說話的人。這是「望一望」。'),
+  ...X([
+  CHQ(2,'😊','健仔在聽經理說話。｜他望着經理，輕輕點頭。','健仔聽得好嗎？','*👍好|👎不好',
+   '健仔望着經理，輕輕點頭，表示他在聽。'),
+  CHQ(2,'💬','師傅正在說話，成仔和旁邊的同事聊天。','成仔聽得好嗎？','👍好|*👎不好',
+   '師傅說話的時候，要安靜。聊天會聽漏重要的事。'),
+  CHQ(2,'🤔','小愉聽不明白師傅的話。｜她不問，自己亂做。','小愉做得好嗎？','👍好|*👎不好',
+   '不明白就問。亂做會做錯，更麻煩。'),
+  CHQ(2,'🧰','經理要說話了。｜健仔先把手上的工具放下，才望向經理。','健仔做得好嗎？','*👍好|👎不好',
+   '放下手上的東西，是「停一停」，這樣才能專心聽。'),
+  MUL(2,'🎯','','哪些是專心聽的做法？','*👀望着說話的人|📱玩手機|*🤫安靜地聽|💬和旁邊的人聊天|*✋放下手上的東西',
+   '專心聽：望着說話的人、安靜地聽、放下手上的東西。',{tip:'選好之後，請同學說說「為什麼這樣做可以聽得更好」。'})
+  ]),
+  /* 動動身體 */
+  ACT(3,'🙋','老師說，你做','聽完才做，一個動作、兩個動作、三個動作。',
+   ['老師說一個動作（例如：拍拍手），全班聽完才做。','逐步加長：「先拍手，然後摸頭」，再加到三個動作。','做錯的同學不用出局，重新聽一次；讚賞等到最後才做的同學。','每一輪提醒：停、望、聽、做。'],
+   5,{timer:180,mat:'無需預備',tip:'這是「聽完才做」的練習。提醒同學：未聽完就動，會做錯；等一等，就做得準。'}),
+  ...X([
+  ACT(3,'👩‍🏫','小老師帶領','輪流當小老師，說出指示。',
+   ['請一位同學當小老師，說出一至兩個動作指令。','其他同學聽完才做。','小老師要用「先……然後……」說話，說清楚。','每位小老師完成後，全班一起說：「謝謝小老師！」'],
+   6,{timer:300,tip:'小老師說得太快時，提示「慢慢說」，這也是練習「說清楚」。'})
+  ]),
+  /* 試一試 */
+  CHQ(4,'🧑‍💼','經理開始說話了。','你第一步要做甚麼？','💪馬上去做|📱玩手機|*✋停一停',
+   '第一步是「停一停」：雙手放好，嘴巴不說話。'),
+  CHQ(4,'🤔','師傅說完了。你有一件事不明白。','你應該怎麼做？','🤷亂做一通|*🙋問一問師傅|😶甚麼也不說',
+   '不明白就問，是好員工的表現。'),
+  ...X([
+  CHQ(4,'📞','經理說話的時候，你的手機響了。','你應該怎麼做？','📱馬上接電話|*🤫等經理說完，才看手機|🚪走開',
+   '先專心聽經理說話，說完才處理手機。'),
+  CHQ(4,'🔊','經理說話的時候，外面很嘈吵，你聽不清楚。','你應該怎麼做？','🤷亂做一通|*🙏請再說一次|😶不說話',
+   '聽不清楚，可以禮貌地說：「請再說一次。」',{tip:'下一節課之後我們會再詳細練習求助的說話。'}),
+  ACT(4,'🎭','角色扮演：好聽眾，壞聽眾','兩人一組，演一演。',
+   ['每組兩人：一人當經理說一句話（例如：請把杯子放在桌上），一人當員工。','員工先演「不好的聽法」（玩手機、望別處、插嘴），再演「好的聽法」（五步曲）。','全班猜一猜：哪一次聽得好？為甚麼？','請同學上台表演，大家為好聽眾鼓掌。'],
+   8,{timer:420,mat:'無需預備（可用玩具手機）',tip:'表演前先示範一組，避免同學尷尬。重點是讚賞「好的聽法」。'})
+  ]),
+  TCH(4,'🏅','我會專心聽','停一停，望一望，聽清楚，說一說，就去做。',
+   '今天，我們學會了專心聽。｜停一停，望一望，聽清楚，說一說，就去做。',
+   '請學生分享：「我會在哪裏用五步曲？」（課堂、家中、實習）。鼓勵他們留意別人怎樣聽。')
+  ]});
+
+/* ───────────────────────── 第 2 節 耳朵熱身 ───────────────────────── */
+LIS.push({ s:2, title:'耳朵熱身：聽聲音、數字和時間', sub:'分辨聲音、數字、時間和相似的詞', ico:'🔔', tx:0,
+  unit:'耳朵熱身',
+  goals:[
+    {ico:'🔔', zh:'分辨聲音的高低、長短和次數', en:'Tell high and low, long and short sounds'},
+    {ico:'🔢', zh:'聽清楚數字和數量', en:'Listen carefully to numbers and amounts'},
+    {ico:'🕘', zh:'聽清楚時間，分辨聽起來相似的詞語', en:'Hear the time and tell similar words apart'}],
+  prep:['（活動）鑰匙、紙張、水杯等會發聲的小物件','（加長版）紙和筆，畫九宮格','建議平板音量調至中等'],
+  stages:['聽聲音','聽數字','聽時間','聽相似的詞','聽覺挑戰'],
+  strat:[
+    '聽辨訓練：先不用語言，只聽聲音的高低、長短和次數，建立「專心聽細節」的習慣。',
+    '化整為零：數字一個一個記，邊聽邊用手指數，聽完才說一遍。',
+    '連結職場：上班、午飯、收工都要聽清楚時間；用鐘面圖片支援。',
+    '對比訓練：聽起來相似的詞語，要聽到最後一個字才知道，培養耐性。',
+    '綜合應用：同時聽幾樣東西，用多選題訓練短期記憶；初組只需記住最先聽到的。'],
+  items:[
+  TCH(0,'👂','耳朵熱身','耳朵像肌肉，多練習，就會更靈敏。',
+   '今天，我們做耳朵熱身。｜我們練習聽聲音，聽數字，聽時間。',
+   '引起動機：問「你的耳朵厲害嗎？」。說明這節沒有難題，只是練習，答錯也沒關係。'),
+  ACT(0,'🔍','聽聲音猜一猜','老師製造聲音，同學閉眼猜一猜。',
+   ['老師站在同學背後或用書本擋住，製造聲音（搖鑰匙、撕紙、倒水、敲桌子）。','同學閉眼聽，說：「我聽到……」。','猜對的同學說說：是怎樣聽出來的？（高低、長短、快慢）','每種聲音多做一次，讓同學有信心。'],
+   5,{timer:240,mat:'鑰匙、紙張、水杯、小鈴等',tip:'有感官敏感的同學可預先告知聲音，或請他當「製造聲音的人」。'}),
+  CHQ(0,'🔔','','你聽到幾聲？','🔔一聲|🔔🔔兩聲|*🔔🔔🔔三聲|🔔🔔🔔🔔四聲','有三聲。',
+   {beep:BP([660,660,660],.35),tip:'請同學邊聽邊用手指數。老師可請同學先預測：「有幾聲？」'}),
+  CHQ(0,'🔔','','你聽到幾聲？','*🔔一聲|🔔🔔兩聲|🔔🔔🔔三聲','有一聲。',{beep:BP([660],.4)}),
+  CHQ(0,'🎵','','哪一個聲音比較高？','1️⃣先聽到的|*2️⃣後聽到的','後聽到的聲音比較高。',
+   {beep:BP([330,880],.6),tip:'提示：高音像小鳥，低音像大象。可用手勢：高音手舉高，低音手放低。'}),
+  CHQ(0,'🎵','','哪一個聲音比較高？','*1️⃣先聽到的|2️⃣後聽到的','先聽到的聲音比較高。',{beep:BP([880,330],.6)}),
+  ...X([
+  CHQ(0,'🔔','','你聽到幾聲？','🔔一聲|*🔔🔔兩聲|🔔🔔🔔三聲|🔔🔔🔔🔔四聲','有兩聲。',{beep:BP([660,660],.35)}),
+  CHQ(0,'🎵','','三個聲音，哪一個最低？','1️⃣第一個|*2️⃣第二個|3️⃣第三個','第二個聲音最低。',{beep:BP([660,330,880],.55)}),
+  CHQ(0,'⏱️','','哪一個聲音比較長？','1️⃣先聽到的|*2️⃣後聽到的','後聽到的聲音比較長。',{beep:[{f:550,d:.25},{f:550,d:1.1}]}),
+  ACT(0,'🧍','聽高音站，聽低音坐','聽聲音，做動作。',
+   ['按「播放聲音」：聽到高音，站起來；聽到低音，坐下去。','做錯的同學不要緊，再聽一次。','請同學試當小老師，說出「高」或「低」。','可重播多次，每次可以加快一點。'],
+   6,{timer:240,beep:BP([880,330,330,880,330,880,880,330],.5),tip:'提醒同學「先聽，再動」。這是聽辨加控制衝動的練習。'})
+  ]),
+  /* 數字 */
+  TCH(1,'🔢','聽數字的方法','一個一個記。邊聽邊用手指，聽完說一遍。',
+   '聽數字有方法。｜一個一個記。｜邊聽，邊用手指。｜聽完，說一遍。例如，三，五，八。',
+   '示範：老師讀「三、五、八」，同時伸出手指；再示範複述「三五八」。電話號碼、門牌、貨品編號都用得着。',
+   {cards:[{e:'3️⃣',t:'三',s:'三'},{e:'5️⃣',t:'五',s:'五'},{e:'8️⃣',t:'八',s:'八'}]}),
+  CHQ(1,'🔢','七','你聽到哪個數字？','1️⃣一|*7️⃣七|9️⃣九|5️⃣五','是七。',{min:1.5,tip:'「一」和「七」聽起來有點像，要專心聽。'}),
+  CHQ(1,'📞','三｜五｜八','你聽到哪一組數字？','*358|385|538|583','是三、五、八。',{gap:450,min:1.5}),
+  ...X([
+  CHQ(1,'📞','六｜二｜九','你聽到哪一組數字？','692|*629|269|926','是六、二、九。',{gap:450,min:1.5}),
+  CHQ(1,'📞','二｜七｜五｜八','你聽到哪一組數字？','2578|*2758|2785|2587','是二、七、五、八。',{gap:450,min:1.5,tip:'四個數字比較長。請同學邊聽邊用手指數，再說一次。'})
+  ]),
+  CHQ(1,'🥛','請拿三個杯子。','要拿幾個杯子？','🥛一個|🥛🥛兩個|*🥛🥛🥛三個|🥛🥛🥛🥛四個','要拿三個。'),
+  ...X([
+  ACT(1,'🎱','數字 Bingo','聽數字，圈出來，連成一線就贏。',
+   ['每人在紙上畫 3×3 格，隨意寫上 1 至 9 的數字。','老師隨機讀出數字（可用電腦「🔊 朗讀」或自己讀），同學聽到就圈。','連成一線的同學舉手說「到！」。','核對：請同學把圈出的數字讀出來。'],
+   7,{timer:420,mat:'紙、筆',tip:'贏的同學可以當下一輪的主持人，讀數字。'})
+  ]),
+  /* 時間 */
+  TCH(2,'🕘','聽時間','上班、午飯、收工，都有時間。',
+   '上班，有時間。｜午飯，有時間。｜收工，也有時間。｜我們要聽清楚。',
+   '配合教室內的鐘或圖卡，請同學指出時間。留意「上午、下午」。',
+   {cards:[{e:'🕘',t:'九點',s:'上午九點'},{e:'🕙',t:'十點',s:'上午十點'},{e:'🕑',t:'兩點',s:'下午兩點'},{e:'🕒',t:'三點',s:'下午三點'}]}),
+  CHQ(2,'🏢','我們上午九點上班。','幾點上班？','🕙十點|*🕘九點|🕑兩點|🕒三點','上午九點上班。'),
+  ...GRP(2,'🏢','早上九點上班，｜下午五點下班。',[
+    ['時','幾點上班？','🕙十點|*🕘九點|🕗八點|🕚十一點','九點上班。'],
+    ['時','幾點下班？','🕓四點|*🕔五點|🕕六點|🕒三點','五點下班。']]),
+  ...X([
+  CHQ(2,'🏁','下午三點，大家一起收工。','幾點收工？','🕑兩點|*🕒三點|🕓四點|🕔五點','下午三點收工。')
+
+  ]),
+  /* 相似的詞 */
+  TCH(3,'👂','聽起來很像','有些詞聽起來很像。要聽到最後，才知道是哪一個。',
+   '有些詞，聽起來很像。｜例如：十點，四點。｜要聽到最後，才知道是哪一個。',
+   '示範「十」和「四」、「買」和「賣」：說得慢一點，請同學看口形、聽聲調。強調「不要搶答」。',
+   {cards:[{e:'🔟',t:'十點',s:'十點'},{e:'4️⃣',t:'四點',s:'四點'},{e:'🛒',t:'買菜',s:'買菜'},{e:'💰',t:'賣菜',s:'賣菜'}]}),
+  CHQ(3,'🔟','請你十點到。','幾點到？','*🕙十點|🕓四點|🕗八點|🕖七點','十點到，不是四點。'),
+  CHQ(3,'🧽','請你洗杯子。','要做甚麼？','🛏️洗被子|*🥛洗杯子|🥢洗筷子|🍽️洗碟子','洗杯子。'),
+  MUL(3,'🛍️','杯子，｜毛巾，｜剪刀。','你聽到哪三樣東西？','*🥛杯子|🧻紙巾|*🧣毛巾|📎迴紋針|*✂️剪刀','杯子、毛巾、剪刀。',
+   {tip:'按人數讀三樣東西；高組選三樣、中組選兩樣、初組選最先聽到的一樣。'}),
+  ...X([
+  CHQ(3,'🛒','請你去買菜。','去做甚麼？','💰賣菜|*🛒買菜','是買菜，不是賣菜。',{tip:'「買」和「賣」只是聲調不同。可請兩位同學各讀一次。'}),
+  CHQ(3,'📚','請把那本書拿來。','拿甚麼？','🌳樹|🐭鼠|*📚書','拿書。',{tip:'「書、樹、鼠」只是聲調不同，是很好的聽辨練習。'})
+  ]),
+  /* 聽覺挑戰 */
+  ...GRP(4,'📦','請把三箱汽水，搬到二號房。',[
+    ['量','搬多少？','📦兩箱|*📦📦📦三箱|📦📦📦📦四箱|📦一箱','三箱。'],
+    ['物','搬甚麼？','🥛牛奶|*🥤汽水|🧃果汁|🍞麵包','汽水。'],
+    ['地','搬到幾號房？','1️⃣一號房|*2️⃣二號房|3️⃣三號房|4️⃣四號房','二號房。']],{tx:0,tip:'這一組有數量、物品和地點，請同學逐一找出。'}),
+  ...X(GRP(4,'🛒','下午四點，請拿兩包麵粉，送到五號櫃枱。',[
+    ['時','幾點？','🕒三點|*🕓四點|🕔五點|🕑兩點','下午四點。'],
+    ['量','拿多少？','🌾一包|*🌾🌾兩包|🌾🌾🌾三包|🌾🌾🌾🌾四包','兩包。'],
+    ['地','送到哪裏？','3️⃣三號櫃枱|4️⃣四號櫃枱|*5️⃣五號櫃枱|6️⃣六號櫃枱','五號櫃枱。']])),
+  TCH(4,'🏅','耳朵熱身完成','聽聲音，聽數字，聽時間，聽相似的詞。',
+   '今天，我們做完了耳朵熱身。｜聽聲音，聽數字，聽時間，｜還要聽清楚相似的詞。',
+   '請同學分享：「今天哪一題最難？你是怎樣聽的？」培養自我檢視。')
+  ]});
+
+/* ───────────────────────── 第 3 節 聽出重點：時人地事 ───────────────────────── */
+LIS.push({ s:3, title:'聽出重點：時人地事', sub:'聽一句話，找出四個重點', ico:'🎯', tx:1,
+  unit:'聽出時人地事',
+  goals:[
+    {ico:'🎯', zh:'認識聽話的四個重點：時、人、地、事', en:'Learn the 4 key points: when, who, where, what'},
+    {ico:'🔍', zh:'聽完一句話，找出時間、人物、地點和事情', en:'Find the time, person, place and event'},
+    {ico:'🧑‍💼', zh:'聽懂同事和經理的工作安排，並說出來', en:'Understand work arrangements and say them back'}],
+  prep:['白板或紙張，及四種顏色的筆（對應時、人、地、事）','（活動）一張寫上句子的紙條，用來傳話','（加長版）時、人、地、事卡片（每人一組，可事先寫好）'],
+  stages:['認識重點','聽一聽 ①','聽一聽 ②','聽一聽 ③','說一說'],
+  strat:[
+    '圖式組織：用顏色和圖示把「時人地事」視覺化，老師出聲思考示範。',
+    '有字幕支援：先看着字幕聽，再逐題找出重點。',
+    '撤除字幕：只聽不看，老師可重播一次；請同學邊聽邊用手指數出重點。',
+    '遷移到真實語氣：用經理指示的說話方式，聽出工作安排。',
+    '輸出與複述：把聽到的重點說出來、傳下去，由「聽懂」走到「說清楚」。'],
+  items:[
+  TCH(0,'🎯','聽話要找重點','經理一次說很多話。我們要找出四個重點。',
+   '經理一次會說很多話。｜我們要找出四個重點：｜時間，人物，地點，事情。',
+   '類比：寄信要有「甚麼時候、寄給誰、寄去哪裏、寄甚麼」。可請同學說說手機訊息裏的重點。'),
+  TCH(0,'🔎','四個重點','每個重點有一個顏色。',
+   '四個重點：｜時，甚麼時候？｜人，是誰？｜地，在哪裏？｜事，做甚麼？',
+   '逐張卡片按，讀出問題。之後的題目沿用同一顏色，幫助學生記憶。',
+   {cards:[{k:'時',e:'⏰',t:'時',d:'甚麼時候？',s:'時，甚麼時候？'},{k:'人',e:'🧑',t:'人',d:'是誰？',s:'人，是誰？'},
+           {k:'地',e:'📍',t:'地',d:'在哪裏？',s:'地，在哪裏？'},{k:'事',e:'🛠️',t:'事',d:'做甚麼？',s:'事，做甚麼？'}]}),
+  TCH(0,'🔍','示範：找出四個重點','',
+   '上午九點，成仔在餐廳洗杯子。',
+   '老師出聲思考示範：「我聽到『上午九點』，這是時間；『成仔』是人物；『餐廳』是地點；『洗杯子』是事情。」逐一點出顏色。',
+   {chunks:[{k:'時',t:'上午九點',post:'，'},{k:'人',t:'成仔'},{k:'地',t:'餐廳',pre:'在'},{k:'事',t:'洗杯子',post:'。'}]}),
+  ACT(0,'📱','手機訊息找重點','在訊息裏，圈出四個重點。',
+   ['白板上寫一則訊息：「明天下午三點，小愉到圖書館還書。」','請同學用四種顏色的筆，圈出時、人、地、事。','請同學讀出來：「時間是……，人物是……」','請同學說一則自己的訊息（例如：星期六早上，我在公園跑步），大家一起找重點。'],
+   5,{mat:'白板、四色筆',tip:'先由老師圈第一個，示範顏色與重點的配對。讓能力較高的同學當小老師。'}),
+  /* 聽一聽 ①：有字幕 */
+  ...SENT(1,'🍽️','上午九點，成仔在餐廳洗杯子。',[
+    '🕙上午十點|*🕘上午九點|🕑下午兩點|🕒下午三點',
+    '@小愉|@健仔|*@成仔|@經理',
+    '📦倉庫|*🍽️餐廳|🏪超級市場|📚圖書館',
+    '🧹掃地|🛒排貨品|📦搬箱子|*🥛洗杯子'],null,{tx:1,tip:'先請學生看字幕，找出「時間」的詞語並圈出，再作答。'}),
+  ...X(SENT(1,'📚','星期一早上，小愉在圖書館還書。',[
+    '*📅星期一早上|📅星期二早上|📅星期一下午|📅星期四早上',
+    '@成仔|*@小愉|@健仔|@經理',
+    '🍽️餐廳|*📚圖書館|📦倉庫|🏫學校',
+    '*📖還書|🛒買東西|🥛洗杯子|🧹掃地'],null,{tx:1})),
+  /* 聽一聽 ②：無字幕 */
+  ...SENT(2,'🏪','下午兩點，小愉在超級市場排貨品。',[
+    '🕘上午九點|🕒下午三點|*🕑下午兩點|🕙上午十點',
+    '@成仔|*@小愉|@經理|@健仔',
+    '*🏪超級市場|🍽️餐廳|📦倉庫|🏫學校',
+    '🥛洗杯子|*🛒排貨品|🧹掃地|📦搬箱子'],null,{tx:0,tip:'這一組不顯示字幕，只聽。可重播一次；請同學邊聽邊用手指數出「時、人、地、事」。'}),
+  ...SENT(2,'📦','星期三早上，健仔在倉庫搬紙箱。',[
+    '📅星期一早上|*📅星期三早上|📅星期五下午|📅星期三下午',
+    '@成仔|@小愉|*@健仔|@經理',
+    '*📦倉庫|🍽️餐廳|🏪超級市場|🏢辦公室',
+    '🧹掃地|*📦搬紙箱|🛒排貨品|🥛洗杯子'],null,{tx:0}),
+  ...X(SENT(2,'🧺','下午四點，成仔在洗衣店摺毛巾。',[
+    '🕒下午三點|🕔下午五點|*🕓下午四點|🕑下午兩點',
+    '@健仔|*@成仔|@小愉|@經理',
+    '🏪超級市場|📚圖書館|*🧺洗衣店|🍽️餐廳',
+    '🧹掃地|*🧣摺毛巾|📦搬箱子|🥛洗杯子'],null,{tx:0})),
+  /* 聽一聽 ③：經理說話 */
+  ...SENT(3,'🧑‍💼','經理說：｜明天早上十點，｜健仔到倉庫搬汽水。',[
+    '🕘明天早上九點|*🕙明天早上十點|🕑明天下午兩點|🕒明天下午三點',
+    '@成仔|*@健仔|@小愉|@經理',
+    '📚圖書館|🍽️餐廳|*📦倉庫|🏪超級市場',
+    '*🥤搬汽水|🥛洗杯子|🧹掃地|🛒排貨品'],
+    ['甚麼時候去？','誰要去？','去哪裏？','去做甚麼？'],{tx:0,tip:'用經理說話的語氣讀。提醒學生：經理說話，要用五步曲，先「停一停」。'}),
+  ...SENT(3,'🏢','師傅說：｜今天下午四點，｜小愉在辦公室影印文件。',[
+    '🕒下午三點|*🕓下午四點|🕔下午五點|🕑下午兩點',
+    '@健仔|@成仔|*@小愉|@經理',
+    '🏪超級市場|*🏢辦公室|📦倉庫|🍽️餐廳',
+    '*📄影印文件|🧹掃地|📦搬箱子|🥛洗杯子'],
+    ['甚麼時候做？','誰要做？','在哪裏做？','做甚麼？'],{tx:0}),
+  ...X(SENT(3,'🚉','經理說：｜後天早上八點，｜成仔在車站集合。',[
+    '*🕗後天早上八點|🕘後天早上九點|🕗今天早上八點|🕗明天早上八點',
+    '@健仔|*@成仔|@小愉|@經理',
+    '🏫學校|🏪超級市場|*🚉車站|🏢辦公室',
+    '🚌搭車|🛒買東西|*👥集合|🍽️食飯'],
+    ['甚麼時候？','誰要去？','在哪裏？','做甚麼？'],{tx:0})),
+  ...X(SENT(3,'🧹','師傅說：｜下午五點，｜健仔在清潔公司掃走廊。',[
+    '🕓下午四點|*🕔下午五點|🕕下午六點|🕒下午三點',
+    '*@健仔|@成仔|@小愉|@經理',
+    '🏢辦公室|*🧹清潔公司|📦倉庫|🍽️餐廳',
+    '🧽抹窗|📄影印|*🧹掃走廊|🥛洗杯子'],
+    ['甚麼時候做？','誰要做？','在哪裏做？','做甚麼？'],{tx:0})),
+  ...X([
+  MUL(3,'🧑‍💼','經理說：｜後天下午三點，｜小愉去超級市場買牛奶。','你聽到哪些重點？',
+   '*🕒後天下午三點|*👧小愉|🧒成仔|*🏪超級市場|🕘今天上午九點|*🥛買牛奶',
+   '重點：後天下午三點、小愉、超級市場、買牛奶。',{tx:0,tip:'高組找出四個重點中的三個，中組兩個，初組一個（先聽到的）。'})
+  ]),
+  /* 說一說 */
+  ACT(4,'🗣️','傳話：四個重點','把聽到的話傳下去。',
+   ['老師在第一位同學耳邊說一句有時、人、地、事的話（例如：明天早上十點，小愉在餐廳洗杯子）。','同學一個傳一個，最後一位同學大聲說出來。','全班一起核對：時、人、地、事有沒有變？','如果傳錯了，不要責怪，一起找出在哪裏聽錯。'],
+   5,{timer:300,mat:'寫了句子的紙條（給老師核對）',tip:'傳話有趣但容易傳錯，正好讓同學明白「聽清楚、記重點」的重要。第一位同學可以由能力高的同學擔任。'}),
+  ...X([
+  ACT(4,'🃏','時人地事造句','抽卡片，造一句完整的話。',
+   ['每組一副卡片：時、人、地、事各抽一張（例如：星期五｜小愉｜倉庫｜搬箱子）。','小組合作，把四張卡說成一句完整的話。','派一位同學讀給全班聽，其他同學說出「時」「人」「地」「事」。','每組輪流表演，答對的同學得到掌聲。'],
+   8,{timer:480,mat:'時人地事卡片（每組一副，老師可預先寫好）',tip:'初組同學可以直接讀卡片，高組同學要自己加上「在」「到」等字詞。'})
+  ]),
+  TCH(4,'🏅','我找到四個重點','時、人、地、事。',
+   '今天，我們學會了找重點。｜時，人，地，事。',
+   '請學生選一個重點，向旁邊的同學說一說：「我聽到……」。',
+   {cards:[{k:'時',e:'⏰',t:'時'},{k:'人',e:'🧑',t:'人'},{k:'地',e:'📍',t:'地'},{k:'事',e:'🛠️',t:'事'}]})
+  ]});
+
+/* ───────────────────────── 第 4 節 聽小故事找重點 ───────────────────────── */
+LIS.push({ s:4, title:'聽小故事找重點', sub:'聽故事：誰、在哪裏、發生甚麼事、結果怎樣', ico:'📖', tx:1,
+  unit:'聽小故事',
+  goals:[
+    {ico:'📖', zh:'專心聽完一個小故事', en:'Listen to a short story from beginning to end'},
+    {ico:'🔍', zh:'找出故事的人物、地點、事情和結果', en:'Find who, where, what happened and the result'},
+    {ico:'🗣️', zh:'用自己的話說一說故事', en:'Tell the story in your own words'}],
+  prep:['（活動）一張大紙，寫上「誰？在哪裏？發生甚麼事？結果怎樣？」','（加長版）紙和筆，讓同學畫出故事的次序'],
+  stages:['聽故事前','故事 ①','故事 ②','故事 ③','故事 ④','更多故事','說一說'],
+  strat:[
+    '策略教學：聽故事前先預備四個問題（誰、哪裏、甚麼事、結果），聽的時候有目標。',
+    '有字幕支援：較熟悉的情景（咖啡店實習），降低記憶負擔，先建立成功經驗。',
+    '撤除字幕：只聽，故事長度相同，訓練工作記憶。',
+    '因果與改正：聽出「為甚麼」和「怎樣改正」，連結「聽錯了，可以再聽」的職場態度。',
+    '情景變化：換一個職場情景（快餐店），聽出天氣、地點和先後次序。',
+    '擴闊與遷移：不同的職場情景和人際相處（幫助同事、問路、做朋友），聽出細節和先後次序。',
+    '輸出：看圖／用手指數重點，用自己的話複述，由「聽懂」走到「說清楚」。'],
+  items:[
+  TCH(0,'📖','聽故事的方法','聽故事前，先想想四個問題。',
+   '聽故事有方法。｜聽之前，先想想四個問題：｜誰？在哪裏？發生甚麼事？結果怎樣？',
+   '在白板上畫四個格，寫上四個問題。每個問題配一個手指（1隻手指＝誰、2隻＝哪裏、3隻＝甚麼事、4隻＝結果），邊聽邊數。',
+   {cards:[{e:'🧑',t:'誰？',s:'誰？'},{e:'📍',t:'在哪裏？',s:'在哪裏？'},{e:'❗',t:'發生甚麼事？',s:'發生甚麼事？'},{e:'🔚',t:'結果怎樣？',s:'結果怎樣？'}]}),
+  ACT(0,'👩‍🏫','老師講小故事','老師講一個很短的故事，全班用手指找重點。',
+   ['老師講一個三句的小故事（例如：小愉早上去餐廳，她洗了十隻杯子，經理稱讚她）。','全班用手指數：1 = 誰、2 = 哪裏、3 = 甚麼事、4 = 結果。','請同學逐個問題回答，老師把答案寫在白板的四格內。','老師再講一次，讓同學核對有沒有漏掉。'],
+   5,{mat:'白板、四色筆',tip:'示範時刻意說慢一點。先讓同學成功，再逐步加長故事。'}),
+  /* 故事 ①：成仔的第一天 */
+  CHQ(1,'☕','成仔第一天去咖啡店實習。｜他先向經理問早。｜經理叫他先洗手，然後洗杯子。｜成仔洗杯子的時候，不小心打爛了一隻杯子。｜他馬上告訴經理：對不起。｜經理說：沒關係，下次小心。',
+   '誰去咖啡店實習？','*@成仔|@小愉|@健仔|@經理','是成仔。',{tag:'人',tx:1,rate:.74,tip:'故事較長，可重播一次，或請同學邊聽邊用手指數四個問題。'}),
+  FUP(1,'成仔在哪裏實習？','🏪超級市場|*☕咖啡店|📦倉庫|🧹清潔公司','在咖啡店。',{tag:'地'}),
+  ORD(1,'','','🧼洗手|🥛洗杯子','🧹掃地',{same:1,ask:'經理叫成仔先做甚麼？然後做甚麼？'}),
+  FUP(1,'發生了甚麼事？','*🥛打爛了一隻杯子|🧼忘記洗手|🚪遲到了|☕倒了咖啡','成仔打爛了一隻杯子。',{tag:'事'}),
+  FUP(1,'成仔怎樣做？','🏃走開|*🙇馬上告訴經理|🤫不說話','出了錯，要馬上告訴經理，說：「對不起。」',{tag:'事',tip:'請同學說說：如果你是成仔，你會怎樣說？'}),
+  FUP(1,'經理怎樣說？','😠大聲責罵|*😊沒關係，下次小心|🙄不理他','經理說：沒關係，下次小心。',{tag:'結'}),
+  /* 故事 ②：小愉遲到了 */
+  CHQ(2,'🚌','小愉今天要去超級市場上班。｜因為巴士太慢，她遲到了十分鐘。｜她到了超級市場，對師傅說：對不起，我遲到了。｜師傅說：下次早一點出門。｜小愉點點頭，馬上開始排貨品。',
+   '誰遲到了？','@成仔|*@小愉|@健仔|@經理','是小愉。',{tag:'人',tx:0,rate:.74}),
+  FUP(2,'她為甚麼遲到？','😴睡過頭|🌧️下雨|*🚌巴士太慢|📱找不到手機','因為巴士太慢。',{tag:'因'}),
+  FUP(2,'她遲到了多久？','*⏰十分鐘|⏰二十分鐘|⏰半小時|⏰一小時','遲到了十分鐘。',{tag:'量'}),
+  ORD(2,'','','🙏說對不起|🛒排貨品','🏃走開',{same:1,ask:'小愉到了超級市場，先做甚麼？然後做甚麼？'}),
+  FUP(2,'師傅叫她下次怎樣？','🛌多睡一會|*⏰早一點出門|🚕坐的士','師傅叫她下次早一點出門。',{tag:'事'}),
+  /* 故事 ③：健仔聽錯了 */
+  CHQ(3,'📦','經理叫健仔搬三箱汽水到二號房。｜健仔沒有專心聽，他搬了兩箱到三號房。｜經理說：不對！是三箱，二號房。｜健仔說：對不起，我再聽一次。｜這次，健仔專心聽，做對了。',
+   '經理叫健仔搬多少箱？','📦兩箱|*📦三箱|📦四箱|📦五箱','經理叫他搬三箱。',{tag:'量',tx:0,rate:.74}),
+  FUP(3,'要搬到哪裏？','1️⃣一號房|*2️⃣二號房|3️⃣三號房|4️⃣四號房','要搬到二號房。',{tag:'地'}),
+  FUP(3,'健仔為甚麼做錯？','🛌太累|*🙉沒有專心聽|🧾經理說錯|📦箱子太重','因為他沒有專心聽。',{tag:'因',tip:'連結第 1 節的「五步曲」：先停一停、望一望，才聽清楚。'}),
+  FUP(3,'健仔做錯後，怎樣改正？','🏃走開|*🙏說對不起，再聽一次|🤫甚麼也不說','做錯了，可以說對不起，再聽一次。',{tag:'事'}),
+  MUL(3,'','','這個故事告訴我們要怎樣聽？','*👀望着經理|📱邊聽邊玩手機|*🤫安靜|💬同時聊天|*✋聽完才做','要望着說話的人、安靜、聽完才做。',{same:1,min:2}),
+  /* 故事 ④：下雨天 */
+  CHQ(4,'☔','今天下大雨。｜小愉去快餐店上班，她帶了雨傘。｜到了店裏，師傅說：地上很濕，請先拿拖把抹地，然後放好雨傘。｜小愉照着做。｜師傅笑着說：做得好！',
+   '今天天氣怎樣？','☀️天晴|*☔下大雨|☁️多雲|💨颳大風','今天下大雨。',{tag:'事',tx:0,rate:.74}),
+  FUP(4,'小愉去哪裏上班？','🏪超級市場|📦倉庫|*🍔快餐店|🧹清潔公司','小愉去快餐店上班。',{tag:'地'}),
+  ORD(4,'','','🧹拿拖把抹地|☂️放好雨傘','🍔做漢堡',{same:1,ask:'師傅叫小愉先做甚麼？然後做甚麼？'}),
+  FUP(4,'師傅最後怎樣說？','😠你很慢|*👍做得好|🙄不要再來','師傅說：做得好！',{tag:'結'}),
+  /* 說一說 */
+  ...X([
+  /* 故事 ⑤：健仔的新朋友 */
+  CHQ(5,'🍱','健仔在清潔公司認識了新同事阿明。｜午飯時間，阿明請健仔一起食飯。｜健仔說：多謝你，我很高興。｜他們一邊食飯，一邊談天。｜下午，他們一起去掃走廊。',
+   '健仔認識了誰？','@成仔|*@阿明|@小愉|@經理','健仔認識了阿明。',{tag:'人',tx:0,rate:.74}),
+  FUP(5,'誰請誰食飯？','*阿明請健仔|健仔請阿明|經理請健仔|健仔請經理','阿明請健仔一起食飯。',{tag:'事'}),
+  FUP(5,'健仔怎樣說？','*🙏多謝你，我很高興|🙄不用了|😶甚麼也不說','健仔說：多謝你，我很高興。',{tag:'事'}),
+  ORD(5,'','','🍱一起食飯|🧹一起掃走廊','🏠回家',{same:1,ask:'他們午飯時間做甚麼？下午做甚麼？'}),
+  FUP(5,'這個故事告訴我們甚麼？','😠不要理人|*😊和同事相處，要有禮貌|🏃快點走','和同事相處，要有禮貌，多謝別人的好意。',{tag:'結'}),
+  /* 故事 ⑥：健仔問路 */
+  CHQ(5,'🗺️','健仔第一次去新的工作地點。｜他找不到入口，就問保安員：請問員工入口在哪裏？｜保安員說：向前走，在街口轉右，就是員工入口。｜健仔說：多謝你。｜他準時到了。',
+   '誰找不到入口？','*@健仔|@成仔|@小愉|@經理','是健仔。',{tag:'人',tx:0,rate:.74}),
+  FUP(5,'他問誰？','🧑‍💼經理|*👮保安員|👩小愉|🧓師傅','他問保安員。',{tag:'人'}),
+  ORD(5,'','','⬆️向前走|➡️轉右','⬅️轉左',{same:1,ask:'保安員說，先怎樣走？然後怎樣走？'}),
+  FUP(5,'最後的結果怎樣？','🕙遲到了|*🕘準時到了|🚫沒有去','健仔準時到了。',{tag:'結'}),
+  /* 故事 ⑦：成仔幫忙 */
+  CHQ(5,'📦','倉庫的箱子很重，阿明搬不動。｜成仔看見了，就說：我來幫你。｜他們一起搬，很快就搬完了。｜阿明說：多謝你！｜成仔笑着說：不用客氣。',
+   '誰搬不動箱子？','@成仔|*@阿明|@小愉|@健仔','是阿明。',{tag:'人',tx:0,rate:.74}),
+  FUP(5,'成仔看見了，怎樣說？','🙄不關我事|*🤝我來幫你|🏃走開','成仔說：我來幫你。',{tag:'事'}),
+  FUP(5,'他們怎樣搬？','🙅各自搬|*🤝一起搬|😴不搬','他們一起搬，很快就搬完了。',{tag:'事'}),
+  ORD(5,'','','🤝說我來幫你|📦一起搬','🏃走開',{same:1,ask:'成仔先做甚麼？然後做甚麼？'}),
+  FUP(5,'阿明說甚麼？','😠走開|*🙏多謝你|🤐甚麼也不說','阿明說：多謝你！',{tag:'結'}),
+  ACT(5,'🖼️','看圖排故事','看四張圖，排出故事的先後。',
+   ['老師展示四張亂序的圖卡（例如：搬箱子的故事的四個畫面）。','請同學按故事次序，貼在白板上。','每貼一張，請一位同學說出那一格的內容：「先……，然後……」。','最後全班一起把故事從頭說一遍。'],
+   6,{timer:360,mat:'四張圖卡（可自行畫簡單的圖）',tip:'沒有圖卡時，可請同學在白紙上畫四格漫畫，再交換講給對方聽。'}),
+  ACT(5,'🎙️','我的小故事','兩人一組，說說今天早上發生的事。',
+   ['兩人一組，一人說兩至三句今天早上的事（例如：我今天坐巴士回校，巴士很擠，我站了二十分鐘）。','聽的人用手指找出：誰？在哪裏？甚麼事？結果？','聽的人複述一次：「你說……」。','交換角色，再做一次。'],
+   8,{timer:480,tip:'老師巡視，給予初組同學提示：用「我今天……」開始。複述時鼓勵用「你說……」。'})
+  ]),
+  ACT(6,'🔁','故事接龍','全班輪流說一句，把故事接起來。',
+   ['老師說：「剛才成仔的故事，誰記得第一句？」','全班坐成圓圈，每人說一句，一個接一個把故事說完。','忘記的時候，同學可以提示：「誰？」「在哪裏？」。','說完後，請同學拍手，讚賞專心聽的同學。'],
+   6,{timer:360,tip:'初組同學只需說出人物或地點；高組同學可說完整的一句。目標是人人有機會開口。'}),
+  TCH(6,'🏅','我會聽故事','誰？在哪裏？發生甚麼事？結果怎樣？',
+   '今天，我們學會了聽故事。｜誰？在哪裏？發生甚麼事？結果怎樣？',
+   '請學生選一個今天喜歡的故事，向旁邊的同學說說「我記得……」。',
+   {cards:[{e:'🧑',t:'誰？'},{e:'📍',t:'在哪裏？'},{e:'❗',t:'發生甚麼事？'},{e:'🔚',t:'結果怎樣？'}]})
+  ]});
+
+/* ───────────────────────── 第 5 節 聽指示做事 ───────────────────────── */
+LIS.push({ s:5, title:'聽指示做事：先、然後、最後', sub:'一步、兩步、三步指示', ico:'🔢', tx:0,
+  unit:'聽指示做事',
+  goals:[
+    {ico:'🔢', zh:'聽出先做甚麼、然後做甚麼、最後做甚麼', en:'Hear what to do first, next and last'},
+    {ico:'🧩', zh:'按次序完成一步、兩步和三步指示', en:'Follow one-, two- and three-step instructions'},
+    {ico:'🙌', zh:'聽完指示，把事情做出來', en:'Listen to the instruction, then do it'}],
+  prep:['（活動）教室內的實物：書、筆、杯子、文件夾等','（加長版）紙和筆，用來畫圖','分組名單（四至五人一組）'],
+  stages:['次序詞','一步指示','兩步指示','三步指示','做一做'],
+  strat:[
+    '線索詞：「先、然後、最後」是次序的提示，用手指數一數、在腦中畫圖，幫助記憶。',
+    '一步指示：圖片選擇，先建立「聽到就找圖」的習慣；再配合動作，聽完才做。',
+    '兩步指示：逐步加長；聽完才排次序，公佈後請同學複述。',
+    '三步指示：加入干擾圖卡；初組只需完成第一步，中組完成前兩步。',
+    '實物操作：把聽到的指示用實物做出來，連結真實工作；小組接力訓練傳達指示。'],
+  items:[
+  TCH(0,'🔢','先、然後、最後','聽到「先、然後、最後」，就要記住次序。',
+   '聽到，先，然後，最後，｜就要記住次序。｜例如：先洗手，然後倒水，最後拿杯子。',
+   '邊聽邊用手指數：先（1隻手指）、然後（2隻）、最後（3隻）。這是常用的記憶技巧。',
+   {tx:1,cards:[{e:'1️⃣',t:'先',d:'第一步'},{e:'2️⃣',t:'然後',d:'第二步'},{e:'3️⃣',t:'最後',d:'第三步'}]}),
+  TCH(0,'🧠','記住指示的三個方法','數一數，看一看，說一說。',
+   '記住指示有三個方法。｜第一，用手指數一數。｜第二，在腦中看一看畫面。｜第三，自己說一遍。',
+   '示範三個方法：①伸出手指數步驟；②閉眼想像做事的畫面；③小聲複述。讓學生選一個最適合自己的方法。',
+   {cards:[{e:'🖐️',t:'數一數',s:'用手指數一數'},{e:'🧠',t:'看一看',s:'在腦中看一看畫面'},{e:'🗣️',t:'說一說',s:'自己說一遍'}]}),
+  /* 一步 */
+  ACT(1,'🙋','我說你做：一步和兩步','聽完才做，一步一步來。',
+   ['老師說一步指示（例如：請把書放在桌子上），全班聽完才做。','再說兩步指示（例如：先站起來，然後拍手），全班聽完才做。','做錯的同學重新聽一次；讚賞等到最後才做的同學。','每次問一位同學：「你剛才聽到甚麼？」（複述）'],
+   5,{timer:300,mat:'書本、杯子等教室實物',tip:'先示範做錯的例子（未聽完就動）和做對的例子，讓同學明白「聽完才做」。'}),
+  CHQ(1,'🥛','請把杯子放在桌子上。','經理要你做甚麼？','🧹拿掃把|*🥛放杯子|🧼洗手|🚪開門','要把杯子放在桌子上。',
+   {tip:'先讓學生預測，再作答。聽不清楚的同學，請他用「請再說一次」發問。'}),
+  CHQ(1,'📦','請把箱子搬到門口。','經理要你做甚麼？','🧽抹桌子|🥛洗杯子|🧹掃地|*📦搬箱子','要把箱子搬到門口。'),
+  CHQ(1,'🧼','請你先去洗手。','經理要你做甚麼？','🥛洗杯子|*🧼洗手|🧽抹桌子|📦搬箱子','要先去洗手。',
+   {tip:'「洗手」和「洗杯子」開頭相同，要聽到最後才知道，是專心聽的好例子。'}),
+  ...X([
+  CHQ(1,'🪟','請把窗關上。','經理要你做甚麼？','🚪關門|*🪟關窗|💡開燈|🧹掃地','要把窗關上。'),
+  CHQ(1,'🗑️','請把垃圾倒掉。','經理要你做甚麼？','*🗑️倒垃圾|🥛倒水|🚰開水喉|🧺摺衫','要把垃圾倒掉。')
+  ]),
+  /* 兩步 */
+  ORD(2,'🧑‍💼','先戴手套，｜然後抹桌子。','🧤戴手套|🧽抹桌子','🧹掃地',
+   {tip:'請同學邊聽邊用手指數「先、然後」。公佈答案後，請一位同學複述：「先……，然後……」。'}),
+  ORD(2,'🧑‍💼','先拿清單，｜然後拿貨品。','📋拿清單|🛒拿貨品','🥤倒水'),
+  ORD(2,'🧑‍💼','先洗手，｜然後拿杯子。','🧼洗手|🥛拿杯子','🚪開門'),
+  ...X([
+  ORD(2,'📦','先打開箱子，｜然後拿出貨品。','📦打開箱子|🛒拿出貨品','🧹掃地'),
+  ORD(2,'🥤','先倒水，｜然後放冰塊。','🚰倒水|🧊放冰塊','🥛洗杯子')
+  ]),
+  /* 三步 */
+  ORD(3,'☕','先洗手，｜然後拿杯子，｜最後放在桌上。','🧼洗手|🥛拿杯子|🍽️放在桌上','🧹掃地',
+   {tip:'三步指示較長：可分段重播（每步之間停一停）。初組同學只需聽出第一步。'}),
+  ORD(3,'📦','先戴手套，｜然後搬箱子，｜最後貼標籤。','🧤戴手套|📦搬箱子|🏷️貼標籤','🧽抹桌子'),
+  ORD(3,'🏪','先看清單，｜然後拿貨品，｜最後放進籃子。','📋看清單|🛒拿貨品|🧺放進籃子','🥛洗杯子'),
+  ...X([
+  ORD(3,'🧹','先拿掃把，｜然後掃地，｜最後倒垃圾。','🧹拿掃把|🧹掃地|🗑️倒垃圾','🧼洗手'),
+  ORD(3,'🧊','先拿牛奶，｜然後貼價錢紙，｜最後排在冰箱。','🥛拿牛奶|🏷️貼價錢紙|🧊排在冰箱','🧹掃地')
+  ]),
+  /* 做一做 */
+  ACT(4,'🧰','實物指示：我做給你看','聽三步指示，用教室的實物做出來。',
+   ['請一位同學站到前面，老師說三步指示（例如：先拿一本書，然後放在椅子上，最後拍拍手）。','同學聽完，才把三個動作做出來。','其他同學當「檢查員」，舉手說：「做對了」或「我想再看一次」。','輪流請不同的同學上來，每次換一個指示。'],
+   8,{timer:480,mat:'書、筆、椅子、杯子、文件夾等',tip:'高組同學可以先做；初組同學可以只做第一步，其餘由同學幫忙提示。重點是「聽完才做」。'}),
+  ...X([
+  ACT(4,'✏️','畫圖指示','聽指示，一步一步畫出來。',
+   ['每人拿一張紙和一支筆。','老師說：先畫一個圓圈，然後畫兩隻眼睛，最後畫一個笑口。','畫好後，和旁邊的同學比較：畫得一樣嗎？','換一個指示再做一次（例如：先畫一間屋，然後畫門，最後畫太陽）。'],
+   6,{timer:360,mat:'紙、筆',tip:'這項活動讓同學練習「聽完才做」，亦可看出誰在哪一步聽漏了。'}),
+  ACT(4,'📣','指示接力','小組接力：聽、記、說、做。',
+   ['每組四至五人排成一行。','老師向第一位同學說三步指示（例如：先拿筆，然後寫名字，最後交給老師）。','第一位悄悄告訴第二位，如此類推；最後一位做出來。','全班核對：做對了嗎？在哪裏傳錯了？'],
+   8,{timer:480,mat:'簡單的實物（筆、紙）',tip:'傳錯了不用責怪，一起找出在哪一步聽漏，再練習一次。'})
+  ]),
+  TCH(4,'🏅','我會聽指示','先、然後、最後；聽清楚，才去做。',
+   '今天，我們學會了聽指示。｜先，然後，最後。｜聽清楚，才去做。',
+   '請學生說說：「剛才哪一題最難？我是怎樣聽的？」培養自我檢視。',
+   {cards:[{e:'1️⃣',t:'先'},{e:'2️⃣',t:'然後'},{e:'3️⃣',t:'最後'}]})
+  ]});
+
+/* ───────────────────────── 第 6 節 經理話 ───────────────────────── */
+LIS.push({ s:6, title:'經理話：不要、數量、方向和顏色', sub:'玩「經理話」，聽出重要的小細節', ico:'📢', tx:0,
+  unit:'經理話與聽細節',
+  goals:[
+    {ico:'📢', zh:'玩「經理話」，只有聽到「經理說」才做', en:'Play “Manager says” and act only when you hear it'},
+    {ico:'🚫', zh:'聽出「不要」，知道甚麼不可以做', en:'Hear “don’t” and know what not to do'},
+    {ico:'🎨', zh:'聽出數量、顏色和方向', en:'Listen for amounts, colours and directions'}],
+  prep:['（活動）無須特別預備','（加長版）紅、藍、綠色的小物件（可選）'],
+  stages:['經理話','聽出「不要」','聽出數量','聽出方向和顏色','經理話大挑戰'],
+  strat:[
+    '選擇性注意：只有「經理說」才行動，訓練抓住關鍵詞和控制衝動；做錯不出局，重新再聽。',
+    '否定詞：「不要」是安全和工作質素的關鍵，用手勢（交叉手）提醒，聽到就停。',
+    '數量：數字配圖像，邊聽邊用手指數。',
+    '細節：顏色、方向要同時記住「哪一個」和「放哪裏」，一次只問一個問題。',
+    '綜合：混合「經理說」、否定詞和多步指示，逐步加難。'],
+  items:[
+  TCH(0,'📢','經理話','經理說，才做；沒有說「經理說」，就不做！',
+   '我們來玩，經理話。｜只有聽到，經理說，才做動作。｜沒有聽到，經理說，就不要動！',
+   '先全班試玩兩輪（不用平板），讓每位同學明白規則。玩的時候，做動作的同學站起來，按掣選「做」或「不做」；沒有「經理說」要保持不動。',{tx:1}),
+  ACT(0,'🎮','全班玩經理話','先玩一玩，再用平板玩。',
+   ['老師當「經理」，說指令（例如：經理說，拍拍手。／拍拍手。）','只有「經理說」才做；沒有說就保持不動。','做錯的同學不用出局，笑一笑，再聽下一個。','玩三至五輪，讓同學熟習規則。'],
+   5,{timer:240,tip:'有些同學衝動，容易做錯；做錯時說「沒關係，再聽一次」，並讚賞能忍住不動的同學。'}),
+  BOS(0,'經理說：站起來。',true,'有「經理說」，要做。',{tx:1}),
+  BOS(0,'拍拍手。',false),
+  BOS(0,'經理說：摸摸頭。',true),
+  BOS(0,'坐下來。',false),
+  BOS(0,'經理說：舉高手。',true),
+  ...X([
+  BOS(0,'經理說：拍拍手，｜然後坐下來。',true,'有「經理說」，要做兩件事：先拍拍手，然後坐下來。'),
+  BOS(0,'摸摸鼻子。',false),
+  BOS(0,'經理說：轉一個圈。',true),
+  BOS(0,'舉高手。',false)
+  ]),
+  /* 不要 */
+  TCH(1,'🚫','聽到「不要」，就要停','「不要」是很重要的字。',
+   '有一個字，很重要。｜就是，不要。｜聽到不要，就要停一停，想一想。',
+   '手勢：雙手交叉成「X」。可舉例：「不要走進去，地上很滑」「不要用手摸，很燙」，讓學生明白漏聽「不要」可能有危險。',
+   {cards:[{e:'🚫',t:'不要走',s:'不要走進去'},{e:'🔥',t:'不要摸',s:'不要用手摸，很燙'},{e:'📱',t:'不要玩手機',s:'上班時，不要玩手機'}]}),
+  CHQ(1,'🥛','請拿杯子，不要拿碟子。','要拿甚麼？','*🥛杯子|🍽️碟子|🥢筷子','要拿杯子，不要拿碟子。',{tip:'請同學說：「要拿……，不要拿……」。'}),
+  CHQ(1,'💡','請開燈，不要開風扇。','要開甚麼？','🌀風扇|*💡燈|🚪門','要開燈，不要開風扇。'),
+  CHQ(1,'🧽','不要走進去，這裏正在抹地。','你應該怎麼做？','🚶走進去|*✋等一等，不走進去|🏃跑過去','要等一等，不走進去，免得跌倒。'),
+  ...X([
+  CHQ(1,'☕','不要用手摸，這杯咖啡很燙。','你應該怎麼做？','🤚用手摸|*🫱小心，不要摸|🥤馬上喝','很燙，不可以用手摸。'),
+  ACT(1,'🙅','不要遊戲','聽到「不要」，保持不動。',
+   ['老師說指令，如果聽到「不要」，同學保持不動；沒有「不要」才做。','例如：「拍拍手。」（做）「不要拍手。」（不動）「不要站起來，摸摸頭。」（只摸頭）','做錯的同學重新再聽。','請同學當小老師，說出有「不要」的指令。'],
+   6,{timer:300,tip:'「不要站起來，摸摸頭」較難：要同時聽到不做甚麼和做甚麼。初組同學可只玩短的指令。'})
+  ]),
+  /* 數量 */
+  CHQ(2,'🍽️','請拿三個碟子。','要拿幾個碟子？','🍽️兩個|*🍽️🍽️🍽️三個|🍽️🍽️🍽️🍽️四個|🍽️一個','要拿三個碟子。'),
+  ...GRP(2,'☕','請拿兩杯咖啡，｜一杯茶。',[
+    ['量','咖啡要拿幾杯？','☕一杯|*☕☕兩杯|☕☕☕三杯|☕☕☕☕四杯','咖啡兩杯。'],
+    ['量','茶要拿幾杯？','*🍵一杯|🍵🍵兩杯|🍵🍵🍵三杯','茶一杯。']],{tag:'量'}),
+  ...X([
+  CHQ(2,'🥛','請搬四箱牛奶。','要搬幾箱？','🥛兩箱|🥛三箱|*🥛四箱|🥛五箱','要搬四箱牛奶。'),
+  CHQ(2,'🏷️','請貼五張標籤。','要貼幾張？','🏷️三張|🏷️四張|*🏷️五張|🏷️六張','要貼五張標籤。')
+  ]),
+  /* 方向和顏色 */
+  TCH(3,'🎨','方向和顏色','聽清楚是哪一個，放在哪裏。',
+   '經理會說顏色，也會說方向。｜左邊，右邊，上面，下面。｜紅色，藍色，綠色，黃色。',
+   '邊說邊用手指方向（左、右、上、下），請同學跟着指。左右對部分同學較難，可先在教室內貼上「左」「右」標籤。',
+   {cards:[{e:'⬅️',t:'左邊'},{e:'➡️',t:'右邊'},{e:'⬆️',t:'上面'},{e:'⬇️',t:'下面'},{e:'🟥',t:'紅色'},{e:'🟦',t:'藍色'}]}),
+  ...GRP(3,'📦','請把紅色的箱子，｜放在左邊。',[
+    ['物','要放哪一個箱子？','🟦藍色箱子|*🟥紅色箱子|🟩綠色箱子|🟨黃色箱子','紅色的箱子。'],
+    ['地','放在哪一邊？','*⬅️左邊|➡️右邊|⬆️上面|⬇️下面','放在左邊。']]),
+  ...GRP(3,'🥛','請把藍色的杯子，｜放在上面。',[
+    ['物','要放哪一個杯子？','🔴紅色杯子|🟢綠色杯子|*🔵藍色杯子|🟡黃色杯子','藍色的杯子。'],
+    ['地','放在哪裏？','⬇️下面|*⬆️上面|⬅️左邊|➡️右邊','放在上面。']]),
+  ...X(GRP(3,'📁','請把綠色的文件夾，｜放在右邊。',[
+    ['物','要放哪一個文件夾？','🟥紅色文件夾|🟦藍色文件夾|🟨黃色文件夾|*🟩綠色文件夾','綠色的文件夾。'],
+    ['地','放在哪一邊？','⬅️左邊|*➡️右邊|⬆️上面|⬇️下面','放在右邊。']])),
+  /* 大挑戰 */
+  BOS(4,'經理說：不要拍手。',false,'經理說了「不要」，就不拍手。',{ask:'要拍手嗎？'}),
+  BOS(4,'經理說：先站起來，｜然後坐下來。',true,'有「經理說」，要做兩件事：先站起來，然後坐下來。'),
+  BOS(4,'先站起來，｜然後坐下來。',false),
+  BOS(4,'經理說：先拍手，｜然後摸頭，｜最後坐下來。',true,'有「經理說」，要做三件事：先拍手，然後摸頭，最後坐下來。'),
+  ...X([
+  BOS(4,'經理說：不要站起來。',false,'經理說了「不要」，就不站起來。',{ask:'要站起來嗎？'}),
+  BOS(4,'經理說：拍拍手，｜不要摸頭。',true,'要拍拍手，不要摸頭。',{ask:'要拍手嗎？'}),
+  BOS(4,'經理說：舉高手，｜然後轉一個圈。',true),
+  ACT(4,'🧑‍💼','小經理','輪流當經理，說出指令。',
+   ['請一位同學當「小經理」，站到前面。','小經理說指令（可用「經理說」「不要」「先……然後……」），其他同學聽完才做。','小經理要說得慢、說得清楚；如果同學聽不清楚，要再說一次。','每位小經理完成後，全班說：「謝謝經理！」'],
+   7,{timer:420,tip:'小經理也是練習「說清楚」。初組同學可以用簡單的一步指令。'})
+  ]),
+  TCH(4,'🏅','我會聽細節','經理說，才做。聽到「不要」，就要停。',
+   '今天，我們學會了聽細節。｜經理說，才做。｜聽到，不要，就要停。｜還要聽清楚，數量，顏色和方向。',
+   '請學生說說：「哪一個細節最容易漏掉？」（例如：不要、數量、左右）',
+   {cards:[{e:'📢',t:'經理說'},{e:'🚫',t:'不要'},{e:'🔢',t:'數量'},{e:'🎨',t:'顏色'}]})
+  ]});
+
+/* ───────────────────────── 第 7 節 職場常聽到的話 ───────────────────────── */
+LIS.push({ s:7, title:'職場常聽到的話：口訊、電話和廣播', sub:'聽口訊、電話留言和廣播，找出重點', ico:'📞', tx:0,
+  unit:'口訊、電話和廣播',
+  goals:[
+    {ico:'💬', zh:'聽懂同事的口訊，記住重點', en:'Understand a spoken message from a colleague'},
+    {ico:'📞', zh:'認識接電話的說話，聽出電話留言的重點', en:'Learn phone manners and find the key points of a message'},
+    {ico:'📢', zh:'聽懂廣播和通知，知道要做甚麼', en:'Understand announcements and know what to do'}],
+  prep:['（活動）玩具電話或兩部電話','（活動）便條紙和筆','（加長版）寫了口訊的紙條'],
+  stages:['同事口訊','接電話','電話留言','廣播和通知','我來試一試'],
+  strat:[
+    '口訊要記重點：誰說的、甚麼時候、哪裏、做甚麼；先用四色圖式，再用「傳話」練習記憶和複述。',
+    '禮貌用語：接電話有固定的說話，用句式卡反覆練習，在角色扮演中使用。',
+    '留言便條：電話留言只說一次，邊聽邊記下「人、時、數字、事」，數字用手指數。',
+    '廣播的特點：先聽對象（各位同事／乘客），再抓重點；沒有畫面，只靠聲音。',
+    '綜合：把口訊、電話、廣播當成一天的工作情景。'],
+  items:[
+  TCH(0,'💬','口訊要記重點','同事叫我們轉告別人，要記住重點。',
+   '有時候，同事會叫我們，轉告別人。｜這叫口訊。｜我們要記住，誰說的，甚麼時候，在哪裏，做甚麼。',
+   '請同學舉例：「你有沒有幫老師轉告過同學？」說明口訊不一定寫下來，要靠聽和記。',
+   {tx:1,cards:[{k:'人',e:'🧑',t:'誰說的？'},{k:'時',e:'⏰',t:'甚麼時候？'},{k:'地',e:'📍',t:'在哪裏？'},{k:'事',e:'🛠️',t:'做甚麼？'}]}),
+  ...SENT(0,'🧑‍💼','經理叫我告訴你：｜下午三點，｜在二號房開會。',[
+    '@小愉|*@經理|@成仔|@健仔',
+    '🕑下午兩點|*🕒下午三點|🕓下午四點|🕘上午九點',
+    '1️⃣一號房|*2️⃣二號房|3️⃣三號房|🏫禮堂',
+    '*👥開會|🍱食飯|🧹打掃|🎉慶祝'],
+    ['誰叫我告訴你？','甚麼時候開會？','在哪裏開會？','要做甚麼？'],{tag:'人',tx:1,tip:'先請同學看字幕，再撤除字幕重聽一次。'}).map((q,j)=>j===0?q:q),
+  ...X(GRP(0,'🌂','小愉叫我告訴你：｜明天早上，｜請帶雨傘。',[
+    ['人','誰叫我告訴你？','@成仔|*@小愉|@健仔|@經理','是小愉。'],
+    ['時','甚麼時候？','*🌅明天早上|🌇明天晚上|📅後天早上|🌅今天早上','是明天早上。'],
+    ['物','要帶甚麼？','🧢帽子|*☂️雨傘|🧥外套|🍱飯盒','要帶雨傘。']],{tx:0})),
+  ACT(0,'📣','口訊接力','把口訊傳下去，最後一位去做。',
+   ['老師向第一位同學說一個口訊（例如：請告訴小愉，把藍色的杯子放在桌子上）。','同學一個傳一個，最後一位同學把事情做出來。','全班核對：口訊有沒有傳錯？','傳錯了，不用責怪，一起找出在哪裏聽漏了。'],
+   6,{timer:360,mat:'杯子、桌子等教室實物',tip:'口訊要簡短，先用一步指示，再逐漸加長。傳話的同學要說得慢、說得清楚。'}),
+  /* 接電話 */
+  TCH(1,'📞','接電話的說話','接電話，要有禮貌，也要聽清楚。',
+   '接電話，要有禮貌。｜先說：喂，你好。｜然後問：請問找哪一位？｜聽不清楚，可以說：請你再說一次。',
+   '逐句跟讀。留意語氣要友善，語速不要太快。可以先由老師與一位同學示範，再請同學兩人一組試一試。',
+   {cards:[{e:'📞',t:'喂，你好！',s:'喂，你好！'},{e:'❓',t:'請問找哪一位？',s:'請問找哪一位？'},{e:'⏳',t:'請等一等',s:'請等一等'},
+           {e:'🔁',t:'請你再說一次',s:'請你再說一次'},{e:'📝',t:'我會轉告他',s:'我會轉告他'},{e:'👋',t:'再見',s:'再見'}]}),
+  CHQ(1,'📞','電話響了。你拿起電話。','你應該先說甚麼？','😶不說話|🙄你找誰|*📞喂，你好','先說：「喂，你好。」',{tip:'請同學示範完整的接電話開場白，語氣要友善。'}),
+  CHQ(1,'📞','對方說：請找經理。｜但是，經理現在不在。','你應該怎麼說？','📵掛線|*🙂經理現在不在，請問你是哪位？|🤷我不知道','說：「經理現在不在，請問你是哪位？」再記下留言。'),
+  ...X([
+  CHQ(1,'🔇','電話裏，對方說話很小聲。','你聽不清楚，應該怎麼說？','📵掛線|😶不說話|*🔁對不起，請你再說一次','聽不清楚，要禮貌地說：「請你再說一次。」'),
+  ACT(1,'🎭','角色扮演：接電話','兩人一組，一人打電話，一人接電話。',
+   ['兩人一組，用玩具電話（或兩部電話）。','打電話的同學說：「喂，我想找經理。」接電話的同學練習：「喂，你好。請問你是哪位？」','接電話的同學把留言寫下來：誰、時間、事。','交換角色，再做一次；然後請兩組上台表演。'],
+   8,{timer:480,mat:'玩具電話、便條紙和筆',tip:'初組同學可只練習「喂，你好」和「再見」；高組同學練習問「請問你是哪位」和記下留言。'})
+  ]),
+  /* 電話留言 */
+  TCH(2,'📝','電話留言要記四樣','誰打來？甚麼時候？電話號碼？甚麼事？',
+   '電話留言，只說一次。｜我們要記下四樣：｜誰打來。甚麼時候。電話號碼。甚麼事。',
+   '示範：老師一邊聽一邊在白板上寫「陳先生／明天十點／3582／打電話」。強調數字要用手指邊聽邊記。',
+   {cards:[{k:'人',e:'🧑',t:'誰打來',s:'誰打來？'},{k:'時',e:'⏰',t:'甚麼時候',s:'甚麼時候？'},{k:'量',e:'🔢',t:'電話號碼',s:'電話號碼是甚麼？'},{k:'事',e:'🛠️',t:'甚麼事',s:'甚麼事？'}]}),
+  ...SENT(2,'📞','喂，我是陳先生。｜請明天早上十點，｜打電話給我。｜我的電話是，三，五，八，二。',[
+    '*👨陳先生|👩李小姐|🧑‍💼經理|🧓師傅',
+    '🕘明天早上九點|*🕙明天早上十點|🕙今天早上十點|🕙後天早上十點',
+    '3528|*3582|3852|5382',
+    '*📞打電話給他|📩寫電郵給他|🚪去找他'],
+    ['是誰打電話來？','請甚麼時候打回去？','電話號碼是甚麼？','要做甚麼？'],{tx:0,gap:500,tip:'數字部分可重播。請同學邊聽邊用手指數，再把四個重點說一遍。'}).map(q=>q),
+  ...SENT(2,'📞','你好，我是李小姐。｜我想改時間。｜後天下午兩點，｜我們在餐廳見面。',[
+    '👨陳先生|*👩李小姐|🧑‍💼經理|🧓師傅',
+    '*⏰改時間|❌取消|🍱訂位|🛒買東西',
+    '*🕑後天下午兩點|🕑明天下午兩點|🕒後天下午三點|🕑今天下午兩點',
+    '*🍽️餐廳|🏢辦公室|📚圖書館|🏪超級市場'],
+    ['是誰打電話來？','李小姐想怎樣？','改到甚麼時候？','在哪裏見面？'],{tx:0}),
+  ...X(SENT(2,'📦','喂，我是倉庫的阿強。｜請今天下午四點前，｜把三箱汽水，｜送到二號房。',[
+    '*📦倉庫的阿強|🧑‍💼經理|👧小愉|🧓師傅',
+    '🕒下午三點前|*🕓下午四點前|🕔下午五點前|🕑下午兩點前',
+    '🥤兩箱汽水|*🥤三箱汽水|🥤四箱汽水|🥛三箱牛奶',
+    '1️⃣一號房|*2️⃣二號房|3️⃣三號房|4️⃣四號房'],
+    ['是誰打電話來？','最遲幾點前？','送甚麼？送多少？','送到哪裏？'],{tx:0})),
+  ...X([
+  ACT(2,'📝','寫留言便條','聽電話留言，寫下重點。',
+   ['每人拿一張便條紙，寫上四個格：誰、時間、電話、事。','老師用電腦播放（或自己讀）一段電話留言，同學邊聽邊記。','小組互相核對：寫的一樣嗎？','請一位同學把便條讀給全班聽。'],
+   6,{timer:360,mat:'便條紙、筆',tip:'初組同學可在便條上畫圖或只記一樣重點；高組同學要寫完整的四樣。'})
+  ]),
+  /* 廣播 */
+  TCH(3,'📢','廣播和通知','廣播只說一次，先聽是誰，再聽重點。',
+   '工作的地方，常常有廣播。｜先聽，是叫誰。｜例如，各位同事，各位乘客。｜再聽重點：甚麼時候，在哪裏，做甚麼。',
+   '請同學說說在哪裏聽過廣播（學校、地鐵站、商場、超級市場）。廣播沒有畫面，只靠聲音，要特別專心。',
+   {cards:[{e:'📢',t:'各位請注意',s:'各位同事請注意'},{e:'👂',t:'聽完整句',s:'要聽完整句'},{e:'📌',t:'找重點',s:'找出時間，地點，和要做的事'}]}),
+  ...SENT(3,'📢','各位同事請注意：｜下午兩點，｜請到禮堂集合。',[
+    '*👥同事|🛒顧客|🚌乘客|🎓同學',
+    '🕐下午一點|*🕑下午兩點|🕒下午三點|🕓下午四點',
+    '*🏫禮堂|🍽️餐廳|📦倉庫|🏢辦公室',
+    '*👥集合|🍱食飯|🧹打掃|🚌乘車'],
+    ['廣播叫誰注意？','甚麼時候集合？','到哪裏集合？','要做甚麼？'],{tx:0,tip:'請同學先說：廣播叫誰？再找時間地點。'}),
+  ...X(GRP(3,'🚇','各位乘客請注意：｜下一班往旺角的列車，｜將在兩分鐘後到達。',[
+    ['地','列車往哪裏？','🚉九龍塘|*🚉旺角|🚉沙田|🚉屯門','往旺角。'],
+    ['時','幾時到達？','⏰一分鐘後|*⏰兩分鐘後|⏰五分鐘後|⏰十分鐘後','兩分鐘後到達。']],{tx:0})),
+  /* 綜合 */
+  ...GRP(4,'🏪','各位顧客請注意：｜本店將在十分鐘後關門，｜請到收銀處付款。',[
+    ['時','幾時關門？','⏰五分鐘後|*⏰十分鐘後|⏰半小時後|⏰一小時後','十分鐘後關門。'],
+    ['事','顧客要做甚麼？','*💰到收銀處付款|🚪離開|🍱食飯|📦領貨','要到收銀處付款。']],{tx:0}),
+  TCH(4,'🏅','我會聽口訊、電話和廣播','記住重點，聽不清楚就問。',
+   '今天，我們學會了聽口訊，聽電話，和聽廣播。｜記住重點。｜聽不清楚，就問。',
+   '請學生說說：「在實習或日常生活中，你有沒有聽過廣播或接過電話？」',
+   {cards:[{e:'💬',t:'口訊'},{e:'📞',t:'電話'},{e:'📢',t:'廣播'}]})
+  ]});
+
+/* ───────────────────────── 第 8 節 聽不清楚怎麼辦 ───────────────────────── */
+LIS.push({ s:8, title:'聽不清楚怎麼辦：確認和求助', sub:'請再說一次・我說一次，對嗎？', ico:'🙋', tx:0,
+  unit:'聽不清楚，我會問',
+  goals:[
+    {ico:'🙋', zh:'聽不清楚時，禮貌地問一問', en:'Politely ask when you did not hear clearly'},
+    {ico:'🔁', zh:'聽完指示，把它說一遍，確認自己聽對', en:'Repeat the instruction to check you heard it right'},
+    {ico:'🎭', zh:'在角色扮演中，用說話解決聽不清楚的問題', en:'Use words to solve problems in role-play'}],
+  prep:['（活動）分組：兩人一組','（活動）簡單道具：箱子、杯子、文件夾等','建議說明：不明白而發問，是好員工的表現'],
+  stages:['聽不清楚','我會問','我說一次，對嗎？','角色扮演','求助挑戰'],
+  strat:[
+    '正常化：每個人都有聽不清楚的時候，重要的是知道怎麼做；用「說得太快」「太嘈吵」等真實情況引入。',
+    '求助句式：用句式卡練習「請再說一次」「請問……在哪裏？」，一次聽一句，跟讀配語氣。',
+    '複述確認：聽完指示，說一遍，請對方確認；這是職場上避免出錯的重要技巧。',
+    '角色扮演：兩人一組，一人當經理，一人當新員工，在真實情景中使用；老師巡視給予回饋。',
+    '綜合挑戰：加入多步指示，聽不清楚時能夠發問或確認。'],
+  items:[
+  TCH(0,'🙉','聽不清楚，不用怕','每個人都有聽不清楚的時候。重要的是，知道怎麼做。',
+   '每個人，都有聽不清楚的時候。｜聽不清楚，不用怕。｜重要的是，知道怎麼做。',
+   '先請同學分享：「你有沒有聽不清楚老師或家人的話？那時你怎麼做？」肯定「問」是勇敢和有禮貌的表現。',{tx:1}),
+  CHQ(0,'🔊','經理說話的時候，外面很嘈吵。你聽不清楚。','你應該怎麼做？','🤷亂做一通|*🙏請再說一次|😶不說話','聽不清楚，可以說：「請再說一次。」',
+   {tx:1,tip:'請學生說出完整句子：「請再說一次。」並注意語氣有禮貌。'}),
+  CHQ(0,'🏃','經理說：請把三箱汽水，搬到二號房。','（經理說得很快）你應該怎麼說？','😶不說話|*🐢請說慢一點|🤷自己亂做','經理說得太快，可以說：「請說慢一點。」',
+   {rate:1.5,tx:0,tip:'故意用很快的速度播放。讓學生體驗「聽不清楚」，再討論可以怎樣說。'}),
+  CHQ(0,'⚙️','經理說：請把箱子搬到……｜機器聲很大，你聽不到最後一句。你不知道要搬去哪裏。','你應該問甚麼？','🤷自己亂搬|*❓請問搬到哪裏？|😶不說話','可以問：「請問搬到哪裏？」',{tx:1}),
+  ...X([
+  CHQ(0,'📞','電話裏，對方說話很小聲。你只聽到「明天……」。','你應該怎麼說？','📵掛線|🤷亂猜|*🔁對不起，請你再說一次','聽不清楚，要禮貌地說：「請你再說一次。」'),
+  CHQ(0,'🧑‍💼','經理說話的時候，你剛好打了一個噴嚏，漏聽了一句。','你應該怎麼做？','*🙏對不起，我漏聽了，請再說一次|🤥假裝聽到|🏃走開','漏聽了，可以說：「對不起，我漏聽了，請再說一次。」')
+  ]),
+  /* 我會問 */
+  TCH(1,'🙋','聽不清楚，我會問','不明白，不用怕。可以說：',
+   '聽不清楚，不用怕。｜我們可以說：請再說一次。｜對不起，我沒聽清楚。｜請問在哪裏？｜我說一次，對嗎？',
+   '逐句跟讀，配合禮貌的語氣、微笑和望向對方。可兩人一組角色扮演：一人當經理，一人當新員工。',
+   {tx:1,cards:[{e:'🔁',t:'請再說一次'},{e:'🙏',t:'對不起，我沒聽清楚'},{e:'❓',t:'請問在哪裏？'},{e:'✅',t:'我說一次，對嗎？'}]}),
+  CHQ(1,'🧑‍💼','經理一口氣說了三件事。你只記得兩件。','你應該怎麼做？','🤥假裝記得|*🙋請問第三件是甚麼？|🏃走開','可以問：「請問第三件是甚麼？」',{tx:0}),
+  CHQ(1,'🕐','經理說：請你下午……過來。｜你沒有聽到時間。','你應該問甚麼？','*🕑請問是下午幾點？|🤷隨便過去|😶不問','可以問：「請問是下午幾點？」'),
+  CHQ(1,'🧑‍💼','師傅說：把那個放在那裏。｜你不知道「那個」是甚麼，也不知道「那裏」在哪裏。','你應該怎麼做？','🤷隨便放|😶不問|*🙋請問是哪一個？放在哪裏？','要問清楚：「請問是哪一個？放在哪裏？」'),
+  CHQ(1,'🤔','你聽完經理的指示。你想知道自己有沒有聽對。','你可以怎麼說？','😴我不想聽|🤐甚麼也不說|*✅我說一次，對嗎？','說一次，經理就知道你有沒有聽對。'),
+  ...X([
+  CHQ(1,'👤','師傅說：請把這個交給阿明。｜你不認識阿明。','你應該怎麼做？','🤷交給別人|*❓請問阿明在哪裏？|🚫不做','不認識，就要問：「請問阿明在哪裏？」'),
+  CHQ(1,'📋','經理說：請把文件放進藍色的文件夾。｜你找不到藍色的文件夾。','你應該怎麼做？','*🙋請問藍色文件夾在哪裏？|🤷隨便放|😴不做','找不到，可以問：「請問藍色文件夾在哪裏？」')
+  ]),
+  /* 我說一次，對嗎？ */
+  TCH(2,'✅','我說一次，對嗎？','聽完指示，把它說一遍。',
+   '聽完指示，把它說一遍。｜例如，經理說：先洗手，然後倒咖啡。｜我說：先洗手，然後倒咖啡，對嗎？',
+   '示範：老師當經理，說一個兩步指示；學生複述「先……，然後……，對嗎？」。經理回答「對」或「不對，是……」。',
+   {tx:1,cards:[{e:'👂',t:'聽',s:'先聽清楚'},{e:'🗣️',t:'說一遍',s:'然後，把它說一遍'},{e:'❓',t:'對嗎？',s:'最後，問：對嗎？'}]}),
+  ORD(2,'☕','咖啡店經理說：｜先洗手，｜然後倒咖啡，｜最後送上桌。','🧼洗手|☕倒咖啡|🍽️送上桌','🧹掃地',
+   {tip:'公佈答案後，用「🎲 抽同學」請一位同學複述指示（說一說），再請全班說一次：「……對嗎？」'}),
+  ORD(2,'🏪','超級市場師傅說：｜先拿貨品，｜然後貼價錢紙，｜最後排在架上。','📦拿貨品|🏷️貼價錢紙|🛒排在架上','🥛洗杯子'),
+  CHQ(2,'🙏','你複述後，經理說：不對，是下午三點。','你應該怎麼做？','😠生氣|*🙏多謝，下午三點，我記住了|🏃走開','被糾正是好事。要說多謝，再說一次正確的時間。'),
+  ...X([
+  ORD(2,'🧹','清潔師傅說：｜先拿水桶，｜然後裝水，｜最後抹窗。','🪣拿水桶|💧裝水|🪟抹窗','🧤戴手套')
+  ]),
+  /* 角色扮演 */
+  ACT(3,'🎭','角色扮演：經理和新員工','兩人一組，一人當經理，一人當新員工。',
+   ['經理說一個兩步或三步指示（例如：先拿文件夾，然後放在桌上），可以故意說快一點或小聲一點。','新員工聽不清楚時，用句式卡說：「請再說一次。」「請說慢一點。」','新員工聽完後，說一遍：「我說一次，對嗎？」','交換角色，再做一次；然後請兩組上台表演。'],
+   8,{timer:480,mat:'句式卡（可用本課件的「聽不清楚，我會問」頁）、文件夾、杯子等',tip:'老師巡視，先讚賞做得好的小組。初組同學可以只練習說「請再說一次」。'}),
+  ...X([
+  ACT(3,'🙌','問得好！','老師故意說得含糊，同學問清楚。',
+   ['老師說一些含糊的指示（例如：把那個放在那裏。／請你過來一下。）','同學舉手，說：「請問是哪一個？」「請問在哪裏？」「請問甚麼時候？」','問得清楚、有禮貌的同學得到一個讚。','全班一起說：問清楚，做得準。'],
+   6,{timer:360,tip:'這項活動的目的，是讓同學明白「問」是好習慣。初組同學可以先跟讀句式。'}),
+  ACT(3,'📣','傳話挑戰','傳話時，可以問一次。',
+   ['每組四至五人排成一行，老師向第一位同學說一個三步指示。','傳話時，每個人可以問上一位同學一次：「請再說一次。」','最後一位同學把指示做出來。','核對：傳對了嗎？問了幾次？'],
+   8,{timer:480,tip:'在第 5 節「指示接力」的基礎上，加入「可以問一次」的規則，鼓勵同學使用求助句式。'})
+  ]),
+  /* 求助挑戰 */
+  ORD(4,'🍞','師傅說：｜先洗手，｜然後戴手套，｜最後包好麵包。','🧼洗手|🧤戴手套|🍞包麵包','🧹掃地',{tip:'請同學聽完後，先說一遍：「我說一次，對嗎？」再作答。'}),
+  CHQ(4,'📦','經理說：下午兩點，請把三箱汽水搬進倉庫。｜但是，你剛才只聽到「三箱」。','你應該問甚麼？','*❓請問甚麼時候？搬到哪裏？|🤷隨便搬|😴不做','要問清楚：「請問甚麼時候？搬到哪裏？」'),
+  ...X([
+  ORD(4,'☕','經理說：｜先擦桌子，｜然後擺好杯子，｜最後開燈。','🧽擦桌子|🥛擺好杯子|💡開燈','🧹掃地'),
+  CHQ(4,'🏢','經理說完指示後，問：你明白嗎？｜你其實有一點不明白。','你應該怎麼說？','🤥我明白|*🙋有一點不明白，請問……|😶不說話','不明白，要老實說，再問清楚。')
+  ]),
+  TCH(4,'🏅','我會問，也會確認','聽不清楚，我會問。聽完了，我會說一遍。',
+   '今天，我們學會了，聽不清楚，就問。｜聽完了，說一遍。｜問清楚，做得準。',
+   '請學生說說：「我最喜歡哪一句求助的說話？」鼓勵他們在實習和日常生活中使用。',
+   {cards:[{e:'🔁',t:'請再說一次'},{e:'🐢',t:'請說慢一點'},{e:'❓',t:'請問在哪裏？'},{e:'✅',t:'我說一次，對嗎？'}]})
+  ]});
+
+/* ───────────────────────── 第 9 節 新員工挑戰日 ───────────────────────── */
+LIS.push({ s:9, title:'新員工挑戰日', sub:'由報到到收工：一天的聆聽挑戰', ico:'🏆', tx:0,
+  unit:'新員工挑戰日',
+  goals:[
+    {ico:'🏆', zh:'在一天的工作情景中，運用五步曲專心聽', en:'Use the 5 listening steps through a whole working day'},
+    {ico:'🎯', zh:'聽出時人地事、次序、數量和「不要」', en:'Hear who, when, where, what, order, amounts and “don’t”'},
+    {ico:'🙋', zh:'聽不清楚時，會問、會確認', en:'Ask and check when you do not hear clearly'}],
+  prep:['建議在「聽力闖關」畫面試用「背景聲」（音量很輕；有感官敏感的同學先留意反應）','（活動）紙和筆','（加長版）分組名單'],
+  stages:['上班報到','早會','工作任務','午間時間','收工'],
+  strat:[
+    '情景連貫：用同一間咖啡店的一天，貫穿全節；先打招呼、目光接觸、自我介紹。',
+    '多條資料：早會一次說三件事，用手指數、多選題訓練短期記憶。',
+    '應用：師傅的步驟、數量、方向和「不要」同時出現；聽不清楚時主動發問。',
+    '真實聲音：廣播和電話留言，數字和人名要記；可試用輕微的背景聲。',
+    '總結與反思：聽經理的收工說話，回顧今天，分享學習；頒發證書，連結轉銜檔案。'],
+  items:[
+  TCH(0,'🏆','新員工挑戰日','今天，我們是咖啡店的新員工，要聽一天的指示。',
+   '今天，我們是咖啡店的新員工。｜由上班，到收工。｜我們要用五步曲，聽清楚每一句話。',
+   '連結實習經驗。提醒：停一停，望一望，聽清楚，說一說，就去做。有需要可按「背景聲」加上輕微的環境聲，模擬職場。',
+   {tx:1,cards:[{e:'✋',t:'停'},{e:'👀',t:'望'},{e:'👂',t:'聽'},{e:'🗣️',t:'說'},{e:'💪',t:'做'}]}),
+  ACT(0,'🤝','早晨，我是新員工','練習打招呼和自我介紹。',
+   ['一位同學當「經理」，一位同學當「新員工」，站到前面。','新員工望着經理，微笑說：「早晨，我叫……，請多多指教。」','經理回答：「早晨，歡迎你。」','其他同學當「檢查員」，說出：有沒有望着對方？有沒有微笑？聲音夠不夠大？'],
+   5,{timer:300,tip:'目光接觸可以由「望向對方的臉」開始，不勉強；重點是友善和有禮貌。'}),
+  ...GRP(0,'🧑‍💼','經理說：早晨！我是陳經理。｜今天你跟師傅學習。｜師傅在廚房等你。',[
+    ['人','你今天跟誰學習？','🧑‍💼陳經理|*🧓師傅|👧小愉|🧒成仔','今天跟師傅學習。'],
+    ['地','師傅在哪裏等你？','☕門口|*🍳廚房|📦倉庫|🏢辦公室','師傅在廚房。'],
+    ['人','經理姓甚麼？','🧑‍💼李經理|*🧑‍💼陳經理|🧑‍💼黃經理|🧑‍💼張經理','經理姓陳。']],{tx:1,tip:'人名也是重點。請同學說說：「我聽到經理姓……」'}),
+  /* 早會 */
+  CHQ(1,'📋','經理說：今天有三件事。｜第一，十點有客人預訂。｜第二，下午兩點，要收貨。｜第三，五點半，大家一起收工。',
+   '今天有幾件事？','2️⃣兩件|*3️⃣三件|4️⃣四件|5️⃣五件','今天有三件事。',{tag:'量',tx:0,tip:'請同學用手指數出一、二、三。'}),
+  FUP(1,'客人幾點預訂？','🕘九點|*🕙十點|🕚十一點|🕛十二點','十點有客人預訂。',{tag:'時'}),
+  FUP(1,'下午幾點收貨？','🕐一點|*🕑兩點|🕒三點|🕓四點','下午兩點收貨。',{tag:'時'}),
+  MUL(1,'','','今天有哪三件事？','*📅十點有客人預訂|*📦下午兩點收貨|*🏁五點半收工|🎉開派對|🛒去街市','客人預訂、收貨、收工。',{same:1,min:2}),
+  ...X([
+  ACT(1,'📔','我的記事簿','邊聽邊記，把重點畫下來。',
+   ['每人拿一張紙，畫三個格。','老師再說一次早會的話（或按「朗讀」），同學邊聽邊在格子裏畫（或寫）：預訂、收貨、收工。','和旁邊的同學核對：寫的一樣嗎？','請一位同學把記事簿讀給全班聽。'],
+   6,{timer:360,mat:'紙、筆',tip:'記事簿是職場常用的好習慣。初組同學可只畫圖，不用寫字。'})
+  ]),
+  /* 工作任務 */
+  ORD(2,'☕','師傅說：｜先洗手，｜然後戴手套，｜最後把咖啡豆倒進機器。','🧼洗手|🧤戴手套|☕倒咖啡豆','🧹掃地',{tip:'請同學先說一遍：「我說一次，對嗎？」'}),
+  ...GRP(2,'🫘','師傅說：請把兩包咖啡豆，｜放在左邊的架上，｜不要放在地上。',[
+    ['量','要拿多少包咖啡豆？','🫘一包|*🫘🫘兩包|🫘🫘🫘三包|🫘🫘🫘🫘四包','兩包。'],
+    ['地','要放在哪裏？','⬇️地上|➡️右邊的架上|*⬅️左邊的架上|⬆️上面','放在左邊的架上。'],
+    ['事','不可以放在哪裏？','*⬇️地上|⬅️左邊的架|➡️右邊的架|🚪門口','不要放在地上。']],{tx:0}),
+  ...X([
+  CHQ(2,'🤔','師傅說：把那個放在那裏。｜你不知道「那個」是甚麼，也不知道「那裏」在哪裏。','你應該怎麼做？','🤷隨便放|😶不問|*🙋請問是哪一個？放在哪裏？','要問清楚：「請問是哪一個？放在哪裏？」'),
+  ORD(2,'🧽','師傅說：｜先拿抹布，｜然後抹桌子，｜最後洗乾淨抹布。','🧽拿抹布|🪑抹桌子|🚰洗抹布','🚪開門'),
+  ...GRP(2,'☕','師傅說：請你在下午三點，｜把十杯咖啡，｜送到二號桌。',[
+    ['時','幾點送？','🕑下午兩點|*🕒下午三點|🕓下午四點|🕔下午五點','下午三點。'],
+    ['量','送多少杯咖啡？','☕五杯|☕八杯|*☕十杯|☕十二杯','十杯。'],
+    ['地','送到哪一桌？','1️⃣一號桌|*2️⃣二號桌|3️⃣三號桌|4️⃣四號桌','二號桌。']])
+  ]),
+  /* 午間 */
+  ...GRP(3,'📢','各位同事請注意：｜午飯時間到了，｜請到後面的休息室，｜十二點半之前回來。',[
+    ['地','在哪裏午飯？','🍳廚房|🏢辦公室|*🛋️休息室|📦倉庫','在休息室。'],
+    ['時','最遲幾點回來？','🕛十二點前|*🕧十二點半前|🕐一點前|🕜一點半前','十二點半前回來。'],
+    ['事','現在要做甚麼？','*🍱午飯|🧹打掃|📦收貨|🎉開派對','現在是午飯時間。']],{tx:0,tip:'廣播沒有畫面。請同學先說：廣播叫誰？'}),
+  ...GRP(3,'📞','喂，我是供應商阿強。｜請告訴經理，｜貨車下午兩點到。｜我的電話是，六，二，九，四。',[
+    ['人','是誰打電話來？','🧑‍💼經理|*🚚供應商阿強|🧓師傅|👧小愉','是供應商阿強。'],
+    ['時','貨車幾點到？','🕐一點|*🕑兩點|🕒三點|🕓四點','下午兩點。'],
+    ['量','電話號碼是甚麼？','6924|*6294|6249|2694','是六、二、九、四。']],{tx:0,gap:450,tip:'請同學邊聽邊用手指數數字，再把留言說一遍。'}),
+  ...X([
+  ACT(3,'🍱','午飯時間：和同事聊天','練習聆聽同事說話，也練習回應。',
+   ['兩人一組，一人說一件今天發生的事（例如：我今天坐巴士來上班，很擠）。','另一人要望着對方，聽完後說：「你說……，是嗎？」','再回應一句（例如：辛苦你了。）','交換角色，再做一次。'],
+   6,{timer:360,tip:'這是日常和同事相處的聆聽練習：望、聽、說（複述）、回應。'})
+  ]),
+  /* 收工 */
+  ...GRP(4,'🧑‍💼','經理說：今天大家做得很好。｜明天早上九點，｜請準時回來，｜帶雨傘。',[
+    ['時','明天幾點回來？','🕗八點|*🕘九點|🕙十點|🕚十一點','明天早上九點。'],
+    ['事','經理希望大家怎樣？','🕙遲到|*⏰準時回來|🏖️放假|🚪早退','請準時回來。'],
+    ['物','要帶甚麼？','🧢帽子|*☂️雨傘|🥤水樽|🍱飯盒','要帶雨傘。']],{tx:0}),
+  ACT(4,'📔','新員工日記','說一說，今天的新員工日。',
+   ['每人說一句：「今天我學到……」（例如：聽不清楚要問／要看着說話的人）。','老師把同學的話寫在白板上。','全班一起讀一次，作為今天的總結。','為專心聽的同學拍手。'],
+   4,{tip:'初組同學可以選擇卡片說：「我今天學會了停一停。」'}),
+  ...X([
+  ACT(4,'🏅','聆聽大挑戰：小組搶答','小組合作，把聽到的話找出重點。',
+   ['全班分成兩至三組。','老師說一句有時、人、地、事的話；各組討論，舉牌答案。','答對一項（時／人／地／事）得一分；答案要完整地說出來。','最後計分，頒發「最佳聆聽隊」。'],
+   8,{timer:480,mat:'紙牌或白板（每組一個）',tip:'比賽重點在合作和專心聽，不在輸贏。老師要讚賞每一組的表現。'})
+  ]),
+  TCH(4,'🎓','聆聽小員工','你做到了！停、望、聽、說、做。',
+   '你們是聆聽小員工。｜聽清楚，做得準確。',
+   '可按「🖨 列印」為全班列印「聆聽小員工證書」，放入學生的轉銜／學習檔案。',
+   {cert:1,cards:[{e:'✋',t:'停'},{e:'👀',t:'望'},{e:'👂',t:'聽'},{e:'🗣️',t:'說'},{e:'💪',t:'做'}]})
+  ]});
+
+/* 整理：預設答案說明；同一段話的追問沿用上一項的 say、scene；加上序號 */
+LIS.forEach(S=>{
+  let last = '', lastScene = '';
+  S.items = [].concat(...S.items);
+  S.items.forEach((it,i)=>{
+    if(it.same){ it.say = last; if(!it.scene) it.scene = ''; }
+    else if(it.say!==undefined) last = it.say;
+    if(it.k==='choice' && !it.fb && it.opts) it.fb = '答案是「'+it.opts[it.a].t+'」。';
+    it.i = i;
+  });
+});
+/* 選擇題的選項次序：沒有自然次序的（人物、物品、行動）把正確答案平均分佈在各位置，
+   避免學生發現「答案總在第二個」；有自然次序的（時間、數量、左右、先後）保持原次序。
+   用固定的亂數種子，老師機和學生機打開時次序完全一樣。 */
+(function(){
+  /* 只有「第一個／第二個／第三個」和「一聲／兩聲／三聲」這類本身就是序數的選項才保持原次序 */
+  const ordered = it => it.opts.every(o=>/^第[一二三四五]個$/.test(o.t)) || it.opts.every(o=>/^[一二三四五]聲$/.test(o.t));
+  let seed = 20261022; const bag = {};
+  const rnd = ()=>{ seed = (seed*1103515245 + 12345) & 0x7fffffff; return seed/0x7fffffff; };
+  const shuf = a => { for(let i=a.length-1;i>0;i--){ const j = Math.floor(rnd()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; };
+  LIS.forEach(S=>S.items.forEach(it=>{
+    if(it.k!=='choice' || it.opts.length<2 || ordered(it)) return;
+    const n = it.opts.length;
+    if(!bag[n] || !bag[n].length) bag[n] = shuf([...Array(n).keys()]);
+    const target = bag[n].pop();
+    const correct = it.opts[it.a], rest = shuf(it.opts.filter((_,j)=>j!==it.a));
+    rest.splice(target, 0, correct); it.opts = rest; it.a = target;
+  }));
+})();
+/* 粵拼表是逐字查的。讀音會變的詞語在這裏指定：陣列逐字對應；null = 照字表 */
+Object.assign(LIS_FIX, {
+  '應該':['jing1','goi1'], '時間':['si4','gaan3'], '重點':['zung6','dim2'], '假裝':['gaa2','zong1'],
+  '重要':['zung6','jiu3'], '很重':[null,'zung6'], '太重':[null,'zung6'],
+  '開會':['hoi1','wui2'], '早會':['zou2','wui2'], '睡一會':[null,null,'wui2'],
+  '倒水':['dou3',null], '倒咖啡':['dou3',null,null], '倒垃圾':['dou3',null,null], '倒掉':['dou3',null], '倒進':['dou3',null], '倒了':['dou3',null],
+  '安靜地':[null,null,'dik1'], '禮貌地':[null,null,'dik1'], '完整地':[null,null,'dik1'],
+  '好意':['hou3',null], '沒':['mou5'],
+  '數一數':['sou2',null,'sou2'], '手指數一數':[null,null,'sou2',null,'sou2'], '手指數':[null,null,'sou2'],
+  '相似':['soeng1',null], '互相':[null,'soeng1'], '相處':['soeng1','cyu5'], '處理':['cyu5',null],
+  '別處':[null,'cyu3'], '收銀處':[null,null,'cyu3'],
+  '每種':[null,'zung2'], '四種':[null,'zung2'], '一行':[null,'hong4'], '作為':[null,'wai4']
+});
+lisFixInit();
 
 /* 共用：入帳識別、課節名稱 */
 function payKey(){ return lisOn() ? 'L'+lisS().s+'.'+lisS().run : CTRL.lessonNo; }
