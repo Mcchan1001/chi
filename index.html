@@ -637,55 +637,289 @@ table.obs td{padding:6px 10px}
 .lisactsteps li{padding:6px 16px;margin-bottom:6px}
 .lisbigtm{font-size:4rem;line-height:1.2}
 
+
+/* ==================================================================
+   第一階段：新視覺
+   設計重點：以「田字格」作為全課件的記認 —— 單元、名字、等待畫面都用同一個格子，
+   其餘畫面保持安靜。動畫只在兩處：首頁第一次出現時，字逐個寫上格；
+   和老師按下去之後轉頁的短淡入。「安靜模式」或系統「減少動態」會全部關掉。
+   ================================================================== */
+:root{
+  --ink:#1F2B3A; --mute:#5C6877;
+  --seal:#D9483B;
+  --u1:#FBD5E4; --u1d:#B03A68;
+  --u2:#CDE6F8; --u2d:#1B63A0;
+  --u3:#FFE7A0; --u3d:#8F5A00;
+  --u4:#D2EFE0; --u4d:#17785A;
+  --uL:#E3D6F6; --uLd:#5A3CA5;
+  --kai:"Kaiti TC","BiauKai","DFKai-SB","標楷體","STKaiti","KaiTi",serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+.btn:focus-visible,.tile:focus-visible,.lcard:focus-visible,.pk:focus-visible,.special:focus-visible{
+  outline:4px solid #5FA8D3;outline-offset:3px}
+
+/* ---------- 田字格 ---------- */
+.tg{position:relative;display:block;flex:0 0 auto;width:var(--w,120px);height:var(--w,120px);
+  container-type:size;background-color:#fff;border:3px solid var(--seal);border-radius:10%;overflow:hidden}
+.tg::before{content:"";position:absolute;inset:0;opacity:.4;pointer-events:none;
+  background:
+    repeating-linear-gradient(to bottom,var(--seal) 0 4%,transparent 4% 8%) 50% 0/2px 100% no-repeat,
+    repeating-linear-gradient(to right,var(--seal) 0 4%,transparent 4% 8%) 0 50%/100% 2px no-repeat}
+.tg .ch{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--kai);font-weight:700;font-size:64cqw;line-height:1;color:var(--ink);
+  padding-bottom:2cqw}
+.tg .ch.two{font-size:38cqw;letter-spacing:-.02em}
+.tg.tint1{background-color:var(--u1)} .tg.tint2{background-color:var(--u2)}
+.tg.tint3{background-color:var(--u3)} .tg.tint4{background-color:var(--u4)}
+.tg.tintL{background-color:var(--uL)}
+@keyframes inkin{from{clip-path:inset(0 100% 0 0);opacity:.15}to{clip-path:inset(0 0 0 0);opacity:1}}
+.first .tg .ch{animation:inkin .85s var(--ease) both;
+  animation-delay:calc(var(--i,0)*.18s + .12s - var(--el,0s))}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+.tg.breathe{animation:breathe 4.5s ease-in-out infinite}
+#roles .tg{border-width:4px}
+.tile .tg{--w:100%;width:100%;height:auto;aspect-ratio:1}
+
+/* ---------- 頂欄 ---------- */
+#teacher .top,#student .top,#adminv .top{background:rgba(255,255,255,.78);
+  border-bottom:1px solid rgba(31,43,58,.08);box-shadow:0 1px 0 rgba(255,255,255,.9) inset}
+.top .ttl{font-size:1.2rem;letter-spacing:.04em;color:var(--ink)}
+.crumb{display:flex;flex-direction:column;gap:2px;min-width:0}
+.homebtn{font-weight:900}
+body[data-scr="home"] .lessononly,body[data-scr="unit"] .lessononly{display:none!important}
+body[data-scr="home"] .homebtn{display:none!important}
+body[data-scr="home"] #tPick,body[data-scr="unit"] #tPick{display:none}
+body[data-scr="home"] #tTop .meta,body[data-scr="unit"] #tTop .meta{display:none}
+#teacher .panel.bare{background:none;border:none;box-shadow:none;backdrop-filter:none;
+  -webkit-backdrop-filter:none;padding:10px 18px 26px}
+
+/* ---------- 選身份頁 ---------- */
+#roles{gap:28px;padding:32px 24px}
+.rolehero{display:flex;flex-direction:column;align-items:center;gap:14px}
+.rgrid{display:flex;gap:12px}
+.rgrid .tg{--w:clamp(84px,13vw,132px)}
+#roles h1{font-size:clamp(2.4rem,6vw,3.6rem);letter-spacing:.3em;margin-right:-.3em;
+  color:var(--ink);text-shadow:none}
+#roles .rsub{color:var(--mute);font-size:1.05rem;font-weight:700;letter-spacing:.08em}
+#roles .rolebtns{gap:22px;margin-top:4px}
+.rolecard{display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:28px 40px;min-width:min(260px,80vw);border-radius:30px;background:rgba(255,255,255,.82);
+  box-shadow:var(--hard),var(--sh);border:1px solid rgba(255,255,255,.95);
+  transition:transform .12s var(--ease),box-shadow .12s}
+.rolecard .ico{font-size:3rem;line-height:1}
+.rolecard .t{font-size:1.55rem;font-weight:900;margin-top:4px}
+.rolecard .d{font-size:.92rem;color:var(--mute);line-height:1.7}
+.rolecard.rt{border-bottom:6px solid var(--u2d)}
+.rolecard.rs{border-bottom:6px solid var(--u1d)}
+.rolelink{font-size:.92rem;font-weight:800;color:var(--mute);padding:8px 16px;border-radius:14px;
+  background:rgba(255,255,255,.5)}
+
+/* ---------- 教師首頁 ---------- */
+.home{max-width:1400px;margin:0 auto}
+.homehd{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  margin:4px 4px 22px}
+.homehd h1{font-size:clamp(2.2rem,4vw,3.4rem);font-weight:900;letter-spacing:.18em;line-height:1.1}
+.homehd .hsub{color:var(--mute);font-weight:700;margin-top:8px;font-size:1.05rem}
+.homehd .hday{text-align:right;color:var(--mute);font-weight:700}
+.homehd .hday b{display:block;font-size:1.6rem;color:var(--ink);letter-spacing:.06em}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,28px)}
+.tile{position:relative;display:flex;flex-direction:column;align-items:stretch;text-align:left;
+  padding:clamp(10px,1.2vw,16px);border-radius:30px;background:var(--tc);
+  box-shadow:0 7px 0 var(--ts),var(--sh);border:1px solid rgba(255,255,255,.9);
+  transition:transform .14s var(--ease),box-shadow .14s var(--ease)}
+.tile:active{transform:translateY(6px);box-shadow:0 1px 0 var(--ts),var(--sh)}
+.tile .tg{--w:100%;width:100%;height:auto;aspect-ratio:1}
+.tile .tl{margin-top:14px;padding:0 4px;display:flex;flex-direction:column;gap:2px}
+.tile .tl b{font-size:1.05rem;color:var(--td);letter-spacing:.14em}
+.tile .tl span{font-size:clamp(1.25rem,1.9vw,1.7rem);font-weight:900;color:var(--ink);line-height:1.35}
+.tile .tstat{margin:10px 4px 2px;align-self:flex-start;font-size:.92rem;font-weight:800;color:var(--td);
+  background:rgba(255,255,255,.7);border-radius:14px;padding:5px 12px}
+.tile.u1{--tc:var(--u1);--td:var(--u1d);--ts:#E9A9C3}
+.tile.u2{--tc:var(--u2);--td:var(--u2d);--ts:#9CC7E6}
+.tile.u3{--tc:var(--u3);--td:var(--u3d);--ts:#E9C766}
+.tile.u4{--tc:var(--u4);--td:var(--u4d);--ts:#9ED3BA}
+.tile.soon{filter:saturate(.55);opacity:.8}
+.tile.soon .tstat{background:rgba(255,255,255,.55)}
+.homerow{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr) auto;gap:clamp(14px,2vw,26px);
+  margin-top:clamp(18px,2.4vw,30px);align-items:stretch}
+.special,.resume{display:flex;align-items:center;gap:18px;text-align:left;padding:14px 20px 14px 14px;
+  border-radius:26px;box-shadow:0 6px 0 var(--ts),var(--sh);border:1px solid rgba(255,255,255,.9);
+  background:var(--tc);transition:transform .14s var(--ease),box-shadow .14s var(--ease)}
+.special{--tc:var(--uL);--td:var(--uLd);--ts:#BDA8E3}
+.special:active,.resume.go:active{transform:translateY(5px);box-shadow:0 1px 0 var(--ts),var(--sh)}
+.special .tg{--w:92px}
+.special .sptx,.resume .rstx{display:flex;flex-direction:column;gap:3px;min-width:0}
+.special .sptx b,.resume .rstx b{font-size:1.4rem;font-weight:900;color:var(--ink)}
+.special .sptx span,.resume .rstx span{font-size:.98rem;font-weight:700;color:var(--td)}
+.resume{--tc:#fff;--td:var(--mute);--ts:#CFD8E4;justify-content:space-between}
+.resume.none{opacity:.7;box-shadow:var(--sh);justify-content:flex-start}
+.resume .rstx b{font-size:1.25rem}
+.resume .rsgo{flex:0 0 auto}
+.qrcard{display:flex;align-items:center;gap:14px;padding:12px 18px 12px 12px;border-radius:26px;
+  background:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.95);box-shadow:var(--sh);text-align:left}
+.qrcard .qrsvg{width:clamp(96px,9vw,132px);cursor:zoom-in;border-radius:10px;overflow:hidden;background:#fff}
+.qrcard .qct{display:flex;flex-direction:column;gap:6px}
+.qrcard .qct b{font-size:1.05rem}
+.qrcard .qct span{font-size:.9rem;color:var(--mute);font-weight:700;line-height:1.5}
+.qrcard .qwho{display:flex;gap:4px;flex-wrap:wrap;max-width:190px}
+.qrcard .qwho i{width:12px;height:12px;border-radius:50%;background:rgba(120,140,180,.28)}
+.qrcard .qwho i.y{background:#7FD3B0}
+@media(max-width:1000px){
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .homerow{grid-template-columns:1fr}
+}
+
+/* ---------- 單元頁 ---------- */
+.upage{max-width:1400px;margin:0 auto}
+.uhead{display:flex;align-items:center;gap:clamp(16px,2.4vw,30px);flex-wrap:wrap;
+  padding:clamp(12px,1.6vw,20px);border-radius:30px;background:var(--tc);
+  box-shadow:0 7px 0 var(--ts),var(--sh);border:1px solid rgba(255,255,255,.9);margin-bottom:26px}
+.uhead .tg{--w:clamp(96px,11vw,150px)}
+.uhead .utx{flex:1;min-width:220px}
+.uhead .uno{font-size:1.05rem;font-weight:900;color:var(--td);letter-spacing:.16em}
+.uhead h2{font-size:clamp(1.8rem,3.2vw,2.7rem);font-weight:900;line-height:1.25;margin-top:2px}
+.uhead .uinfo{margin-top:6px;font-size:1rem;font-weight:700;color:var(--td)}
+.uhead.u1{--tc:var(--u1);--td:var(--u1d);--ts:#E9A9C3}
+.uhead.u2{--tc:var(--u2);--td:var(--u2d);--ts:#9CC7E6}
+.uhead.u3{--tc:var(--u3);--td:var(--u3d);--ts:#E9C766}
+.uhead.u4{--tc:var(--u4);--td:var(--u4d);--ts:#9ED3BA}
+.uhead.uL{--tc:var(--uL);--td:var(--uLd);--ts:#BDA8E3}
+.lcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:18px}
+.lcard{display:flex;gap:14px;align-items:stretch;text-align:left;padding:12px;border-radius:24px;
+  background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 5px 0 rgba(120,130,170,.22),var(--sh);
+  transition:transform .12s var(--ease),box-shadow .12s var(--ease)}
+.lcard:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(120,130,170,.22),var(--sh)}
+.lcard .tg{--w:78px}
+.lcard .lmain{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1}
+.lcard .ltxt{font-size:1.12rem;font-weight:800;line-height:1.6;color:var(--ink)}
+.lcard .ltags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
+.lcard .ltag{font-size:.8rem;font-weight:800;border-radius:12px;padding:3px 10px;background:#EEF2F8;color:var(--mute)}
+.lcard .ltag.ok{background:#D4F1E3;color:#17785A}
+.lcard .ltag.warn{background:#FFE9C4;color:#8F5A00}
+.lcard .lthumb{flex:0 0 96px;border-radius:14px;overflow:hidden;background:#EEF2F8;align-self:stretch;
+  min-height:78px}
+.lcard .lthumb img{width:100%;height:100%;object-fit:cover;display:block}
+.soonbox{background:rgba(255,255,255,.85);border:1px dashed rgba(31,43,58,.25);border-radius:26px;
+  padding:26px 28px;line-height:1.9;font-size:1.1rem;font-weight:700}
+.soonbox h3{font-size:1.25rem;margin-bottom:8px}
+.soonbox .pv{margin-top:14px;font-size:1.25rem;line-height:2.1;font-weight:700;color:var(--ink);
+  background:rgba(255,255,255,.7);border-radius:18px;padding:14px 18px}
+
+/* ---------- 學生：選名字 ---------- */
+.spick{max-width:1100px;margin:0 auto;padding:18px 18px 40px}
+.spk-head{display:flex;align-items:center;gap:20px;justify-content:center;margin:12px 0 22px;flex-wrap:wrap}
+.spk-head .tg{--w:104px}
+.spk-head h2{font-size:2.5rem;font-weight:900;letter-spacing:.12em}
+.spk-head p{font-size:1.1rem;color:var(--mute);font-weight:700;margin-top:4px}
+.lastme{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;
+  background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.95);border-radius:26px;
+  padding:14px 22px;box-shadow:var(--sh);max-width:640px;margin:0 auto 26px;
+  font-size:1.35rem;font-weight:900}
+.pick2{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:18px}
+.pk{display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px 10px 16px;border-radius:26px;
+  background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 5px 0 rgba(120,130,170,.22),var(--sh);
+  transition:transform .12s var(--ease),box-shadow .12s var(--ease)}
+.pk:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(120,130,170,.22),var(--sh)}
+.pk .tg{--w:96px;background-color:var(--c,#fff)}
+.pk .pn{font-size:1.2rem;font-weight:900}
+.pk.me{outline:4px solid #7FD3B0;outline-offset:2px}
+.spick .diag{margin-top:26px;text-align:center}
+
+/* ---------- 學生：等老師 ---------- */
+.swait{display:flex;flex-direction:column;align-items:center;gap:18px;padding:clamp(30px,8vh,80px) 20px;
+  text-align:center}
+.swait .tg{--w:clamp(120px,22vw,180px)}
+.swait .t{font-size:2rem;font-weight:900;letter-spacing:.06em}
+.swait .d{font-size:1.05rem;color:var(--mute);font-weight:700}
+.swait .uchip{display:inline-flex;align-items:center;gap:10px;border-radius:20px;padding:8px 16px 8px 8px;
+  background:var(--tc);font-weight:900;font-size:1.1rem}
+.swait .uchip .tg{--w:44px;border-width:2px;border-radius:8px}
+.swait .uchip.u1{--tc:var(--u1)} .swait .uchip.u2{--tc:var(--u2)} .swait .uchip.u3{--tc:var(--u3)}
+.swait .uchip.u4{--tc:var(--u4)} .swait .uchip.uL{--tc:var(--uL)}
+
+/* ---------- 總結算（取代原本的獎品店） ---------- */
+.settle-note{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+
+/* ---------- 安靜模式 / 減少動態 ---------- */
+body.calm *,body.calm *::before,body.calm *::after{animation:none!important;transition:none!important}
+body.calm #cheer .big,body.calm #cheer h2{animation:none!important}
+body.calm .first .tg .ch{clip-path:none;opacity:1}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+
+.lcard.cur{outline:3px solid #F4B740;outline-offset:2px}
+#cheer.calm{inset:auto;top:18px;left:50%;transform:translateX(-50%);width:auto;flex-direction:row;gap:12px;
+  padding:10px 24px;border-radius:22px;background:rgba(127,211,176,.96);box-shadow:var(--sh)}
+#cheer.calm .big{font-size:1.7rem}
+#cheer.calm h2{font-size:1.25rem;margin:0}
+.lastme b{font-size:1.5rem}
+
+/* 頂欄收窄：電視上不折行 */
+#teacher .top{gap:10px;padding:8px 16px}
+#teacher .top .dot{width:10px;height:10px}
+#teacher .top select{max-width:min(34vw,330px)}
+@media(max-width:1500px){#tDots{display:none}}
+
 </style>
 </head>
 <body>
 
-<div id="roles">
-  <h1>中文堂即時互動</h1>
-  <div class="sub">賽馬會匡智學校 · 高中中國語文 · 2026–2027</div>
-  <div class="rolebtns">
-    <button class="rolecard" onclick="setRole('t')">
-      <div class="ico">📺</div><div class="t">教師版</div>
-      <div class="d">大電視顯示<br>派題 · 鎖機 · 評分 · 派錢</div></button>
-    <button class="rolecard" onclick="setRole('s')">
-      <div class="ico">📱</div><div class="t">學生版</div>
-      <div class="d">平板電腦使用<br>閱讀課文 · 書寫 · 回答問題</div></button>
-    <button class="rolecard" onclick="setRole('a')">
-      <div class="ico">⚙️</div><div class="t">後台設定</div>
-      <div class="d">設定每位學生的<br>能力 · 書寫支援 · 英文</div></button>
+<div id="roles" class="first">
+  <div class="rolehero">
+    <div class="rgrid">
+      <span class="tg tint1"><span class="ch" style="--i:0">中</span></span>
+      <span class="tg tint2"><span class="ch" style="--i:1">文</span></span>
+      <span class="tg tint3"><span class="ch" style="--i:2">堂</span></span>
+    </div>
+    <h1>即時互動課件</h1>
+    <div class="rsub">賽馬會匡智學校 · 高中中國語文 · 2026–2027</div>
   </div>
+  <div class="rolebtns">
+    <button class="rolecard rt" onclick="setRole('t')">
+      <div class="ico">📺</div><div class="t">教師版</div>
+      <div class="d">大電視顯示<br>選單元 · 派題 · 鎖機 · 評分</div></button>
+    <button class="rolecard rs" onclick="setRole('s')">
+      <div class="ico">📱</div><div class="t">學生版</div>
+      <div class="d">平板電腦使用<br>選名字 · 跟老師上課</div></button>
+  </div>
+  <button class="rolelink" onclick="setRole('a')">⚙️ 後台設定（能力組別 · 書寫支援 · 安靜模式）</button>
 </div>
 
 <div id="teacher" class="hide">
-  <div class="top">
-    <div>
-      <div class="ttl" id="tTtl">單元一 · 朋輩在我心</div>
+  <div class="top" id="tTop">
+    <button class="btn sm homebtn" onclick="goHome()">🏠 首頁</button>
+    <div class="crumb">
+      <div class="ttl" id="tTtl">中文堂</div>
       <div class="meta"><select id="tPick" onchange="pickLesson(this.value)"></select></div>
     </div>
+    <button class="btn sm lessononly" onclick="goUnit(curUnit())">☰ 課表</button>
     <div class="sp">
-      <div class="dots" id="tDots"></div>
-      <button class="btn sm ${'' }" id="bHold" onclick="toggleHold()">🔒 鎖住學生機</button>
+      <div class="dots lessononly" id="tDots"></div>
+      <button class="btn sm lessononly" id="bHold" onclick="toggleHold()">🔒 鎖住學生機</button>
       <span id="tNet"></span>
       <button class="btn sm" id="bJy" onclick="toggleJy()">拼</button>
       <button class="btn sm" id="bLang" onclick="toggleLang()">🌐 EN</button>
-      <button class="btn sm" onclick="doPrint()">🖨 列印</button>
-      <button class="btn sm" onclick="resetAll()">↺ 重設</button>
+      <button class="btn sm" id="bCalm" onclick="toggleCalm()">🔇 安靜</button>
+      <button class="btn sm lessononly" onclick="doPrint()" title="列印工作紙／證書">🖨</button>
+      <button class="btn sm lessononly" onclick="resetAll()" title="重設：清除本節的答案及評分">↺</button>
       <button class="btn sm" onclick="location.reload()">✕</button>
     </div>
   </div>
-  <div class="steps" id="tSteps"></div>
+  <div class="steps lessononly" id="tSteps"></div>
   <div class="panel glass" id="tPanel"></div>
 </div>
 
 <div id="student" class="hide">
   <div class="top">
-    <div><div class="ttl" id="sName">請選擇你的名字</div><div class="meta" id="sMeta"></div></div>
+    <div><div class="ttl" id="sName">中文堂</div><div class="meta" id="sMeta"></div></div>
     <div class="sp">
       <span id="sNet"></span>
       <button class="btn sm" id="bJy2" onclick="toggleJy()">拼</button>
       <button class="btn sm" id="bLang2" onclick="toggleLang()">🌐 EN</button>
-      <button class="btn sm lemon" id="sPurse">💰 $0</button>
+      <span class="btn sm lemon hide" id="sPurse" style="pointer-events:none">💰 $0</span>
       <button class="btn sm" onclick="location.reload()">✕</button>
     </div>
   </div>
@@ -1116,18 +1350,13 @@ function qOpts(q, lv){
 /* 作答方式：高組書寫／打字，中初組圈選（初組另可摹寫） */
 function qMode(lv){ return lv===1 ? 'write' : 'choice'; }
 
-const PRIZES0 = [
-  {e:'✏️',n:'鉛筆',ne:'Pencil',p:10},{e:'🍬',n:'糖果',ne:'Candy',p:15},
-  {e:'📒',n:'筆記簿',ne:'Notebook',p:25},{e:'🧃',n:'飲品',ne:'Drink',p:30},
-  {e:'🎨',n:'顏色筆',ne:'Colour pens',p:50},{e:'🎁',n:'神秘禮物',ne:'Mystery gift',p:100}
-];
-let PRIZES = PRIZES0.map(p=>({...p}));
 
 /* ============ 介面英文對照（內置，離線可用） ============ */
 const L10N = {
   '教師版':'Teacher','學生版':'Student','後台設定':'Settings',
   '課文':'Text','字詞':'Vocabulary','寫字＋選字':'Write & Choose','問答':'Questions',
-  '評分':'Marking','今日進帳':'Today’s Earnings',
+  '評分':'Marking','總結算':'Final tally','中文堂':'Chinese class','按一下自己的名字':'Tap your name',
+  '你是':'Are you','嗎？':'?','是，我是':'Yes, that’s me','老師正在選課':'The teacher is choosing a lesson',
   '請選擇你的名字':'Please choose your name',
   '等待老師開始':'Waiting for the teacher','請看大電視':'Please look at the big screen',
   '老師正在教授字詞':'The teacher is teaching vocabulary',
@@ -1184,7 +1413,7 @@ document.body.classList.toggle('nojy', !JYON);
 /* ==================================================================
    狀態 + 同步（分權儲存）
    ================================================================== */
-const APPVER = 'v34';
+const APPVER = 'v35';
 const K = 'zw26';
 const KC = K+'.ctrl', KB = K+'.bank', KP = K+'.pulse', KS = K+'.stu';
 const KA = sid => K+'.ans.'+sid;
@@ -1204,12 +1433,13 @@ let lastPulse = localStorage.getItem(KP)||'';
 const CTRL0 = {phase:'idle', lessonNo:1, vocabIdx:-1, showHint:false, lessonDate:'', read:null, readSeq:0,
                hold:false,
                goalDone:{},
-               showExplain:false, game:null, shopOpen:false,
+               showExplain:false, game:null,
                gemini:false,        /* 學生版 Gemini 掣：老師開放先出 */
                wsEnd:false, wsOk:{},  /* 工作紙：單元完結模式、老師已確認嘅工作紙 */
                wordIdx:0, sub:'write', qIdx:0, qLocked:false,
                mode:'', lis:null, lobs:{},   /* 聆聽專題：mode='lis' 時用聆聽闖關 */
-               marks:{}, coins:{}, adj:{}, paid:{}};
+               marks:{}, coins:{}, adj:{}, paid:{},
+               unit:1, screen:'home', last:null, epoch:''};   /* 單元、畫面（home／unit／lesson）、上次上課、換堂標記 */
 const BANK0 = {wallet:{}};   /* 交易紀錄改存試算表獨立工作表，唔會寫爆一格 */
 const MINE0 = {a:{}, prog:''};
 
@@ -1220,8 +1450,6 @@ let ANS = {};
 function pullAns(){ STUDENTS.forEach(s => ANS[s.id] = rd(KA(s.id), MINE0)); }
 function pullAll(){
   CTRL = rd(KC, CTRL0); BANK = rd(KB, BANK0);
-  const pz = rd(K+'.prizes', {list:null});
-  if(pz.list && pz.list.length) PRIZES = pz.list;
   STUDENTS = JSON.parse(localStorage.getItem(KS)||'null') || STUDENTS0.map(s=>({...s}));
   pullAns();
 }
@@ -1380,7 +1608,7 @@ setInterval(()=>NET.tick(), 900);
 
 /* 老師同學生用同一條字串識別「而家喺邊一頁」，方便點算幾多人已收到 */
 function phaseKey(){
-  return [CTRL.hold?'HOLD':CTRL.phase, CTRL.lessonNo, CTRL.vocabIdx, CTRL.wordIdx,
+  return [CTRL.screen||'home', CTRL.unit, CTRL.hold?'HOLD':CTRL.phase, CTRL.lessonNo, CTRL.vocabIdx, CTRL.wordIdx,
           CTRL.sub, CTRL.qIdx, CTRL.game?CTRL.game.w:'',
           (CTRL.mode==='lis' && CTRL.lis) ? [CTRL.lis.s,CTRL.lis.run,CTRL.lis.i,CTRL.lis.st,CTRL.lis.plays,
             CTRL.lis.pick,CTRL.lis.tx?1:0,CTRL.lis.sp?1:0].join('.') : ''].join('|');
@@ -1434,18 +1662,28 @@ let ROLE=null, ME=null, STEP='hello';
 function setRole(r){
   ROLE = r;
   document.getElementById('roles').classList.add('hide');
-  document.getElementById(r==='t'?'teacher':r==='s'?'student':'adminv').classList.remove('hide');
+  const pane = document.getElementById(r==='t'?'teacher':r==='s'?'student':'adminv');
+  pane.classList.remove('hide');
   if(r==='t'){
-    /* 教師版一開就把目前步驟同日期推給學生機，否則學生機停在「等待老師開始」 */
-    CTRL.phase = STEP;
+    /* 教師版一開就把目前畫面推給學生機；重新整理時回到原本那一堂 */
+    if(CTRL.screen==='lesson'){
+      const ok = stepsNow().map(x=>x[0]);
+      STEP = ok.includes(CTRL.phase) ? CTRL.phase : 'hello';
+      CTRL.phase = STEP;
+    } else CTRL.phase = 'idle';
     if(!CTRL.lessonDate) CTRL.lessonDate = todayStr();
     saveCtrl();
   }
   render();
+  fadeIn(pane);
 }
 function stu(id){ return STUDENTS.find(x=>x.id===id); }
 function myAns(){ return (ANS[ME] = ANS[ME] || {a:{},prog:''}).a; }
-function myA(sid){ return (ANS[sid]||{a:{}}).a || {}; }
+function myA(sid){
+  const r = ANS[sid];
+  if(!r || (r.ep||'') !== (CTRL.epoch||'')) return {};      /* 上一堂遺留的答案不計 */
+  return r.a || {};
+}
 
 function L(){ return LESSONS[(CTRL.lessonNo||1)-1] || LESSONS[0]; }
 function qaSet(){ return QA[L().no] || []; }
@@ -1634,17 +1872,21 @@ function askGemini(word){
     '_blank', 'noopener');
 }
 function cheer(txt){
-  const c=document.getElementById('cheer');
+  const c=document.getElementById('cheer'), calm = calmOn();
   document.getElementById('cheerTxt').textContent = T(txt||'答對了！');
+  c.classList.toggle('calm', calm);
   c.classList.add('show');
-  for(let i=0;i<18;i++){
-    const d=document.createElement('div'); d.className='confetti';
-    d.textContent=['🎊','⭐','🎉','💛','💙'][i%5];
-    d.style.left=Math.random()*100+'vw';
-    d.style.animationDuration=(1.6+Math.random()*1.4)+'s';
-    document.body.appendChild(d); setTimeout(()=>d.remove(),3200);
+  if(!calm){
+    for(let i=0;i<18;i++){
+      const d=document.createElement('div'); d.className='confetti';
+      d.textContent=['🎊','⭐','🎉','💛','💙'][i%5];
+      d.style.left=Math.random()*100+'vw';
+      d.style.animationDuration=(1.6+Math.random()*1.4)+'s';
+      document.body.appendChild(d); setTimeout(()=>d.remove(),3200);
+    }
   }
-  setTimeout(()=>c.classList.remove('show'),1500);
+  clearTimeout(cheer._t);
+  cheer._t = setTimeout(()=>c.classList.remove('show'), calm ? 1100 : 1500);
 }
 
 /* 雙擊本機檔案開啟（file://）連不到雲端，平板電腦也開不到；一定要用網址 */
@@ -1663,6 +1905,7 @@ function fileWarn(){
 function render(){
   wsKeepPos();
   fileWarn();
+  applyCalm();
   document.querySelectorAll('#tNet,#sNet').forEach(e=>{ if(e) e.innerHTML = netChip(); });
   document.querySelectorAll('#bJy,#bJy2').forEach(b=>{
     if(b){ b.textContent = JYON?'拼 ✓':'拼'; }});
@@ -1682,7 +1925,7 @@ function renderAdmin(){
   <div class="note">在此修改的設定會即時生效。
     學生的平板電腦不會顯示「高組／中組／初組」等字眼。</div>
   <table class="adm">
-    <tr><th>學生姓名（可直接修改）</th><th>班別</th><th>問答難度</th><th>書寫支援</th><th>同步顯示英文</th>
+    <tr><th>學生姓名（可直接修改）</th><th>班別</th><th>問答難度</th><th>書寫支援</th><th>同步顯示英文</th><th>安靜模式<br><span style="font-weight:400;font-size:.8rem">（關閉動畫）</span></th>
       <th>工作紙</th><th>寫字工作紙版本<br><span style="font-weight:400;font-size:.8rem">（只適用中組）</span></th></tr>
     ${STUDENTS.map(s=>`
     <tr><td><input class="nmbox" value="${String(s.n).replace(/"/g,'&quot;')}"
@@ -1698,6 +1941,8 @@ function renderAdmin(){
       </select></td>
       <td><label class="sw"><input type="checkbox" ${s.en?'checked':''}
         onchange="setEn('${s.id}',this.checked)"><span></span></label></td>
+      <td><label class="sw"><input type="checkbox" ${s.calm?'checked':''}
+        onchange="setCalm('${s.id}',this.checked)"><span></span></label></td>
       <td><select onchange="setF('${s.id}','ws',this.value)">
         ${Object.entries(WS_TRACK).map(([k,n])=>`<option value="${k}" ${wsTrackOf(s)===k?'selected':''}>${n}</option>`).join('')}
       </select></td>
@@ -1748,6 +1993,7 @@ function renderAdmin(){
     <b>問答難度</b>決定該學生看到哪一組題目，以及選字題的選項數目（高組 6 選 1、中組 4 選 1、初組 3 選 1）。<br>
     <b>書寫支援</b>決定手寫格的提示：直接抄寫沒有底稿；灰階摹寫有淺灰底稿；陰影跟寫有較深底稿。<br>
     <b>同步顯示英文</b>開啟後，該學生的畫面會在中文下面加一行英文。<br>
+    <b>安靜模式</b>開啟後，該學生的平板電腦不會有彈出、彩帶等動畫，適合對動態敏感的同學；教師版頂欄的 <b>🔇 安靜</b> 則只影響大電視。<br>
     右上角的 <b>🌐</b> 可把整個介面切換成英文，<b>拼</b> 可開關粵語拼音。
   </div>`;
 }
@@ -1782,7 +2028,7 @@ const WS = {"1":{"H":[{"t":"閱讀句子","d":"高組 › 1. 閱讀句子","f":"
      （GitHub Pages 係公開嘅；資料夾名入面有學生姓名同支援需要）。
    · 邊個學生做高組／中組、用邊個寫字版本，喺後台揀，存喺試算表。
    · 學生只可以按次序做：而家嗰張做完，下一張先出「我做完了」。
-   · 學生撳「我做完了」＝🙋；老師撳一下確認＝✔，計入今日進帳 $1。
+   · 學生撳「我做完了」＝🙋；老師撳一下確認＝✔，計入總結算 $1。
    ================================================================== */
 /* 邊啲工作紙已經轉咗做圖（id → 頁數）。圖放喺網站嘅 ws/ 資料夾，
    檔名 <id>-p1.jpg、<id>-p2.jpg…；冇圖嘅仍然當紙本用。 */
@@ -1867,7 +2113,7 @@ function tWS(){
       <button class="btn" onclick="wsPrint()">🖨 列印：要印的工作紙＋每人清單</button>
     </div>
     <div class="note">學生做完一張會撳「我做完了」，這裏會出 🙋；
-      <b>你撳一下確認</b>變成 ✔，每張計 $1，入「今日進帳」。
+      <b>你撳一下確認</b>變成 ✔，每張計 $1，計入「總結算」。
       滑鼠停在工作紙上會顯示 Drive 資料夾及檔名。</div>
     ${tWSOpenRow(set)}
     <table class="adm wstbl">${rows}</table>
@@ -2289,7 +2535,7 @@ function sWS(me){
    教師版
    ================================================================ */
 const STEPS = [['hello','① 打招呼'],['notes','② 課堂筆記'],['text','③ 課文'],['vocab','④ 字詞'],
-               ['round','⑤ 寫字＋選字'],['qa','⑥ 問答'],['ws','⑦ 工作紙'],['review','⑧ 今日進帳'],
+               ['round','⑤ 寫字＋選字'],['qa','⑥ 問答'],['ws','⑦ 工作紙'],['review','⑧ 總結算'],
                ['goals','⑨ 課堂總結']];
 
 /* 問候語按時間自動變 */
@@ -2318,16 +2564,14 @@ function todayStr(){
   return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${WD[d.getDay()]}）`;
 }
 function lessonDate(){ return CTRL.lessonDate || todayStr(); }
-function renderTeacher(){
+function renderLesson(){
   document.getElementById('tPick').innerHTML =
     `<optgroup label="📖 單元一 · 朋輩在我心">` + LESSONS.map(l=>
-    `<option value="${l.no}" ${(!lisOn() && l.no===CTRL.lessonNo)?'selected':''}>第 ${l.no} 連堂 — ${
+    `<option value="${l.no}" ${(!lisOn() && curUnit()===1 && l.no===CTRL.lessonNo)?'selected':''}>第 ${l.no} 連堂 — ${
       l.sentence.slice(0,15)}${l.sentence.length>15?'…':''}${hasQA(l.no)?'':'（問答未編）'}</option>`).join('')
     + `</optgroup><optgroup label="🎧 聆聽專題 · 聽指示做得到">` + LIS.map(x=>
     `<option value="L${x.s}" ${(lisOn() && lisS().s===x.s)?'selected':''}>聆聽第 ${x.s} 節 — ${x.title}</option>`).join('')
     + `</optgroup>`;
-  const tt = document.getElementById('tTtl');
-  if(tt) tt.textContent = lisOn() ? '聆聽專題 · 聽指示做得到' : '單元一 · 朋輩在我心';
   document.getElementById('tDots').innerHTML = STUDENTS.map(s=>{
     const p=ANS[s.id].prog;
     return `<div class="dot ${p==='done'?'done':p?'on':''}" title="${s.n}"></div>`;
@@ -2347,16 +2591,11 @@ function renderTeacher(){
   const tp = document.getElementById('tPanel');
   if(WSV) wsMount(tp, tWSView());
   else tp.innerHTML = ({hello:tHello,notes:tNotes,text:tText,vocab:tVocab,round:tRound,qa:tQA,ws:tWS,
-      review:tReview,wallet:tWallet,goals:tGoals,lis:tLis}[STEP]||tHello)();
+      review:tReview,goals:tGoals,lis:tLis}[STEP]||tHello)();
 }
-function pickLesson(n){
-  if(/^L\d+$/.test(String(n))) return pickLis(+String(n).slice(1));
-  lisStop(); LIS_PLAYING = false;
-  if(lisOn()){ lisClearPaid(); CTRL.goalDone={}; CTRL.mode=''; STEP='hello'; CTRL.phase='hello'; }     /* 由聆聽專題轉返去讀課文 */
-  CTRL.wsEnd=false;
-  CTRL.lessonNo=+n; CTRL.vocabIdx=-1; CTRL.wordIdx=0; CTRL.lessonDate=todayStr();
-  CTRL.sub='write'; CTRL.qIdx=0; CTRL.qLocked=false;
-  saveCtrl(); render();
+function pickLesson(n){          /* 課堂內快速轉課：與單元頁選課同一個流程 */
+  if(/^L\d+$/.test(String(n))) return openLesson('L', +String(n).slice(1));
+  return openLesson(1, +n);
 }
 function tStep(k){
   if(k!=='ws') WSV=null;          /* 轉去其他頁就收起工作紙 */
@@ -2416,7 +2655,7 @@ function tGoals(){
         <div class="gtxt">${ruby(x.zh)}<div class="tr">${x.en}</div></div>
         <div class="gno">${done[i]?'✓':''}</div></button>`).join('')}</div>
     <div class="row" style="margin-top:18px">
-      <button class="btn" onclick="tStep('review')">← 返回今日進帳</button>
+      <button class="btn" onclick="tStep('review')">← 返回總結算</button>
       <button class="btn mint" onclick="speak('${goals.map(x=>x.zh).join('。')}')">🔊 讀一次</button>
     </div>
     <div class="note">逐項按下打勾，同學仔一起確認今日做到了甚麼。</div>`;
@@ -2551,6 +2790,7 @@ function tGameAns(choice, el){
   /* 如果老師點了某位同學出來做，成績記在該位同學名下 */
   if(g.who){
     const rec = ANS[g.who] || {a:{},prog:''};
+    if((rec.ep||'') !== (CTRL.epoch||'')){ rec.a = {}; rec.ep = CTRL.epoch||''; }
     rec.a['g_'+g.w] = choice;
     wr(KA(g.who), rec); pullAns();
   }
@@ -2742,7 +2982,7 @@ function tQA(){
       ${CTRL.qLocked?`<button class="btn" onclick="qLock(false)">🔓 解鎖</button>`
                     :`<button class="btn peach" onclick="qLock(true)">🔒 鎖機，顯示答案</button>`}
       <button class="btn blue" onclick="qNav(1)" ${i<total-1?'':'disabled'}>${T('下一題')} →</button>
-      <button class="btn lemon" onclick="tStep('review')">問答完成 → 今日進帳</button></div>
+      <button class="btn lemon" onclick="tStep('review')">問答完成 → 總結算</button></div>
     <div class="sgrid">${live}</div>`;
 }
 /* 🔒 鎖住學生機：學生畫面即刻變「望大電視」，撳唔到嘢 */
@@ -2773,7 +3013,7 @@ function showAns(q, v){
 
 /* ---------- ⑤ 評分 ---------- */
 /* ================================================================
-   ⑥ 今日進帳 — 答對一題即 $1，不需再逐項評 0–4 分
+   ⑥ 總結算 — 答對一題即 $1，不需再逐項評 0–4 分
    ================================================================ */
 function scoreOf(sid){
   if(lisOn()) return lisScore(sid);
@@ -2815,228 +3055,54 @@ function addCoin(sid,d){
   recalcCoins(sid); saveCtrl(); render();
 }
 
-function tReview(){
-  recalcAll();
-  const rank = STUDENTS.map(s=>({s, ...scoreOf(s.id), coin:CTRL.coins[s.id]||0}))
-                       .sort((a,b)=> b.coin-a.coin || a.s.n.localeCompare(b.s.n));
-  const MED = ['🥇','🥈','🥉'];
-  const CLS = ['gold','silver','bronze'];
-  const rows = rank.map((r,i)=>`
-    <div class="rank ${CLS[i]||''}">
-      <div class="pos">${MED[i] || (i+1)}</div>
-      <div class="who">${r.s.n}</div>
-      <div class="bar"><div class="fill" style="width:${
-        rank[0].coin ? Math.round(r.coin/rank[0].coin*100) : 0}%"></div></div>
-      <div class="amt">$${r.coin}</div>
-      <div class="det">答對 ${r.right}／${r.total}　·　戶口 $${BANK.wallet[r.s.id]||0}${
-        (CTRL.adj||{})[r.s.id]?`　·　調整 ${CTRL.adj[r.s.id]>0?'+':''}${CTRL.adj[r.s.id]}`:''}</div>
-      <div class="ctl">
-        <button class="btn sm" onclick="addCoin('${r.s.id}',-1)">−</button>
-        <button class="btn sm mint" onclick="addCoin('${r.s.id}',1)">＋</button>
-      </div>
-    </div>`).join('');
-  return `<div class="note">答對一題自動 $1（${lisOn()?'聽力闖關':'選字、問答、小遊戲'}都計）。
-      需要鼓勵或調整，按 <b>＋</b> ／ <b>−</b>，總數即時重算。</div>
-    <div class="row" style="margin-bottom:16px">
-      <button class="btn lemon" onclick="payout()">💰 ${
-        (CTRL.paid||{})[payKey()]?'已入帳 — 再入一次':'確認入帳，存入戶口 →'}</button>
-      <button class="btn peach" onclick="toggleShop()">🎁 ${CTRL.shopOpen?'關閉獎品店':'打開獎品店'}</button>
-      <button class="btn" onclick="STEP='wallet';render()">📒 交易紀錄</button>
-    </div>
-    <div class="ranklist">${rows}</div>${lisOn()?lisReviewExtra():''}
-    ${CTRL.shopOpen?shopPanel():''}`;
-}
-function toggleShop(){ CTRL.shopOpen=!CTRL.shopOpen; saveCtrl(); render(); }
 
 /* ---------- 獎品店（老師可自訂圖片、名稱、價錢） ---------- */
-function shopPanel(){
-  return `<h3 class="sec">🎁 獎品店</h3>
-    <div class="note">獎品店平時收起，你想開兌換的時候才打開。
-      按獎品可改名稱、價錢，或換一張相片。</div>
-    <div class="shop">
-      ${PRIZES.map((p,i)=>`<div class="item">
-        ${p.img?`<img src="${p.img}" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:14px">`
-               :`<div class="e">${p.e}</div>`}
-        <div class="n">${p.n}</div><div class="p">$${p.p}</div>
-        <div class="row" style="justify-content:center;margin-top:8px">
-          <button class="btn sm" onclick="editPrize(${i})">✏️ 修改</button>
-          <button class="btn sm" onclick="prizePhoto(${i})">📷 相片</button>
-          <button class="btn sm mint" onclick="buy(${i})">兌換</button>
-        </div></div>`).join('')}
-      <div class="item" style="display:flex;align-items:center;justify-content:center">
-        <button class="btn mint" onclick="addPrize()">＋ 新增獎品</button></div>
-    </div>
-    <h3 class="sec">待處理的兌換申請</h3>
-    ${pendingList()}`;
-}
-function savePrizes(){ wr(K+'.prizes', {list:PRIZES}); }
-function editPrize(i){
-  const p=PRIZES[i];
-  const n=prompt('獎品名稱：', p.n); if(n===null) return;
-  const v=prompt('價錢（數字）：', p.p); if(v===null) return;
-  p.n=n.trim()||p.n; p.p=Math.max(0, parseInt(v,10)||p.p);
-  savePrizes(); render();
-}
-function addPrize(){
-  const n=prompt('新獎品名稱：'); if(!n) return;
-  const v=parseInt(prompt('價錢（數字）：','20'),10)||20;
-  PRIZES.push({e:'🎁', n:n.trim(), ne:'', p:v});
-  savePrizes(); render();
-}
-function prizePhoto(i){
-  const inp=document.createElement('input'); inp.type='file'; inp.accept='image/*';
-  inp.onchange=()=>{
-    const f=inp.files[0]; if(!f) return;
-    const rd2=new FileReader();
-    rd2.onload=()=>{
-      const im=new Image();
-      im.onload=()=>{
-        const cv=document.createElement('canvas');
-        const w=Math.min(360, im.width); cv.width=w; cv.height=Math.round(im.height*w/im.width);
-        cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);
-        PRIZES[i].img = cv.toDataURL('image/jpeg', .75);
-        savePrizes(); render();
-      };
-      im.src=rd2.result;
-    };
-    rd2.readAsDataURL(f);
-  };
-  inp.click();
-}
 
 /* ---------- 兌換申請：學生按掣申請，老師確認才扣錢 ---------- */
-function pendingList(){
-  const reqs = [];
-  STUDENTS.forEach(s=>{
-    (ANS[s.id].req||[]).forEach((r,j)=>{ if(!r.done) reqs.push({s, r, j}); });
-  });
-  if(!reqs.length) return `<div class="note">暫時沒有兌換申請。</div>`;
-  return `<div class="sgrid">${reqs.map(({s,r,j})=>`
-    <div class="scard" style="border-color:#F4B740">
-      <div class="nm">🎫 ${s.n}</div>
-      <div class="st" style="font-size:1.1rem;font-weight:900">${r.n}　$${r.p}</div>
-      <div class="st">戶口 $${BANK.wallet[s.id]||0}</div>
-      <div class="row" style="margin-top:9px">
-        <button class="btn sm mint" onclick="approveReq('${s.id}',${j})">✅ 換給他</button>
-        <button class="btn sm" onclick="rejectReq('${s.id}',${j})">✕ 取消</button>
-      </div></div>`).join('')}</div>`;
-}
-function approveReq(sid, j){
-  const rec = ANS[sid], r = rec.req[j];
-  if((BANK.wallet[sid]||0) < r.p){ alert(`${stu(sid).n} 的金額不足。`); return; }
-  BANK.wallet[sid] -= r.p;
-  addTx([{sid, d:new Date().toLocaleDateString('zh-HK'), t:`兌換 ${r.n}`, a:-r.p}]);
-  r.done=true; r.ok=true;
-  wr(KA(sid), rec); saveBank(); render();
-  cheer('兌換成功！');
-}
-function rejectReq(sid, j){
-  const rec = ANS[sid]; rec.req[j].done=true; rec.req[j].ok=false;
-  wr(KA(sid), rec); render();
-}
 
 /* 交易紀錄：一筆一行寫入試算表；本機只留一份近期紀錄供顯示 */
-let TX = [];
-function addTx(list){
-  TX = list.concat(TX).slice(0, 60);
-  NET.txAdd(list.map(x=>[x.d, (stu(x.sid)||{}).n || x.sid, x.t, x.a]));
-}
 /* 試算表會把「18/8/2026」自動當成日期，讀返嚟係內部格式，要還原做人睇得明嘅樣 */
-function fmtDate(v){
-  const s = String(v);
-  if(/^\d{4}-\d{2}-\d{2}T/.test(s)){
-    const d = new Date(s);
-    if(!isNaN(d)) return `${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`;
-  }
-  return s;
-}
-async function loadTx(){
-  const rows = await NET.txList(40);
-  TX = rows.reverse().map(r=>({d:fmtDate(r[0]), n:String(r[1]), t:String(r[2]), a:Number(r[3])}));
-  render();
-}
-function payout(){
-  CTRL.paid=CTRL.paid||{};
-  if(CTRL.paid[payKey()] &&
-     !confirm(`${lessonLabel()}已經入過帳。\n再入一次？（會重複入帳）`)) return;
-  CTRL.paid[payKey()]=true;
-  recalcAll();
-  const list=[];
-  STUDENTS.forEach(s=>{
-    const c=CTRL.coins[s.id]||0; if(!c) return;
-    BANK.wallet[s.id]=(BANK.wallet[s.id]||0)+c;
-    list.push({sid:s.id, d:new Date().toLocaleDateString('zh-HK'),
-               t:`${lessonLabel()} 答對${scoreOf(s.id).right}題`, a:c});
-  });
-  addTx(list);
-  saveCtrl(); saveBank(); render(); cheer('已存入戶口！');
-}
-function tWallet(){
-  const cards = STUDENTS.map(s=>`<div class="wcard"><div class="n">${s.n}</div>
-    <div class="today">$${BANK.wallet[s.id]||0}</div>
-    <div class="bal">今日 +$${CTRL.coins[s.id]||0}</div></div>`).join('');
-  const tx = TX.slice(0,25).map(x=>
-    `<tr><td>${x.d}</td><td>${x.n || (stu(x.sid)||{}).n || ''}</td><td>${x.t}</td>
-     <td class="amt ${x.a>0?'pos':'neg'}">${x.a>0?'+':''}$${x.a}</td></tr>`).join('');
-  return `<h3 class="sec">全班戶口</h3><div class="wgrid">${cards}</div>
-    <div class="row" style="margin-top:14px">
-      <button class="btn" onclick="STEP='review';render()">← 返回今日進帳</button></div>
-    <h3 class="sec">交易紀錄
-      <button class="btn sm" style="margin-left:10px" onclick="loadTx()">↻ 由試算表載入</button></h3>
-    <div class="note">交易紀錄一筆一行存喺試算表嘅「交易紀錄」工作表，可以直接打開查閱全年紀錄。</div>
-    <table class="tx"><tr><th>日期</th><th>學生</th><th>項目</th><th style="text-align:right">金額</th></tr>
-    ${tx||'<tr><td colspan="4" style="color:#999">按上面「↻ 由試算表載入」查閱</td></tr>'}</table>`;
-}
-function buy(i){
-  const p=PRIZES[i];
-  const pick=prompt(`哪位學生兌換「${p.n}」$${p.p}？\n\n`+
-    STUDENTS.map((s,j)=>`${j+1}. ${s.n}（$${BANK.wallet[s.id]||0}）`).join('\n')+'\n\n請輸入編號：');
-  const j=parseInt(pick,10)-1; if(isNaN(j)||!STUDENTS[j]) return;
-  const s=STUDENTS[j];
-  if((BANK.wallet[s.id]||0)<p.p){ alert(`${s.n} 的金額不足，尚差 $${p.p-(BANK.wallet[s.id]||0)}`); return; }
-  BANK.wallet[s.id]-=p.p;
-  addTx([{sid:s.id,d:new Date().toLocaleDateString('zh-HK'),t:`兌換 ${p.n}`,a:-p.p}]);
-  saveBank(); render();
-}
 function resetAll(){
-  if(!confirm('清除本節課的答案及評分？（銀包及交易紀錄會保留）')) return;
+  if(!confirm('清除本節課的答案及評分？')) return;
   const keepLis = (CTRL.mode==='lis' && CTRL.lis)
     ? {mode:'lis', lis:{...CTRL.lis, i:0, plays:0, pick:null, run:Date.now().toString(36)}} : {};
   lisStop(); LIS_PLAYING = false;
-  CTRL={...CTRL0, paid:CTRL.paid||{}, ...keepLis};
-  if(keepLis.mode){ STEP='hello'; CTRL.phase='hello'; CTRL.lis.st = lisFresh(lisItem()); }
-  STUDENTS.forEach(s=>{ ANS[s.id]={a:{},prog:''}; localStorage.removeItem(KA(s.id)); });
+  const ep = Date.now().toString(36);
+  CTRL = {...CTRL0, paid:CTRL.paid||{}, unit:CTRL.unit, screen:CTRL.screen, last:CTRL.last,
+          lessonNo:CTRL.lessonNo, lessonDate:CTRL.lessonDate, epoch:ep, ...keepLis};
+  STEP = 'hello'; CTRL.phase = 'hello';
+  if(keepLis.mode) CTRL.lis.st = lisFresh(lisItem());
+  STUDENTS.forEach(s=>{ ANS[s.id]={a:{},prog:'',ep}; localStorage.removeItem(KA(s.id)); });
   saveCtrl(); render();
 }
 
 /* ================================================================
    學生版 —— 不顯示任何組別字眼
    ================================================================ */
-function renderStudent(){
+function renderStudent0(){
   const B=document.getElementById('sBody');
+  const purse = document.getElementById('sPurse');
   if(!ME){
-    document.getElementById('sName').textContent = T('請選擇你的名字');
+    document.getElementById('sName').textContent = T('中文堂');
     document.getElementById('sMeta').textContent = '';
-    B.innerHTML = `<div class="row" style="justify-content:center;margin-bottom:10px">
-        <button class="btn sm" onclick="selfCheck()">🩺 自我檢查（開得慢／連唔到就按這裏）</button>
-      </div><div id="diagBox">${DIAG_HTML}</div>
-      <div class="pick">`+STUDENTS.map((s,i)=>
-      `<button onclick="beMe('${s.id}')">
-        <div class="av" style="background:${AV[i%AV.length]}">${s.n[0]}</div>
-        <div class="n">${s.n}</div></button>`).join('')+`</div>`;
+    purse.classList.add('hide');
+    B.innerHTML = sPick();
     return;
   }
+  epochSync();
   const me=stu(ME);
   document.getElementById('sName').textContent = me.n;
-  document.getElementById('sMeta').textContent = lisOn() ? `聆聽專題 · 第 ${lisS().s} 節` : `單元一 · 第 ${L().no} 連堂`;
-  /* 錢包平時淨係顯示餘額，撳唔到 —— 同學唔會上堂上到一半走咗入去。
-     老師打開獎品店嗰陣先變成可以撳入去換獎品。 */
-  const purse = document.getElementById('sPurse');
-  purse.textContent = `💰 $${BANK.wallet[ME]||0}` + (CTRL.shopOpen ? ' 🎁' : '');
-  purse.onclick = CTRL.shopOpen ? toggleShopS : null;
-  purse.style.pointerEvents = CTRL.shopOpen ? 'auto' : 'none';
-  purse.classList.toggle('peach', !!CTRL.shopOpen);
-  if(!CTRL.shopOpen && SHOP_S) SHOP_S = false;   /* 老師收舖，同學跟住返課堂 */
+  document.getElementById('sMeta').textContent = CTRL.screen!=='lesson' ? '' :
+    (lisOn() ? `聆聽專題 · 第 ${lisS().s} 節` : `${unitInfo(curUnit()).zh} · 第 ${L().no} 連堂`);
+  /* 錢包位只顯示今堂賺了多少，撳唔到 */
+  purse.classList.remove('hide');
+  purse.textContent = `💰 $${(CTRL.coins||{})[ME]||0}`;
+  if(CTRL.screen!=='lesson'){          /* 老師仲喺首頁／單元頁：企喺度等 */
+    stashPad(); WSV = null;
+    B.innerHTML = sWaitHome(me);
+    NET.sendBeat();
+    return;
+  }
   if(CTRL.hold){                       /* 老師鎖住咗：唔好畀學生撳嘢 */
     stashPad();                        /* 寫緊嘅字先儲起，唔好因為突然鎖機而白寫 */
     B.innerHTML = `<div class="waitbox holdwait"><div class="em">👀</div>
@@ -3047,7 +3113,6 @@ function renderStudent(){
   }
   if(WSV && CTRL.phase!=='ws') WSV=null;          /* 老師轉去第二頁，就退返出嚟 */
   if(WSV){ wsMount(B, sWSView(me)); NET.sendBeat(); return; }
-  if(SHOP_S){ B.innerHTML = sShop(me); return; }
   const f={hello:sHello,notes:sNotes,text:sText,vocab:sVocab,round:sRound,
            qa:sQA,ws:sWS,goals:sGoals,lis:sLis,
            lisend:()=>wait('🏆','做得好！','請看大電視')}[CTRL.phase];
@@ -3063,58 +3128,14 @@ function wait(em,t,d){
   return `<div class="waitbox"><div class="em">${em}</div>
     <div class="t">${ruby(T(t))}</div><div class="d">${T(d)}</div></div>`;
 }
-let SHOP_S = false;
-function toggleShopS(){ SHOP_S=!SHOP_S; render(); }
 
 /* 學生的獎品兌換：按下即產生一張電子票，交老師確認 */
-function sShop(me){
-  const bal = BANK.wallet[ME]||0;
-  const reqs = (ANS[ME].req||[]);
-  const pend = reqs.filter(r=>!r.done);
-  const done = reqs.filter(r=>r.done && r.ok);
-  return `<div class="stu">
-    <div class="q" style="text-align:center;background:linear-gradient(180deg,#FFF6DC,#FFEBB8)">
-      <div style="font-size:1.1rem;font-weight:800;color:#8A5B12">${ruby('我的戶口')}</div>
-      <div style="font-size:4.2rem;font-weight:900;color:#B7791F;line-height:1.2">$${bal}</div>
-      <div class="tr">My balance</div>
-    </div>
-    ${pend.map(r=>`<div class="ticket">
-      <div style="font-size:2.6rem">🎫</div>
-      <div style="font-size:1.5rem;font-weight:900">${ruby(r.n)}</div>
-      <div style="font-size:1.1rem;color:#8A5B12;font-weight:800">$${r.p}</div>
-      <div style="margin-top:8px;font-weight:800">${ruby('請把這張票給老師')}</div>
-      <div class="tr">Show this ticket to your teacher</div>
-    </div>`).join('')}
-    <div class="q">
-      <div class="qt">${ruby('用我賺到的錢換獎品')}</div>
-      <div class="shop">${PRIZES.map((p,i)=>{
-        const afford = bal>=p.p;
-        return `<div class="item" style="${afford?'':'opacity:.45'}">
-          ${p.img?`<img src="${p.img}" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:14px">`
-                 :`<div class="e">${p.e}</div>`}
-          <div class="n">${ruby(p.n)}</div>
-          <div class="p">$${p.p}</div>
-          <button class="btn sm ${afford?'mint':''}" ${afford?'':'disabled'}
-            onclick="reqPrize(${i})">${afford?'我要換':'錢未夠'}</button>
-        </div>`;
-      }).join('')}</div>
-    </div>
-    ${done.length?`<div class="q"><div class="qt">${ruby('我換過的獎品')}</div>
-      <div class="row">${done.map(r=>`<span class="btn sm lemon">🎁 ${r.n}</span>`).join('')}</div></div>`:''}
-    <div class="row" style="justify-content:center">
-      <button class="btn" onclick="toggleShopS()">← ${ruby('返回課堂')}</button></div>
-  </div>`;
-}
-function reqPrize(i){
-  const p = PRIZES[i], bal = BANK.wallet[ME]||0;
-  if(bal < p.p) return;
-  if(!confirm(`用 $${p.p} 換「${p.n}」？\n換完之後會剩返 $${bal-p.p}。`)) return;
-  const rec = ANS[ME]; rec.req = rec.req||[];
-  rec.req.push({n:p.n, p:p.p, done:false, ok:false, d:new Date().toLocaleDateString('zh-HK')});
-  saveMine(); render(); cheer('已交票給老師！');
-}
 
-function beMe(id){ ME=id; ANS[id]=rd(KA(id),MINE0); ANS[id].prog='on'; saveMine(); render(); }
+function beMe(id){
+  ME=id; ANS[id]=rd(KA(id),MINE0); ANS[id].prog='on'; saveMine();
+  try{ localStorage.setItem('zw26.lastme', id); }catch(e){}
+  render();
+}
 
 function sHello(me){
   const g = greeting(), goals = goalsOf(), showEn = me.en||LANG==='en';
@@ -3722,10 +3743,10 @@ function printQ(q, i, lv, grey){
   return `<div class="q"><div class="qn">${i+1}.　${q.q}</div>${bd}${hint}</div>`;
 }
 function sheetFor(lv, grey, title){
-  const d = lessonDate(), u = '朋輩在我心';
+  const d = lessonDate(), u = unitName();
   return `<div class="sheet">
     <div class="hd">賽馬會匡智學校　中國語文科</div>
-    <div class="hd2">單元一：${u}　·　第 ${L().no} 連堂　·　${title}</div>
+    <div class="hd2">${unitInfo(curUnit()).zh}：${u}　·　第 ${L().no} 連堂　·　${title}</div>
 
     <div class="sec">一、寫上你的姓名、日期和單元名稱</div>
     <div class="fld"><span class="lb">姓名</span><div class="cells">
@@ -3760,14 +3781,14 @@ function doPrint(){
    老師：一個大掣依次「播放指示 → 請同學作答 → 公佈答案 → 下一題」
    學生：聽完才作答；高／中／初組按各自能力調整選項數目和指示長短
    每節分「60 分鐘核心版」和「90 分鐘加長版」（題目的 x:1 = 加長版才有）
-   答案存在各人的 ANS（key = L<節>_<項>），答對一題 $1，沿用「今日進帳」
+   答案存在各人的 ANS（key = L<節>_<項>），答對一題 $1，沿用「總結算」
    ================================================================ */
 const LIS_NOPT  = {1:4, 2:3, 3:2};   /* 選擇題：高組 4 選 1、中組 3 選 1、初組 2 選 1 */
 const LIS_NSTEP = {1:3, 2:2, 3:1};   /* 排次序／多選：高組三項、中組兩項、初組一項 */
 const LIS_MIN   = {teach:2, choice:2, order:3, boss:1.2, multi:2.5, act:5};   /* 每類題目預計分鐘 */
-const LIS_FIXED = 18;   /* 打招呼、課堂筆記、今日進帳、課堂總結及轉頁，合共約 18 分鐘 */
+const LIS_FIXED = 18;   /* 打招呼、課堂筆記、總結算、課堂總結及轉頁，合共約 18 分鐘 */
 const LIS_STEPS = [['hello','① 打招呼'],['notes','② 課堂筆記'],['lis','③ 聽力闖關'],
-                   ['review','④ 今日進帳'],['goals','⑤ 課堂總結']];
+                   ['review','④ 總結算'],['goals','⑤ 課堂總結']];
 /* 粵拼表是逐字查的，遇到讀音會變的詞語在此指定（愈長的詞愈優先） */
 const LIS_FIX = {};
 let LIS_FIXRE = null;
@@ -3825,7 +3846,7 @@ function lisPut(i, v){
   saveMine();
 }
 function stepsNow(){ return lisOn() ? LIS_STEPS : STEPS; }
-function unitName(){ return lisOn() ? lisSess().unit : '朋輩在我心'; }
+function unitName(){ return lisOn() ? lisSess().unit : unitInfo(curUnit()).name; }
 function lisFresh(it){ return (lisPage(it) || it.same || (!it.say && !it.beep)) ? 'answer' : 'listen'; }
 
 /* ── 聲音：語音（「｜」處停一停）、嗶聲、倒數鈴聲 ── */
@@ -4360,7 +4381,7 @@ function lisCtl(it, L, S){
   const B = (txt, cls, fn)=>`<button class="btn ${cls}" onclick="${fn}">${txt}</button>`;
   let main = '', sec = '';
   if(lisPage(it)){
-    main = B(last?'🎯 完成，去「今日進帳」 →':(it.k==='act'?'活動完成，下一項 →':'下一頁 →'), last?'mint lisbig':'blue lisbig', 'lisMain()');
+    main = B(last?'🎯 完成，去「總結算」 →':(it.k==='act'?'活動完成，下一項 →':'下一頁 →'), last?'mint lisbig':'blue lisbig', 'lisMain()');
     if(it.say || it.beep) sec += B(it.beep ? '🔔 播放聲音' : '🔊 朗讀', 'mint', 'lisPlay(true)');
   } else if(L.st==='listen'){
     main = B(it.beep?'🔔 播放聲音':'🔊 播放指示', 'mint lisbig', 'lisMain()');
@@ -4370,7 +4391,7 @@ function lisCtl(it, L, S){
     sec += B('🔁 重播指示', 'mint', 'lisPlay(true)');
     if((it.k==='choice'||it.k==='multi') && it.ask) sec += B('🔊 讀題', 'mint', 'lisAsk()');
   } else {
-    main = B(last?'完成 → 今日進帳':'下一題 →', last?'mint lisbig':'blue lisbig', 'lisMain()');
+    main = B(last?'完成 → 總結算':'下一題 →', last?'mint lisbig':'blue lisbig', 'lisMain()');
     sec += B('🔁 再聽一次', 'mint', 'lisPlay(true)');
   }
   const tg = (on, txt, fn)=>`<button class="btn sm ${on?'lemon':''}" onclick="${fn}">${on?'✔ ':''}${txt}</button>`;
@@ -4438,7 +4459,7 @@ function lisHelloExtra(){
         <b>分層：</b>高組 4 選 1／三步指示；中組 3 選 1／兩步指示；初組 2 選 1／一步指示。</div></div>` : ''}`;
 }
 
-/* ── 今日進帳：聆聽觀察表（老師打勾）── */
+/* ── 總結算：聆聽觀察表（老師打勾）── */
 const LIS_OBS = [['🤫','安靜聆聽'],['🎯','專注'],['👀','目光接觸'],['🔁','複述／發問']];
 function lisObsGet(sid){ const o = ((CTRL.lobs||{})[lisS().s]||{})[sid]; return o || [0,0,0,0]; }
 function lisObsTog(sid, j){
@@ -5521,12 +5542,370 @@ Object.assign(LIS_FIX, {
 lisFixInit();
 
 /* 共用：入帳識別、課節名稱 */
-function payKey(){ return lisOn() ? 'L'+lisS().s+'.'+lisS().run : CTRL.lessonNo; }
-function lessonLabel(){ return lisOn() ? `聆聽第 ${lisS().s} 節` : `第 ${CTRL.lessonNo} 連堂`; }
 function lisReviewExtra(){
   return `<div class="row" style="margin:14px 0">
       <button class="btn lemon" onclick="doPrint()">🖨 列印聆聽小員工證書</button></div>` + lisObsHTML();
 }
+
+
+/* ================================================================
+   第一階段：四個單元、新首頁、學生入口、簡化獎勵、安靜模式
+   ================================================================ */
+
+/* ---------- 單元登記表（單元二至四的課件之後逐個加入） ---------- */
+const UNITS = [null,
+  {no:1, zh:'單元一', name:'朋輩在我心',     ch:'朋', t:'1'},
+  {no:2, zh:'單元二', name:'生活科技面面觀', ch:'科', t:'2'},
+  {no:3, zh:'單元三', name:'認識中國',       ch:'中', t:'3'},
+  {no:4, zh:'單元四', name:'未來生活在我手', ch:'未', t:'4'}
+];
+const UNIT_L = {no:'L', zh:'聆聽專題', name:'聽指示做得到', ch:'聽', t:'L'};
+const NUMZH = ['','一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四','十五','十六','十七','十八','十九','二十'];
+const UNIT_CARDS = {};      /* 單元 → 函數：回傳該單元的課堂卡片；單元二起在這裏登記 */
+const UNIT_SOON  = {        /* 還沒有課件的單元，單元頁顯示的說明 */
+  2:{pv:'現代科技發達，讓每個家庭都能使用到科技產品。', note:'課文、字詞、句子教學和工作紙，會在下一階段加入。'},
+  3:{pv:'', note:'這個單元的課件還沒開始製作。'},
+  4:{pv:'', note:'這個單元的課件還沒開始製作。'}
+};
+function unitInfo(u){ return u==='L' ? UNIT_L : (UNITS[+u] || UNITS[1]); }
+function curUnit(){ return CTRL.unit==='L' ? 'L' : (+CTRL.unit || 1); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+/* 田字格：全個課件的記認。ch 一個字（或兩個字）、tint 單元顏色、i 出場次序 */
+function tile(ch, tint, i, extra){
+  ch = String(ch);
+  return `<span class="tg tint${tint} ${extra||''}"><span class="ch${ch.length>1?' two':''}" style="--i:${i||0}">${esc(ch)}</span></span>`;
+}
+
+/* ---------- 安靜模式 ---------- */
+function calmOn(){
+  try{ if(localStorage.getItem('zw26.calm')==='1') return true; }catch(e){}
+  if(ROLE==='s' && ME){ const s = stu(ME); if(s && s.calm) return true; }
+  try{ if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return true; }catch(e){}
+  return false;
+}
+function applyCalm(){
+  document.body.classList.toggle('calm', calmOn());
+  document.body.dataset.role = ROLE || '';
+  const b = document.getElementById('bCalm');
+  if(b){
+    let on = false; try{ on = localStorage.getItem('zw26.calm')==='1'; }catch(e){}
+    b.textContent = on ? '🔇 安靜 ✓' : '🔇 安靜';
+    b.title = '安靜模式：關閉動畫和彩帶，適合對動態敏感的同學';
+  }
+}
+function toggleCalm(){
+  try{ localStorage.setItem('zw26.calm', localStorage.getItem('zw26.calm')==='1' ? '0' : '1'); }catch(e){}
+  render();
+}
+function setCalm(id, v){ const s = stu(id); if(s){ s.calm = !!v; saveStu(); render(); } }
+
+/* ---------- 換頁淡入：只在「換了一頁」時播一次，同一頁重畫不會閃 ---------- */
+function pageEnter(el, sig, move, top){
+  if(!el) return;
+  const prev = el._sig, prevTop = el._top;
+  el._sig = sig; el._top = top;
+  if(prev === undefined || prev === sig) return;
+  if(ROLE==='t' && prevTop !== top){ try{ window.scrollTo(0,0); }catch(e){} }
+  if(calmOn() || !el.animate) return;
+  try{
+    el.animate(move ? [{opacity:0, transform:'translateY(14px)'},{opacity:1, transform:'none'}]
+                    : [{opacity:0},{opacity:1}],
+               {duration: move ? 300 : 200, easing:'cubic-bezier(.2,.7,.2,1)'});
+  }catch(e){}
+}
+function fadeIn(el){
+  if(!el || calmOn() || !el.animate) return;
+  try{ el.animate([{opacity:0},{opacity:1}], {duration:260, easing:'ease-out'}); }catch(e){}
+}
+
+/* ---------- 課堂卡片 ---------- */
+function lessonCards(u){
+  if(UNIT_CARDS[u]) return UNIT_CARDS[u]();
+  if(u==='L') return LIS.map(S=>({k:S.s, g:NUMZH[S.s], text:S.title, tags:[['',S.unit],['ok','60／90 分鐘']]}));
+  if(+u===1) return LESSONS.map(l=>({k:l.no, g:NUMZH[l.no], text:l.sentence,
+      tags:[hasQA(l.no)?['ok','有問答']:['warn','問答未編'], ['', l.keys.length+' 個詞語']],
+      img:IMG[l.keys[0]]}));
+  return [];
+}
+function lessonLabelOf(u, k){
+  if(u==='L') return `聆聽第 ${k} 節`;
+  return `第 ${k} 連堂`;
+}
+function lastKey(){ return CTRL.last ? CTRL.last.u + ':' + CTRL.last.k : ''; }
+
+/* ---------- 教師：首頁 ---------- */
+let HOME_T0 = 0;
+function tHome(){
+  if(!HOME_T0) HOME_T0 = Date.now();
+  const el = (Date.now() - HOME_T0) / 1000, first = !calmOn() && el < 2.6;
+  const d = new Date();
+  const n = STUDENTS.length;
+  const seen = STUDENTS.filter(s=>NET.seen[s.id]===phaseKey()).length;
+  const who = STUDENTS.map(s=>`<i class="${NET.seen[s.id]===phaseKey()?'y':''}" title="${esc(s.n)}"></i>`).join('');
+  const qaN = LESSONS.filter(l=>hasQA(l.no)).length;
+  const stat = {
+    1:`${LESSONS.length} 連堂 · ${qaN} 課有問答`,
+    2:'準備中', 3:'準備中', 4:'準備中'
+  };
+  let k = 0;
+  const tiles = [1,2,3,4].map(u=>{
+    const I = UNITS[u], ready = (u===1) || !!UNIT_CARDS[u];
+    return `<button class="tile u${u} ${ready?'':'soon'}" onclick="goUnit(${u})">
+      ${tile(I.ch, u, k++, 'breathe')}
+      <span class="tl"><b>${I.zh}</b><span>${I.name}</span></span>
+      <span class="tstat">${ready ? (u===1 ? stat[1] : (stat[u]||'')) : '準備中'}</span></button>`;
+  }).join('');
+  const last = CTRL.last;
+  const resume = last
+    ? `<button class="resume go" onclick="resumeLesson()">
+        <span class="rstx"><span>繼續上一堂</span><b>${unitInfo(last.u).zh} · ${esc(last.label)}</b></span>
+        <span class="btn mint rsgo">繼續 →</span></button>`
+    : `<div class="resume none"><span class="rstx"><b>還沒有上過課</b><span>由上面揀一個單元開始</span></span></div>`;
+  return `<div class="home ${first?'first':''}" style="--el:${el.toFixed(2)}s">
+    <div class="homehd">
+      <div><h1>選一個單元</h1>
+        <div class="hsub">學生掃 QR 碼、按自己的名字後，會在平板電腦等你開始</div></div>
+      <div class="hday"><b>${d.getMonth()+1}月${d.getDate()}日</b>星期${WD[d.getDay()]}</div>
+    </div>
+    <div class="tiles">${tiles}</div>
+    <div class="homerow">
+      <button class="special" onclick="goUnit('L')">
+        ${tile(UNIT_L.ch, 'L', k++)}
+        <span class="sptx"><b>聆聽專題 · 聽指示做得到</b>
+          <span>${LIS.length} 節 · 每節有 60 分鐘和 90 分鐘版本</span></span></button>
+      ${resume}
+      <div class="qrcard">
+        <div class="qrsvg" onclick="zoomQR()" title="放大 QR 碼">${QR_SVG}</div>
+        <div class="qct"><b>學生掃碼進入</b>
+          <span>${NET.on() ? `已進入 ${seen} / ${n}` : '本機模式'}</span>
+          <div class="qwho">${who}</div></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ---------- 教師：單元頁 ---------- */
+function tUnitPage(){
+  const u = curUnit(), I = unitInfo(u), cards = lessonCards(u);
+  const lk = lastKey();
+  let body;
+  if(cards.length){
+    body = `<div class="lcards">${cards.map(c=>{
+      const key = u + ':' + c.k, cur = key === lk;
+      return `<button class="lcard ${cur?'cur':''}" onclick="openLesson(${u==='L'?"'L'":u},${c.k})">
+        ${tile(c.g, I.t, 0)}
+        <span class="lmain"><span class="ltxt">${esc(c.text)}</span>
+          <span class="ltags">${cur?'<span class="ltag warn">上次上到這裏</span>':''}${
+            (c.tags||[]).map(t=>`<span class="ltag ${t[0]}">${esc(t[1])}</span>`).join('')}</span></span>
+        ${c.img?`<span class="lthumb"><img src="${c.img}" alt="" onerror="this.parentNode.remove()"></span>`:''}
+      </button>`;
+    }).join('')}</div>`;
+  } else {
+    const S = UNIT_SOON[u] || {pv:'', note:''};
+    body = `<div class="soonbox"><h3>課件準備中</h3>${esc(S.note)}${
+      S.pv ? `<div class="pv">${ruby(S.pv)}</div>` : ''}</div>`;
+  }
+  const info = u==='L' ? `${LIS.length} 節 · 每節有 60 分鐘和 90 分鐘版本`
+             : cards.length ? `${cards.length} 連堂` : '準備中';
+  return `<div class="upage">
+    <div class="uhead u${I.t==='L'?'L':I.t}">
+      ${tile(I.ch, I.t, 0)}
+      <div class="utx"><div class="uno">${I.zh}</div><h2>${I.name}</h2>
+        <div class="uinfo">${info}</div></div>
+      <button class="btn" onclick="goHome()">← 回首頁</button>
+    </div>${body}</div>`;
+}
+
+/* ---------- 教師：換頁 ---------- */
+function stopMedia(){
+  lisStop(); LIS_PLAYING = false;
+  try{ if(READ.on) stopRead(false); }catch(e){}
+  try{ speechSynthesis.cancel(); }catch(e){}
+}
+function goHome(){
+  stopMedia(); WSV = null; WS_HTML = '';
+  CTRL.screen = 'home'; CTRL.phase = 'idle';
+  saveCtrl(); render();
+}
+function goUnit(u){
+  stopMedia(); WSV = null; WS_HTML = '';
+  CTRL.unit = u; CTRL.screen = 'unit'; CTRL.phase = 'idle';
+  saveCtrl(); render();
+}
+/* 這一堂有沒有還沒總結算的成績？ */
+function hasWork(){
+  if((CTRL.paid||{})[payKey()]) return false;
+  if(Object.values(CTRL.adj||{}).some(v=>v)) return true;
+  return STUDENTS.some(s=>Object.keys(myA(s.id)).length > 0);
+}
+/* 新的一堂：清走同學上一堂的答案和獎勵。
+   學生機看到新的 epoch 就自己清走本機答案，所以不用逐部平板電腦處理。 */
+function freshStart(){
+  CTRL.epoch = Date.now().toString(36);
+  CTRL.coins = {}; CTRL.adj = {}; CTRL.wsOk = {}; CTRL.goalDone = {};
+  STUDENTS.forEach(s=>{ ANS[s.id] = {a:{}, prog:'', ep:CTRL.epoch}; try{ localStorage.removeItem(KA(s.id)); }catch(e){} });
+}
+function openLesson(u, k){
+  const same = lastKey() === (u + ':' + k) &&
+    (u==='L' ? (lisOn() && lisS().s===+k) : (!lisOn() && CTRL.lessonNo===+k && curUnit()===+u));
+  if(!same && u!=='L' && hasWork()){
+    if(!confirm(`上一堂（${lessonLabel()}）還沒有做「總結算」。\n開始新的一課會清除同學上一堂的答案和獎勵，確定嗎？`)) return;
+  }
+  stopMedia(); WSV = null; WS_HTML = '';
+  CTRL.unit = u;
+  if(u==='L'){
+    const wasOn = lisOn() && lisS().s===+k;
+    if(!wasOn) pickLis(+k, true);
+  } else if(!same){
+    if(lisOn()){ lisClearPaid(); CTRL.mode = ''; }
+    freshStart();
+    CTRL.lessonNo = +k; CTRL.vocabIdx = -1; CTRL.wordIdx = 0; CTRL.sub = 'write';
+    CTRL.qIdx = 0; CTRL.qLocked = false; CTRL.wsEnd = false; CTRL.game = null; CTRL.showExplain = false;
+    CTRL.lessonDate = todayStr();
+    STEP = 'hello';
+  }
+  CTRL.last = {u, k:+k, label:lessonLabelOf(u, k)};
+  CTRL.screen = 'lesson';
+  CTRL.phase = STEP;
+  saveCtrl(); render();
+}
+function resumeLesson(){
+  const l = CTRL.last; if(!l) return;
+  openLesson(l.u, l.k);
+}
+
+/* ---------- 教師：頂欄 ---------- */
+function tChrome(scr){
+  const I = unitInfo(curUnit());
+  const tt = document.getElementById('tTtl');
+  if(tt) tt.textContent = scr==='home' ? '中文堂' : `${I.zh} · ${I.name}`;
+}
+function tSig(){
+  const scr = CTRL.screen || 'home';
+  if(scr !== 'lesson') return scr + '|' + curUnit();
+  return [scr, curUnit(), STEP, lisOn() ? 'L'+lisS().s+'.'+lisS().i : CTRL.lessonNo,
+          STEP==='vocab' ? CTRL.vocabIdx : '', STEP==='round' ? CTRL.wordIdx + CTRL.sub : '',
+          STEP==='qa' ? CTRL.qIdx : '', CTRL.game ? CTRL.game.w : '', WSV ? WSV.id : ''].join('|');
+}
+function tTop(){
+  const scr = CTRL.screen || 'home';
+  return scr === 'lesson' ? [scr, curUnit(), STEP, lisOn() ? 'L'+lisS().s : CTRL.lessonNo].join('|') : scr + '|' + curUnit();
+}
+function renderTeacher(){
+  const scr = CTRL.screen || 'home';
+  document.body.dataset.scr = scr;
+  tChrome(scr);
+  const tp = document.getElementById('tPanel');
+  if(scr === 'lesson'){
+    if(tp.className !== 'panel glass') tp.className = 'panel glass';
+    renderLesson();
+    pageEnter(tp, tSig(), false, tTop());
+    return;
+  }
+  if(tp.className !== 'panel bare') tp.className = 'panel bare';
+  tp.innerHTML = scr === 'home' ? tHome() : tUnitPage();
+  pageEnter(tp, tSig(), true, tTop());
+}
+
+/* ---------- 學生：選名字 ---------- */
+function sPick(){
+  const lastId = (()=>{ try{ return localStorage.getItem('zw26.lastme'); }catch(e){ return null; } })();
+  const ls = lastId && stu(lastId);
+  return `<div class="spick">
+    <div class="spk-head">${tile('名', '2', 0)}
+      <div><h2>${T('請選擇你的名字')}</h2><p>${T('按一下自己的名字')}</p></div></div>
+    ${ls ? `<div class="lastme"><span>${T('你是')}</span><b>${esc(ls.n)}</b><span>${T('嗎？')}</span>
+        <button class="btn mint" onclick="beMe('${ls.id}')">${T('是，我是')}</button></div>` : ''}
+    <div class="pick2">${STUDENTS.map((s,i)=>
+      `<button class="pk ${ls&&ls.id===s.id?'me':''}" onclick="beMe('${s.id}')">
+        <span class="tg" style="--c:${AV[i%AV.length]}"><span class="ch">${esc(String(s.n)[0]||'')}</span></span>
+        <span class="pn">${esc(s.n)}</span></button>`).join('')}</div>
+    <div class="diag"><button class="btn sm" onclick="selfCheck()">🩺 自我檢查（開得慢／連唔到就按這裏）</button>
+      <div id="diagBox">${DIAG_HTML}</div></div>
+  </div>`;
+}
+/* ---------- 學生：等老師選課 ---------- */
+function sWaitHome(me){
+  const g = greeting(), showEn = me.en || LANG==='en';
+  const i = CTRL.screen==='unit' ? unitInfo(curUnit()) : null;
+  const idx = Math.max(0, STUDENTS.findIndex(s=>s.id===me.id));
+  return `<div class="swait">
+    <span class="tg breathe" style="--c:${AV[idx%AV.length]};background-color:${AV[idx%AV.length]}"><span class="ch">${esc(String(me.n)[0]||'')}</span></span>
+    <div class="t">${ruby(g.zh)}${ruby('，')}${ruby(me.n)}</div>
+    ${i ? `<div class="uchip u${i.t}">${tile(i.ch, i.t, 0)}<span>${i.zh}　${i.name}</span></div>` : ''}
+    <div class="d">${ruby(T(i ? '老師正在選課' : '等待老師開始'))}　${ruby(T('請看大電視'))}</div>
+    ${showEn ? `<div class="tr">${i ? 'The teacher is choosing a lesson' : 'Waiting for the teacher'}</div>` : ''}
+  </div>`;
+}
+function studentSig(){
+  if(!ME) return 'pick';
+  if(CTRL.screen !== 'lesson') return 'wait|' + (CTRL.screen==='unit' ? curUnit() : '');
+  if(CTRL.hold) return 'hold';
+  if(WSV) return 'ws' + WSV.id;
+  return [CTRL.phase, curUnit(), CTRL.lessonNo, CTRL.vocabIdx,
+          CTRL.phase==='round' ? CTRL.wordIdx + CTRL.sub : '', CTRL.phase==='qa' ? CTRL.qIdx : '',
+          CTRL.game ? CTRL.game.w : '',
+          (CTRL.mode==='lis' && CTRL.lis) ? CTRL.lis.s + '.' + CTRL.lis.i : ''].join('|');
+}
+function renderStudent(){
+  renderStudent0();
+  pageEnter(document.getElementById('sBody'), studentSig(), false, studentSig());
+}
+/* 老師開始新的一堂（或按了重設），本機舊答案自動清走 */
+function epochSync(){
+  if(ROLE !== 's' || !ME) return;
+  const ep = CTRL.epoch || '';
+  const rec = ANS[ME] = ANS[ME] || {a:{}, prog:''};
+  if((rec.ep || '') !== ep){
+    ANS[ME] = {a:{}, prog:'on', ep};
+    saveMine();
+  }
+}
+
+/* ---------- 總結算（取代原本的「今日進帳」＋獎品店） ---------- */
+function settle(){
+  CTRL.paid = CTRL.paid || {};
+  CTRL.paid[payKey()] = true;
+  recalcAll();
+  saveCtrl(); render(); cheer('總結算完成！');
+}
+function tReview(){
+  recalcAll();
+  const done = !!(CTRL.paid||{})[payKey()];
+  const rank = STUDENTS.map(s=>({s, ...scoreOf(s.id), coin:CTRL.coins[s.id]||0}))
+                       .sort((a,b)=> b.coin-a.coin || a.s.n.localeCompare(b.s.n));
+  const MED = ['🥇','🥈','🥉'];
+  const CLS = ['gold','silver','bronze'];
+  const rows = rank.map((r,i)=>`
+    <div class="rank ${CLS[i]||''}">
+      <div class="pos">${MED[i] || (i+1)}</div>
+      <div class="who">${esc(r.s.n)}</div>
+      <div class="bar"><div class="fill" style="width:${
+        rank[0].coin ? Math.round(r.coin/rank[0].coin*100) : 0}%"></div></div>
+      <div class="amt">$${r.coin}</div>
+      <div class="det">答對 ${r.right}／${r.total}${
+        (CTRL.adj||{})[r.s.id]?`　·　老師加減 ${CTRL.adj[r.s.id]>0?'+':''}${CTRL.adj[r.s.id]}`:''}</div>
+      <div class="ctl">
+        <button class="btn sm" onclick="addCoin('${r.s.id}',-1)">−</button>
+        <button class="btn sm mint" onclick="addCoin('${r.s.id}',1)">＋</button>
+      </div>
+    </div>`).join('');
+  return `<div class="note">答對一題自動 $1（${lisOn()?'聽力闖關':'選字、問答、小遊戲、工作紙'}都計）。
+      課堂上想獎勵同學，隨時可在這裏按 <b>＋</b> ／ <b>−</b>，總數即時重算。</div>
+    <div class="row settle-note" style="margin-bottom:16px">
+      <button class="btn lemon" onclick="settle()">🏁 ${done?'已完成總結算（可再按更新）':'完成總結算'}</button>
+      <button class="btn blue" onclick="tStep('goals')">下一步：課堂總結 →</button>
+    </div>
+    <div class="ranklist">${rows}</div>${lisOn()?lisReviewExtra():''}`;
+}
+
+/* ---------- 共用：入帳識別、課節名稱 ---------- */
+function payKey(){
+  if(lisOn()) return 'L'+lisS().s+'.'+lisS().run;
+  return curUnit()===1 ? CTRL.lessonNo : 'U'+curUnit()+'.'+CTRL.lessonNo;
+}
+function lessonLabel(){ return lisOn() ? `聆聽第 ${lisS().s} 節` : `第 ${CTRL.lessonNo} 連堂`; }
 
 render();
 </script>
