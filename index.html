@@ -863,6 +863,275 @@ body.calm .first .tg .ch{clip-path:none;opacity:1}
 #teacher .top select{max-width:min(34vw,330px)}
 @media(max-width:1500px){#tDots{display:none}}
 
+/* ==================================================================
+   第二階段：單元二的題目卡、句子教學卡、課文影片
+   設計重點：整個單元二以「藍」為主色（和單元卡片一致），
+   句子成分用固定顏色（名詞藍、動作粉紅、地點黃…），同學看顏色就記得句子結構。
+   ================================================================== */
+:root{
+  --c1:#CDE6F8; --c1d:#6AAEDC;
+  --c2:#FBD5E4; --c2d:#E48BAE;
+  --c3:#FFE7A0; --c3d:#E2B93C;
+  --c4:#D2EFE0; --c4d:#6BC09C;
+  --c5:#E3D6F6; --c5d:#A58AD8;
+  --c6:#FFD9C2; --c6d:#F0A06F;
+}
+
+/* ---------- 題目（共用） ---------- */
+.it .it-q{font-size:1.95rem;font-weight:900;line-height:2.25;color:var(--ink);text-align:center}
+.it .it-q .tr{display:block;font-size:1.05rem;line-height:1.5;font-weight:700;color:var(--mute);margin-top:4px}
+.it .it-cue{display:inline-block;margin:6px auto 2px;padding:6px 18px;border-radius:18px;background:#fff;
+  border:3px dashed #9CC7E6;font-size:1.5rem;font-weight:900;letter-spacing:.06em;color:#1B63A0}
+.it{text-align:center}
+.it .it-pic{display:block;margin:10px auto 4px;width:min(300px,86%);border-radius:18px;border:4px solid #fff;
+  box-shadow:var(--sh,0 6px 18px rgba(31,43,58,.12))}
+.it .it-em{font-size:4.6rem;line-height:1.2;margin:4px 0}
+.it .it-say{margin:8px 0 2px}
+.it-tag{display:inline-block;font-size:.78rem;font-weight:900;padding:2px 12px;border-radius:20px;
+  background:#DCEEF9;color:#1B63A0;vertical-align:middle;margin-left:4px}
+.it-opts{margin-top:14px}
+.it-opts .opt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:84px}
+.it-opts .opt .o-t{font-size:1.5rem;font-weight:900}
+.it-opts .opt .o-em{font-size:3rem;line-height:1.1}
+.it-opts .opt img{width:100%;max-width:210px;aspect-ratio:4/3;object-fit:cover;border-radius:12px}
+.it-opts.pe .opt{min-height:130px}
+.it-opts .opt.wrongkeep{border-color:#E7746A;background:#FFF0EE}
+.it-opts .opt.right{animation:u2pop .45s var(--ease)}
+@keyframes u2pop{0%{transform:scale(.94)}60%{transform:scale(1.05)}100%{transform:scale(1)}}
+.sorthint{margin:10px 0 4px;font-size:1.05rem;font-weight:800;color:var(--mute)}
+.fillstep{margin:6px 0 0;font-size:.95rem;font-weight:800;color:var(--mute)}
+
+/* 對／不對 */
+.tfrow{display:flex;gap:20px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.tfb{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:200px;padding:16px 28px;
+  border-radius:26px;border:5px solid;font-weight:900;cursor:pointer;transition:transform .12s}
+.tfb:active{transform:translateY(3px) scale(.98)}
+.tfb.yes{background:#EAFAF2;border-color:#7FD3B0;color:#1E8E62}
+.tfb.no{background:#FFF0EE;border-color:#F0A19A;color:#C0463B}
+.tfb .tfi{font-size:3.4rem;line-height:1.1}
+.tfb .tft{font-size:1.7rem}
+.tfb.right{box-shadow:0 0 0 6px rgba(127,211,176,.55);animation:u2pop .45s var(--ease)}
+.tfb.wrongkeep{opacity:.5}
+
+/* 排句子 */
+.chip{display:inline-flex;align-items:center;justify-content:center;font-size:1.65rem;font-weight:900;line-height:2;
+  padding:4px 20px;border-radius:20px;background:#fff;border:4px solid #A9CDEA;color:var(--ink);cursor:pointer;
+  box-shadow:0 4px 0 #A9CDEA;transition:transform .1s,box-shadow .1s}
+.chip:active{transform:translateY(3px);box-shadow:0 1px 0 #A9CDEA}
+.chip:disabled,.chip.used{opacity:.35;box-shadow:none;cursor:default}
+.chips{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:16px;min-height:62px}
+.orderline{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin:16px 0 4px;
+  padding:16px 14px;border-radius:22px;background:rgba(255,255,255,.7);border:3px dashed #BBD6EC}
+.orderline .given{font-size:1.65rem;font-weight:900;line-height:2;padding:4px 18px;border-radius:20px;background:#E4EDF6;color:#4D6276}
+.orderline .slot{display:inline-block;min-width:96px;height:68px;border-radius:18px;border:4px dashed #BBD6EC;background:rgba(255,255,255,.6)}
+.orderline .slot.next{border-color:#F4B740;animation:u2pulse 1.4s ease-in-out infinite}
+@keyframes u2pulse{0%,100%{box-shadow:0 0 0 0 rgba(244,183,64,.45)}50%{box-shadow:0 0 0 8px rgba(244,183,64,0)}}
+.orderline .chip.placed{background:#FFF6DC;border-color:#F4B740;box-shadow:0 4px 0 #F4B740}
+.orderline .chip.placed.ok{background:#EAFAF2;border-color:#7FD3B0;box-shadow:0 4px 0 #7FD3B0}
+.doneword{font-size:2.4rem}
+
+/* 填充 */
+.fillq .blank{display:inline-block;min-width:104px;height:1.5em;vertical-align:middle;margin:0 6px;
+  border-bottom:6px solid #7FB6D9;border-radius:6px 6px 0 0;background:rgba(255,255,255,.55)}
+.fillq .blank.now{border-bottom-color:#F4B740;background:#FFF6DC;animation:u2pulse 1.4s ease-in-out infinite}
+.fillq .blank.filled{border-bottom-color:#7FD3B0;background:#EAFAF2;color:#1E8E62}
+
+/* 分類 */
+.buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:16px}
+.bucket{display:flex;flex-direction:column;gap:10px;min-height:150px;padding:12px;border-radius:24px;border:4px solid;
+  text-align:center;cursor:pointer;background:var(--bg);border-color:var(--bd)}
+.bucket:nth-child(4n+1){--bg:#E8F3FC;--bd:#9CC7E6}
+.bucket:nth-child(4n+2){--bg:#FDEAF2;--bd:#E9A6C1}
+.bucket:nth-child(4n+3){--bg:#FFF6D8;--bd:#E8C766}
+.bucket:nth-child(4n+4){--bg:#E6F6EE;--bd:#8CCDAE}
+.bucket .bk-h{display:flex;align-items:center;justify-content:center;gap:10px}
+.bucket .bk-ico{font-size:2.2rem;line-height:1}
+.bucket .bk-lb{font-size:1.45rem;font-weight:900;color:var(--ink)}
+.bucket .bk-in{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-content:flex-start;min-height:56px}
+.bucket.ready{animation:u2glow 1.3s ease-in-out infinite}
+@keyframes u2glow{0%,100%{box-shadow:0 0 0 0 rgba(244,183,64,.5)}50%{box-shadow:0 0 0 9px rgba(244,183,64,0)}}
+.cards{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:12px}
+.card{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 14px;min-width:120px;border-radius:20px;
+  background:#fff;border:4px solid #C8D8EB;cursor:pointer;box-shadow:0 4px 0 #C8D8EB;transition:transform .1s}
+.card:active{transform:translateY(3px)}
+.card img{width:120px;height:90px;object-fit:cover;border-radius:12px}
+.card .o-em{font-size:3rem;line-height:1.1}
+.card .c-t{font-size:1.3rem;font-weight:900}
+.card.sel{border-color:#F4B740;background:#FFF6DC;box-shadow:0 0 0 6px rgba(244,183,64,.4);transform:translateY(-4px)}
+.mini{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:16px;background:#fff;
+  border:3px solid rgba(31,43,58,.1);font-size:1.15rem;font-weight:900}
+.mini img{width:44px;height:34px;object-fit:cover;border-radius:8px}
+.mini .o-em{font-size:1.5rem}
+
+/* 配對 */
+.matchwrap{display:grid;grid-template-columns:1.25fr 1fr;gap:20px;margin-top:16px;align-items:start}
+.mlefts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.mrights{display:flex;flex-direction:column;gap:12px;align-items:stretch}
+.mleft{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px;border-radius:20px;background:#fff;
+  border:4px solid #C8D8EB;cursor:pointer;box-shadow:0 4px 0 #C8D8EB}
+.mleft img{width:100%;max-width:150px;aspect-ratio:4/3;object-fit:cover;border-radius:12px}
+.mleft .o-em{font-size:3rem;line-height:1.1}
+.mleft .c-t{font-size:1.2rem;font-weight:900}
+.mleft .mans{min-width:110px;min-height:2.2em;border-radius:12px;border:3px dashed #BBD6EC;background:#F4F9FD;font-size:1.2rem;
+  font-weight:900;display:flex;align-items:center;justify-content:center;color:#9AA9B9;padding:0 8px}
+.mleft.sel{border-color:#F4B740;background:#FFF6DC;box-shadow:0 0 0 6px rgba(244,183,64,.4)}
+.mleft.done{border-color:#7FD3B0;background:#EAFAF2;box-shadow:0 4px 0 #7FD3B0}
+.mleft.done .mans{border-style:solid;border-color:#7FD3B0;background:#fff;color:#1E8E62}
+
+/* 多選 */
+.it-multi .opt.pickd::after,.it-multi .opt.right::after{content:"✔";position:absolute;top:8px;right:12px;font-size:1.5rem;color:#1E8E62}
+.it-multi .opt{position:relative}
+
+/* 說話 */
+.talkbox{padding:12px 6px}
+.talkbox .talkico{font-size:3.4rem}
+.talkbox .talknote{margin-top:6px;font-size:1.15rem;font-weight:800;color:var(--mute)}
+.tiptv{display:inline-block;margin-top:12px;padding:8px 18px;border-radius:16px;background:#FFF3CD;font-weight:800;color:#8A5B12}
+
+/* 答案揭曉 */
+.ansboard{margin-bottom:16px;border:3px solid #7FD3B0!important;background:rgba(233,250,243,.92)!important}
+.ansbig{font-size:2.3rem;font-weight:900;line-height:2.1;color:#1E8E62;text-align:center}
+
+/* ---------- 句子教學卡 ---------- */
+.tcard{padding:6px 4px 10px;text-align:center}
+.tcard.fresh{animation:u2in .45s var(--ease) both}
+@keyframes u2in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.tnote{margin:14px auto 0;max-width:760px;padding:10px 18px;border-radius:16px;background:rgba(255,243,205,.85);
+  border:2px dashed #F4C95D;font-size:1.12rem;font-weight:800;line-height:2.1;color:#6B4A0B}
+
+.striprow{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin:16px 0}
+.sthumb{width:130px;height:98px;object-fit:cover;border-radius:16px;border:4px solid #fff;box-shadow:0 5px 14px rgba(31,43,58,.14)}
+.strips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.strip{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 20px 6px;border-radius:20px;border:4px solid;
+  cursor:pointer;min-width:100px;box-shadow:0 5px 0 rgba(31,43,58,.1);transition:transform .1s}
+.strip:active{transform:translateY(3px)}
+.strip .st-t{font-size:1.9rem;font-weight:900;line-height:2.2;color:var(--ink)}
+.strip .st-l{font-size:.9rem;font-weight:900;color:rgba(31,43,58,.62)}
+.strip.c1{background:var(--c1);border-color:var(--c1d)} .strip.c2{background:var(--c2);border-color:var(--c2d)}
+.strip.c3{background:var(--c3);border-color:var(--c3d)} .strip.c4{background:var(--c4);border-color:var(--c4d)}
+.strip.c5{background:var(--c5);border-color:var(--c5d)} .strip.c6{background:var(--c6);border-color:var(--c6d)}
+.tcard.fresh .strip{animation:u2in .5s var(--ease) both;animation-delay:calc(var(--i,0)*.14s)}
+
+.compwrap{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;margin:14px auto;max-width:900px}
+.tg.big{--w:150px}
+.tg.satg{--w:84px}
+.compr{display:grid;grid-template-columns:repeat(2,auto);gap:12px}
+.sat{padding:0;border:none;background:none;cursor:pointer;border-radius:12px;transition:transform .12s}
+.sat.on{transform:scale(1.12);filter:drop-shadow(0 0 0 #F4B740)}
+.sat.on .tg{border-color:#F4B740;box-shadow:0 0 0 5px rgba(244,183,64,.45)}
+.compm{min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.eqhint{font-size:1.1rem;font-weight:800;color:var(--mute)}
+.eq{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;animation:u2in .35s var(--ease)}
+.eqc{font-family:var(--kai);font-size:2.8rem;font-weight:700}
+.eqp{font-size:2rem;font-weight:900;color:var(--seal)}
+.eqw{font-size:2.4rem;font-weight:900;padding:2px 22px;border-radius:20px;background:#fff;border:4px solid #7FD3B0;cursor:pointer}
+.eqpic img{width:150px;height:112px;object-fit:cover;border-radius:16px;border:4px solid #fff;box-shadow:0 5px 14px rgba(31,43,58,.14)}
+.o-em.big{font-size:4rem}
+
+.rulewrap{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;margin:10px 0}
+.ruleico{font-size:4.4rem;line-height:1}
+.rulelines{text-align:left}
+.rl{font-size:1.65rem;font-weight:900;line-height:2.3}
+.rulechips{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:10px}
+.rchip{display:flex;align-items:center;gap:8px;padding:6px 16px 6px 8px;border-radius:20px;background:#fff;border:4px solid #C8D8EB;
+  font-size:1.4rem;font-weight:900;cursor:pointer;box-shadow:0 4px 0 #C8D8EB}
+.rchip img{width:64px;height:48px;object-fit:cover;border-radius:10px}
+
+.saywrap{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;margin:10px 0}
+.saypic{width:220px;border-radius:18px;border:4px solid #fff;box-shadow:0 5px 14px rgba(31,43,58,.14)}
+.saylines{text-align:left}
+
+.jprow{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;margin:16px 0}
+.jtiles{display:flex;gap:8px}
+.jtile{display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 4px 6px;border-radius:16px;
+  background:rgba(255,255,255,.7);border:3px solid #C8D8EB;cursor:pointer}
+.jtile .jp{font-size:1.55rem;font-weight:900;letter-spacing:.02em;color:#1B63A0;line-height:1.4;min-height:1.4em}
+.jtile .jp .ini{color:var(--seal)}
+.jtg{--w:92px}
+
+/* ---------- 課文頁（大圖書；L9／L10 只顯示上／下半） ---------- */
+.pgs{display:flex;flex-direction:column;gap:12px;width:min(470px,100%)}
+.stu .pgs{width:100%}
+.pgs .pg{position:relative;overflow:hidden;border-radius:22px;border:5px solid #fff;box-shadow:var(--sh);background:#fff}
+.pgs .pg img{display:block;width:100%;border:none!important;box-shadow:none!important;border-radius:0!important}
+.pgs .pg.crop-top,.pgs .pg.crop-bottom{aspect-ratio:441/111}
+.pgs .pg.crop-top img,.pgs .pg.crop-bottom img{position:absolute;left:0}
+.pgs .pg.crop-top img{top:0}
+.pgs .pg.crop-bottom img{bottom:0}
+
+/* ---------- 課文影片 ---------- */
+.vid{background:radial-gradient(120% 120% at 20% 0%,#1B2E4A 0%,#0F1B2D 60%);border-radius:28px;padding:16px 20px 20px;color:#fff;
+  display:flex;flex-direction:column;gap:12px;min-height:calc(100vh - 118px)}
+.vtop{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.vtitle{font-weight:900;font-size:1.2rem;flex:1;letter-spacing:.04em}
+.vcnt{font-weight:800;color:#9DB6D3;font-variant-numeric:tabular-nums}
+.vprog{display:flex;gap:4px;width:100%;order:9}
+.vprog i{flex:1;height:9px;border-radius:5px;background:rgba(255,255,255,.18);cursor:pointer;transition:background .25s}
+.vprog i.past{background:#5FA8D3}
+.vprog i.cur{background:#FFD36B}
+.vscreen{flex:1;display:grid;grid-template-rows:minmax(0,1fr) auto;gap:12px;min-height:0}
+.vframe{position:relative;overflow:hidden;border-radius:22px;background:#0a1220;height:min(43vh,430px);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 14px 36px rgba(0,0,0,.35);border:4px solid rgba(255,255,255,.12)}
+.vbox{height:100%;max-width:100%;aspect-ratio:var(--ar,1.6);overflow:hidden;position:relative;background:#fff}
+.vbox img{position:absolute;inset:0;width:100%;height:100%;display:block;transform-origin:50% 50%;
+  transition:transform .9s var(--ease)}
+.vframe img.kb{animation:u2kb 9s ease-out both}
+@keyframes u2kb{from{transform:scale(1)}to{transform:scale(1.07)}}
+.vid[data-fx="tl"] #vSlide{transform-origin:0 0;transform:scale(2);animation:none}
+.vid[data-fx="tr"] #vSlide{transform-origin:100% 0;transform:scale(2);animation:none}
+.vid[data-fx="bl"] #vSlide{transform-origin:0 100%;transform:scale(2);animation:none}
+.vid[data-fx="br"] #vSlide{transform-origin:100% 100%;transform:scale(2);animation:none}
+#vSlide[data-s="10"]{animation:none}
+.vsubwrap{position:relative}
+.vsub{min-height:3.4em;display:flex;align-items:center;justify-content:center;text-align:center;flex-wrap:wrap;
+  font-size:2.5rem;font-weight:900;line-height:2.1;padding:6px 20px;border-radius:20px;background:rgba(255,255,255,.08)}
+.vsub rt{font-size:.38em;color:#B8CCE2;font-weight:700}
+.vsub .vk{color:#FFD36B;background:rgba(255,211,107,.14);border-radius:10px;padding:0 6px}
+.vsub .vk rt{color:#FFE5A3}
+.vsub.pop{animation:u2sub .28s var(--ease)}
+@keyframes u2sub{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.vhide{opacity:.35;font-size:1.6rem}
+.vbarwrap{height:6px;border-radius:3px;background:rgba(255,255,255,.14);margin-top:8px;overflow:hidden}
+.vbar{height:100%;width:0;background:linear-gradient(90deg,#5FA8D3,#FFD36B);border-radius:3px}
+@keyframes vbar{from{width:0}to{width:100%}}
+.vecho{position:absolute;right:16px;top:-16px;padding:8px 20px;border-radius:20px;background:#FFD36B;color:#5A3B00;font-weight:900;
+  font-size:1.3rem;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .2s,transform .2s}
+.vecho.show{opacity:1;transform:none}
+.vctl{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center}
+.vctl .btn.big{font-size:1.5rem;padding:12px 34px}
+.vsep{width:2px;height:34px;background:rgba(255,255,255,.2);margin:0 6px}
+.vid .btn.holdon{background:#FFD36B;color:#5A3B00}
+.vend{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(10,18,32,.78)}
+.vend.show{display:flex;animation:u2in .4s var(--ease)}
+.vend-in{text-align:center}
+.vend-em{font-size:4rem}
+.vend-t{font-size:2rem;font-weight:900;margin:6px 0 16px}
+
+/* 學生版影片 */
+.svid .vframe{height:auto;border:4px solid #fff;background:#fff}
+.svid .vbox{height:auto;width:100%}
+.svid .vsub.s{background:rgba(255,255,255,.75);color:var(--ink);font-size:1.9rem;margin-top:12px}
+.svid .vsub.s rt{color:#4D6276}
+.svid .vsub.s .vk{color:#8A5B12;background:#FFF0C4}
+.svid .vsub.pop{animation:u2sub .28s var(--ease)}
+
+/* ---------- 安靜模式：關閉單元二的動畫 ---------- */
+body.calm .vid *,body.calm .tcard,body.calm .tcard *,body.calm .it *{animation:none!important;transition:none!important}
+
+@media (max-width:760px){
+  .compwrap{grid-template-columns:1fr}
+  .matchwrap{grid-template-columns:1fr}
+  .it .it-q{font-size:1.6rem}
+  .vsub{font-size:1.6rem}
+  .vbox{height:auto;width:100%}
+}
+@media (prefers-reduced-motion: reduce){
+  .vid *,.tcard,.tcard *,.it *{animation:none!important;transition:none!important}
+}
+
+body[data-scr="video"] .lessononly{display:none!important}
+body[data-scr="video"] #tPick,body[data-scr="video"] #tTop .meta{display:none}
 </style>
 </head>
 <body>
@@ -1052,7 +1321,7 @@ const EXPLAIN = {
  '小愉':['👧','課文入面的人物。','A character in the text.'],
  '健仔':['👦','課文入面的人物。','A character in the text.']
 };
-function explain(w){ return EXPLAIN[w] || ['💬', '', enOf(w)||'']; }
+function explain(w){ return (isU2() ? EXPLAIN2[w] : EXPLAIN[w]) || ['💬', '', enOf(w)||'']; }
 
 /* ============ 第 1 連堂問答題 ============
    每個重點詞語最少一條，全部備有提示；題目一律使用書面語。 */
@@ -1413,7 +1682,7 @@ document.body.classList.toggle('nojy', !JYON);
 /* ==================================================================
    狀態 + 同步（分權儲存）
    ================================================================== */
-const APPVER = 'v35';
+const APPVER = 'v36';
 const K = 'zw26';
 const KC = K+'.ctrl', KB = K+'.bank', KP = K+'.pulse', KS = K+'.stu';
 const KA = sid => K+'.ans.'+sid;
@@ -1439,7 +1708,7 @@ const CTRL0 = {phase:'idle', lessonNo:1, vocabIdx:-1, showHint:false, lessonDate
                wordIdx:0, sub:'write', qIdx:0, qLocked:false,
                mode:'', lis:null, lobs:{},   /* 聆聽專題：mode='lis' 時用聆聽闖關 */
                marks:{}, coins:{}, adj:{}, paid:{},
-               unit:1, screen:'home', last:null, epoch:''};   /* 單元、畫面（home／unit／lesson）、上次上課、換堂標記 */
+               unit:1, screen:'home', last:null, epoch:'', xIdx:0, vid:null};   /* 單元、畫面（home／unit／lesson）、上次上課、換堂標記 */
 const BANK0 = {wallet:{}};   /* 交易紀錄改存試算表獨立工作表，唔會寫爆一格 */
 const MINE0 = {a:{}, prog:''};
 
@@ -1609,7 +1878,9 @@ setInterval(()=>NET.tick(), 900);
 /* 老師同學生用同一條字串識別「而家喺邊一頁」，方便點算幾多人已收到 */
 function phaseKey(){
   return [CTRL.screen||'home', CTRL.unit, CTRL.hold?'HOLD':CTRL.phase, CTRL.lessonNo, CTRL.vocabIdx, CTRL.wordIdx,
-          CTRL.sub, CTRL.qIdx, CTRL.game?CTRL.game.w:'',
+          CTRL.sub, CTRL.qIdx, CTRL.xIdx||0,
+          CTRL.vid ? [CTRL.vid.id,CTRL.vid.i,CTRL.vid.play,CTRL.vid.end,CTRL.vid.sub,CTRL.vid.jp].join('.') : '',
+          CTRL.game?CTRL.game.w:'',
           (CTRL.mode==='lis' && CTRL.lis) ? [CTRL.lis.s,CTRL.lis.run,CTRL.lis.i,CTRL.lis.st,CTRL.lis.plays,
             CTRL.lis.pick,CTRL.lis.tx?1:0,CTRL.lis.sp?1:0].join('.') : ''].join('|');
 }
@@ -1685,13 +1956,13 @@ function myA(sid){
   return r.a || {};
 }
 
-function L(){ return LESSONS[(CTRL.lessonNo||1)-1] || LESSONS[0]; }
-function qaSet(){ return QA[L().no] || []; }
-function hasQA(no){ return !!QA[no]; }
+function L(){ const ls = lessons(); return ls[(CTRL.lessonNo||1)-1] || ls[0]; }
+function qaSet(){ return (isU2() ? QA2[L().no] : QA[L().no]) || []; }
+function hasQA(no, u){ return !!(((u||curUnit())===2) ? QA2[no] : QA[no]); }
 function words(){ return L().keys; }
 function curWord(){ return words()[CTRL.wordIdx] || words()[0]; }
 function pickOpts(word, lv){
-  const pool = [...new Set(LESSONS.flatMap(l=>l.keys))].filter(w=>w!==word);
+  const pool = unitWords().filter(w=>w!==word);
   const n = (NOPT[lv]||3)-1;
   let seed=0; for(const c of word) seed += c.charCodeAt(0);
   const picked=[];
@@ -1700,9 +1971,6 @@ function pickOpts(word, lv){
 }
 
 /* ============ 粵拼 · 朗讀 ============ */
-function ruby(s){
-  return [...String(s)].map(c=> JYUT[c] ? `<ruby>${c}<rt>${JYUT[c]}</rt></ruby>` : c).join('');
-}
 /* 中文（連粵拼）＋英文對照；en 為 null 時交由網上翻譯補上 */
 function biT(zh, en, show){
   const main = ruby(zh);
@@ -1845,7 +2113,7 @@ function tokenize(sen, keys){
   return out;
 }
 function enOf(w){
-  for(const l of LESSONS){ const v=l.vocab.find(x=>x.w===w); if(v&&v.en) return v.en; }
+  for(const l of lessons()){ const v=l.vocab.find(x=>x.w===w); if(v&&v.en) return v.en; }
   return null;
 }
 function gPrompt(word){
@@ -2553,6 +2821,7 @@ function goalsOf(){
     {ico:'📖', zh:`讀出課文：${l.sentence}`, en:'Read the text aloud'},
     {ico:'🔤', zh:`認識 ${ks.length} 個詞語：${ks.join('、')}`, en:`Learn ${ks.length} new words`}
   ];
+  if(isU2()) g.push({ico:'🧩', zh:'學習句子，玩排句子和分類遊戲', en:'Build sentences and play word games'});
   if(hasQA(l.no)) g.push({ico:'✍️', zh:'寫出詞語，並回答問題', en:'Write the words and answer questions'});
   return g;
 }
@@ -2568,7 +2837,9 @@ function renderLesson(){
   document.getElementById('tPick').innerHTML =
     `<optgroup label="📖 單元一 · 朋輩在我心">` + LESSONS.map(l=>
     `<option value="${l.no}" ${(!lisOn() && curUnit()===1 && l.no===CTRL.lessonNo)?'selected':''}>第 ${l.no} 連堂 — ${
-      l.sentence.slice(0,15)}${l.sentence.length>15?'…':''}${hasQA(l.no)?'':'（問答未編）'}</option>`).join('')
+      l.sentence.slice(0,15)}${l.sentence.length>15?'…':''}${hasQA(l.no,1)?'':'（問答未編）'}</option>`).join('')
+    + `</optgroup><optgroup label="🔬 單元二 · 生活科技面面觀">` + LESSONS2.map(l=>
+    `<option value="U2:${l.no}" ${(!lisOn() && curUnit()===2 && l.no===CTRL.lessonNo)?'selected':''}>第 ${l.no} 連堂 — ${l.title}</option>`).join('')
     + `</optgroup><optgroup label="🎧 聆聽專題 · 聽指示做得到">` + LIS.map(x=>
     `<option value="L${x.s}" ${(lisOn() && lisS().s===x.s)?'selected':''}>聆聽第 ${x.s} 節 — ${x.title}</option>`).join('')
     + `</optgroup>`;
@@ -2590,18 +2861,21 @@ function renderLesson(){
   /* 鎖機時只靠右上角個掣著色提示；唔喺內容區加橫額，避免誤撳解鎖 */
   const tp = document.getElementById('tPanel');
   if(WSV) wsMount(tp, tWSView());
-  else tp.innerHTML = ({hello:tHello,notes:tNotes,text:tText,vocab:tVocab,round:tRound,qa:tQA,ws:tWS,
+  else tp.innerHTML = ({hello:tHello,notes:tNotes,text:tText,vocab:tVocab,round:tRound,sent:tSent,qa:(isU2()?tQA2:tQA),ws:tWS,
       review:tReview,goals:tGoals,lis:tLis}[STEP]||tHello)();
 }
 function pickLesson(n){          /* 課堂內快速轉課：與單元頁選課同一個流程 */
   if(/^L\d+$/.test(String(n))) return openLesson('L', +String(n).slice(1));
+  const m = /^U(\d+):(\d+)$/.exec(String(n));
+  if(m) return openLesson(+m[1], +m[2]);
   return openLesson(1, +n);
 }
 function tStep(k){
   if(k!=='ws') WSV=null;          /* 轉去其他頁就收起工作紙 */
   STEP=k;
   if(k!=='lis'){ lisStop(); LIS_PLAYING = false; }
-  if(['hello','notes','text','vocab','round','qa','ws','goals','lis'].includes(k)) CTRL.phase=k;
+  if(['hello','notes','text','vocab','sent','round','qa','ws','goals','lis'].includes(k)) CTRL.phase=k;
+  if(k==='sent' || k==='qa') u2Reset();
   if(lisOn() && k==='review') CTRL.phase='lisend';            /* 學生機：請望大電視 */
   if(!CTRL.lessonDate) CTRL.lessonDate = todayStr();
   saveCtrl(); render();
@@ -2718,13 +2992,14 @@ function tText(){
   const zh = tokenize(L().sentence, L().keys).map(t=>
     `<w class="${t.key?'key':''}" data-len="${t.t.length}" onclick="speak('${t.t}')">${ruby(t.t)}</w>`).join('');
   return `<div class="textrow">
-    <img src="${IMG[L().page]||''}" alt="課文圖畫">
+    ${isU2() ? pageHTML(L()) : `<img src="${IMG[L().page]||''}" alt="課文圖畫">`}
     <div class="sentence">
       <div class="zh readline">${zh}</div>
       <div data-tr="${L().sentence}" style="font-size:1rem;color:var(--mute);margin-top:10px"></div>
       <div class="row" style="margin-top:18px">
         <button class="btn mint readbtn" onclick="toggleRead('${L().sentence}')">🔊 ${T('朗讀全句')}</button>
         <button class="btn stopbtn hide" onclick="stopRead()">⏹ 停止</button>
+        ${isU2() ? `<button class="btn lemon" onclick="openVideo(${L().cues[0]},${L().cues[1]},'lesson')">🎬 看這一段</button>` : ''}
         <button class="btn blue" onclick="tStep('vocab')">下一步：教授字詞 →</button>
       </div>
       <div class="note">按任何一個字或詞語，即時以粵語讀出；字下面是粵語拼音。
@@ -2735,7 +3010,7 @@ function tVocab(){
   const gamePanel = CTRL.game ? tGame() : '';
   const cards = L().vocab.map((v,i)=>`
     <button class="vcard ${CTRL.vocabIdx===i?'big':''}" onclick="tPickVocab(${i})">
-      <img src="${IMG[v.img]||''}" alt="${v.w}">
+      <img src="${imgOf(v.img)||''}" alt="${v.w}">
       <div class="w">${ruby(v.w)}</div>
       <div class="e">${v.en||''}</div>
       ${CTRL.vocabIdx===i?`<div class="row" style="justify-content:center;margin-top:14px">
@@ -2752,7 +3027,8 @@ function tVocab(){
       <button class="btn" onclick="tStep('text')">← ${T('返回課文')}</button>
       <button class="btn ${CTRL.gemini?'lilac holdon':''}" onclick="toggleGemini()">
         ✨ ${CTRL.gemini?'收起學生的 Gemini':'開放 Gemini 給學生'}</button>
-      <button class="btn blue" onclick="startRound()">下一步：逐個詞語書寫及選字 →</button>
+      ${isU2() ? `<button class="btn blue" onclick="startSent()">下一步：學習句子 →</button>`
+                    : `<button class="btn blue" onclick="startRound()">下一步：逐個詞語書寫及選字 →</button>`}
     </div>
     <div class="note"><b>✨ 學生版的 Gemini 掣預設收起</b>，按「開放 Gemini 給學生」才會出現；
       轉到另一個詞語會自動收回。<br>
@@ -2768,9 +3044,9 @@ function tVocab(){
    ================================================================ */
 const GAME_N = [12,8,6,4,3,2];
 const GAME_DEF = {1:6, 2:4, 3:2};
-function unitWords(){ return [...new Set(LESSONS.flatMap(l=>l.keys))]; }
+function unitWords(){ return [...new Set(lessons().flatMap(l=>l.keys))]; }
 function gameOpts(word, n){
-  const pool = unitWords().filter(w=>w!==word && IMG[w]);
+  const pool = unitWords().filter(w=>w!==word && imgOf(w));
   let seed=0; for(const c of word) seed+=c.charCodeAt(0);
   const picked=[];
   for(let i=0;i<n-1 && pool.length;i++)
@@ -2825,7 +3101,7 @@ function tGame(){
     <div class="opts" style="grid-template-columns:repeat(auto-fit,minmax(${g.n>8?110:150}px,1fr))">
       ${opts.map(o=>`<button class="opt ${g.pick===o?(o===g.w?'right':'pickd'):''}"
         onclick="tGameAns('${o}',this)">
-        <img src="${IMG[o]||''}">
+        <img src="${imgOf(o)||''}">
         <div style="font-size:${g.n>8?1.1:1.5}rem">${ruby(o)}</div></button>`).join('')}
     </div>
     <div class="sgrid" style="margin-top:16px">${answers.map(a=>`
@@ -2845,7 +3121,7 @@ function explainBox(w, big){
     <div style="font-size:${4.4*sc}rem;line-height:1.1">${ico}</div>
     <div style="font-size:${1.5*sc}rem;font-weight:900;margin-top:6px">${ruby(zh)}</div>
     <div class="tr" style="font-size:${1.05*sc}rem">${en}</div>
-    <img src="${IMG[w]||''}" style="max-width:${230*sc}px;border-radius:14px;
+    <img src="${imgOf(w)||''}" style="max-width:${230*sc}px;border-radius:14px;
       border:4px solid #fff;box-shadow:var(--sh);display:block;margin:10px auto 0">
   </div>`;
 }
@@ -2926,7 +3202,7 @@ function setSub(s){ CTRL.sub=s; saveCtrl(); render(); }
 function gotoWord(i){ CTRL.wordIdx=i; CTRL.sub='write'; saveCtrl(); render(); }
 
 /* ---------- ④ 問答 ---------- */
-function startQA(){ CTRL.phase='qa'; CTRL.qIdx=0; CTRL.qLocked=false; STEP='qa'; saveCtrl(); render(); }
+function startQA(){ CTRL.phase='qa'; CTRL.qIdx=0; CTRL.qLocked=false; u2Reset(); STEP='qa'; saveCtrl(); render(); }
 function qTotal(){ return qaSet().length; }
 function tQA(){
   if(!hasQA(L().no)) return `<div class="note" style="font-size:1.02rem">
@@ -2996,7 +3272,7 @@ function toggleShowHint(){ CTRL.showHint = !CTRL.showHint; saveCtrl(); render();
 function correctText(q){ return q.ans; }
 function qNav(d){
   CTRL.qIdx = Math.min(qTotal()-1, Math.max(0, CTRL.qIdx+d));
-  CTRL.qLocked=false; CTRL.showHint=false; saveCtrl(); render();
+  CTRL.qLocked=false; u2Reset(); CTRL.showHint=false; saveCtrl(); render();
 }
 function qLock(v){ CTRL.qLocked=v; saveCtrl(); render(); }
 /* 判卷：圈選比對答案文字；打字去空白後比對；手寫要老師人手判 */
@@ -3017,6 +3293,7 @@ function showAns(q, v){
    ================================================================ */
 function scoreOf(sid){
   if(lisOn()) return lisScore(sid);
+  if(isU2()) return scoreOf2(sid);
   const s=stu(sid), a=myA(sid), set=qaSet();
   let right=0, total=0, det=[];
   words().forEach((w,i)=>{
@@ -3070,7 +3347,7 @@ function resetAll(){
   const ep = Date.now().toString(36);
   CTRL = {...CTRL0, paid:CTRL.paid||{}, unit:CTRL.unit, screen:CTRL.screen, last:CTRL.last,
           lessonNo:CTRL.lessonNo, lessonDate:CTRL.lessonDate, epoch:ep, ...keepLis};
-  STEP = 'hello'; CTRL.phase = 'hello';
+  STEP = 'hello'; CTRL.phase = 'hello'; u2Reset();
   if(keepLis.mode) CTRL.lis.st = lisFresh(lisItem());
   STUDENTS.forEach(s=>{ ANS[s.id]={a:{},prog:'',ep}; localStorage.removeItem(KA(s.id)); });
   saveCtrl(); render();
@@ -3097,6 +3374,12 @@ function renderStudent0(){
   /* 錢包位只顯示今堂賺了多少，撳唔到 */
   purse.classList.remove('hide');
   purse.textContent = `💰 $${(CTRL.coins||{})[ME]||0}`;
+  if(CTRL.screen==='video'){           /* 老師播放課文影片：跟著看 */
+    stashPad(); WSV = null;
+    sVideoRender(B, me);
+    NET.sendBeat();
+    return;
+  }
   if(CTRL.screen!=='lesson'){          /* 老師仲喺首頁／單元頁：企喺度等 */
     stashPad(); WSV = null;
     B.innerHTML = sWaitHome(me);
@@ -3114,13 +3397,13 @@ function renderStudent0(){
   if(WSV && CTRL.phase!=='ws') WSV=null;          /* 老師轉去第二頁，就退返出嚟 */
   if(WSV){ wsMount(B, sWSView(me)); NET.sendBeat(); return; }
   const f={hello:sHello,notes:sNotes,text:sText,vocab:sVocab,round:sRound,
-           qa:sQA,ws:sWS,goals:sGoals,lis:sLis,
+           sent:sSent,qa:(isU2()?sQA2:sQA),ws:sWS,goals:sGoals,lis:sLis,
            lisend:()=>wait('🏆','做得好！','請看大電視')}[CTRL.phase];
   B.innerHTML = f ? f(me) : wait('😊','等待老師開始','請看大電視');
   if(CTRL.phase==='round' && CTRL.sub==='write') initPad(me);
   if(CTRL.phase==='notes') NOTE_FIELDS.forEach((f2,i)=>initNotePad(me,i));
   if(CTRL.phase==='text') followRead();
-  if(CTRL.phase==='qa' && qMode(me.lv)==='write') initQPad(me);
+  if(CTRL.phase==='qa' && (isU2() ? isWrItem(curItem('q')) : qMode(me.lv)==='write')) initQPad(me);
   bindTypeBoxes();
   NET.sendBeat();
 }
@@ -3196,7 +3479,7 @@ function sText(me){
   const zh = tokenize(L().sentence,L().keys).map(t=>
     `<w class="${t.key?'key':''}" data-len="${t.t.length}" onclick="speak('${t.t}')">${ruby(t.t)}</w>`).join('');
   return `<div class="stu"><div class="q">
-    <img src="${IMG[L().page]||''}" style="width:100%;border-radius:18px">
+    ${isU2() ? pageHTML(L()) : `<img src="${IMG[L().page]||''}" style="width:100%;border-radius:18px">`}
     <div class="zh readline" style="font-size:1.7rem;line-height:2.6;font-weight:800;margin-top:14px">${zh}</div>
     ${me.en||LANG==='en'?`<div class="tr" style="font-size:1.05rem" data-tr="${L().sentence}"></div>`:''}
     <div class="row" style="justify-content:center;margin-top:14px">
@@ -3210,7 +3493,7 @@ function sVocab(me){
   if(i<0) return wait('👀','請看大電視','老師正在教授字詞');
   const v=L().vocab[i];
   return `<div class="stu"><div class="q" style="text-align:center">
-    <img src="${IMG[v.img]||''}" style="max-width:100%;border-radius:18px">
+    <img src="${imgOf(v.img)||''}" style="max-width:100%;border-radius:18px">
     <div style="font-size:3.4rem;font-weight:900;margin-top:12px">${ruby(v.w)}</div>
     ${me.en||LANG==='en'?`<div style="font-size:1.25rem;color:var(--mute);font-weight:800">${v.en||''}</div>`:''}
     <div class="row" style="justify-content:center;margin-top:16px">
@@ -3238,7 +3521,7 @@ function sGame(me){
     <div class="opts" style="grid-template-columns:repeat(auto-fit,minmax(${n>6?120:160}px,1fr))">
       ${opts.map(o=>`<button class="opt ${picked===o?'pickd':''}"
         onclick="gameAns('${g.w}','${o}',this)">
-        <img src="${IMG[o]||''}">
+        <img src="${imgOf(o)||''}">
         <div style="font-size:${n>6?1.05:1.4}rem">${ruby(o)}</div></button>`).join('')}
     </div></div></div>`;
 }
@@ -3298,7 +3581,7 @@ function hintHTML(h, showEn, big){
     out += `<div style="display:flex;gap:${12*sc}px;justify-content:center;flex-wrap:wrap;margin:10px 0">`
       + h.cards.map(c=>`
         <div style="text-align:center">
-          ${c.img ? `<img src="${IMG[c.img]||''}" style="width:${(c.small?90:140)*sc}px;height:${(c.small?70:104)*sc}px;
+          ${c.img ? `<img src="${imgOf(c.img)||''}" style="width:${(c.small?90:140)*sc}px;height:${(c.small?70:104)*sc}px;
               object-fit:cover;border-radius:14px;border:4px solid #fff;box-shadow:var(--sh)">`
                   : `<div style="width:${140*sc}px;height:${104*sc}px;border-radius:14px;background:${c.swatch};
               border:4px solid #fff;box-shadow:var(--sh)"></div>`}
@@ -3307,7 +3590,7 @@ function hintHTML(h, showEn, big){
         </div>`).join('') + `</div>`;
   }
   if(h.img && !h.cards){
-    out += `<img src="${IMG[h.img]||''}" style="max-width:${230*sc}px;border-radius:14px;
+    out += `<img src="${imgOf(h.img)||''}" style="max-width:${230*sc}px;border-radius:14px;
       border:4px solid #fff;box-shadow:var(--sh);display:block;margin:8px auto">`;
   }
   if(h.t) out += `<div style="font-size:${1.05*sc}rem;font-weight:700;margin-top:6px">${ruby(h.t)}</div>`;
@@ -3761,7 +4044,7 @@ function sheetFor(lv, grey, title){
     ${words().map(w=>`<div class="wrow"><span class="wlab">${w}</span>${printCells(w, grey)}</div>`).join('')}
 
     <div class="sec">四、問答</div>
-    ${qaSet().map((q,i)=>printQ(q,i,lv,grey)).join('')}
+    ${isU2() ? printU2(lv, grey) : qaSet().map((q,i)=>printQ(q,i,lv,grey)).join('')}
   </div>`;
 }
 function doPrint(){
@@ -3845,7 +4128,7 @@ function lisPut(i, v){
   else a[lisKey(L.s,i)] = v;
   saveMine();
 }
-function stepsNow(){ return lisOn() ? LIS_STEPS : STEPS; }
+function stepsNow(){ return lisOn() ? LIS_STEPS : (isU2() ? STEPS2 : STEPS); }
 function unitName(){ return lisOn() ? lisSess().unit : unitInfo(curUnit()).name; }
 function lisFresh(it){ return (lisPage(it) || it.same || (!it.say && !it.beep)) ? 'answer' : 'listen'; }
 
@@ -5624,7 +5907,7 @@ function lessonCards(u){
   if(UNIT_CARDS[u]) return UNIT_CARDS[u]();
   if(u==='L') return LIS.map(S=>({k:S.s, g:NUMZH[S.s], text:S.title, tags:[['',S.unit],['ok','60／90 分鐘']]}));
   if(+u===1) return LESSONS.map(l=>({k:l.no, g:NUMZH[l.no], text:l.sentence,
-      tags:[hasQA(l.no)?['ok','有問答']:['warn','問答未編'], ['', l.keys.length+' 個詞語']],
+      tags:[hasQA(l.no,1)?['ok','有問答']:['warn','問答未編'], ['', l.keys.length+' 個詞語']],
       img:IMG[l.keys[0]]}));
   return [];
 }
@@ -5643,10 +5926,10 @@ function tHome(){
   const n = STUDENTS.length;
   const seen = STUDENTS.filter(s=>NET.seen[s.id]===phaseKey()).length;
   const who = STUDENTS.map(s=>`<i class="${NET.seen[s.id]===phaseKey()?'y':''}" title="${esc(s.n)}"></i>`).join('');
-  const qaN = LESSONS.filter(l=>hasQA(l.no)).length;
+  const qaN = LESSONS.filter(l=>hasQA(l.no,1)).length;
   const stat = {
     1:`${LESSONS.length} 連堂 · ${qaN} 課有問答`,
-    2:'準備中', 3:'準備中', 4:'準備中'
+    2:`${LESSONS2.length} 連堂 · 含課文影片`, 3:'準備中', 4:'準備中'
   };
   let k = 0;
   const tiles = [1,2,3,4].map(u=>{
@@ -5654,7 +5937,7 @@ function tHome(){
     return `<button class="tile u${u} ${ready?'':'soon'}" onclick="goUnit(${u})">
       ${tile(I.ch, u, k++, 'breathe')}
       <span class="tl"><b>${I.zh}</b><span>${I.name}</span></span>
-      <span class="tstat">${ready ? (u===1 ? stat[1] : (stat[u]||'')) : '準備中'}</span></button>`;
+      <span class="tstat">${ready ? (stat[u]||'') : '準備中'}</span></button>`;
   }).join('');
   const last = CTRL.last;
   const resume = last
@@ -5713,7 +5996,7 @@ function tUnitPage(){
       ${tile(I.ch, I.t, 0)}
       <div class="utx"><div class="uno">${I.zh}</div><h2>${I.name}</h2>
         <div class="uinfo">${info}</div></div>
-      <button class="btn" onclick="goHome()">← 回首頁</button>
+      ${uAct(u)}<button class="btn" onclick="goHome()">← 回首頁</button>
     </div>${body}</div>`;
 }
 
@@ -5721,6 +6004,7 @@ function tUnitPage(){
 function stopMedia(){
   lisStop(); LIS_PLAYING = false;
   try{ if(READ.on) stopRead(false); }catch(e){}
+  vidStop(); CTRL.vid = null;
   try{ speechSynthesis.cancel(); }catch(e){}
 }
 function goHome(){
@@ -5761,7 +6045,7 @@ function openLesson(u, k){
     if(lisOn()){ lisClearPaid(); CTRL.mode = ''; }
     freshStart();
     CTRL.lessonNo = +k; CTRL.vocabIdx = -1; CTRL.wordIdx = 0; CTRL.sub = 'write';
-    CTRL.qIdx = 0; CTRL.qLocked = false; CTRL.wsEnd = false; CTRL.game = null; CTRL.showExplain = false;
+    CTRL.qIdx = 0; CTRL.xIdx = 0; CTRL.qLocked = false; u2Reset(); CTRL.wsEnd = false; CTRL.game = null; CTRL.showExplain = false;
     CTRL.lessonDate = todayStr();
     STEP = 'hello';
   }
@@ -5786,7 +6070,7 @@ function tSig(){
   if(scr !== 'lesson') return scr + '|' + curUnit();
   return [scr, curUnit(), STEP, lisOn() ? 'L'+lisS().s+'.'+lisS().i : CTRL.lessonNo,
           STEP==='vocab' ? CTRL.vocabIdx : '', STEP==='round' ? CTRL.wordIdx + CTRL.sub : '',
-          STEP==='qa' ? CTRL.qIdx : '', CTRL.game ? CTRL.game.w : '', WSV ? WSV.id : ''].join('|');
+          STEP==='qa' ? CTRL.qIdx : (STEP==='sent' ? CTRL.xIdx : ''), CTRL.game ? CTRL.game.w : '', WSV ? WSV.id : ''].join('|');
 }
 function tTop(){
   const scr = CTRL.screen || 'home';
@@ -5797,6 +6081,12 @@ function renderTeacher(){
   document.body.dataset.scr = scr;
   tChrome(scr);
   const tp = document.getElementById('tPanel');
+  if(scr === 'video'){
+    if(tp.className !== 'panel bare') tp.className = 'panel bare';
+    tVideoRender(tp);
+    pageEnter(tp, tSig(), false, tTop());
+    return;
+  }
   if(scr === 'lesson'){
     if(tp.className !== 'panel glass') tp.className = 'panel glass';
     renderLesson();
@@ -5840,11 +6130,12 @@ function sWaitHome(me){
 }
 function studentSig(){
   if(!ME) return 'pick';
+  if(CTRL.screen === 'video') return 'video|' + (CTRL.vid ? CTRL.vid.id : '');
   if(CTRL.screen !== 'lesson') return 'wait|' + (CTRL.screen==='unit' ? curUnit() : '');
   if(CTRL.hold) return 'hold';
   if(WSV) return 'ws' + WSV.id;
   return [CTRL.phase, curUnit(), CTRL.lessonNo, CTRL.vocabIdx,
-          CTRL.phase==='round' ? CTRL.wordIdx + CTRL.sub : '', CTRL.phase==='qa' ? CTRL.qIdx : '',
+          CTRL.phase==='round' ? CTRL.wordIdx + CTRL.sub : '', CTRL.phase==='qa' ? CTRL.qIdx : (CTRL.phase==='sent' ? CTRL.xIdx : ''),
           CTRL.game ? CTRL.game.w : '',
           (CTRL.mode==='lis' && CTRL.lis) ? CTRL.lis.s + '.' + CTRL.lis.i : ''].join('|');
 }
@@ -5906,6 +6197,1557 @@ function payKey(){
   return curUnit()===1 ? CTRL.lessonNo : 'U'+curUnit()+'.'+CTRL.lessonNo;
 }
 function lessonLabel(){ return lisOn() ? `聆聽第 ${lisS().s} 節` : `第 ${CTRL.lessonNo} 連堂`; }
+
+/* ================================================================
+   單元二　生活科技面面觀 —— 課文、詞語、影片字幕
+   圖片全放在 u2/ 資料夾（w＝詞語圖片、s＝大圖書畫面）
+   ================================================================ */
+const U2IMG = {
+"上班": "u2/w01.jpg",
+"上網": "u2/w02.jpg",
+"不宜": "u2/w03.jpg",
+"不開": "u2/w04.jpg",
+"乘搭巴士": "u2/w05.jpg",
+"付款": "u2/w06.jpg",
+"使用": "u2/w07.jpg",
+"便利店": "u2/w08.jpg",
+"保持": "u2/w09.jpg",
+"八達通": "u2/w10.jpg",
+"冷氣機": "u2/w11.jpg",
+"冷藏食物": "u2/w12.jpg",
+"出外": "u2/w13.jpg",
+"吃午餐": "u2/w14.jpg",
+"吃午餐1": "u2/w15.jpg",
+"哥哥": "u2/w16.jpg",
+"大家": "u2/w17.jpg",
+"妹妹": "u2/w18.jpg",
+"媽媽": "u2/w19.jpg",
+"學習": "u2/w20.jpg",
+"安全": "u2/w21.jpg",
+"家庭": "u2/w22.jpg",
+"平板電腦": "u2/w23.jpg",
+"得宜": "u2/w24.jpg",
+"微波爐": "u2/w25.jpg",
+"快餐店": "u2/w26.jpg",
+"態度": "u2/w27.jpg",
+"我們": "u2/w28.jpg",
+"洗手": "u2/w29.jpg",
+"手乾": "u2/w30.jpg",
+"方便": "u2/w31.jpg",
+"正確": "u2/w32.jpg",
+"注意": "u2/w33.jpg",
+"洗衣機": "u2/w34.jpg",
+"涼快": "u2/w35.jpg",
+"清潔": "u2/w36.jpg",
+"清潔衣服": "u2/w37.jpg",
+"爸爸": "u2/w38.jpg",
+"生活": "u2/w39.jpg",
+"產品": "u2/w40.jpg",
+"科技": "u2/w41.jpg",
+"科技發達": "u2/w42.jpg",
+"稍涼": "u2/w43.jpg",
+"節制": "u2/w44.jpg",
+"節目": "u2/w45.jpg",
+"節省": "u2/w46.jpg",
+"節省能源": "u2/w47.jpg",
+"翻熱": "u2/w48.jpg",
+"舒適": "u2/w49.jpg",
+"螢幕": "u2/w50.jpg",
+"衣服": "u2/w51.jpg",
+"觀看": "u2/w52.jpg",
+"買報紙": "u2/w53.jpg",
+"買菜": "u2/w54.jpg",
+"購物": "u2/w55.jpg",
+"超級市場": "u2/w56.jpg",
+"距離": "u2/w57.jpg",
+"適當的": "u2/w58.jpg",
+"長時間": "u2/w59.jpg",
+"開關": "u2/w60.jpg",
+"雪櫃": "u2/w61.jpg",
+"電腦": "u2/w62.jpg",
+"電腦技能": "u2/w63.jpg",
+"電視": "u2/w64.jpg",
+"食物": "u2/w65.jpg",
+"slide1": "u2/s01.jpg",
+"slide2": "u2/s02.jpg",
+"slide3": "u2/s03.jpg",
+"slide4": "u2/s04.jpg",
+"slide5": "u2/s05.jpg",
+"slide6": "u2/s06.jpg",
+"slide7": "u2/s07.jpg",
+"slide8": "u2/s08.jpg",
+"slide9": "u2/s09.jpg",
+"slide10": "u2/s10.jpg",
+"slide11": "u2/s11.jpg",
+"slide12": "u2/s12.jpg",
+"slide13": "u2/s13.jpg",
+"slide14": "u2/s14.jpg",
+"slide15": "u2/s15.jpg",
+"slide16": "u2/s16.jpg",
+"slide17": "u2/s17.jpg"
+};
+Object.keys(U2IMG).forEach(k=>{ IMG['2:'+k] = U2IMG[k]; });
+/* 單元二圖片一律以「2:詞語」引用，避免和單元一同名圖片（例如「我們」）混在一起 */
+function imgOf(n){
+  if(!n) return '';
+  return (curUnit()===2 && IMG['2:'+n]) ? IMG['2:'+n] : (IMG[n] || IMG['2:'+n] || '');
+}
+function im2(n){ return IMG['2:'+n] || ''; }
+
+const V2 = (w, en, img)=>({w, en, img:'2:'+(img||w)});
+
+/* 全文（影片、全文對照用） */
+const TEXT2 = [
+  ['現代科技發達，讓每個家庭都能使用到科技產品。'],
+  ['我家有電視，我們可以一起看電視節目。','我家有微波爐，可以讓我們翻熱食物。','我家有洗衣機，可以讓我們清潔衣服。',
+   '我家有冷氣機，可以讓我們感到涼快。','我家有電腦及平板電腦，可以讓我們上網及學習電腦技能。','我家有雪櫃，可以讓我們冷藏食物。'],
+  ['出外時，科技令我們的生活很方便。','我們可以用八達通購物及付款，媽媽去超級市場使用八達通買菜，爸爸去便利店使用八達通買報紙，哥哥使用八達通乘搭巴士上班，妹妹使用八達通到快餐店吃午餐。'],
+  ['我們使用科技產品時，應注意安全及持有正確的態度，包括：','保持手乾才開關產品。','天氣稍涼，可以不開冷氣機，以節省能源。',
+   '保持適當的距離觀看產品的螢幕。','不宜太長時間使用電視或平板電腦。','購物須節制。'],
+  ['大家只要使用得宜，科技產品便能讓我們生活更舒適和方便。']
+];
+
+/* 十四連堂。cues＝課文影片的字幕範圍（見 VID2）；pages＝課文用的大圖書畫面；crop＝只顯示畫面的上半／下半 */
+const LESSONS2 = [
+ {no:1,  title:'科技產品', sentence:'現代科技發達，讓每個家庭都能使用到科技產品。', pages:['slide2'], cues:[1,2],
+  keys:['科技發達','家庭','科技產品'],
+  vocab:[V2('科技發達','Advanced technology'), V2('家庭','Family'), V2('科技產品','Technology products','產品')]},
+ {no:2,  title:'電視', sentence:'我家有電視，我們可以一起看電視節目。', pages:['slide3'], cues:[3,4],
+  keys:['電視','我們','電視節目'],
+  vocab:[V2('電視','Television'), V2('我們','We'), V2('電視節目','TV programmes','節目')]},
+ {no:3,  title:'微波爐', sentence:'我家有微波爐，可以讓我們翻熱食物。', pages:['slide4'], cues:[5,6],
+  keys:['微波爐','翻熱食物'],
+  vocab:[V2('微波爐','Microwave oven'), V2('翻熱食物','Reheat food','翻熱')]},
+ {no:4,  title:'洗衣機', sentence:'我家有洗衣機，可以讓我們清潔衣服。', pages:['slide5'], cues:[7,8],
+  keys:['洗衣機','清潔衣服'],
+  vocab:[V2('洗衣機','Washing machine'), V2('清潔衣服','Clean clothes')]},
+ {no:5,  title:'冷氣機', sentence:'我家有冷氣機，可以讓我們感到涼快。', pages:['slide6'], cues:[9,10],
+  keys:['冷氣機','涼快'],
+  vocab:[V2('冷氣機','Air-conditioner'), V2('涼快','Cool and fresh')]},
+ {no:6,  title:'電腦', sentence:'我家有電腦及平板電腦，可以讓我們上網及學習電腦技能。', pages:['slide7'], cues:[11,12],
+  keys:['電腦','平板電腦','上網','學習','電腦技能'],
+  vocab:[V2('電腦','Computer'), V2('平板電腦','Tablet'), V2('上網','Go online'), V2('學習','Learn'), V2('電腦技能','Computer skills')]},
+ {no:7,  title:'雪櫃', sentence:'我家有雪櫃，可以讓我們冷藏食物。', pages:['slide8'], cues:[13,14],
+  keys:['雪櫃','冷藏食物'],
+  vocab:[V2('雪櫃','Refrigerator'), V2('冷藏食物','Keep food cold')]},
+ {no:8,  title:'出外', sentence:'出外時，科技令我們的生活很方便。', pages:['slide9'], cues:[15,16],
+  keys:['出外','方便'],
+  vocab:[V2('出外','Go out'), V2('方便','Convenient')]},
+ {no:9,  title:'八達通（一）', sentence:'我們可以用八達通購物及付款，媽媽去超級市場使用八達通買菜，爸爸去便利店使用八達通買報紙。',
+  pages:['slide10'], crop:'top', cues:[17,19],
+  keys:['八達通','購物','付款','媽媽','超級市場','買菜','爸爸','便利店','買報紙'],
+  vocab:[V2('八達通','Octopus card'), V2('購物','Shopping'), V2('付款','Pay'), V2('媽媽','Mum'), V2('超級市場','Supermarket'),
+         V2('買菜','Buy vegetables'), V2('爸爸','Dad'), V2('便利店','Convenience store'), V2('買報紙','Buy a newspaper')]},
+ {no:10, title:'八達通（二）', sentence:'哥哥使用八達通乘搭巴士上班，妹妹使用八達通到快餐店吃午餐。',
+  pages:['slide10'], crop:'bottom', cues:[20,21],
+  keys:['哥哥','乘搭巴士','上班','妹妹','快餐店','吃午餐'],
+  vocab:[V2('哥哥','Older brother'), V2('乘搭巴士','Take a bus'), V2('上班','Go to work'), V2('妹妹','Younger sister'),
+         V2('快餐店','Fast-food shop'), V2('吃午餐','Have lunch')]},
+ {no:11, title:'安全的態度', sentence:'我們使用科技產品時，應注意安全及持有正確的態度，包括：保持手乾才開關產品。',
+  pages:['slide11','slide12'], cues:[22,24],
+  keys:['安全','正確','態度','手乾','開關'],
+  vocab:[V2('安全','Safety'), V2('正確','Correct'), V2('態度','Attitude'), V2('手乾','Dry hands'), V2('開關','Switch on and off')]},
+ {no:12, title:'節省能源', sentence:'天氣稍涼，可以不開冷氣機，以節省能源。', pages:['slide13'], cues:[25,25],
+  keys:['稍涼','不開','節省能源'],
+  vocab:[V2('稍涼','A bit cool'), V2('不開','Do not switch on'), V2('節省能源','Save energy')]},
+ {no:13, title:'距離和時間', sentence:'保持適當的距離觀看產品的螢幕。不宜太長時間使用電視或平板電腦。',
+  pages:['slide14','slide15'], cues:[26,27],
+  keys:['保持','適當的','距離','螢幕','不宜','長時間'],
+  vocab:[V2('保持','Keep'), V2('適當的','Suitable'), V2('距離','Distance'), V2('螢幕','Screen'), V2('不宜','Should not'), V2('長時間','A long time')]},
+ {no:14, title:'使用得宜', sentence:'購物須節制。大家只要使用得宜，科技產品便能讓我們生活更舒適和方便。',
+  pages:['slide16','slide17'], cues:[28,30],
+  keys:['節制','大家','得宜','舒適'],
+  vocab:[V2('節制','Moderation'), V2('大家','Everyone'), V2('得宜','Properly'), V2('舒適','Comfortable')]}
+];
+LESSONS2.forEach(l=>{ l.page = '2:'+l.pages[0]; });
+
+/* 課文影片：一格一句字幕。s＝大圖書第幾頁，fx＝只放大畫面的某一格（tl 左上、tr 右上、bl 左下、br 右下） */
+/* 每張大圖書的闊高比（影片畫面按此排版，局部放大才會準確） */
+const SLIDE_AR = {"1": 1.5932, "2": 1.8062, "3": 1.6338, "4": 1.5926, "5": 1.6, "6": 1.6262, "7": 1.7525, "8": 1.6286, "9": 1.5969, "10": 1.9865, "11": 1.7924, "12": 1.5938, "13": 1.5683, "14": 1.5828, "15": 1.582, "16": 1.5994, "17": 1.8486};
+const VID2 = [
+  {s:1,  t:'《科技產品》'},
+  {s:2,  t:'現代科技發達，'},
+  {s:2,  t:'讓每個家庭都能使用到科技產品。'},
+  {s:3,  t:'我家有電視，'},
+  {s:3,  t:'我們可以一起看電視節目。'},
+  {s:4,  t:'我家有微波爐，'},
+  {s:4,  t:'可以讓我們翻熱食物。'},
+  {s:5,  t:'我家有洗衣機，'},
+  {s:5,  t:'可以讓我們清潔衣服。'},
+  {s:6,  t:'我家有冷氣機，'},
+  {s:6,  t:'可以讓我們感到涼快。'},
+  {s:7,  t:'我家有電腦及平板電腦，'},
+  {s:7,  t:'可以讓我們上網及學習電腦技能。'},
+  {s:8,  t:'我家有雪櫃，'},
+  {s:8,  t:'可以讓我們冷藏食物。'},
+  {s:9,  t:'出外時，'},
+  {s:9,  t:'科技令我們的生活很方便。'},
+  {s:10, t:'我們可以用八達通購物及付款，'},
+  {s:10, t:'媽媽去超級市場使用八達通買菜，', fx:'tl'},
+  {s:10, t:'爸爸去便利店使用八達通買報紙，', fx:'tr'},
+  {s:10, t:'哥哥使用八達通乘搭巴士上班，',   fx:'bl'},
+  {s:10, t:'妹妹使用八達通到快餐店吃午餐。', fx:'br'},
+  {s:11, t:'我們使用科技產品時，'},
+  {s:11, t:'應注意安全及持有正確的態度，包括：'},
+  {s:12, t:'保持手乾才開關產品。'},
+  {s:13, t:'天氣稍涼，可以不開冷氣機，以節省能源。'},
+  {s:14, t:'保持適當的距離觀看產品的螢幕。'},
+  {s:15, t:'不宜太長時間使用電視或平板電腦。'},
+  {s:16, t:'購物須節制。'},
+  {s:17, t:'大家只要使用得宜，'},
+  {s:17, t:'科技產品便能讓我們生活更舒適和方便。'}
+];
+VID2.forEach((c,i)=>{ c.i = i; c.img = '2:slide'+c.s; });
+
+/* 💡 解釋（老師按「解釋」時顯示） */
+const EXPLAIN2 = ({
+ '我們':['🧑‍🤝‍🧑','「我」和其他人，不只是一個人。','We: me and other people.'],
+ '科技發達':['🚀','科技進步了，有很多新機器、新發明。','Technology has advanced; there are many new machines.'],
+ '家庭':['👨‍👩‍👧‍👦','爸爸、媽媽和孩子住在一起。','Parents and children living together.'],
+ '科技產品':['📺','用電或科技做成的東西，例如電視、洗衣機。','Things powered by technology, like TVs and washing machines.'],
+ '電視':['📺','用來看節目的電器。','An appliance for watching programmes.'],
+ '電視節目':['🎬','在電視上播放的節目。','Programmes shown on TV.'],
+ '微波爐':['♨️','可以快快翻熱食物的電器。','An appliance that reheats food quickly.'],
+ '翻熱食物':['🍲','把冷了的食物弄熱。','Make cold food hot again.'],
+ '洗衣機':['🧺','用來洗衣服的電器。','An appliance for washing clothes.'],
+ '清潔衣服':['👕','把衣服洗乾淨。','Wash clothes clean.'],
+ '冷氣機':['❄️','可以令房間變涼的電器。','An appliance that cools a room.'],
+ '涼快':['😌','不熱，很舒服。','Not hot; pleasant and fresh.'],
+ '電腦':['💻','可以上網、打字、學習的機器。','A machine for the internet, typing and learning.'],
+ '平板電腦':['📱','薄薄的、用手指點的電腦。','A thin computer you tap with your fingers.'],
+ '上網':['🌐','用電腦或平板電腦看網上的資料。','Use the internet on a computer or tablet.'],
+ '學習':['📖','學新的知識和本領。','Learning new knowledge and skills.'],
+ '電腦技能':['⌨️','使用電腦的本領，例如打字。','Skills for using a computer, such as typing.'],
+ '雪櫃':['🧊','把食物放在裏面，保持冰冷。','Keeps food cold inside.'],
+ '冷藏食物':['🥛','把食物放進雪櫃，不容易壞。','Food kept in the fridge stays fresh.'],
+ '出外':['🚶','離開家，去外面。','Leave home and go outside.'],
+ '方便':['👍','容易、不麻煩。','Easy and not troublesome.'],
+ '八達通':['💳','拍一拍就可以付款的卡。','A card you tap to pay.'],
+ '購物':['🛍️','去買東西。','Going to buy things.'],
+ '付款':['💰','買東西時付錢。','Paying money when you buy.'],
+ '媽媽':['👩','我的母親。','My mother.'],
+ '超級市場':['🏬','有很多食物和日用品的大商店。','A big shop selling food and daily goods.'],
+ '買菜':['🥬','購買蔬菜。','Buying vegetables.'],
+ '爸爸':['👨','我的父親。','My father.'],
+ '便利店':['🏪','細小、營業時間長的商店。','A small shop open for long hours.'],
+ '買報紙':['📰','購買報紙來看。','Buying a newspaper to read.'],
+ '哥哥':['👦','比我大的男孩子，我的家人。','An older brother.'],
+ '乘搭巴士':['🚌','坐巴士去別的地方。','Take a bus to go somewhere.'],
+ '上班':['💼','去工作的地方做工。','Go to the workplace.'],
+ '妹妹':['👧','比我小的女孩子，我的家人。','A younger sister.'],
+ '快餐店':['🍔','很快就有食物吃的餐廳。','A restaurant that serves food quickly.'],
+ '吃午餐':['🍱','中午吃的一餐。','The meal eaten at noon.'],
+ '安全':['🛡️','沒有危險，不會受傷。','No danger; not getting hurt.'],
+ '正確':['✅','對的，沒有錯。','Right, not wrong.'],
+ '態度':['🙂','我們做事的方法和心情。','The way and spirit in which we do things.'],
+ '手乾':['🤲','手上沒有水。','No water on your hands.'],
+ '開關':['🔘','打開和關上電器的掣。','The switch that turns things on and off.'],
+ '稍涼':['🌤️','有一點點涼，不太熱。','A little cool; not too hot.'],
+ '不開':['🚫','不要打開。','Do not switch on.'],
+ '節省能源':['🌱','少用電，保護地球。','Use less electricity and protect the Earth.'],
+ '保持':['🤝','一直是這樣，不改變。','Keep it that way.'],
+ '適當的':['👌','剛剛好，不太多也不太少。','Just right; not too much, not too little.'],
+ '距離':['↔️','兩個東西之間的遠近。','How far apart two things are.'],
+ '螢幕':['🖥️','電視或電腦顯示畫面的地方。','The part of a TV or computer that shows pictures.'],
+ '不宜':['⛔','不應該、不適合。','Should not; not suitable.'],
+ '長時間':['⏳','很長的時間。','A long time.'],
+ '節制':['⚖️','不要太多，要有分寸。','Not too much; keep it under control.'],
+ '大家':['🧑‍🤝‍🧑','所有人，包括我和你。','Everyone, including you and me.'],
+ '得宜':['👏','做得合適、恰當。','Done properly.'],
+ '舒適':['🛋️','很舒服、很輕鬆。','Very comfortable and relaxed.']
+});
+
+/* ================================================================
+   單元二的粵拼：補上原本粵拼表沒有的字，並指定讀音會變的詞語
+   ================================================================ */
+(function(){
+  const J2 = {技:'gei6',觀:'gun1',律:'leot6',避:'bei6',混:'wan6',產:'caan2',爐:'lou4',翻:'faan1',網:'mong5',藏:'cong4',購:'gau3',利:'lei6',
+    括:'kut3',稍:'saau1',省:'saang2',源:'jyun4',距:'geoi6',螢:'jing4',宜:'ji4',制:'zai3',舒:'syu1',圍:'wai4',顯:'hin2',某:'mau5',
+    孩:'haai4',弄:'lung6',薄:'bok6',母:'mou5',親:'can1',蔬:'so1',父:'fu6',營:'jing4',男:'naam4',女:'neoi5',遠:'jyun5',近:'gan6',寸:'cyun3',
+    恰:'hap1',鬆:'sung1',擇:'zaak6',判:'pun3',斷:'dyun6',配:'pui3',程:'cing4',拆:'caak3',尾:'mei5',構:'gau3',素:'sou3',族:'zuk6',
+    筒:'tung4',粵:'jyut6',拼:'ping3',聞:'man4',劇:'kek6',逗:'dau6',德:'dak1',湯:'tong1',襪:'mat6',拉:'laai1',火:'fo2',箭:'zin3',
+    晾:'long6',吹:'ceoi1',炎:'jim4',厚:'hau5',況:'fong3',浪:'long6',雞:'gai1',聯:'lyun4',絡:'lok3',硬:'ngaang6',幣:'bai6',澡:'cou2',
+    雜:'zaap6',誌:'zi3',速:'cuk1',髒:'zong1',否:'fau2',費:'fai3',替:'tai3',陣:'zan6',碌:'luk1'};
+  for(const k in J2) if(!JYUT[k]) JYUT[k] = J2[k];
+})();
+
+/* 詞語層面的讀音（逐字查表會讀錯的）。陣列裏空的位置沿用單字讀音 */
+var FIX2 = {
+  '媽媽':['maa4','maa1'], '爸爸':['baa4','baa1'], '哥哥':['go4','go1'], '妹妹':['mui6','mui2'],
+  '上網':['soeng5','mong5'], '應注意':['jing1'], '時間':['si4','gaan3'], '長時間':['coeng4','si4','gaan3'],
+  '八達通':['baat3','daat6','tung1'], '便利店':['bin6','lei6','dim3'], '方便':['fong1','bin6'], '涼快':['loeng4','faai3'],
+  '稍涼':['saau1','loeng4'], '冷藏':['laang5','cong4'], '正確':['zing3','kok3'], '大家':['daai6','gaa1']
+};
+var FIX2RE = null;
+(function(){
+  const ks = Object.keys(FIX2).sort((a,b)=>b.length-a.length);
+  FIX2RE = ks.length ? new RegExp('('+ks.join('|')+')') : null;
+})();
+function rubyPlain(s){
+  return [...String(s)].map(c=> JYUT[c] ? `<ruby>${c}<rt>${JYUT[c]}</rt></ruby>` : c).join('');
+}
+function ruby(s){
+  s = String(s==null?'':s);
+  if(!FIX2RE) return rubyPlain(s);
+  return s.split(FIX2RE).map(p=> FIX2[p]
+    ? [...p].map((c,j)=>{ const r = FIX2[p][j] || JYUT[c]; return r ? `<ruby>${c}<rt>${r}</rt></ruby>` : c; }).join('')
+    : rubyPlain(p)).join('');
+}
+/* 粵拼識字卡用：一個詞語 → [[字, 粵拼], …] */
+function jpOf(w){
+  const fx = FIX2[w];
+  return [...String(w)].map((c,j)=>[c, (fx && fx[j]) || JYUT[c] || '']);
+}
+/* 粵拼拆成聲母＋韻母（和學校的拼音表一樣，聲母以紅色顯示） */
+function jpSplit(jp){
+  const m = /^(ng|gw|kw|b|p|m|f|d|t|n|l|g|k|h|w|z|c|s|j)?(.*)$/.exec(jp || '');
+  return [m[1]||'', m[2]||''];
+}
+
+/* ================================================================
+   單元二：句子教學（SENT2）與問答（QA2）
+   每課的「⑤ 句子」放語文知識和句式遊戲；「⑦ 問答」是理解題。
+   題型：teach 教學卡 · choice 選擇 · tf 判斷 · order 排句子 · fill 填空 · sort 分類 ·
+         match 配對 · multi 多選 · talk 說話（老師按 👍 加分）
+   圖片一律寫詞語名（例如 '電視'），程式會自動指向單元二的圖片。
+   ================================================================ */
+const IT = {
+  ch:(q,ans,wrong,o)=>({k:'choice', q, ans, opts:[ans,...wrong], ...o}),
+  tf:(q,ans,o)=>({k:'tf', q, ans:!!ans, ...o}),
+  od:(parts,o)=>({k:'order', parts, ...o}),
+  fl:(t,bl,o)=>({k:'fill', t, bl, ...o}),
+  so:(bk,its,o)=>({k:'sort', bk, its, ...o}),
+  mt:(pairs,o)=>({k:'match', pairs, ...o}),
+  mu:(q,opts,o)=>({k:'multi', q, opts, ...o}),
+  tk:(q,o)=>({k:'talk', q, ...o}),
+  th:(t,o)=>({k:'teach', t, ...o})
+};
+const P = (t,c,lab)=>({t,c,lab});        /* 句子拆件：文字、顏色、標籤 */
+const S_ = (t,to,img,em)=>({t,to,img,em}); /* 分類用的卡 */
+const O_ = (t,ok,img,em)=>({t,ok:ok?1:0,img,em});   /* 多選用的選項 */
+const BK_YN = [['a','科技產品','⚡'],['b','不是科技產品','🚫']];
+
+const SENT2 = {}, QA2 = {};
+
+/* ───────────── 第 1 連堂　科技發達、家庭、科技產品 ───────────── */
+SENT2[1] = [
+  IT.th('say',{tag:'認識科技產品', q:'甚麼是科技產品？', img:'產品',
+    lines:['用電或科技做成的東西，叫「科技產品」。','例如：電視、洗衣機、冷氣機、微波爐。']}),
+  IT.th('rule',{tag:'名詞', q:'認識名詞', ico:'🏷️',
+    lines:['名詞是「東西的名稱」。','科技產品的名稱，全部都是名詞。'],
+    chips:[{t:'微波爐',img:'微波爐'},{t:'洗衣機',img:'洗衣機'},{t:'冷氣機',img:'冷氣機'},{t:'電腦',img:'電腦'},{t:'平板電腦',img:'平板電腦'}]}),
+  IT.so(BK_YN,[S_('電視','a','電視'),S_('蘋果','b',0,'🍎'),S_('洗衣機','a','洗衣機'),S_('椅子','b',0,'🪑'),
+               S_('冷氣機','a','冷氣機'),S_('書本','b',0,'📚'),S_('電腦','a','電腦'),S_('皮鞋','b',0,'👞')],
+    {tag:'名詞', q:'分一分：是科技產品，還是不是？', qe:'Sort: technology product or not?', cnt:{1:8,2:6,3:4}}),
+  IT.od(['讓','每個家庭','都能使用到','科技產品','。'],
+    {tag:'句子', q:'排一排：把詞語排成課文句子', qe:'Put the words in order', pre:'現代科技發達，', img:'家庭'}),
+  IT.tk('你家有哪些科技產品？說給大家聽。',{tag:'說話', tip:'可以用「我家有……」開頭。'})
+];
+QA2[1] = [
+  IT.ch('現代，每個家庭都能使用到甚麼？','科技產品',['玩具','圖書'],
+    {qe:'What can every family use nowadays?', img:'產品', hint:{sent:'現代科技發達，讓每個家庭都能使用到（科技產品）。', img:'產品'}}),
+  IT.tf('現代的科技很發達。',true,{qe:'Technology is very advanced today.', img:'科技發達',
+    hint:{sent:'現代（科技發達），讓每個家庭都能使用到科技產品。'}}),
+  IT.mu('選出所有科技產品。',[O_('電視',1,'電視'),O_('洗衣機',1,'洗衣機'),O_('冷氣機',1,'冷氣機'),O_('微波爐',1,'微波爐'),
+        O_('椅子',0,0,'🪑'),O_('蘋果',0,0,'🍎')],{qe:'Choose all the technology products.',
+        hint:{img:'產品', t:'電視、洗衣機、冷氣機、微波爐都是科技產品。'}}),
+  IT.mt([{img:'科技發達',r:'科技發達'},{img:'家庭',r:'家庭'},{img:'產品',r:'科技產品'}],
+    {q:'配一配：圖片和詞語', qe:'Match the pictures with the words'}),
+  IT.fl('現代＿＿＿＿，讓每個家庭都能使用到科技產品。',[['科技發達','天氣很熱','學校放假']],
+    {qe:'Fill in the blank', hint:{sent:'現代（科技發達），讓每個家庭都能使用到科技產品。'}}),
+  IT.ch('請寫出：每個（　　）都能使用到科技產品。','家庭',['學校','公園'],
+    {qe:'Write: Every ___ can use technology products.', wr:true, img:'家庭', hint:{sent:'讓每個（家庭）都能使用到科技產品。', img:'家庭'}}),
+  IT.tk('你覺得科技產品令生活更方便嗎？為甚麼？',{tag:'說話', tip:'引導學生用「因為……」回答。'})
+];
+
+/* ───────────── 第 2 連堂　電視、我們、電視節目 ───────────── */
+SENT2[2] = [
+  IT.th('strips',{tag:'句式', q:'句式：「我家有電視。」',
+    rows:[{parts:[P('我家',1,'誰的家'),P('有',2,'有'),P('電視',3,'甚麼東西'),P('。',4,'句號')], img:'電視'},
+          {parts:[P('我家',1,'誰的家'),P('有',2,'有'),P('冷氣機',3,'甚麼東西'),P('。',4,'句號')], img:'冷氣機'}],
+    note:'陳述句：說明一件事，句尾用句號。　結構：名詞＋有＋名詞。'}),
+  IT.od(['我家','有','電視','。'],{tag:'句式', q:'排一排，組成句子', qe:'Make a sentence', img:'電視'}),
+  IT.th('comp',{tag:'語素', q:'「電」字家族', ctr:'電',
+    sats:[{c:'視',w:'電視',img:'電視'},{c:'話',w:'電話',em:'📞'},{c:'筒',w:'電筒',em:'🔦'},{c:'腦',w:'電腦',img:'電腦'}],
+    note:'「電」是一個語素。加上不同的字，就變成不同的詞語。按一按看看。'}),
+  IT.ch('「電」加上「視」，是甚麼詞語？','電視',['電話','電筒'],{tag:'語素', qe:'電 + 視 = ?', po:1, oe:{電話:'📞',電筒:'🔦'}}),
+  IT.ch('看圖，這是甚麼？','電筒',['電視','電話'],{tag:'語素', em:'🔦', qe:'What is this?', po:1, oe:{電話:'📞',電筒:'🔦'}}),
+  IT.th('jp',{tag:'粵拼', q:'粵拼識字：電視', words:['電視']}),
+  IT.ch('讀一讀拼音，選出正確的詞語。','電視',['電腦','雪櫃'],{tag:'粵拼', cue:'din6 si6', say:'電視', po:1, pe:1}),
+  IT.th('say',{tag:'代詞', q:'「我們」', img:'我們',
+    lines:['「我們」是指「我」和其他人。','我們一家人，可以一起看電視節目。']}),
+  IT.tf('「我們」只是指我一個人。',false,{tag:'代詞', qe:'"We" means only me.', img:'我們', hint:{t:'「我們」是我和其他人，不只是一個人。'}})
+];
+QA2[2] = [
+  IT.ch('我家有甚麼？','電視',['雪櫃','電腦'],{qe:'What do we have at home?', img:'電視', hint:{sent:'我家有（電視），我們可以一起看電視節目。', img:'電視'}}),
+  IT.ch('我們可以一起看甚麼？','電視節目',['圖書','報紙'],{qe:'What can we watch together?', img:'節目', hint:{sent:'我家有電視，我們可以一起看（電視節目）。', img:'節目'}}),
+  IT.tf('我家有電視。',true,{qe:'There is a TV at home.', img:'電視'}),
+  IT.fl('我家有＿＿，我們可以一起看電視節目。',[['電視','洗衣機','冷氣機']],{qe:'Fill in the blank', hint:{sent:'我家有（電視），我們可以一起看電視節目。'}}),
+  IT.od(['我們','可以','一起','看','電視節目','。'],{qe:'Put the words in order', img:'節目'}),
+  IT.ch('誰可以一起看電視節目？','我們',['他','我'],{tag:'代詞', qe:'Who can watch TV programmes together?', hint:{sent:'我家有電視，（我們）可以一起看電視節目。', t:'「我們」包括我和家人。'}}),
+  IT.ch('請寫出：我家有（　　）。','電視',['電話','電筒'],{qe:'Write: We have a ___ at home.', wr:true, img:'電視', hint:{sent:'我家有（電視）。', img:'電視'}}),
+  IT.tk('你家有電視嗎？你最喜歡看甚麼電視節目？',{tag:'說話', tip:'答案可以是卡通片、新聞、電視劇……'})
+];
+
+/* ───────────── 第 3 連堂　微波爐、翻熱食物 ───────────── */
+SENT2[3] = [
+  IT.th('strips',{tag:'句式', q:'句式：「我家有微波爐，可以讓我們翻熱食物。」',
+    rows:[{parts:[P('我家有',1,'有甚麼'),P('微波爐',3,'電器'),P('，',4,'逗號'),P('可以讓我們',2,'可以做甚麼'),P('翻熱食物',5,'動作＋東西'),P('。',4,'句號')], img:'微波爐'}],
+    note:'「電器」可以讓我們做甚麼事？後面就接上「動作＋東西」。'}),
+  IT.fl('我家有＿＿＿，可以讓我們翻熱食物。',[['微波爐','洗衣機','電視']],{tag:'句式', qe:'Fill in the blank', po:1, img:'翻熱'}),
+  IT.od(['家','有','微波爐','。'],{tag:'句式', q:'排一排：「家有微波爐。」', img:'微波爐'}),
+  IT.th('rule',{tag:'詞組', q:'動作＋東西', ico:'🍲',
+    lines:['「翻熱」是動作，「食物」是東西。','動作加上東西，就是一個詞組：翻熱食物。'],
+    chips:[{t:'翻熱食物',img:'翻熱'},{t:'吃午餐',img:'吃午餐'}]}),
+  IT.mt([{l:'翻熱',r:'食物'},{l:'清潔',r:'衣服'},{l:'上網',r:'電腦'}],{tag:'詞組', q:'配一配：動作和東西', qe:'Match the action with the thing'}),
+  IT.ch('微波爐可以讓我們做甚麼？','翻熱食物',['清潔衣服','冷藏食物'],{tag:'句式', qe:'What can a microwave oven do for us?', img:'微波爐', po:1, oi:{翻熱食物:'翻熱',清潔衣服:'清潔衣服',冷藏食物:'冷藏食物'}})
+];
+QA2[3] = [
+  IT.ch('我家有甚麼電器？','微波爐',['電視','雪櫃'],{qe:'What appliance do we have?', img:'微波爐', hint:{sent:'我家有（微波爐），可以讓我們翻熱食物。', img:'微波爐'}}),
+  IT.ch('微波爐可以讓我們做甚麼？','翻熱食物',['清潔衣服','冷藏食物'],{qe:'What can a microwave oven do for us?', hint:{sent:'我家有微波爐，可以讓我們（翻熱食物）。', img:'翻熱'}}),
+  IT.tf('微波爐可以清潔衣服。',false,{qe:'A microwave oven can clean clothes.', img:'微波爐', hint:{t:'清潔衣服要用洗衣機。', img:'洗衣機'}}),
+  IT.ch('聽一聽，選出微波爐。','微波爐',['洗衣機','冷氣機'],{qe:'Listen and pick the microwave oven', po:1, pe:1, say:'微波爐'}),
+  IT.fl('微波爐可以讓我們＿＿＿食物。',[['翻熱','清潔','冷藏']],{qe:'Fill in the blank', hint:{sent:'可以讓我們（翻熱）食物。', img:'翻熱'}}),
+  IT.tf('使用微波爐的時候，要保持手乾。',true,{tag:'品德', qe:'Keep your hands dry when using a microwave oven.', img:'手乾', hint:{t:'手濕的時候開關電器，會有危險。'}}),
+  IT.ch('請寫出：可以讓我們翻熱（　　）。','食物',['衣服','報紙'],{qe:'Write: Reheat ___.', wr:true, img:'翻熱'}),
+  IT.tk('你吃過用微波爐翻熱的食物嗎？是甚麼食物？',{tag:'說話', tip:'例如：飯盒、包點、湯。'})
+];
+
+/* ───────────── 第 4 連堂　洗衣機、清潔衣服 ───────────── */
+SENT2[4] = [
+  IT.th('strips',{tag:'句式', q:'句式：「我家有洗衣機，可以讓我們清潔衣服。」',
+    rows:[{parts:[P('我家有',1,'有甚麼'),P('洗衣機',3,'電器'),P('，',4,'逗號'),P('可以讓我們',2,'可以做甚麼'),P('清潔衣服',5,'動作＋東西'),P('。',4,'句號')], img:'洗衣機'}]}),
+  IT.th('jp',{tag:'粵拼', q:'粵拼識字：洗衣機', words:['洗衣機']}),
+  IT.ch('讀一讀拼音，選出正確的詞語。','洗衣機',['微波爐','冷氣機'],{tag:'粵拼', cue:'sai2 ji1 gei1', say:'洗衣機', po:1, pe:1}),
+  IT.od(['我家','有','洗衣機','。'],{tag:'句式', q:'排一排，組成句子', img:'洗衣機'}),
+  IT.fl('我家有＿＿＿＿，可以讓我們清潔衣服。',[['洗衣機','微波爐','雪櫃']],{tag:'句式', qe:'Fill in the blank', po:1, img:'清潔衣服'}),
+  IT.so([['a','可以洗','🧺'],['b','不可以洗','🚫']],[S_('衣服','a',0,'👕'),S_('褲子','a',0,'👖'),S_('毛巾','a',0,'🧣'),S_('襪子','a',0,'🧦'),
+        S_('電視','b','電視'),S_('雪櫃','b','雪櫃'),S_('電腦','b','電腦'),S_('微波爐','b','微波爐')],
+    {tag:'名詞', q:'洗衣機可以洗哪些東西？', qe:'What can go in the washing machine?', cnt:{1:8,2:6,3:4}})
+];
+QA2[4] = [
+  IT.ch('我家有甚麼電器？','洗衣機',['冷氣機','電視'],{qe:'What appliance do we have?', img:'洗衣機', hint:{sent:'我家有（洗衣機），可以讓我們清潔衣服。', img:'洗衣機'}}),
+  IT.ch('洗衣機可以讓我們做甚麼？','清潔衣服',['翻熱食物','冷藏食物'],{qe:'What can a washing machine do for us?', img:'清潔衣服', hint:{sent:'我家有洗衣機，可以讓我們（清潔衣服）。', img:'清潔衣服'}}),
+  IT.tf('洗衣機可以翻熱食物。',false,{qe:'A washing machine can reheat food.', hint:{t:'翻熱食物要用微波爐。', img:'微波爐'}}),
+  IT.mu('哪些電器放在家裏？選出課文提到的電器。',[O_('洗衣機',1,'洗衣機'),O_('電視',1,'電視'),O_('微波爐',1,'微波爐'),O_('拖拉機',0,0,'🚜'),O_('火箭',0,0,'🚀')],
+    {qe:'Choose the appliances in the text.', hint:{t:'課文提到：電視、微波爐、洗衣機……'}}),
+  IT.od(['洗衣機','可以','讓我們','清潔衣服','。'],{qe:'Put the words in order', img:'洗衣機'}),
+  IT.fl('洗衣機可以讓我們＿＿＿＿衣服。',[['清潔','翻熱','冷藏']],{qe:'Fill in the blank'}),
+  IT.ch('請寫出：我家有（　　　）。','洗衣機',['冷氣機','微波爐'],{qe:'Write: We have a ___ at home.', wr:true, img:'洗衣機'}),
+  IT.tk('誰在你家洗衣服？你可以幫忙做甚麼？',{tag:'說話', tip:'例如：把衣服放進洗衣機、晾衣服。'})
+];
+
+/* ───────────── 第 5 連堂　冷氣機、涼快 ───────────── */
+SENT2[5] = [
+  IT.th('strips',{tag:'句式', q:'句式：「我家有冷氣機，可以讓我們感到涼快。」',
+    rows:[{parts:[P('我家有',1,'有甚麼'),P('冷氣機',3,'電器'),P('，',4,'逗號'),P('可以讓我們',2,'可以做甚麼'),P('感到涼快',5,'感覺'),P('。',4,'句號')], img:'冷氣機'}]}),
+  IT.th('rule',{tag:'形容詞', q:'認識形容詞：涼快', ico:'😌',
+    lines:['形容詞可以說出「人的感覺」。','天氣很熱，開了冷氣機，我們感到涼快。'],
+    chips:[{t:'涼快',img:'涼快'},{t:'舒適',img:'舒適'},{t:'方便',img:'方便'}]}),
+  IT.so([['a','涼快','😌'],['b','很熱','🥵']],[S_('開冷氣機','a',0,'❄️'),S_('吹風扇','a',0,'🌀'),S_('飲冰水','a',0,'🧊'),S_('在太陽下跑步','b',0,'🏃'),
+        S_('天氣炎熱','b',0,'☀️'),S_('穿厚冷衣','b',0,'🧥')],{tag:'形容詞', q:'這些情況，會令我們感到涼快，還是很熱？', qe:'Cool or hot?', cnt:{1:6,2:6,3:4}}),
+  IT.th('jp',{tag:'粵拼', q:'粵拼識字：冷氣機', words:['冷氣機']}),
+  IT.ch('讀一讀拼音，選出正確的詞語。','冷氣機',['洗衣機','雪櫃'],{tag:'粵拼', cue:'laang5 hei3 gei1', say:'冷氣機', po:1, pe:1}),
+  IT.fl('我家有＿＿＿，可以讓我們感到涼快。',[['冷氣機','微波爐','電視']],{tag:'句式', qe:'Fill in the blank', po:1, img:'涼快'}),
+  IT.od(['家','有','冷氣機','。'],{tag:'句式', q:'排一排：「家有冷氣機。」', img:'冷氣機'})
+];
+QA2[5] = [
+  IT.ch('我家有甚麼電器？','冷氣機',['洗衣機','雪櫃'],{qe:'What appliance do we have?', img:'冷氣機', hint:{sent:'我家有（冷氣機），可以讓我們感到涼快。', img:'冷氣機'}}),
+  IT.ch('冷氣機可以讓我們感到怎樣？','涼快',['很熱','肚餓'],{qe:'How does an air-conditioner make us feel?', img:'涼快', hint:{sent:'我家有冷氣機，可以讓我們感到（涼快）。', img:'涼快'}}),
+  IT.tf('冷氣機可以讓我們感到涼快。',true,{qe:'An air-conditioner makes us feel cool.', img:'冷氣機'}),
+  IT.ch('聽一聽，選出冷氣機。','冷氣機',['微波爐','洗衣機'],{qe:'Listen and pick the air-conditioner', po:1, pe:1, say:'冷氣機'}),
+  IT.fl('冷氣機可以讓我們感到＿＿＿＿。',[['涼快','翻熱','清潔']],{qe:'Fill in the blank', hint:{sent:'可以讓我們感到（涼快）。', img:'涼快'}}),
+  IT.so([['a','涼快','😌'],['b','很熱','🥵']],[S_('冷氣機','a','冷氣機'),S_('涼快的風','a',0,'🍃'),S_('大太陽','b',0,'☀️'),S_('熱浪','b',0,'🔥')],
+    {qe:'Sort the pictures', q:'分一分：涼快，還是很熱？', cnt:{1:4,2:4,3:4}}),
+  IT.ch('請寫出：可以讓我們感到（　　）。','涼快',['舒適','方便'],{qe:'Write: make us feel ___.', wr:true, img:'涼快'}),
+  IT.tk('你家有冷氣機嗎？天氣很熱的時候，你會做甚麼？',{tag:'說話', tip:'引導學生說：我家有／沒有冷氣機。'})
+];
+
+/* ───────────── 第 6 連堂　電腦、平板電腦、上網、學習、電腦技能 ───────────── */
+SENT2[6] = [
+  IT.th('strips',{tag:'句式', q:'句式：「我家有電腦及平板電腦」',
+    rows:[{parts:[P('我家有',1,'有甚麼'),P('電腦',3,'東西'),P('及',6,'和'),P('平板電腦',3,'東西'),P('。',4,'句號')], img:'電腦'}],
+    note:'「及」的意思是「和」，用來連接兩樣東西。'}),
+  IT.th('comp',{tag:'語素', q:'「電腦」大家族', ctr:'電腦',
+    sats:[{c:'平板',w:'平板電腦',img:'平板電腦'},{c:'技能',w:'電腦技能',img:'電腦技能'}],
+    note:'「電腦」加上其他詞語，變成新的詞語。按一按看看。'}),
+  IT.th('jp',{tag:'粵拼', q:'粵拼識字：電腦、平板電腦', words:['電腦','平板電腦']}),
+  IT.ch('讀一讀拼音，選出正確的詞語。','平板電腦',['電腦','電視'],{tag:'粵拼', cue:'ping4 baan2 din6 nou5', say:'平板電腦', po:1, pe:1}),
+  IT.ch('讀一讀拼音，選出正確的詞語。','電腦',['電視','雪櫃'],{tag:'粵拼', cue:'din6 nou5', say:'電腦', po:1, pe:1}),
+  IT.fl('我家有＿＿＿及平板電腦，可以讓我們上網及學習電腦技能。',[['電腦','電視','電筒']],{tag:'語素', qe:'Fill in the blank', po:1, img:'上網'}),
+  IT.mt([{l:'上網',r:'用電腦看網頁',img:'上網'},{l:'學習',r:'學新知識',img:'學習'},{l:'電腦技能',r:'打字、做簡報',img:'電腦技能'}],
+    {tag:'詞語', q:'配一配：詞語和意思', qe:'Match the words with their meanings'})
+];
+QA2[6] = [
+  IT.ch('我家有甚麼？','電腦及平板電腦',['電視及雪櫃','洗衣機及冷氣機'],{qe:'What do we have at home?', img:'電腦', hint:{sent:'我家有（電腦及平板電腦），可以讓我們上網及學習電腦技能。', img:'平板電腦'}}),
+  IT.ch('電腦及平板電腦可以讓我們做甚麼？','上網及學習電腦技能',['冷藏食物','清潔衣服'],{qe:'What can computers and tablets do for us?', hint:{sent:'……可以讓我們（上網及學習電腦技能）。', img:'電腦技能'}}),
+  IT.tf('平板電腦可以讓我們上網。',true,{qe:'A tablet lets us go online.', img:'上網'}),
+  IT.mu('選出所有可以上網的電器。',[O_('電腦',1,'電腦'),O_('平板電腦',1,'平板電腦'),O_('雪櫃',0,'雪櫃'),O_('洗衣機',0,'洗衣機'),O_('微波爐',0,'微波爐')],
+    {qe:'Choose everything that can go online.', hint:{t:'電腦和平板電腦都可以上網。'}}),
+  IT.od(['可以','讓我們','上網','及','學習','電腦技能','。'],{qe:'Put the words in order', img:'電腦技能'}),
+  IT.fl('我家有電腦及＿＿＿＿＿＿。',[['平板電腦','洗衣機','微波爐']],{qe:'Fill in the blank', po:1, hint:{sent:'我家有電腦及（平板電腦）。', img:'平板電腦'}}),
+  IT.ch('請寫出：我家有（　　）。','電腦',['電視','電筒'],{qe:'Write: We have a ___ at home.', wr:true, img:'電腦'}),
+  IT.tk('你會用電腦或平板電腦做甚麼？',{tag:'說話', tip:'例如：看影片、玩遊戲、學習。'})
+];
+
+/* ───────────── 第 7 連堂　雪櫃、冷藏食物 ───────────── */
+SENT2[7] = [
+  IT.th('strips',{tag:'句式', q:'句式：「我家有雪櫃，可以讓我們冷藏食物。」',
+    rows:[{parts:[P('我家有',1,'有甚麼'),P('雪櫃',3,'電器'),P('，',4,'逗號'),P('可以讓我們',2,'可以做甚麼'),P('冷藏食物',5,'動作＋東西'),P('。',4,'句號')], img:'雪櫃'}]}),
+  IT.th('jp',{tag:'粵拼', q:'粵拼識字：雪櫃', words:['雪櫃']}),
+  IT.ch('讀一讀拼音，選出正確的詞語。','雪櫃',['電視','電腦'],{tag:'粵拼', cue:'syut3 gwai6', say:'雪櫃', po:1, pe:1}),
+  IT.od(['我家','有','雪櫃','。'],{tag:'句式', q:'排一排，組成句子', img:'雪櫃'}),
+  IT.so([['a','放進雪櫃','🧊'],['b','不放進雪櫃','🚫']],[S_('牛奶','a',0,'🥛'),S_('雞蛋','a',0,'🥚'),S_('蔬菜','a',0,'🥬'),S_('雪糕','a',0,'🍦'),
+        S_('皮鞋','b',0,'👞'),S_('書本','b',0,'📚'),S_('枕頭','b',0,'🛏️'),S_('玩具','b',0,'🧸')],
+    {tag:'名詞', q:'哪些東西要放進雪櫃冷藏？', qe:'What goes into the fridge?', cnt:{1:8,2:6,3:4}}),
+  IT.mt([{img:'電視',r:'看電視節目'},{img:'微波爐',r:'翻熱食物'},{img:'洗衣機',r:'清潔衣服'},{img:'冷氣機',r:'感到涼快'},{img:'雪櫃',r:'冷藏食物'}],
+    {tag:'句式', q:'電器和功能：配一配', qe:'Match each appliance with what it does', cnt:{1:5,2:4,3:3}})
+];
+QA2[7] = [
+  IT.ch('我家有甚麼電器？','雪櫃',['冷氣機','電視'],{qe:'What appliance do we have?', img:'雪櫃', hint:{sent:'我家有（雪櫃），可以讓我們冷藏食物。', img:'雪櫃'}}),
+  IT.ch('雪櫃可以讓我們做甚麼？','冷藏食物',['翻熱食物','清潔衣服'],{qe:'What can a fridge do for us?', img:'冷藏食物', hint:{sent:'我家有雪櫃，可以讓我們（冷藏食物）。', img:'冷藏食物'}}),
+  IT.tf('雪櫃可以翻熱食物。',false,{qe:'A fridge can reheat food.', hint:{t:'雪櫃是冷的，用來冷藏食物。'}}),
+  IT.mt([{img:'微波爐',r:'翻熱食物'},{img:'洗衣機',r:'清潔衣服'},{img:'雪櫃',r:'冷藏食物'}],{q:'電器和功能：配一配', qe:'Match appliances with their functions', cnt:{1:3,2:3,3:2}}),
+  IT.fl('雪櫃可以讓我們＿＿＿＿食物。',[['冷藏','翻熱','清潔']],{qe:'Fill in the blank', hint:{sent:'可以讓我們（冷藏）食物。', img:'冷藏食物'}}),
+  IT.od(['雪櫃','可以','讓我們','冷藏食物','。'],{qe:'Put the words in order', img:'雪櫃'}),
+  IT.ch('請寫出：可以讓我們冷藏（　　）。','食物',['衣服','報紙'],{qe:'Write: Keep ___ cold.', wr:true, img:'冷藏食物'}),
+  IT.tk('你家的雪櫃裏有甚麼食物？',{tag:'說話', tip:'例如：牛奶、雞蛋、蔬菜。'})
+];
+
+/* ───────────── 第 8 連堂　出外、方便 ───────────── */
+SENT2[8] = [
+  IT.th('say',{tag:'認識「時」', q:'「出外時」', img:'出外',
+    lines:['「出外時」就是「出去外面的時候」。','「時」告訴我們：甚麼時候。']}),
+  IT.th('rule',{tag:'形容詞', q:'認識形容詞：方便', ico:'👍',
+    lines:['「方便」的意思是容易、不麻煩。','形容詞可以說出我們的感覺。'],
+    chips:[{t:'方便',img:'方便'},{t:'涼快',img:'涼快'},{t:'舒適',img:'舒適'}]}),
+  IT.so([['a','方便','👍'],['b','不方便','😣']],[S_('用八達通乘車','a',0,'💳'),S_('用手機看地圖','a',0,'📱'),S_('用電話聯絡家人','a',0,'📞'),S_('身上帶很多硬幣','b',0,'🪙'),
+        S_('找不到路','b',0,'🗺️'),S_('下雨沒帶雨傘','b',0,'🌧️')],{tag:'形容詞', q:'分一分：方便，還是不方便？', qe:'Convenient or not?', cnt:{1:6,2:6,3:4}}),
+  IT.od(['科技','令','我們的生活','很方便','。'],{tag:'句子', q:'排一排：課文句子', pre:'出外時，', img:'方便'}),
+  IT.fl('出外時，科技令我們的生活很＿＿＿＿。',[['方便','熱','慢']],{tag:'形容詞', qe:'Fill in the blank'}),
+  IT.tk('出外時，你會用甚麼科技產品？',{tag:'說話', tip:'例如：八達通、手機。'})
+];
+QA2[8] = [
+  IT.ch('甚麼時候，科技令我們的生活很方便？','出外時',['睡覺時','洗澡時'],{qe:'When does technology make life convenient?', img:'出外', hint:{sent:'（出外時），科技令我們的生活很方便。', img:'出外'}}),
+  IT.ch('科技令我們的生活怎樣？','很方便',['很麻煩','很危險'],{qe:'How does technology make our lives?', img:'方便', hint:{sent:'出外時，科技令我們的生活很（方便）。', img:'方便'}}),
+  IT.tf('出外時，科技令我們的生活很方便。',true,{qe:'Technology makes life convenient when we go out.', img:'出外'}),
+  IT.ch('哪一個詞語，是說出我們的感覺？','方便',['出外','科技'],{tag:'形容詞', qe:'Which word describes a feeling?', hint:{t:'方便、涼快、舒適都是形容詞。'}}),
+  IT.od(['出外時','，','科技','令','我們的生活','很方便','。'],{qe:'Put the words in order', img:'出外'}),
+  IT.ch('請寫出：科技令我們的生活很（　　）。','方便',['涼快','舒適'],{qe:'Write: Technology makes life ___.', wr:true, img:'方便'}),
+  IT.tk('你出外時，最需要帶甚麼東西？',{tag:'說話', tip:'例如：八達通、手機、水樽。'})
+];
+
+/* ───────────── 第 9 連堂　八達通（一）時人地事 ───────────── */
+SENT2[9] = [
+  IT.th('say',{tag:'認識八達通', q:'八達通', img:'八達通',
+    lines:['八達通是一張卡，拍一拍就可以付款。','我們可以用八達通購物及付款。']}),
+  IT.th('strips',{tag:'時人地事', q:'誰？去哪裏？做甚麼？',
+    rows:[{parts:[P('媽媽',1,'誰'),P('去',6,'去'),P('超級市場',2,'哪裏'),P('使用八達通',4,'怎樣做'),P('買菜',3,'做甚麼'),P('。',5,'句號')], img:'媽媽'},
+          {parts:[P('爸爸',1,'誰'),P('去',6,'去'),P('便利店',2,'哪裏'),P('使用八達通',4,'怎樣做'),P('買報紙',3,'做甚麼'),P('。',5,'句號')], img:'爸爸'}],
+    note:'說一件事，要說清楚：誰（人）、哪裏（地）、做甚麼（事）。'}),
+  IT.mt([{img:'媽媽',r:'超級市場'},{img:'爸爸',r:'便利店'}],{tag:'時人地事', q:'配一配：誰去哪裏？', qe:'Who goes where?', cnt:{1:2,2:2,3:2}}),
+  IT.fl('＿＿＿去超級市場使用八達通＿＿＿＿。',[['媽媽','爸爸','妹妹'],['買菜','買報紙','吃午餐']],{tag:'時人地事', qe:'Who? Does what?'}),
+  IT.od(['爸爸','去','便利店','使用八達通','買報紙','。'],{tag:'句子', q:'排一排：誰去哪裏做甚麼？', img:'買報紙'}),
+  IT.so([['a','超級市場','🏬'],['b','便利店','🏪']],[S_('買菜','a','買菜'),S_('買報紙','b','買報紙'),S_('買蔬菜','a',0,'🥬'),S_('買雜誌','b',0,'📰'),S_('買肉','a',0,'🥩'),S_('買飲品','b',0,'🥤')],
+    {tag:'時人地事', q:'在哪裏買？超級市場，還是便利店？', qe:'Where do we buy them?', cnt:{1:6,2:6,3:4}})
+];
+QA2[9] = [
+  IT.ch('我們可以用八達通做甚麼？','購物及付款',['看電視','洗衣服'],{qe:'What can we do with an Octopus card?', img:'八達通', hint:{sent:'我們可以用八達通（購物及付款）。', img:'付款'}}),
+  IT.ch('媽媽去哪裏買菜？','超級市場',['便利店','快餐店'],{qe:'Where does Mum buy vegetables?', img:'媽媽', hint:{sent:'媽媽去（超級市場）使用八達通買菜。', img:'超級市場'}}),
+  IT.ch('爸爸去便利店買甚麼？','報紙',['蔬菜','午餐'],{qe:'What does Dad buy at the convenience store?', img:'爸爸', hint:{sent:'爸爸去便利店使用八達通買（報紙）。', img:'買報紙'}}),
+  IT.tf('媽媽去便利店買菜。',false,{qe:'Mum goes to the convenience store to buy vegetables.', hint:{sent:'媽媽去（超級市場）使用八達通買菜。', img:'超級市場'}}),
+  IT.mt([{img:'媽媽',r:'買菜'},{img:'爸爸',r:'買報紙'}],{q:'配一配：誰做甚麼？', qe:'Who does what?', cnt:{1:2,2:2,3:2}}),
+  IT.od(['媽媽','去','超級市場','使用八達通','買菜','。'],{qe:'Put the words in order', img:'買菜'}),
+  IT.mu('選出可以用八達通做的事。',[O_('購物',1,'購物'),O_('付款',1,'付款'),O_('乘車',1,0,'🚌'),O_('洗衣服',0,0,'🧺'),O_('看電影',0,0,'🎬')],{qe:'Choose what we can do with an Octopus card.', hint:{t:'八達通可以購物、付款和乘車。'}}),
+  IT.ch('請寫出：媽媽去超級市場買（　　）。','菜',['報紙','午餐'],{qe:'Write: Mum buys ___ at the supermarket.', wr:true, img:'買菜'}),
+  IT.tk('你有去過超級市場嗎？你在那裏買過甚麼？',{tag:'說話', tip:'引導學生用「我去過……買……」。'})
+];
+
+/* ───────────── 第 10 連堂　八達通（二）時人地事 ───────────── */
+SENT2[10] = [
+  IT.th('strips',{tag:'時人地事', q:'誰？去哪裏？做甚麼？',
+    rows:[{parts:[P('哥哥',1,'誰'),P('使用八達通',4,'怎樣做'),P('乘搭巴士',3,'做甚麼'),P('上班',2,'去哪裏'),P('。',5,'句號')], img:'哥哥'},
+          {parts:[P('妹妹',1,'誰'),P('使用八達通',4,'怎樣做'),P('到',6,'到'),P('快餐店',2,'哪裏'),P('吃午餐',3,'做甚麼'),P('。',5,'句號')], img:'妹妹'}]}),
+  IT.mt([{img:'哥哥',r:'乘搭巴士上班'},{img:'妹妹',r:'到快餐店吃午餐'}],{tag:'時人地事', q:'配一配：誰做甚麼？', qe:'Who does what?', cnt:{1:2,2:2,3:2}}),
+  IT.fl('＿＿＿使用八達通到快餐店＿＿＿＿。',[['妹妹','哥哥','媽媽'],['吃午餐','買菜','上班']],{tag:'時人地事', qe:'Who? Does what?'}),
+  IT.od(['哥哥','使用八達通','乘搭巴士','上班','。'],{tag:'句子', q:'排一排：哥哥怎樣上班？', img:'乘搭巴士'}),
+  IT.mt([{img:'媽媽',r:'超級市場'},{img:'爸爸',r:'便利店'},{img:'哥哥',r:'巴士'},{img:'妹妹',r:'快餐店'}],
+    {tag:'時人地事', q:'全家人：誰去哪裏？', qe:'Who goes where?', cnt:{1:4,2:4,3:3}}),
+  IT.tk('我們用八達通做了甚麼？請輪流說一說。',{tag:'說話', tip:'媽媽買菜、爸爸買報紙、哥哥乘巴士、妹妹吃午餐。'})
+];
+QA2[10] = [
+  IT.ch('哥哥使用八達通做甚麼？','乘搭巴士上班',['買報紙','買菜'],{qe:'What does Older Brother use his Octopus card for?', img:'哥哥', hint:{sent:'哥哥使用八達通（乘搭巴士上班）。', img:'乘搭巴士'}}),
+  IT.ch('妹妹去哪裏吃午餐？','快餐店',['超級市場','便利店'],{qe:'Where does Younger Sister have lunch?', img:'妹妹', hint:{sent:'妹妹使用八達通到（快餐店）吃午餐。', img:'快餐店'}}),
+  IT.tf('哥哥乘搭巴士上班。',true,{qe:'Older Brother takes a bus to work.', img:'乘搭巴士'}),
+  IT.tf('妹妹到超級市場吃午餐。',false,{qe:'Younger Sister has lunch at the supermarket.', img:'吃午餐', hint:{sent:'妹妹使用八達通到（快餐店）吃午餐。', img:'快餐店'}}),
+  IT.mt([{img:'媽媽',r:'買菜'},{img:'爸爸',r:'買報紙'},{img:'哥哥',r:'上班'},{img:'妹妹',r:'吃午餐'}],{q:'全家人：誰做甚麼？', qe:'Who does what?', cnt:{1:4,2:4,3:3}}),
+  IT.od(['妹妹','使用八達通','到','快餐店','吃午餐','。'],{qe:'Put the words in order', img:'快餐店'}),
+  IT.so([['a','出外做的事','🚶'],['b','在家做的事','🏠']],[S_('乘搭巴士','a','乘搭巴士'),S_('吃午餐','a','吃午餐'),S_('上班','a','上班'),S_('看電視','b','電視'),S_('洗衣服','b','洗衣機'),S_('翻熱食物','b','翻熱')],
+    {qe:'Sort: outside or at home?', q:'分一分：出外做，還是在家做？', cnt:{1:6,2:6,3:4}}),
+  IT.ch('請寫出：妹妹到快餐店吃（　　）。','午餐',['早餐','晚餐'],{qe:'Write: Younger Sister has ___ at the fast-food shop.', wr:true, img:'吃午餐'}),
+  IT.tk('你家人每天出外做甚麼？他們怎樣去？',{tag:'說話', tip:'可用八達通乘車、買東西作例子。'})
+];
+
+/* ───────────── 第 11 連堂　安全、正確、態度、手乾、開關 ───────────── */
+SENT2[11] = [
+  IT.th('say',{tag:'品德', q:'安全地使用科技產品', img:'安全',
+    lines:['使用科技產品時，要注意安全。','我們要有正確的態度。']}),
+  IT.th('strips',{tag:'句子', q:'「保持手乾才開關產品」',
+    rows:[{parts:[P('保持手乾',1,'先做這件事'),P('才',2,'然後才'),P('開關產品',3,'再做這件事'),P('。',4,'句號')], img:'手乾'}],
+    note:'「才」的意思是：先做好前面的事，然後才可以做後面的事。'}),
+  IT.so([['a','安全 ✔','✅'],['b','危險 ✘','⚠️']],[S_('手乾才開關電器','a','手乾'),S_('手濕時開關電器','b','洗手'),S_('用乾毛巾擦手','a',0,'🧻'),S_('濕手拉插頭','b',0,'💦')],
+    {tag:'品德', q:'哪些做法安全？哪些做法危險？', qe:'Safe or dangerous?', cnt:{1:4,2:4,3:4}}),
+  IT.od(['保持','手乾','才','開關','產品','。'],{tag:'句子', q:'排一排：課文句子', img:'開關'}),
+  IT.fl('保持手乾＿＿開關產品。',[['才','不','很']],{tag:'句子', qe:'Fill in the blank', img:'手乾'}),
+  IT.tf('手是濕的，也可以開電視。',false,{tag:'品德', qe:'You can switch on the TV with wet hands.', img:'洗手', hint:{t:'手濕時開關電器，會有危險。要先把手擦乾。', img:'手乾'}})
+];
+QA2[11] = [
+  IT.ch('使用科技產品時，應注意甚麼？','安全',['速度','價錢'],{qe:'What should we pay attention to?', img:'安全', hint:{sent:'應注意（安全）及持有正確的態度。', img:'安全'}}),
+  IT.ch('保持手乾才可以做甚麼？','開關產品',['吃飯','睡覺'],{qe:'Dry hands are needed before what?', img:'開關', hint:{sent:'保持手乾才（開關產品）。', img:'開關'}}),
+  IT.tf('手濕的時候，可以開關電器。',false,{tag:'品德', qe:'You may switch appliances with wet hands.', img:'洗手', hint:{t:'要保持手乾才開關產品。', img:'手乾'}}),
+  IT.so([['a','正確 ✔','✅'],['b','不正確 ✘','❌']],[S_('保持手乾','a','手乾'),S_('濕手開電掣','b','洗手'),S_('先擦乾手再開關','a',0,'🧻'),S_('邊洗手邊拉插頭','b',0,'🚿')],
+    {q:'分一分：正確，還是不正確？', qe:'Correct or not?', cnt:{1:4,2:4,3:4}}),
+  IT.od(['應','注意','安全','及','持有','正確的態度','。'],{qe:'Put the words in order', img:'態度'}),
+  IT.mt([{img:'安全',r:'安全'},{img:'正確',r:'正確'},{img:'態度',r:'態度'},{img:'手乾',r:'手乾'}],{q:'配一配：圖片和詞語', qe:'Match the pictures with the words', cnt:{1:4,2:4,3:3}}),
+  IT.ch('請寫出：保持（　　）才開關產品。','手乾',['手濕','手髒'],{qe:'Write: Keep your ___ before switching.', wr:true, img:'手乾'}),
+  IT.tk('在家裏，你會怎樣安全地使用電器？',{tag:'說話', tip:'例如：手乾才開電視、不濕手拉插頭。'})
+];
+
+/* ───────────── 第 12 連堂　稍涼、不開、節省能源 ───────────── */
+SENT2[12] = [
+  IT.th('strips',{tag:'否定詞', q:'否定詞：「不開」',
+    rows:[{parts:[P('不',6,'不要'),P('開',2,'動作')], img:'不開'},
+          {parts:[P('不',6,'不要'),P('開',2,'動作'),P('冷氣機',3,'東西'),P('。',4,'句號')], img:'冷氣機'}],
+    note:'「不」是否定詞：表示「不要做」。　句式一：否定詞＋動詞（不開）。　句式二：否定詞＋動詞＋名詞（不開冷氣機）。'}),
+  IT.od(['不','開','冷氣機','。'],{tag:'否定詞', q:'排一排：「不開冷氣機。」', img:'不開'}),
+  IT.fl('天氣稍涼，可以＿＿冷氣機。',[['不開','開','關']],{tag:'否定詞', qe:'Fill in the blank', img:'稍涼'}),
+  IT.mu('「不開……」，後面可以接哪些電器？選出所有答案。',[O_('冷氣機',1,'冷氣機'),O_('風扇',1,0,'🌀'),O_('電燈',1,0,'💡'),O_('電筒',1,0,'🔦'),O_('蘋果',0,0,'🍎'),O_('書本',0,0,'📚')],
+    {tag:'否定詞', qe:'What can follow "do not switch on"?', hint:{t:'不開＋電器：不開冷氣機、不開風扇、不開電燈。', img:'不開'}}),
+  IT.th('say',{tag:'品德', q:'節省能源', img:'節省能源',
+    lines:['天氣稍涼，不開冷氣機，就可以節省能源。','節省能源，就是少用電，保護地球。']}),
+  IT.so([['a','節省能源 ✔','🌱'],['b','浪費能源 ✘','🗑️']],[S_('離開課室關電掣','a',0,'🔌'),S_('天氣稍涼不開冷氣機','a','稍涼'),S_('沒有人時還開着電視','b',0,'📺'),S_('開着冷氣機又開窗','b',0,'🪟'),
+        S_('用完電腦就關機','a',0,'💻'),S_('不用的燈整晚開着','b',0,'💡')],
+    {tag:'品德', q:'分一分：節省能源，還是浪費能源？', qe:'Save or waste energy?', cnt:{1:6,2:6,3:4}})
+];
+QA2[12] = [
+  IT.ch('天氣怎樣的時候，可以不開冷氣機？','稍涼',['炎熱','下雨'],{qe:'When can we leave the air-conditioner off?', img:'稍涼', hint:{sent:'天氣（稍涼），可以不開冷氣機，以節省能源。', img:'稍涼'}}),
+  IT.ch('天氣稍涼，可以怎樣節省能源？','不開冷氣機',['開冷氣機','開電視'],{qe:'How can we save energy when it is a bit cool?', img:'不開', hint:{sent:'天氣稍涼，可以（不開冷氣機），以節省能源。', img:'節省能源'}}),
+  IT.tf('天氣稍涼，可以不開冷氣機。',true,{qe:'When it is a bit cool, we need not switch on the air-conditioner.', img:'稍涼'}),
+  IT.fl('可以不開冷氣機，以＿＿＿＿＿＿。',[['節省能源','浪費金錢','看電視']],{qe:'Fill in the blank', hint:{sent:'以（節省能源）。', img:'節省能源'}}),
+  IT.od(['天氣稍涼','，','可以','不開','冷氣機','。'],{qe:'Put the words in order', img:'稍涼'}),
+  IT.so([['a','不開','🚫'],['b','可以開','✅']],[S_('天氣稍涼','a','稍涼'),S_('沒有人在房間','a',0,'🚪'),S_('天氣炎熱','b',0,'☀️'),S_('覺得很悶熱','b',0,'🥵')],
+    {q:'甚麼時候不開冷氣機？', qe:'When should the air-conditioner stay off?', cnt:{1:4,2:4,3:4}}),
+  IT.ch('請寫出：可以不開（　　　），以節省能源。','冷氣機',['電視','雪櫃'],{qe:'Write: do not switch on the ___ to save energy.', wr:true, img:'不開'}),
+  IT.tk('你在家裏怎樣節省能源？',{tag:'說話', tip:'例如：不用的電器要關掉、離開房間關燈。'})
+];
+
+/* ───────────── 第 13 連堂　保持、適當的、距離、螢幕、不宜、長時間 ───────────── */
+SENT2[13] = [
+  IT.th('say',{tag:'品德', q:'保持適當的距離', img:'距離',
+    lines:['看電視或平板電腦時，不要坐得太近。','要保持適當的距離，保護眼睛。']}),
+  IT.th('strips',{tag:'句子', q:'「保持適當的距離觀看產品的螢幕」',
+    rows:[{parts:[P('保持',1,'保持'),P('適當的距離',2,'怎樣的距離'),P('觀看',3,'做甚麼'),P('產品的螢幕',4,'看甚麼'),P('。',5,'句號')], img:'螢幕'}]}),
+  IT.th('strips',{tag:'否定詞', q:'否定詞：「不宜」',
+    rows:[{parts:[P('不宜',6,'不應該'),P('太長時間',2,'多久'),P('使用',3,'做甚麼'),P('電視或平板電腦',4,'甚麼東西'),P('。',5,'句號')], img:'長時間'}],
+    note:'「不宜」的意思是「不應該」。看太久，眼睛會很累。'}),
+  IT.so([['a','適當 ✔','✅'],['b','不適當 ✘','❌']],[S_('坐得離電視遠一點','a','距離'),S_('近得貼住螢幕','b',0,'🧐'),S_('看三十分鐘','a','適當的'),S_('一看就看五小時','b','長時間')],
+    {tag:'品德', q:'分一分：適當，還是不適當？', qe:'Suitable or not?', cnt:{1:4,2:4,3:4}}),
+  IT.od(['不宜','太長時間','使用','電視','或','平板電腦','。'],{tag:'否定詞', q:'排一排：課文句子', img:'長時間'}),
+  IT.fl('＿＿太長時間使用電視或平板電腦。',[['不宜','適合','喜歡']],{tag:'否定詞', qe:'Fill in the blank', img:'不宜'})
+];
+QA2[13] = [
+  IT.ch('觀看螢幕時，要保持怎樣的距離？','適當的距離',['很近的距離','很遠的距離'],{qe:'What distance should we keep from the screen?', img:'距離', hint:{sent:'保持（適當的距離）觀看產品的螢幕。', img:'距離'}}),
+  IT.ch('不宜太長時間使用甚麼？','電視或平板電腦',['洗衣機','雪櫃'],{qe:'What should we not use for a long time?', img:'長時間', hint:{sent:'不宜太長時間使用（電視或平板電腦）。', img:'長時間'}}),
+  IT.tf('可以一直看電視，看五小時也沒關係。',false,{tag:'品德', qe:'You can watch TV for five hours.', img:'長時間', hint:{t:'不宜太長時間使用電視或平板電腦。', img:'不宜'}}),
+  IT.tf('看電視時，應保持適當的距離。',true,{qe:'Keep a suitable distance when watching TV.', img:'距離'}),
+  IT.mu('選出正確的做法。',[O_('保持適當的距離',1,'距離'),O_('適當地休息',1,0,'😌'),O_('貼着螢幕看',0,0,'🧐'),O_('整晚玩平板電腦',0,0,'🌙')],
+    {qe:'Choose the correct actions.', hint:{t:'要保持距離，也不要看太久。'}}),
+  IT.od(['保持','適當的距離','觀看','產品的螢幕','。'],{qe:'Put the words in order', img:'螢幕'}),
+  IT.mt([{img:'保持',r:'保持'},{img:'適當的',r:'適當的'},{img:'距離',r:'距離'},{img:'螢幕',r:'螢幕'}],{q:'配一配：圖片和詞語', qe:'Match the pictures with the words', cnt:{1:4,2:4,3:3}}),
+  IT.ch('請寫出：不宜太（　　　）使用電視。','長時間',['短時間','早上'],{qe:'Write: Do not use a TV for too ___.', wr:true, img:'長時間'}),
+  IT.tk('你一天看電視或玩平板電腦多久？',{tag:'說話', tip:'引導學生說出「大約……小時」。'})
+];
+
+/* ───────────── 第 14 連堂　節制、大家、得宜、舒適 ───────────── */
+SENT2[14] = [
+  IT.th('say',{tag:'品德', q:'購物須節制', img:'節制',
+    lines:['「節制」就是不要買得太多，要有分寸。','買東西前，先想一想：我真的需要嗎？']}),
+  IT.th('rule',{tag:'代詞', q:'認識代詞：大家', ico:'🧑‍🤝‍🧑',
+    lines:['「大家」可以代替很多人。','大家＝所有人，包括我和你。'],
+    chips:[{t:'大家',img:'大家'}]}),
+  IT.fl('＿＿＿只要使用得宜，科技產品便能讓我們生活更舒適和方便。',[['大家','他','我']],{tag:'代詞', qe:'Fill in the blank', img:'大家'}),
+  IT.ch('老師說：「大家好！」「大家」是指誰？','在場所有人',['只有老師','只有一位同學'],{tag:'代詞', qe:'Who does "everyone" mean?', hint:{t:'大家＝所有人，包括我和你。', img:'大家'}}),
+  IT.th('rule',{tag:'形容詞', q:'形容詞：涼快、舒適、方便', ico:'😊',
+    lines:['涼快：不熱，很舒服。','舒適：很輕鬆、很舒服。','方便：容易、不麻煩。'],
+    chips:[{t:'涼快',img:'涼快'},{t:'舒適',img:'舒適'},{t:'方便',img:'方便'}]}),
+  IT.fl('乘搭港鐵去元朗很＿＿＿＿。',[['方便','涼快','舒適']],{tag:'形容詞', qe:'Fill in the blank', hint:{t:'出行容易、不麻煩，就是方便。'}}),
+  IT.fl('涼風陣陣，我們感到很＿＿＿＿。',[['涼快','方便','舒適']],{tag:'形容詞', qe:'Fill in the blank'}),
+  IT.so([['a','該做 ✔','✅'],['b','不該做 ✘','❌']],[S_('保持手乾才開關','a','手乾'),S_('天氣稍涼不開冷氣機','a','不開'),S_('保持適當的距離','a','距離'),S_('長時間玩平板電腦','b','長時間'),
+        S_('購物要節制','a','節制'),S_('見到甚麼都買','b',0,'🛍️')],
+    {tag:'品德', q:'複習：使用科技產品的態度', qe:'Review: our attitude to technology', cnt:{1:6,2:6,3:4}})
+];
+QA2[14] = [
+  IT.ch('購物須怎樣？','節制',['多買','不買'],{qe:'How should we shop?', img:'節制', hint:{sent:'購物須（節制）。', img:'節制'}}),
+  IT.ch('只要使用得宜，科技產品便能讓我們生活更怎樣？','舒適和方便',['危險和麻煩','辛苦和忙碌'],{qe:'Used properly, technology makes life more…?', img:'舒適', hint:{sent:'科技產品便能讓我們生活更（舒適和方便）。', img:'舒適'}}),
+  IT.tf('大家只要使用得宜，科技產品便能讓我們生活更舒適和方便。',true,{qe:'Used properly, technology makes life comfortable and convenient.', img:'大家'}),
+  IT.ch('「大家」是指甚麼？','所有人',['只有我','只有老師'],{tag:'代詞', qe:'What does "everyone" mean?', hint:{t:'大家＝所有人。'}}),
+  IT.mu('選出使用科技產品時正確的態度。',[O_('保持手乾才開關',1,'手乾'),O_('天氣稍涼不開冷氣機',1,'不開'),O_('保持適當的距離',1,'距離'),O_('購物須節制',1,'節制'),O_('長時間玩平板電腦',0,'長時間'),O_('濕手開電掣',0,'洗手')],
+    {qe:'Choose the correct attitudes.', hint:{t:'共有四個正確的態度：手乾、不開冷氣機、距離、購物節制。'}}),
+  IT.od(['大家','只要','使用得宜','，','科技產品','便能','讓我們','生活更舒適和方便','。'],{qe:'Put the words in order', img:'得宜'}),
+  IT.fl('科技產品便能讓我們生活更＿＿＿和方便。',[['舒適','危險','麻煩']],{qe:'Fill in the blank'}),
+  IT.ch('請寫出：購物須（　　）。','節制',['浪費','多買'],{qe:'Write: Shopping should be done with ___.', wr:true, img:'節制'}),
+  IT.tk('為甚麼要正確地使用科技產品？請說一個原因。',{tag:'說話', tip:'例如：為了安全、為了節省能源、為了保護眼睛。'})
+];
+
+/* ================================================================
+   第二階段：單元二的課堂引擎
+   ① 單元感知（課文、問答、詞語按單元切換）
+   ② 題目引擎（teach / choice / tf / order / fill / sort / match / multi / talk）
+   ③ 課文影片播放器
+   ================================================================ */
+
+/* ───────────── ① 單元感知 ───────────── */
+function isU2(){ return curUnit()===2; }
+function lessons(){ return isU2() ? LESSONS2 : LESSONS; }
+const STEPS2 = [['hello','① 打招呼'],['notes','② 課堂筆記'],['text','③ 課文'],['vocab','④ 字詞'],
+                ['sent','⑤ 句子'],['round','⑥ 寫字＋選字'],['qa','⑦ 問答'],['review','⑧ 總結算'],['goals','⑨ 課堂總結']];
+function u2Cards(){
+  return LESSONS2.map(l=>({k:l.no, g:NUMZH[l.no], text:l.sentence,
+    tags:[['ok', (SENT2[l.no]||[]).length+' 個句子活動'], ['', (QA2[l.no]||[]).length+' 題問答'], ['', l.keys.length+' 個詞語']],
+    img:IMG[l.vocab[0].img]}));
+}
+UNIT_CARDS[2] = u2Cards;
+
+/* 課文頁：大圖書（有些課只顯示上半／下半） */
+function pageHTML(l){
+  return `<div class="pgs">${(l.pages||[]).map(p=>
+    `<div class="pg ${l.crop?'crop-'+l.crop:''}"><img src="${IMG['2:'+p]||''}" alt="課文圖畫"></div>`).join('')}</div>`;
+}
+function u2Reset(){ U2UI.demo = {}; U2UI.sel = {}; U2UI.lists = {}; }
+
+/* ───────────── ② 題目引擎 ───────────── */
+const U2UI = {demo:{}, sel:{}, lists:{}, seen:{}, talked:{}};
+const CNT_OPT = {1:4, 2:3, 3:2};            /* 圈選：高 4、中 3、初 2 */
+function myLv(){ return ROLE==='t' ? 1 : ((stu(ME)||{}).lv||2); }
+function isSentPhase(){ return CTRL.phase==='sent'; }
+function itSet(){ return (ROLE==='t' ? STEP : CTRL.phase)==='qa' ? 'q' : 'x'; }
+function itemsOf(set){ const no = L().no; return ((set==='x' ? SENT2 : QA2)[no]) || []; }
+function itIdx(set){ return set==='x' ? (CTRL.xIdx||0) : (CTRL.qIdx||0); }
+function curItem(set){ set = set || itSet(); return itemsOf(set)[itIdx(set)]; }
+function itKey(set, i){ return (set==='x' ? 'x' : 'q') + i; }
+function recGet(key){ return ROLE==='t' ? U2UI.demo[key] : myAns()[key]; }
+function recPut(key, v){
+  if(ROLE==='t') U2UI.demo[key] = v;
+  else { myAns()[key] = v; saveMine(); }
+}
+function isWrItem(it){ return !!(it && it.wr && ROLE!=='t' && myLv()===1 && itSet()==='q'); }
+function scoredKind(it){ return it && it.k!=='teach' && it.k!=='talk'; }
+function recOk(rec){ return !!(rec && rec.ok); }
+
+/* 決定性的洗牌：同一題每次排法一樣，重畫畫面時不會跳位 */
+function seedOf(s){ let n=0; for(const c of String(s)) n = (n*31 + c.charCodeAt(0)) % 100003; return n; }
+function shuf(arr, seed){
+  const a = arr.slice(); let s = seed || 1;
+  for(let i=a.length-1;i>0;i--){ s = (s*9301 + 49297) % 233280; const j = s % (i+1); [a[i],a[j]] = [a[j],a[i]]; }
+  return a;
+}
+function shufNot(arr, seed){          /* 洗牌，但不可以剛好等於原本次序 */
+  let a = shuf(arr, seed);
+  if(arr.length>1 && a.every((x,i)=>x===arr[i])) a = a.slice(1).concat(a[0]);
+  return a;
+}
+function itLvCnt(it, lv, dflt){ return (it.cnt && it.cnt[lv]) || dflt; }
+function picks(list, n, seed){        /* 從清單挑 n 個，各組別平均 */
+  if(list.length<=n) return list.slice();
+  return list.slice(0, n);
+}
+function optImgName(it, o){ return (it.oi && it.oi[o]) || o; }
+function optVisual(it, o, lv, size){
+  const em = it.oe && it.oe[o];
+  if(em) return `<span class="o-em">${em}</span>`;
+  const src = im2(optImgName(it, o));
+  if(src && (it.po || lv===3)) return `<img src="${src}" alt="">`;
+  return '';
+}
+function qHead(it){
+  const pic = it.img && im2(it.img) ? `<img class="it-pic" src="${im2(it.img)}" alt="">` : '';
+  const em  = it.em ? `<div class="it-em">${it.em}</div>` : '';
+  const cue = it.cue ? `<div class="it-cue">${esc(it.cue)}</div>` : '';
+  const say = (it.say || it.k==='choice') ? `<button class="btn mint sm it-say" onclick="speak('${(it.say||it.q).replace(/'/g,'')}')">🔊 ${T('聽一次')}</button>` : '';
+  return `<div class="it-q">${ruby(it.q||'')}${(ROLE==='s' && (stu(ME)||{}).en && it.qe)?`<span class="tr">${it.qe}</span>`:''}${(ROLE==='t' && it.qe && LANG==='en')?`<span class="tr">${it.qe}</span>`:''}</div>${cue}${pic}${em}${say}`;
+}
+
+/* ---- 單一題目：畫面 ---- */
+function iView(it, key){
+  const f = {teach:vTeach, choice:vChoice, tf:vTf, order:vOrder, fill:vFill, sort:vSort, match:vMatch, multi:vMulti, talk:vTalk}[it.k];
+  return f ? f(it, key) : '';
+}
+function afterCorrect(it){
+  if(ROLE==='t'){ try{ cheer('答對了！'); }catch(e){} } else cheer('答對了！');
+}
+
+/* choice ---------------------------------------------------------- */
+function choiceList(it, lv){
+  const n = ROLE==='t' ? Math.min(it.opts.length, 4) : Math.min(it.opts.length, CNT_OPT[lv]||3);
+  const wrong = it.opts.slice(1, n);
+  return shufNot([it.ans, ...wrong], seedOf(it.q + it.ans));
+}
+function vChoice(it, key){
+  const lv = myLv(), rec = recGet(key) || {};
+  const list = choiceList(it, lv); U2UI.lists[key] = list;
+  const showText = !it.pe || rec.ok;
+  return qHead(it) + `<div class="opts it-opts ${it.pe?'pe':''}">` + list.map((o,j)=>{
+    const vis = optVisual(it, o, lv);
+    const st = rec.ok && o===it.ans ? 'right' : (rec.v===o && !rec.ok ? 'wrongkeep' : '');
+    return `<button class="opt ${st}" onclick="iAct('choice','${key}',${j})">${vis}${showText?`<span class="o-t">${ruby(o)}</span>`:''}</button>`;
+  }).join('') + `</div>`;
+}
+function iChoice(key, j){
+  const it = curItem(), o = (U2UI.lists[key]||[])[j], rec = recGet(key) || {};
+  if(o===undefined || rec.ok) return;
+  const ok = o===it.ans;
+  recPut(key, {ok:ok?1:0, e:(rec.e||0)+(ok?0:1), v:o});
+  render();
+  if(ok){ afterCorrect(it); if(ROLE==='t') speak(o); } else wrongFlash();
+}
+
+/* tf ---------------------------------------------------------------- */
+function vTf(it, key){
+  const rec = recGet(key) || {};
+  const b = (v, ico, lb, cls)=>`<button class="tfb ${cls} ${rec.ok && it.ans===v?'right':''} ${rec.v===v && !rec.ok?'wrongkeep':''}" onclick="iAct('tf','${key}',${v?1:0})">
+      <span class="tfi">${ico}</span><span class="tft">${ruby(lb)}</span></button>`;
+  return qHead(it) + `<div class="tfrow">${b(true,'⭕','對','yes')}${b(false,'❌','不對','no')}</div>`;
+}
+function iTf(key, v){
+  const it = curItem(), rec = recGet(key) || {};
+  if(rec.ok) return;
+  const ok = (!!v)===it.ans;
+  recPut(key, {ok:ok?1:0, e:(rec.e||0)+(ok?0:1), v:!!v});
+  render();
+  if(ok) afterCorrect(it); else wrongFlash();
+}
+
+/* order ------------------------------------------------------------- */
+function orderInfo(it, lv){
+  const n = it.parts.length;
+  const need = ROLE==='t' ? n : Math.min(n, {1:n, 2:Math.min(n,4), 3:Math.min(n,2)}[lv] || n);
+  const given = it.parts.slice(0, n-need);
+  const want  = it.parts.slice(n-need);
+  const pool = shufNot(want.map((t,i)=>({t, o:i})), seedOf(it.parts.join('')));
+  return {need, given, want, pool, errorless: lv===3 && ROLE!=='t'};
+}
+function vOrder(it, key){
+  const lv = myLv(), rec = recGet(key) || {s:[]};
+  const I = orderInfo(it, lv), placed = rec.s || [];
+  U2UI.lists[key] = I;
+  const slots = I.want.map((_,j)=> {
+    const o = placed[j];
+    return o===undefined ? `<span class="slot ${j===placed.length?'next':''}"></span>`
+      : `<button class="chip placed ${rec.ok?'ok':''}" onclick="iAct('unorder','${key}',${j})">${ruby(I.want[o])}</button>`;
+  }).join('');
+  const poolHtml = I.pool.map(c=> placed.includes(c.o) ? '' :
+    `<button class="chip" onclick="iAct('order','${key}',${c.o})">${ruby(c.t)}</button>`).join('');
+  return qHead(it) + `<div class="orderline">
+      ${it.pre?`<span class="given">${ruby(it.pre)}</span>`:''}
+      ${I.given.map(t=>`<span class="given">${ruby(t)}</span>`).join('')}${slots}</div>
+    <div class="chips pool">${poolHtml || (rec.ok?`<span class="doneword">✅</span>`:'')}</div>
+    <div class="row" style="justify-content:center;margin-top:10px">
+      <button class="btn sm mint" onclick="speak('${((it.pre||'')+it.parts.join('')).replace(/'/g,'')}')">🔊 ${T('聽整句')}</button>
+      ${(!rec.ok && placed.length)?`<button class="btn sm" onclick="iAct('orderclear','${key}')">↺ 重新排</button>`:''}</div>`;
+}
+function iOrder(key, o){
+  const it = curItem(), lv = myLv(), I = orderInfo(it, lv), rec = recGet(key) || {s:[], e:0};
+  if(rec.ok) return;
+  const placed = (rec.s||[]).slice();
+  if(placed.includes(o)) return;
+  if(I.errorless){
+    const exp = I.want[placed.length];
+    if(I.want[o] !== exp){ recPut(key, {...rec, s:placed, e:(rec.e||0)+1}); render(); wrongFlash(); return; }
+  }
+  placed.push(o);
+  if(placed.length === I.want.length){
+    const ok = placed.every((x,j)=> I.want[x]===I.want[j]);
+    if(ok){ recPut(key, {ok:1, e:rec.e||0, s:placed}); render(); afterCorrect(it); if(ROLE==='t') speak((it.pre||'')+it.parts.join('')); }
+    else { recPut(key, {ok:0, e:(rec.e||0)+1, s:[]}); render(); wrongFlash(); }
+    return;
+  }
+  recPut(key, {ok:0, e:rec.e||0, s:placed}); render();
+}
+function iUnorder(key, j){
+  const rec = recGet(key) || {s:[]}; if(rec.ok) return;
+  const placed = (rec.s||[]).slice(0, j);
+  recPut(key, {ok:0, e:rec.e||0, s:placed}); render();
+}
+function iOrderClear(key){ const rec = recGet(key)||{}; if(rec.ok) return; recPut(key,{ok:0,e:rec.e||0,s:[]}); render(); }
+
+/* fill -------------------------------------------------------------- */
+function fillParts(t){
+  const out = []; const re = /＿+/g; let last = 0, m, bi = 0;
+  while((m = re.exec(t))){ if(m.index>last) out.push({s:t.slice(last, m.index)}); out.push({b:bi++}); last = m.index + m[0].length; }
+  if(last<t.length) out.push({s:t.slice(last)});
+  return out;
+}
+function fillOpts(it, bi, lv){
+  const arr = it.bl[bi] || [];
+  const n = ROLE==='t' ? Math.min(arr.length, 4) : Math.min(arr.length, CNT_OPT[lv]||3);
+  return shufNot(arr.slice(0, n), seedOf(it.t + bi + arr[0]));
+}
+function vFill(it, key){
+  const lv = myLv(), rec = recGet(key) || {s:[]}, got = rec.s || [];
+  const parts = fillParts(it.t), cur = got.length;
+  const body = parts.map(p=> p.s!==undefined ? ruby(p.s)
+    : (got[p.b]!==undefined ? `<span class="blank filled">${ruby(got[p.b])}</span>`
+       : `<span class="blank ${p.b===cur?'now':''}">&nbsp;</span>`)).join('');
+  const nb = it.bl.length;
+  let opts = '';
+  if(cur < nb){
+    const list = fillOpts(it, cur, lv); U2UI.lists[key] = list;
+    opts = `<div class="opts it-opts">${list.map((o,j)=>{
+      const vis = optVisual(it, o, lv);
+      return `<button class="opt" onclick="iAct('fill','${key}',${j})">${vis}<span class="o-t">${ruby(o)}</span></button>`;}).join('')}</div>`;
+  }
+  const lab = (nb>1 && cur<nb) ? `<div class="fillstep">第 ${cur+1} 個空格／共 ${nb} 個</div>` : '';
+  return `<div class="it-q fillq">${body}</div>${it.img&&im2(it.img)?`<img class="it-pic" src="${im2(it.img)}" alt="">`:''}${lab}${opts}
+    ${rec.ok?`<div class="row" style="justify-content:center;margin-top:10px"><button class="btn sm mint" onclick="speak('${fillParts(it.t).map(p=>p.s!==undefined?p.s:it.bl[p.b][0]).join('').replace(/'/g,'')}')">🔊 ${T('聽整句')}</button></div>`:''}`;
+}
+function iFill(key, j){
+  const it = curItem(), rec = recGet(key) || {s:[], e:0}, got = (rec.s||[]).slice();
+  if(rec.ok) return;
+  const bi = got.length, o = (U2UI.lists[key]||[])[j];
+  if(o===undefined) return;
+  if(o !== it.bl[bi][0]){ recPut(key, {ok:0, e:(rec.e||0)+1, s:got}); render(); wrongFlash(); return; }
+  got.push(o);
+  const done = got.length >= it.bl.length;
+  recPut(key, {ok:done?1:0, e:rec.e||0, s:got}); render();
+  if(done){ afterCorrect(it); if(ROLE==='t') speak(fillParts(it.t).map(p=>p.s!==undefined?p.s:it.bl[p.b][0]).join('')); }
+}
+
+/* sort -------------------------------------------------------------- */
+function sortItems(it, lv){
+  const n = ROLE==='t' ? it.its.length : itLvCnt(it, lv, it.its.length);
+  if(n >= it.its.length) return it.its.map((x,i)=>({...x, _i:i}));
+  /* 每個組別都要有：輪流各取一個 */
+  const ids = it.bk.map(b=>b[0]), by = {}; ids.forEach(id=>by[id]=[]);
+  it.its.forEach((x,i)=>by[x.to].push({...x, _i:i}));
+  const out = []; let k = 0;
+  while(out.length<n && ids.some(id=>by[id].length)){ const id = ids[k++ % ids.length]; if(by[id].length) out.push(by[id].shift()); }
+  return out.sort((a,b)=>a._i-b._i);
+}
+function sortVis(x, big){
+  const src = x.img && im2(x.img);
+  return src ? `<img src="${src}" alt="">` : (x.em ? `<span class="o-em">${x.em}</span>` : '');
+}
+function vSort(it, key){
+  const lv = myLv(), rec = recGet(key) || {p:{}}, p = rec.p || {};
+  const items = sortItems(it, lv); U2UI.lists[key] = items;
+  const sel = U2UI.sel[key];
+  const buckets = it.bk.map(b=>{
+    const inside = items.filter(x=>p[x._i]===b[0]).map(x=>`<span class="mini">${sortVis(x)}<span>${ruby(x.t)}</span></span>`).join('');
+    return `<button class="bucket b-${b[0]} ${sel!==undefined?'ready':''}" onclick="iAct('bucket','${key}','${b[0]}')">
+      <span class="bk-h"><span class="bk-ico">${b[2]||''}</span><span class="bk-lb">${ruby(b[1])}</span></span>
+      <span class="bk-in">${inside}</span></button>`;
+  }).join('');
+  const pool = items.map(x=> p[x._i]!==undefined ? '' :
+    `<button class="card ${sel===x._i?'sel':''}" onclick="iAct('pickitem','${key}',${x._i})">${sortVis(x)}<span class="c-t">${ruby(x.t)}</span></button>`).join('');
+  const left = items.filter(x=>p[x._i]===undefined).length;
+  return qHead(it) + `<div class="buckets">${buckets}</div>
+    <div class="sorthint">${rec.ok?'✅ 全部分好了！':(sel!==undefined?'現在，按一按它屬於哪一組':'先按一張卡，再按它屬於的那一組')}</div>
+    <div class="cards">${pool}</div>`;
+}
+function iPickItem(key, i){
+  const rec = recGet(key) || {}; if(rec.ok) return;
+  U2UI.sel[key] = (U2UI.sel[key]===i ? undefined : i); render();
+}
+function iBucket(key, id){
+  const it = curItem(), rec = recGet(key) || {p:{}, e:0}, p = {...(rec.p||{})};
+  const i = U2UI.sel[key]; if(i===undefined || rec.ok) return;
+  const x = it.its[i];
+  U2UI.sel[key] = undefined;
+  if(x.to !== id){ recPut(key, {ok:0, e:(rec.e||0)+1, p}); render(); wrongFlash(); return; }
+  p[i] = id;
+  const items = U2UI.lists[key] || [];
+  const done = items.every(y=>p[y._i]!==undefined);
+  recPut(key, {ok:done?1:0, e:rec.e||0, p}); render();
+  if(done) afterCorrect(it);
+}
+
+/* match ------------------------------------------------------------- */
+function matchPairs(it, lv){
+  const n = ROLE==='t' ? it.pairs.length : itLvCnt(it, lv, it.pairs.length);
+  return it.pairs.slice(0, Math.min(n, it.pairs.length)).map((x,i)=>({...x, _i:i}));
+}
+function vMatch(it, key){
+  const lv = myLv(), rec = recGet(key) || {m:{}}, m = rec.m || {};
+  const pairs = matchPairs(it, lv); U2UI.lists[key] = pairs;
+  const sel = U2UI.sel[key];
+  const right = shufNot(pairs.map(x=>x._i), seedOf(pairs.map(x=>x.r).join('')));
+  const usedR = new Set(Object.values(m));
+  const left = pairs.map(x=>{
+    const src = x.img && im2(x.img);
+    const vis = src ? `<img src="${src}" alt="">` : (x.em ? `<span class="o-em">${x.em}</span>` : '');
+    const got = m[x._i]!==undefined ? pairs.find(y=>y._i===m[x._i]) : null;
+    return `<button class="mleft ${sel===x._i?'sel':''} ${got?'done':''}" onclick="iAct('mleft','${key}',${x._i})">
+      ${vis}${x.l?`<span class="c-t">${ruby(x.l)}</span>`:''}
+      <span class="mans">${got?ruby(got.r):'？'}</span></button>`;
+  }).join('');
+  const rch = right.map(ri=>{ const x = pairs.find(y=>y._i===ri);
+    return `<button class="chip ${usedR.has(ri)?'used':''}" ${usedR.has(ri)?'disabled':''} onclick="iAct('mright','${key}',${ri})">${ruby(x.r)}</button>`; }).join('');
+  return qHead(it) + `<div class="matchwrap"><div class="mlefts">${left}</div><div class="mrights">${rch}</div></div>
+    <div class="sorthint">${rec.ok?'✅ 全部配對成功！':(sel!==undefined?'再按右邊的詞語':'先按左邊的一張，再按右邊的詞語')}</div>`;
+}
+function iMLeft(key, i){
+  const rec = recGet(key) || {m:{}}; if(rec.ok) return;
+  if((rec.m||{})[i]!==undefined) return;
+  U2UI.sel[key] = (U2UI.sel[key]===i ? undefined : i); render();
+}
+function iMRight(key, ri){
+  const it = curItem(), rec = recGet(key) || {m:{}, e:0}, m = {...(rec.m||{})};
+  const i = U2UI.sel[key]; if(i===undefined || rec.ok) return;
+  U2UI.sel[key] = undefined;
+  if(i !== ri){ recPut(key, {ok:0, e:(rec.e||0)+1, m}); render(); wrongFlash(); return; }
+  m[i] = ri;
+  const done = Object.keys(m).length >= (U2UI.lists[key]||[]).length;
+  recPut(key, {ok:done?1:0, e:rec.e||0, m}); render();
+  if(done) afterCorrect(it);
+}
+
+/* multi ------------------------------------------------------------- */
+function multiList(it, lv){
+  if(ROLE==='t') return it.opts.map((x,i)=>({...x,_i:i}));
+  const okMax = {1:4, 2:3, 3:2}[lv]||3, badMax = {1:2, 2:2, 3:1}[lv]||2;
+  const oks = it.opts.map((x,i)=>({...x,_i:i})).filter(x=>x.ok).slice(0, okMax);
+  const bad = it.opts.map((x,i)=>({...x,_i:i})).filter(x=>!x.ok).slice(0, badMax);
+  return shufNot([...oks, ...bad], seedOf(it.q)).slice();
+}
+function vMulti(it, key){
+  const lv = myLv(), rec = recGet(key) || {sel:[]}, sel = rec.sel || [];
+  const list = multiList(it, lv); U2UI.lists[key] = list;
+  const nOk = list.filter(x=>x.ok).length;
+  return qHead(it) + `<div class="sorthint">有 ${nOk} 個答案</div><div class="opts it-opts">` + list.map(x=>{
+    const src = x.img && im2(x.img), vis = src ? `<img src="${src}" alt="">` : (x.em ? `<span class="o-em">${x.em}</span>` : '');
+    const on = sel.includes(x._i), st = rec.ok ? (x.ok?'right':'') : (on?'pickd':'');
+    return `<button class="opt ${st}" onclick="iAct('mtoggle','${key}',${x._i})">${vis}<span class="o-t">${ruby(x.t)}</span></button>`;
+  }).join('') + `</div>
+    <div class="row" style="justify-content:center;margin-top:14px">${rec.ok?'':
+      `<button class="btn lemon" onclick="iAct('mcheck','${key}')">✔ 確定</button>`}</div>`;
+}
+function iMToggle(key, i){
+  const rec = recGet(key) || {sel:[], e:0}; if(rec.ok) return;
+  const sel = (rec.sel||[]).slice(); const k = sel.indexOf(i);
+  if(k>=0) sel.splice(k,1); else sel.push(i);
+  recPut(key, {ok:0, e:rec.e||0, sel}); render();
+}
+function iMCheck(key){
+  const it = curItem(), rec = recGet(key) || {sel:[], e:0}, list = U2UI.lists[key] || [];
+  const want = list.filter(x=>x.ok).map(x=>x._i).sort().join(','), got = (rec.sel||[]).slice().sort().join(',');
+  if(!(rec.sel||[]).length) return;
+  if(want===got){ recPut(key, {ok:1, e:rec.e||0, sel:rec.sel}); render(); afterCorrect(it); }
+  else { recPut(key, {ok:0, e:(rec.e||0)+1, sel:rec.sel}); render(); wrongFlash(); }
+}
+
+/* talk（說話）：老師按 👍 加分 ------------------------------------------ */
+function vTalk(it, key){
+  return `<div class="talkbox"><div class="talkico">🗣️</div>${qHead(it)}
+    <div class="talknote">${ruby(ROLE==='t' ? '請同學輪流回答，說得好的按 👍' : '請說給老師和同學聽')}</div>
+    ${(ROLE==='t' && it.tip)?`<div class="tiptv">💡 老師提示：${esc(it.tip)}</div>`:''}</div>`;
+}
+
+/* teach（教學卡）-------------------------------------------------------- */
+function vTeach(it, key){
+  const fresh = !U2UI.seen[key]; U2UI.seen[key] = 1;
+  const f = {strips:tcStrips, comp:tcComp, rule:tcRule, jp:tcJp, say:tcSay}[it.t];
+  return `<div class="tcard t-${it.t} ${fresh?'fresh':''}"><div class="it-q">${ruby(it.q||'')}</div>${f?f(it, key):''}
+    ${it.note?`<div class="tnote">${ruby(it.note)}</div>`:''}</div>`;
+}
+function spk(t){ return `speak('${String(t).replace(/'/g,'')}')`; }
+function tcStrips(it){
+  return it.rows.map((r,ri)=>{
+    const src = r.img && im2(r.img);
+    const full = r.parts.map(p=>p.t).join('');
+    return `<div class="striprow">${src?`<img class="sthumb" src="${src}" alt="">`:''}
+      <div class="strips">${r.parts.map((p,i)=>`<button class="strip c${p.c}" style="--i:${i}" onclick="${spk(p.t)}">
+        <span class="st-t">${ruby(p.t)}</span><span class="st-l">${esc(p.lab||'')}</span></button>`).join('')}</div>
+      <button class="btn mint sm" onclick="${spk(full)}">🔊 ${T('讀全句')}</button></div>`;
+  }).join('');
+}
+function tcComp(it, key){
+  const sel = U2UI.sel[key];
+  const sats = it.sats.map((s,i)=>{
+    const src = s.img && im2(s.img);
+    return `<button class="sat ${sel===i?'on':''}" onclick="iAct('sat','${key}',${i})">
+      <span class="tg tint2 satg"><span class="ch ${s.c.length>1?'two':''}">${esc(s.c)}</span></span></button>`; }).join('');
+  let eq = '<div class="eqhint">按一按右邊的字，看看變成甚麼詞語</div>';
+  if(sel!==undefined){
+    const s = it.sats[sel], src = s.img && im2(s.img);
+    eq = `<div class="eq"><span class="eqc">${esc(it.ctr)}</span><span class="eqp">＋</span><span class="eqc">${esc(s.c)}</span><span class="eqp">＝</span>
+      <button class="eqw" onclick="${spk(s.w)}">${ruby(s.w)}</button></div>
+      <div class="eqpic">${src?`<img src="${src}" alt="">`:(s.em?`<span class="o-em big">${s.em}</span>`:'')}</div>`;
+  }
+  return `<div class="compwrap"><div class="compl"><span class="tg tint1 big"><span class="ch ${it.ctr.length>1?'two':''}">${esc(it.ctr)}</span></span></div>
+    <div class="compm">${eq}</div><div class="compr">${sats}</div></div>`;
+}
+function tcRule(it){
+  return `<div class="rulewrap"><div class="ruleico">${it.ico||'📘'}</div>
+    <div class="rulelines">${it.lines.map(l=>`<div class="rl">${ruby(l)}</div>`).join('')}</div></div>
+    ${it.chips?`<div class="rulechips">${it.chips.map(c=>{const s=c.img&&im2(c.img);
+      return `<button class="rchip" onclick="${spk(c.t)}">${s?`<img src="${s}" alt="">`:''}<span>${ruby(c.t)}</span></button>`;}).join('')}</div>`:''}`;
+}
+function tcSay(it){
+  const src = it.img && im2(it.img);
+  return `<div class="saywrap">${src?`<img class="saypic" src="${src}" alt="">`:''}
+    <div class="saylines">${it.lines.map(l=>`<div class="rl">${ruby(l)}</div>`).join('')}
+    <button class="btn mint sm" onclick="${spk(it.lines.join(''))}">🔊 ${T('聽一次')}</button></div></div>`;
+}
+function tcJp(it){
+  return it.words.map(w=>{
+    const src = im2(w), tiles = jpOf(w).map(([c,jp])=>{
+      const [ini, fin] = jpSplit(jp);
+      return `<button class="jtile" onclick="${spk(c)}"><span class="jp"><b class="ini">${ini}</b>${fin}</span>
+        <span class="tg tint1 jtg"><span class="ch">${esc(c)}</span></span></button>`; }).join('');
+    return `<div class="jprow">${src?`<img class="sthumb" src="${src}" alt="">`:''}<div class="jtiles">${tiles}</div>
+      <button class="btn mint sm" onclick="${spk(w)}">🔊 ${T('讀一讀')} ${esc(w)}</button></div>`;
+  }).join('') + `<div class="tnote">聲母（開頭的聲音）用紅色顯示。數字是聲調。</div>`;
+}
+
+/* ---- 統一入口：按掣 ---- */
+function iAct(op, key, a){
+  ({choice:iChoice, tf:iTf, order:iOrder, unorder:iUnorder, orderclear:iOrderClear, fill:iFill, pickitem:iPickItem,
+    bucket:iBucket, mleft:iMLeft, mright:iMRight, mtoggle:iMToggle, mcheck:iMCheck,
+    sat:(k,i)=>{ U2UI.sel[k] = (U2UI.sel[k]===i ? undefined : i); render(); const it=curItem(); if(U2UI.sel[k]!==undefined && it && it.sats) speak(it.sats[i].w); }
+  })[op](key, a);
+}
+
+/* ---- 答案揭曉（鎖機後在大電視顯示） ---- */
+function ansBoard(it){
+  let s = '';
+  if(it.k==='choice') s = it.ans;
+  else if(it.k==='tf') s = it.ans ? '⭕ 對' : '❌ 不對';
+  else if(it.k==='order') s = (it.pre||'') + it.parts.join('');
+  else if(it.k==='fill') s = fillParts(it.t).map(p=>p.s!==undefined?p.s:`【${it.bl[p.b][0]}】`).join('');
+  else if(it.k==='sort') s = it.bk.map(b=>`${b[1]}：${it.its.filter(x=>x.to===b[0]).map(x=>x.t).join('、')}`).join('　｜　');
+  else if(it.k==='match') s = it.pairs.map(x=>`${x.l||'（圖）'} → ${x.r}`).join('　｜　');
+  else if(it.k==='multi') s = it.opts.filter(x=>x.ok).map(x=>x.t).join('、');
+  else return '';
+  return `<div class="q ansboard"><div class="qt" style="color:#1E8E62">✅ 正確答案</div>
+    <div class="ansbig">${ruby(s)}</div></div>`;
+}
+
+/* ---- 學生狀況（老師版） ---- */
+function stuStatus(s, it, i, set){
+  const a = myA(s.id), key = itKey(set, i);
+  if(it.wr && s.lv===1){
+    const v = a[key] !== undefined ? a[key] : a['t_'+key];
+    if(v===undefined) return {txt:'⏳ 思考中…', cls:''};
+    if(typeof v==='object') return {txt: CTRL.qLocked ? `${strokesSVG(v,80)}<div class="row" style="justify-content:center;margin-top:6px"><button class="btn sm mint" onclick="addCoin('${s.id}',1)">👍 對 +$1</button><button class="btn sm" onclick="addCoin('${s.id}',-1)">−$1</button></div>` : '✅ 已提交', cls:'done'};
+    const ok = judge(it, v);
+    return {txt: CTRL.qLocked ? `<span class="${ok?'ok':'no'}">${ok?'✅ ':'❌ '}${esc(v)}</span>` : '✅ 已提交', cls:'done'};
+  }
+  const rec = a[key];
+  if(!rec) return {txt:'⏳ 思考中…', cls:''};
+  const e = rec.e ? `（錯 ${rec.e} 次）` : '';
+  if(rec.ok) return {txt:`<span class="ok">✅ 答對${e}</span>`, cls:'done'};
+  return {txt:`🔄 做緊${e}`, cls:''};
+}
+function tStatusGrid(it, i, set){
+  if(it.k==='teach') return '';
+  if(it.k==='talk'){
+    const key = itKey(set, i);
+    return `<div class="sgrid">${STUDENTS.map(s=>`<div class="scard ${(U2UI.talked[key]||{})[s.id]?'done':''}"><div class="nm">${esc(s.n)}</div>
+      <div class="row" style="margin-top:8px">
+        <button class="btn sm mint" onclick="talkOk('${key}','${s.id}')">👍 說得好 +$1</button>
+        <button class="btn sm" onclick="addCoin('${s.id}',-1)">−$1</button></div>
+      <div class="coin">${(U2UI.talked[key]||{})[s.id]?'✅ 已加分':''}　💰 今日 $${CTRL.coins[s.id]||0}</div></div>`).join('')}</div>`;
+  }
+  return `<div class="sgrid">${STUDENTS.map(s=>{
+    const st = stuStatus(s, it, i, set);
+    return `<div class="scard ${st.cls}"><div class="nm">${esc(s.n)}<span class="lv g${s.lv}">${LVNAME2[s.lv]||''}</span></div><div class="st">${st.txt}</div></div>`;
+  }).join('')}</div>`;
+}
+const LVNAME2 = {1:'高', 2:'中', 3:'初'};
+function talkOk(key, sid){
+  U2UI.talked[key] = U2UI.talked[key] || {}; U2UI.talked[key][sid] = 1;
+  addCoin(sid, 1);
+}
+
+/* ---- 老師頁：句子（x）和問答（q）共用 ---- */
+function tItems(set){
+  const items = itemsOf(set), i = itIdx(set), total = items.length, it = items[i];
+  const title = set==='x' ? '⑤ 句子' : '⑦ 問答';
+  if(!it) return `<div class="note">這一課的${set==='x'?'句子活動':'問答題'}尚未編寫。</div>`;
+  const key = itKey(set, i);
+  const dots = items.map((x,j)=>`<div class="pdot ${j===i?'cur':''}" onclick="${set==='x'?'xGo':'qGo'}(${j})" style="cursor:pointer" title="${esc(x.tag||'')}">${j+1}</div>`).join('');
+  const interactive = scoredKind(it);
+  const lastItem = i >= total-1;
+  const next = lastItem
+    ? (set==='x' ? `<button class="btn peach" onclick="startRound()">句子完成 → ⑥ 寫字＋選字</button>`
+                 : `<button class="btn lemon" onclick="tStep('review')">問答完成 → 總結算</button>`)
+    : `<button class="btn blue" onclick="${set==='x'?'xNav':'qNav'}(1)">${T('下一題')} →</button>`;
+  return `<div class="row" style="margin-bottom:12px">
+      <h3 class="sec" style="margin:0;border:none;flex:1">${title}　第 ${i+1} ／ ${total}${it.tag?`　<span class="it-tag">${esc(it.tag)}</span>`:''}</h3>
+      <div class="pdots">${dots}</div></div>
+    ${(CTRL.qLocked && interactive) ? ansBoard(it) : ''}
+    <div class="q tv it it-${it.k}">${iView(it, key)}
+      ${(CTRL.showHint && it.hint)?`<div class="hintbox" style="margin-top:14px">${hintHTML(hintFix(it.hint), true, true)}</div>`:''}
+    </div>
+    <div class="row" style="margin-bottom:14px">
+      <button class="btn" onclick="${set==='x'?'xNav':'qNav'}(-1)" ${i?'':'disabled'}>← ${T('上一題')}</button>
+      ${it.hint?`<button class="btn lemon" onclick="toggleShowHint()">💡 ${CTRL.showHint?'收起提示':'顯示提示（全班一齊看）'}</button>`:''}
+      ${interactive?(CTRL.qLocked?`<button class="btn" onclick="qLock(false)">🔓 解鎖</button>`
+                                 :`<button class="btn peach" onclick="qLock(true)">🔒 顯示答案</button>`):''}
+      ${next}
+      ${set==='x'?`<button class="btn" onclick="startRound()">跳去 ⑥ 寫字＋選字</button>`:''}</div>
+    ${tStatusGrid(it, i, set)}
+    ${(it.k==='choice' && it.wr)?`<div class="note">這題高組同學用書寫／打字作答；中、初組圈選。</div>`:''}`;
+}
+function tSent(){ return tItems('x'); }
+function tQA2(){ return tItems('q'); }
+function xGo(j){ CTRL.xIdx = j; CTRL.qLocked=false; CTRL.showHint=false; u2Reset(); saveCtrl(); render(); }
+function qGo(j){ CTRL.qIdx = j; CTRL.qLocked=false; CTRL.showHint=false; u2Reset(); saveCtrl(); render(); }
+function xNav(d){
+  const n = itemsOf('x').length;
+  CTRL.xIdx = Math.min(n-1, Math.max(0, (CTRL.xIdx||0)+d));
+  CTRL.qLocked=false; CTRL.showHint=false; u2Reset(); saveCtrl(); render();
+}
+function startSent(){
+  CTRL.phase='sent'; CTRL.xIdx=0; CTRL.qLocked=false; CTRL.showHint=false; STEP='sent'; u2Reset(); saveCtrl(); render();
+}
+/* 提示裏的圖片用單元二圖片 */
+function hintFix(h){
+  if(!h) return h;
+  const o = {...h};
+  if(o.img && im2(o.img)) o.img = '2:'+o.img;
+  if(o.cards) o.cards = o.cards.map(c=> (c.img && im2(c.img)) ? {...c, img:'2:'+c.img} : c);
+  return o;
+}
+
+/* ---- 學生頁 ---- */
+function sItems(me, set){
+  const items = itemsOf(set), i = itIdx(set), it = items[i];
+  if(!it) return wait('🌤','這一題沒有題目','請等待下一題');
+  const key = itKey(set, i), showEn = me.en || LANG==='en';
+  const lab = set==='x' ? '句子' : '問答';
+  let body;
+  if(isWrItem(it)){
+    body = `${qHead(it)}<div class="qt" style="margin-top:10px">${ruby('把答案寫出來，或用鍵盤打出來')}</div>
+      <div class="bigword" style="font-size:${it.ans.length>7?'2rem':'3rem'};opacity:.32">${ruby(it.ans)}</div>
+      ${inputBlock(key, it.ans, me.wlv, 'qpad'+i, {clear:`clearQPad(${i})`, save:`saveQPad(${i})`})}`;
+  } else body = iView(it, key);
+  const hint = (it.hint && it.k!=='teach') ? `
+    <div class="row" style="justify-content:center;margin-top:14px">
+      <button class="btn sm lemon" onclick="toggleHint()">💡 ${T('提示')}</button></div>
+    <div id="hint" class="hintbox ${CTRL.showHint?'':'hide'}">${hintHTML(hintFix(it.hint), showEn)}</div>` : '';
+  return `<div class="stu"><div class="q it it-${it.k}">
+    <div class="qt">${lab}　${i+1} ／ ${items.length}${it.tag?`　<span class="it-tag">${esc(it.tag)}</span>`:''}</div>
+    ${body}${hint}</div></div>`;
+}
+function sSent(me){ return sItems(me, 'x'); }
+function sQA2(me){ return sItems(me, 'q'); }
+
+/* ---- 計分 ---- */
+function scoreOf2(sid){
+  const s = stu(sid), a = myA(sid);
+  let right = 0, total = 0; const det = [];
+  words().forEach((w,i)=>{
+    total++; const v = a['p'+i];
+    const ok = v!==undefined && pickOpts(w, s.lv)[v]===w;
+    if(ok) right++;
+    det.push({lb:`選字「${w}」`, ok, done:v!==undefined});
+  });
+  itemsOf('x').forEach((it,i)=>{
+    if(!scoredKind(it)) return;
+    total++; const r = a['x'+i], ok = recOk(r);
+    if(ok) right++;
+    det.push({lb:`句子 ${i+1}`, ok, done:!!r});
+  });
+  itemsOf('q').forEach((it,i)=>{
+    if(!scoredKind(it)) return;
+    total++;
+    let ok, done;
+    if(it.wr && s.lv===1){
+      const v = a['q'+i]!==undefined ? a['q'+i] : a['t_q'+i];
+      ok = judge(it, v)===true; done = v!==undefined;
+    } else { const r = a['q'+i]; ok = recOk(r); done = !!r; }
+    if(ok) right++;
+    det.push({lb:`問答 ${i+1}`, ok, done});
+  });
+  unitWords().forEach(w=>{
+    const v = a['g_'+w]; if(v===undefined) return;
+    total++; const ok = v===w; if(ok) right++;
+    det.push({lb:`遊戲「${w}」`, ok, done:true});
+  });
+  return {right, total, det};
+}
+
+/* ───────────── ③ 課文影片 ───────────── */
+const VP = {on:false, i:0, tok:0, rate:.8, jp:true, sub:true, echo:false, fb:null, gap:null, id:'', bar:null};
+const VID_MIN = {k:.55};                /* 語音太快結束時，每句字幕至少停留估計時間的幾成 */
+function cueMs(t, rate){ return Math.max(1800, String(t).length * 330 / (rate||.8)); }
+function vidKeys(){ return [...new Set(LESSONS2.flatMap(l=>l.keys))]; }
+function vidSubHTML(i){
+  const c = VID2[i]; if(!c) return '';
+  const toks = tokenize(c.t, vidKeys());
+  return toks.map(t=> t.key ? `<b class="vk">${VP.jp?ruby(t.t):esc(t.t)}</b>` : (VP.jp?ruby(t.t):esc(t.t))).join('');
+}
+function vidTitleOf(v){ return (v.from===0 && v.to===VID2.length-1) ? '《科技產品》整篇課文' : '《科技產品》片段'; }
+function openVideo(from, to, back){
+  stopMedia();
+  VP.i = from; VP.on = false; VP.id = Date.now().toString(36);
+  CTRL.vid = {id:VP.id, from, to, i:from, t0:Date.now(), play:0, rate:VP.rate, jp:VP.jp?1:0, sub:VP.sub?1:0, echo:VP.echo?1:0, back:back||'unit', end:0};
+  CTRL.screen = 'video'; CTRL.phase = 'idle';
+  saveCtrl({force:true}); render();
+  vidPlayFrom(from);
+}
+function vidPush(extra){
+  if(!CTRL.vid) return;
+  const v = CTRL.vid;
+  Object.assign(v, {i:VP.i, t0:Date.now(), play:VP.on?1:0, rate:VP.rate, jp:VP.jp?1:0, sub:VP.sub?1:0, echo:VP.echo?1:0}, extra||{});
+  saveCtrl({force:true});
+}
+function vidStop(){
+  VP.tok++; VP.on = false;
+  clearTimeout(VP.fb); clearTimeout(VP.gap);
+  try{ speechSynthesis.cancel(); }catch(e){}
+}
+function vidPlayFrom(i){
+  const v = CTRL.vid; if(!v) return;
+  VP.tok++; clearTimeout(VP.fb); clearTimeout(VP.gap);
+  VP.i = Math.max(v.from, Math.min(v.to, i)); VP.on = true;
+  if(v.end){ v.end = 0; }
+  vidPush({end:0}); vidShow(true);
+  vidSayCue(VP.tok);
+}
+function vidSayCue(tok){
+  const c = VID2[VP.i]; if(!c) return;
+  const est = cueMs(c.t, VP.rate), t0 = Date.now();
+  let fin = false;
+  const done = ()=>{
+    if(fin || tok!==VP.tok) return; fin = true; clearTimeout(VP.fb);
+    const el = Date.now() - t0, minMs = est * VID_MIN.k;
+    const go = ()=>{ if(tok!==VP.tok) return; vidAfterCue(tok); };
+    if(el < minMs) VP.gap = setTimeout(go, minMs - el); else go();
+  };
+  try{
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(c.t.replace(/[《》]/g,''));
+    u.lang = 'zh-HK'; u.rate = VP.rate; if(VOICE) u.voice = VOICE;
+    u.onend = done; u.onerror = e=>{ if(e && /cancel|interrupt/i.test(String(e.error||''))) return; done(); };
+    speechSynthesis.speak(u);
+  }catch(e){}
+  VP.fb = setTimeout(done, est * 2 + 2500);
+  vidBar(est);
+}
+function vidAfterCue(tok){
+  if(tok!==VP.tok || !VP.on) return;
+  const v = CTRL.vid; if(!v) return;
+  const go = ()=>{
+    if(tok!==VP.tok) return;
+    if(VP.i >= v.to){ vidFinish(); return; }
+    const prevS = VID2[VP.i].s; VP.i++;
+    const sceneChange = VID2[VP.i].s !== prevS;
+    vidPush();                       /* 每一句都傳給學生機，字幕才會對準 */
+    vidShow(sceneChange);
+    vidSayCue(tok);
+  };
+  if(VP.echo){
+    const est = cueMs(VID2[VP.i].t, VP.rate);
+    vidEcho(true);
+    VP.gap = setTimeout(()=>{ vidEcho(false); go(); }, est * .9 + 600);
+  } else VP.gap = setTimeout(go, 380);
+}
+function vidFinish(){
+  VP.on = false; VP.tok++;
+  clearTimeout(VP.fb); clearTimeout(VP.gap);
+  vidPush({end:1, play:0});
+  const el = document.getElementById('vidEnd'); if(el) el.classList.add('show');
+  const b = document.getElementById('vidBar'); if(b){ b.style.animation='none'; b.style.width='100%'; }
+  vidCtl();
+}
+function vidPause(){
+  if(!VP.on){ return vidPlayFrom(VP.i); }
+  VP.tok++; VP.on = false; clearTimeout(VP.fb); clearTimeout(VP.gap);
+  try{ speechSynthesis.cancel(); }catch(e){}
+  vidPush({play:0}); vidCtl();
+  const b = document.getElementById('vidBar'); if(b) b.style.animationPlayState = 'paused';
+}
+function vidSeek(i){
+  const v = CTRL.vid; if(!v) return;
+  const j = Math.max(v.from, Math.min(v.to, i));
+  const was = VP.on;
+  VP.tok++; clearTimeout(VP.fb); clearTimeout(VP.gap); try{ speechSynthesis.cancel(); }catch(e){}
+  VP.i = j; vidEcho(false);
+  if(was || v.end) vidPlayFrom(j); else { vidPush({end:0, play:0}); vidShow(true); }
+}
+function vidStep(d){ vidSeek(VP.i + d); }
+function vidReplay(){ const v = CTRL.vid; if(v) vidPlayFrom(v.from); }
+function vidRate(){
+  VP.rate = VP.rate <= .66 ? .8 : (VP.rate <= .81 ? .95 : .65);
+  vidPush(); vidCtl();
+}
+function vidTog(k){
+  VP[k] = !VP[k];
+  vidPush(); vidShow(false); vidCtl();
+}
+function closeVideo(){
+  const v = CTRL.vid, back = v ? v.back : 'unit';
+  vidStop(); CTRL.vid = null;
+  CTRL.screen = back==='lesson' ? 'lesson' : 'unit';
+  CTRL.phase = CTRL.screen==='lesson' ? STEP : 'idle';
+  saveCtrl({force:true}); render();
+}
+/* 畫面更新（不重畫整頁，字幕和畫面平滑轉換） */
+function vidBar(est){
+  const b = document.getElementById('vidBar'); if(!b) return;
+  b.style.animation = 'none'; void b.offsetWidth;
+  b.style.animation = calmOn() ? 'none' : `vbar ${est}ms linear forwards`;
+  b.style.width = calmOn() ? '100%' : '';
+}
+function vidEcho(on){ const e = document.getElementById('vidEcho'); if(e) e.classList.toggle('show', on); }
+function vidShow(scene){
+  const c = VID2[VP.i]; if(!c) return;
+  const sub = document.getElementById('vSub'), img = document.getElementById('vSlide'), st = document.getElementById('vStage');
+  if(sub){ sub.innerHTML = VP.sub ? vidSubHTML(VP.i) : '<span class="vhide">🔇</span>'; sub.classList.remove('pop'); void sub.offsetWidth; if(!calmOn()) sub.classList.add('pop'); }
+  if(img){
+    const src = IMG[c.img] || '';
+    if(img.getAttribute('data-s') !== String(c.s)){
+      img.setAttribute('data-s', c.s); img.src = src;
+      const bx = document.getElementById('vBox'); if(bx) bx.style.setProperty('--ar', SLIDE_AR[c.s] || 1.6);
+      img.classList.remove('kb'); void img.offsetWidth; if(!calmOn()) img.classList.add('kb');
+    }
+  }
+  const ve = document.getElementById('vidEnd'); if(ve) ve.classList.toggle('show', !!(CTRL.vid && CTRL.vid.end));
+  if(st){ st.setAttribute('data-fx', c.fx || ''); }
+  const prog = document.querySelectorAll('#vProg i');
+  prog.forEach((el,k)=>{ el.classList.toggle('cur', k+ (CTRL.vid?CTRL.vid.from:0) === VP.i); el.classList.toggle('past', k+(CTRL.vid?CTRL.vid.from:0) < VP.i); });
+  const cnt = document.getElementById('vCnt'); if(cnt && CTRL.vid) cnt.textContent = `${VP.i - CTRL.vid.from + 1} ／ ${CTRL.vid.to - CTRL.vid.from + 1}`;
+  vidCtl();
+}
+function vidCtl(){
+  const p = document.getElementById('vPlay'); if(p) p.textContent = VP.on ? '⏸ 暫停' : (CTRL.vid && CTRL.vid.end ? '↺ 重播' : '▶ 播放');
+  const r = document.getElementById('vRate'); if(r) r.textContent = `🐢 速度 ${VP.rate<.7?'慢':VP.rate<.9?'正常':'快'}`;
+  const j = document.getElementById('vJp'); if(j) j.classList.toggle('holdon', VP.jp);
+  const s = document.getElementById('vSubB'); if(s) s.classList.toggle('holdon', VP.sub);
+  const e = document.getElementById('vEchoB'); if(e) e.classList.toggle('holdon', VP.echo);
+}
+function vidMain(){
+  if(CTRL.vid && CTRL.vid.end) return vidReplay();
+  if(VP.on) vidPause(); else vidPlayFrom(VP.i);
+}
+function tVideo(){
+  const v = CTRL.vid; if(!v) return '<div class="note">沒有影片。<button class="btn sm" onclick="closeVideo()">返回</button></div>';
+  if(VP.id !== v.id){ VP.id = v.id; VP.i = v.i; VP.on = false; v.play = 0; }
+  const n = v.to - v.from + 1;
+  const prog = Array.from({length:n}, (_,k)=>`<i onclick="vidSeek(${v.from+k})"></i>`).join('');
+  const backLb = v.back==='lesson' ? '← 返回課堂' : '← 返回單元頁';
+  return `<div class="vid" id="vStage" data-fx="${VID2[VP.i].fx||''}">
+    <div class="vtop"><button class="btn sm" onclick="closeVideo()">${backLb}</button>
+      <div class="vtitle">🎬 ${vidTitleOf(v)}</div><div class="vcnt" id="vCnt"></div>
+      <div class="vprog" id="vProg">${prog}</div></div>
+    <div class="vscreen">
+      <div class="vframe"><div class="vbox" id="vBox"><img id="vSlide" data-s="" alt="" src=""></div>
+        <div class="vend" id="vidEnd"><div class="vend-in"><div class="vend-em">🎉</div><div class="vend-t">看完了</div>
+          <div class="row" style="justify-content:center"><button class="btn lemon" onclick="vidReplay()">↺ 再看一次</button>
+          <button class="btn" onclick="closeVideo()">${backLb}</button></div></div></div></div>
+      <div class="vsubwrap"><div class="vsub" id="vSub"></div><div class="vbarwrap"><div class="vbar" id="vidBar"></div></div>
+        <div class="vecho" id="vidEcho">🗣️ 請跟著讀</div></div>
+    </div>
+    <div class="vctl">
+      <button class="btn" onclick="vidStep(-1)">⏮ 上一句</button>
+      <button class="btn lemon big" id="vPlay" onclick="vidMain()">▶ 播放</button>
+      <button class="btn" onclick="vidStep(1)">下一句 ⏭</button>
+      <span class="vsep"></span>
+      <button class="btn sm" id="vRate" onclick="vidRate()">🐢 速度</button>
+      <button class="btn sm" id="vJp" onclick="vidTog('jp')">粵拼</button>
+      <button class="btn sm" id="vSubB" onclick="vidTog('sub')">字幕</button>
+      <button class="btn sm" id="vEchoB" onclick="vidTog('echo')">🗣️ 跟讀停頓</button>
+    </div></div>`;
+}
+/* 老師版：畫面建好之後接上目前狀態 */
+function tVideoMount(){
+  vidShow(true);
+  const v = CTRL.vid;
+  const e = document.getElementById('vidEnd'); if(e) e.classList.toggle('show', !!(v && v.end));
+}
+
+/* 學生版：跟著老師的影片（只看畫面和字幕；老師每換一句就同步一次） */
+function svSubHTML(i, jp){
+  const toks = tokenize(VID2[i].t, vidKeys());
+  return toks.map(t=> t.key ? `<b class="vk">${jp?ruby(t.t):esc(t.t)}</b>` : (jp?ruby(t.t):esc(t.t))).join('');
+}
+function svSay(i){ return `speak('${VID2[i].t.replace(/[《》\']/g,'')}')`; }
+function sVideo(me){
+  const v = CTRL.vid; if(!v) return wait('🎬','等待影片','請看大電視');
+  const i = Math.max(0, Math.min(VID2.length-1, v.i));
+  return `<div class="stu"><div class="q svid" id="svid" data-id="${v.id}">
+    <div class="vframe"><div class="vbox" id="svBox" style="--ar:${SLIDE_AR[VID2[i].s]||1.6}"><img id="svSlide" data-s="${VID2[i].s}" src="${IMG[VID2[i].img]||''}" alt=""></div></div>
+    <div class="vsub s" id="svSub" data-sig="${i}|${v.sub}|${v.jp}">${v.sub?svSubHTML(i, v.jp):'<span class="vhide">🔇</span>'}</div>
+    <div class="row" style="justify-content:center;margin-top:12px">
+      <button class="btn mint" id="svSay" onclick="${svSay(i)}">🔊 ${T('聽一次')}</button></div>
+    <div class="note" id="svEnd" style="text-align:center;${v.end?'':'display:none'}">${ruby('影片完了')}</div>
+  </div></div>`;
+}
+/* 同一段影片裏，只更新字幕和畫面，不重建整頁（避免閃爍） */
+function svUpdate(v){
+  const i = Math.max(0, Math.min(VID2.length-1, v.i));
+  const sub = document.getElementById('svSub'), im = document.getElementById('svSlide'), say = document.getElementById('svSay');
+  const end = document.getElementById('svEnd');
+  if(!sub || !im) return false;
+  const sig = i+'|'+v.sub+'|'+v.jp;
+  if(sub.getAttribute('data-sig') !== sig){
+    sub.setAttribute('data-sig', sig);
+    sub.innerHTML = v.sub ? svSubHTML(i, v.jp) : '<span class="vhide">🔇</span>';
+    sub.classList.remove('pop'); void sub.offsetWidth; if(!calmOn()) sub.classList.add('pop');
+    if(say) say.setAttribute('onclick', svSay(i));
+    if(im.getAttribute('data-s') !== String(VID2[i].s)){
+      im.setAttribute('data-s', VID2[i].s); im.src = IMG[VID2[i].img] || '';
+      const bx = document.getElementById('svBox'); if(bx) bx.style.setProperty('--ar', SLIDE_AR[VID2[i].s] || 1.6);
+    }
+  }
+  if(end) end.style.display = v.end ? '' : 'none';
+  return true;
+}
+/* 學生版畫面入口（renderStudent 呼叫） */
+function sVideoRender(B, me){
+  const v = CTRL.vid;
+  if(v && B.getAttribute('data-vid') === v.id && svUpdate(v)) return;
+  B.innerHTML = sVideo(me);
+  B.setAttribute('data-vid', v ? v.id : '');
+}
+/* 老師版畫面入口（renderTeacher 呼叫）：同一段影片只建一次 */
+function tVideoRender(tp){
+  const v = CTRL.vid;
+  if(!v){ tp.innerHTML = tVideo(); return; }
+  if(tp.getAttribute('data-vid') === v.id && document.getElementById('vStage')){ vidCtl(); return; }
+  tp.innerHTML = tVideo(); tp.setAttribute('data-vid', v.id);
+  tVideoMount();
+}
+
+/* 教師單元頁：額外按掣 */
+function uAct(u){
+  if(+u===2) return `<button class="btn lemon" onclick="openVideo(0,${VID2.length-1},'unit')">🎬 播放整篇課文影片</button>`;
+  return '';
+}
+
+/* ───────────── ④ 列印（單元二：選擇、判斷、填充；其他題型只在平板電腦上做） ───────────── */
+function printU2(lv, grey){
+  const its = [...itemsOf('x'), ...itemsOf('q')].filter(it=>it.k==='choice' || it.k==='tf' || it.k==='fill');
+  return its.map((it, n)=>{
+    if(it.k==='choice'){
+      const q = {q:it.q, ans:it.ans, opts:[it.ans, ...it.opts.slice(1)], hint:null};
+      return printQ(q, n, lv, grey);
+    }
+    if(it.k==='tf'){
+      return `<div class="q"><div class="qn">${n+1}.　${it.q}</div><div class="opts"><span class="opt">（　）對</span><span class="opt">（　）不對</span></div></div>`;
+    }
+    const txt = it.t.replace(/＿+/g, '（　　　）');
+    const nOpt = {1:0, 2:3, 3:2}[lv] || 0;
+    const opts = it.bl.map(b=> nOpt ? b.slice(0, nOpt) : null);
+    const ans = it.bl.map(b=>b[0]);
+    const bd = nOpt
+      ? `<div class="opts">${opts.map(o=>o.map(x=>`<span class="opt">${x}</span>`).join('')).join('<br>')}</div>`
+      : `<div class="ansline"><span class="alab">答：</span>${printCells(ans.join('、'), false)}</div>`;
+    return `<div class="q"><div class="qn">${n+1}.　${txt}</div>${bd}</div>`;
+  }).join('');
+}
 
 render();
 </script>
