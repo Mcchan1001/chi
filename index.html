@@ -1087,8 +1087,13 @@ body.calm .first .tg .ch{clip-path:none;opacity:1}
 .vsub{min-height:3.4em;display:flex;align-items:center;justify-content:center;text-align:center;flex-wrap:wrap;
   font-size:2.5rem;font-weight:900;line-height:2.1;padding:6px 20px;border-radius:20px;background:rgba(255,255,255,.08)}
 .vsub rt{font-size:.38em;color:#B8CCE2;font-weight:700}
-.vsub .vk{color:#FFD36B;background:rgba(255,211,107,.14);border-radius:10px;padding:0 6px}
-.vsub .vk rt{color:#FFE5A3}
+.vsub .vc{display:inline-block;border-radius:8px;padding:0 1px;transition:color .12s,background-color .12s}
+.vsub .vc.vk{color:#FFD36B}
+.vsub .vc.vk rt{color:#FFE5A3}
+.vsub .vc.done,.vsub .vc.vk.done{color:#FF8E7E}
+.vsub .vc.done rt{color:#FFB8AE}
+.vsub .vc.now{background:#FFD9D9;color:#C0392B}
+.vsub .vc.now rt{color:#C0392B}
 .vsub.pop{animation:u2sub .28s var(--ease)}
 @keyframes u2sub{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .vhide{opacity:.35;font-size:1.6rem}
@@ -1113,7 +1118,10 @@ body.calm .first .tg .ch{clip-path:none;opacity:1}
 .svid .vbox{height:auto;width:100%}
 .svid .vsub.s{background:rgba(255,255,255,.75);color:var(--ink);font-size:1.9rem;margin-top:12px}
 .svid .vsub.s rt{color:#4D6276}
-.svid .vsub.s .vk{color:#8A5B12;background:#FFF0C4}
+.svid .vsub.s .vc.vk{color:#8A5B12}
+.svid .vsub.s .vc.done,.svid .vsub.s .vc.vk.done{color:#C0392B}
+.svid .vsub.s .vc.done rt{color:#C0392B}
+.svid .vsub.s .vc.now{background:#FFD9D9;color:#C0392B}
 .svid .vsub.pop{animation:u2sub .28s var(--ease)}
 
 /* ---------- 安靜模式：關閉單元二的動畫 ---------- */
@@ -1129,6 +1137,79 @@ body.calm .vid *,body.calm .tcard,body.calm .tcard *,body.calm .it *{animation:n
 @media (prefers-reduced-motion: reduce){
   .vid *,.tcard,.tcard *,.it *{animation:none!important;transition:none!important}
 }
+
+/* ---------- 生活語文：模擬文件 ---------- */
+.docwrap{margin:14px auto 4px;max-width:760px;text-align:left}
+.docwrap.dw-mw{max-width:640px}
+.docwrap.dw-wbill,.docwrap.dw-manual1,.docwrap.dw-manual3{max-width:520px}
+.doclegend{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:12px}
+.sp{position:relative;border-radius:12px;transition:box-shadow .15s,background-color .15s}
+.sp[onclick]{cursor:pointer}
+.sp.box{box-shadow:0 0 0 3px rgba(95,168,211,.55)}
+.sp.cand{box-shadow:0 0 0 4px #F4B740;animation:u2glow 1.4s ease-in-out infinite}
+.sp.hit{box-shadow:0 0 0 4px #7FD3B0;background-color:rgba(127,211,176,.22)}
+.sp.dim{opacity:.45}
+.sp.lab{box-shadow:0 0 0 3px rgba(217,72,59,.55)}
+.sptag{position:absolute;left:-10px;top:-12px;z-index:3;width:28px;height:28px;border-radius:50%;background:var(--seal);color:#fff;
+  font:900 .95rem/28px system-ui,sans-serif;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.sptag.in{position:static;display:inline-block;margin-right:6px;width:26px;height:26px;line-height:26px}
+/* 電費單（虛構公司，教學用） */
+.ebill{position:relative;overflow:hidden;background:#fff;border:2px solid #C9D6E4;border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:12px;
+  font-size:1.05rem;color:#22313F;box-shadow:0 8px 24px rgba(31,43,58,.1)}
+.eb-logo{display:flex;align-items:center;gap:12px;padding:8px 10px}
+.eb-bolt{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#FFD36B,#F4A340);display:flex;align-items:center;justify-content:center;font-size:2rem}
+.eb-logo b{display:block;font-size:1.35rem;letter-spacing:.06em}
+.eb-logo small{color:#6B7A89;font-weight:700}
+.eb-mid{display:grid;grid-template-columns:1.2fr 1fr;gap:12px}
+.eb-info{padding:10px 12px;display:flex;flex-direction:column;gap:4px;font-weight:700}
+.eb-info span{display:inline-block;min-width:5.2em;color:#6B7A89;font-weight:800}
+.eb-pay{display:flex;flex-direction:column;gap:10px}
+.eb-total,.eb-due{border-radius:12px;padding:10px 14px;display:flex;flex-direction:column}
+.eb-total{background:#FFF3D6;border:2px solid #F4C95D}
+.eb-total b{font-size:1.9rem;color:#B35B00;letter-spacing:.02em}
+.eb-due{background:#FDECEC;border:2px solid #F0A19A}
+.eb-due b{font-size:1.35rem;color:#C0392B}
+.eb-total span,.eb-due span{font-weight:900;color:#5A4A2A}
+.eb-use{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:end;padding:10px 12px;background:#F2F7FC;border-radius:12px}
+.eb-units span{display:block;font-weight:900;color:#4D6276}
+.eb-units b{font-size:1.7rem;color:#1B63A0}
+.eb-units small{display:block;color:#6B7A89;font-weight:700}
+.eb-chart{display:flex;gap:14px;align-items:flex-end;height:96px}
+.eb-chart i{position:relative;flex:1;height:var(--h);background:linear-gradient(#7FB6D9,#5FA8D3);border-radius:6px 6px 0 0;min-height:10px}
+.eb-chart i:last-child{background:linear-gradient(#FFD36B,#F4B740)}
+.eb-chart em{position:absolute;top:-20px;left:0;right:0;text-align:center;font-style:normal;font-size:.8rem;font-weight:800;color:#4D6276}
+.eb-chart u{position:absolute;bottom:-20px;left:0;right:0;text-align:center;text-decoration:none;font-size:.8rem;font-weight:800;color:#6B7A89}
+.eb-ways{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:16px 12px 8px}
+.eb-ways span{font-weight:900;color:#4D6276;margin-right:4px}
+.eb-ways b{background:#EEF4FA;border-radius:10px;padding:4px 10px}
+.eb-tip{padding:10px 12px;background:#EAF8F1;border-radius:12px;font-weight:800;color:#1E7A55}
+.eb-wm{position:absolute;right:-30px;top:44%;transform:rotate(-24deg);font-size:3.2rem;font-weight:900;color:rgba(192,57,43,.08);pointer-events:none;white-space:nowrap}
+/* 微波爐按鍵（示意） */
+.mw{display:grid;grid-template-columns:1.7fr 1fr;gap:14px;background:linear-gradient(#F7F7F4,#E6E6E0);border:3px solid #CFCFC6;border-radius:26px;padding:16px;box-shadow:0 10px 24px rgba(31,43,58,.15)}
+.mw-door{height:100%;min-height:230px;border-radius:16px;background:#2A2F35;padding:16px;display:flex;align-items:center;gap:12px}
+.mw-win{flex:1;height:100%;min-height:190px;border-radius:12px;background:radial-gradient(circle at 40% 40%,#4A5560,#1C2126);display:flex;align-items:center;justify-content:center;font-size:3.4rem}
+.mw-handle{width:12px;height:70%;border-radius:6px;background:#9AA2AA}
+.mw-panel{display:flex;flex-direction:column;gap:9px}
+.mw-disp{background:#1C2B22;color:#7CF5A8;font:800 1.9rem/1.3 ui-monospace,monospace;text-align:center;border-radius:10px;padding:6px}
+.mw-btn{background:#fff;border:2px solid #C8CFD6;border-radius:12px;padding:9px 6px;text-align:center;font-weight:900;font-size:1.1rem;box-shadow:0 3px 0 #C8CFD6}
+.mw-btn.red{background:#FDECEC;border-color:#F0A19A;box-shadow:0 3px 0 #F0A19A}
+.mw-btn.green{background:#EAFAF2;border-color:#7FD3B0;box-shadow:0 3px 0 #7FD3B0}
+.mw-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+/* 圖片文件（說明書、水費單） */
+.idoc{position:relative;border-radius:14px;overflow:visible;background:#fff;box-shadow:0 8px 24px rgba(31,43,58,.12)}
+.idoc img{display:block;width:100%;border-radius:14px}
+.idoc .sp{position:absolute;padding:0;border:none;background:transparent;border-radius:8px}
+.pgs.doc .pg{border:none;box-shadow:none;background:none;overflow:visible}
+.textrow .pgs.doc{width:min(560px,100%)}
+@media (max-width:760px){ .eb-mid,.mw{grid-template-columns:1fr} }
+/* 單元小測 */
+.qzbar{height:10px;border-radius:5px;background:#E4EDF6;overflow:hidden;margin:6px 0}
+.qzbar i{display:block;height:100%;background:linear-gradient(90deg,#7FD3B0,#5FA8D3);border-radius:5px}
+.qzbar.big{height:14px;margin:4px 0 12px}
+.qzres{margin-top:14px;font-size:1.4rem;font-weight:900;text-align:center}
+.qzres.ok{color:#1E8E62}.qzres.no{color:#B35B00}.qzres.try{color:#C0392B}
+.qzlock .it-opts,.qzlock .tfrow,.qzlock .chips,.qzlock .cards,.qzlock .buckets,.qzlock .matchwrap,.qzlock .docwrap{pointer-events:none}
+.qzstars{font-size:2.4rem;margin:10px 0}.qzstars span{display:block;font-size:1.2rem;font-weight:800;color:var(--mute)}
 
 body[data-scr="video"] .lessononly{display:none!important}
 body[data-scr="video"] #tPick,body[data-scr="video"] #tTop .meta{display:none}
@@ -1682,7 +1763,7 @@ document.body.classList.toggle('nojy', !JYON);
 /* ==================================================================
    狀態 + 同步（分權儲存）
    ================================================================== */
-const APPVER = 'v36';
+const APPVER = 'v37';
 const K = 'zw26';
 const KC = K+'.ctrl', KB = K+'.bank', KP = K+'.pulse', KS = K+'.stu';
 const KA = sid => K+'.ans.'+sid;
@@ -2194,7 +2275,7 @@ function renderAdmin(){
     學生的平板電腦不會顯示「高組／中組／初組」等字眼。</div>
   <table class="adm">
     <tr><th>學生姓名（可直接修改）</th><th>班別</th><th>問答難度</th><th>書寫支援</th><th>同步顯示英文</th><th>安靜模式<br><span style="font-weight:400;font-size:.8rem">（關閉動畫）</span></th>
-      <th>工作紙</th><th>寫字工作紙版本<br><span style="font-weight:400;font-size:.8rem">（只適用中組）</span></th></tr>
+      <th>工作紙<br><span style="font-weight:400;font-size:.8rem">（單元一）</span></th><th>工作紙<br><span style="font-weight:400;font-size:.8rem">（單元二）</span></th><th>寫字工作紙版本<br><span style="font-weight:400;font-size:.8rem">（只適用中組）</span></th></tr>
     ${STUDENTS.map(s=>`
     <tr><td><input class="nmbox" value="${String(s.n).replace(/"/g,'&quot;')}"
         onchange="setName('${s.id}',this.value)"></td>
@@ -2212,9 +2293,12 @@ function renderAdmin(){
       <td><label class="sw"><input type="checkbox" ${s.calm?'checked':''}
         onchange="setCalm('${s.id}',this.checked)"><span></span></label></td>
       <td><select onchange="setF('${s.id}','ws',this.value)">
-        ${Object.entries(WS_TRACK).map(([k,n])=>`<option value="${k}" ${wsTrackOf(s)===k?'selected':''}>${n}</option>`).join('')}
+        ${Object.entries(WS_TRACK).map(([k,n])=>`<option value="${k}" ${wsTrack1Of(s)===k?'selected':''}>${n}</option>`).join('')}
       </select></td>
-      <td><select onchange="setF('${s.id}','wv',this.value)" ${wsTrackOf(s)==='M'?'':'disabled'}>
+      <td><select onchange="setF('${s.id}','ws2',this.value)">
+        ${Object.entries(WS_TRACK2).map(([k,n])=>`<option value="${k}" ${wsTrack2Of(s)===k?'selected':''}>${n}</option>`).join('')}
+      </select></td>
+      <td><select onchange="setF('${s.id}','wv',this.value)" ${(wsTrack1Of(s)==='M'||wsTrack2Of(s)==='M')?'':'disabled'}>
         ${Object.entries(WS_VAR).map(([k,n])=>`<option value="${k}" ${wsVarOf(s)===k?'selected':''}>${n}</option>`).join('')}
       </select></td>
     </tr>`).join('')}
@@ -2280,7 +2364,7 @@ async function testNet(){
       請檢查：部署時「誰可存取」是否設為 <b>任何人</b>，以及網址是否以 <b>/exec</b> 結尾。`;
   }
 }
-function setF(id,f,v){ const s=stu(id); s[f] = (f==='cls'||f==='ws'||f==='wv') ? v : +v; saveStu(); render(); }
+function setF(id,f,v){ const s=stu(id); s[f] = (f==='cls'||f==='ws'||f==='ws2'||f==='wv') ? v : +v; saveStu(); render(); }
 function setName(id,v){ stu(id).n = String(v).trim() || stu(id).n; saveStu(); render(); }
 function setEn(id,v){ stu(id).en=v; saveStu(); render(); }
 
@@ -2311,8 +2395,8 @@ const WS_EN = {'閱讀句子':'Read the sentence','閱讀理解':'Reading compre
   '圈字成句':'Circle words to make a sentence'};
 function wsEn(t){ const b=t.replace(/（[二三四]）$/,'').replace(/「.*」$/,''); return WS_EN[b]||WS_EN[t]||''; }
 
-function wsTrackOf(s){ return (s.ws!==undefined && s.ws!==null) ? s.ws : (s.lv==1 ? 'H' : 'M'); }
-function wsVarOf(s){   return s.wv || ({0:'copy', 1:'grey', 2:'big'})[s.wlv] || 'copy'; }
+function wsTrackOf(s){ return isU2() ? wsTrack2Of(s) : wsTrack1Of(s); }
+function wsVarOf(s){ const v = s.wv || ({0:'copy', 1:'grey', 2:'big'})[s.wlv] || 'copy'; return (isU2() && v==='copyS') ? 'copy' : v; }
 /* 而家做緊邊一套：本連堂，定係成個單元完結後嗰批 */
 function wsSet(){ return CTRL.wsEnd ? 'end' : L().no; }
 function wsSetName(set){ return set==='end' ? '單元完結工作紙' : `第 ${set} 連堂工作紙`; }
@@ -2320,7 +2404,7 @@ function wsSetName(set){ return set==='end' ? '單元完結工作紙' : `第 ${s
 /* 某學生喺某一套要做嘅工作紙，已按次序排好 */
 function wsList(s, set){
   const tr = wsTrackOf(s); if(!tr) return [];
-  const src = ((WS[set]||{})[tr]) || [];
+  const src = ((wsCat()[set]||{})[tr]) || [];
   const out = [];
   src.forEach(it=>{
     if(it.v) (it.v[wsVarOf(s)] || []).forEach(x=>out.push(x));
@@ -2331,7 +2415,7 @@ function wsList(s, set){
 /* 狀態：0 未做　1 學生話做完（🙋）　2 老師確認（✔） */
 /* 由短編號搵返工作紙（標題、檔名、資料夾）*/
 function wsItemById(id){
-  for(const key in WS) for(const tr in WS[key]) for(const x of WS[key][tr]){
+  for(const C of [WS, WS2]) for(const key in C) for(const tr in C[key]) for(const x of C[key][tr]){
     if(x.v){ for(const k in x.v) for(const y of x.v[k]) if(y.id===id) return y; }
     else if(x.id===id) return x;
   }
@@ -2403,7 +2487,7 @@ function wsNeedHTML(set){
   return `<h3 class="sec">🖨 ${wsSetName(set)}：要印的份數</h3>
     <table class="adm"><tr><th>Drive 資料夾</th><th>檔名</th><th>份數</th><th>給誰</th></tr>
     ${need.map(n=>`<tr><td>${n.x.d}</td>
-      <td>${n.x.f}${WSIMG[n.x.id]?` <a class="wslink" href="#" onclick="wsOpen('${n.x.id}');return false">📄 打開</a>`:''}</td>
+      <td>${n.x.f}${wsImgOk(n.x.id)?` <a class="wslink" href="#" onclick="wsOpen('${n.x.id}');return false">📄 打開</a>`:''}</td>
       <td><b>${n.who.length}</b></td>
       <td style="font-size:.85rem">${n.who.join('、')}</td></tr>`).join('')}</table>
     <div class="note">📄 按一下可以打開那張工作紙放大在大電視上講解。
@@ -2537,7 +2621,7 @@ function wsHasInk(id){
 }
 /* 打開一張工作紙 */
 function wsOpen(id){
-  if(!WSIMG[id]) return;
+  if(!wsImgOk(id)) return;
   WSV = {id, tool:'ink', zoom:1}; WS_POS = null; WS_HTML = '';
   wsLoadInk(id);
   render();
@@ -2595,7 +2679,7 @@ function wsStage(v){
       </div>
     </div>`;
 }
-function wsImgSrc(id){ return `ws/${id}.jpg`; }
+function wsImgSrc(id){ return (WSIMG2[id] ? 'ws2/' : 'ws/') + id + '.jpg'; }
 
 /* 圖載入之後先對齊畫布 */
 function initWSView(){
@@ -2760,10 +2844,10 @@ function tWSView(){
 /* 本連堂可以喺大電視打開嘅工作紙（例如同學做填充時，開返閱讀句子嗰張畀佢哋睇） */
 function tWSOpenRow(set){
   const seen={}, btns=[];
-  ['H','M'].forEach(tr=>((WS[set]||{})[tr]||[]).forEach(x=>{
-    if(x.v || !WSIMG[x.id] || seen[x.id]) return;
+  ['H','M','C'].forEach(tr=>((wsCat()[set]||{})[tr]||[]).forEach(x=>{
+    if(x.v || !wsImgOk(x.id) || seen[x.id]) return;
     seen[x.id]=1;
-    btns.push(`<button class="btn sm" onclick="wsOpen('${x.id}')">📄 ${tr==='H'?'高組':'中組'}·${x.t}</button>`);
+    btns.push(`<button class="btn sm" onclick="wsOpen('${x.id}')">📄 ${WS_TRN[tr]}·${x.t}</button>`);
   }));
   if(!btns.length) return '';
   return `<div class="note" style="border-left-color:#7FD3B0">
@@ -2781,7 +2865,7 @@ function sWS(me){
     <div class="qt">📄 ${ruby('今日的工作紙')}　<span class="wsprog">${done}／${list.length}</span></div>
     <div class="wslist">${list.map((x,i)=>{
       const st = wsState(me.id, x.id), now = i===cur;
-      const hasImg = !!WSIMG[x.id];
+      const hasImg = wsImgOk(x.id);
       return `<div class="wsitem s${st} ${now?'now':''}">
         <div class="wsno">${st===2?'⭐':st===1?'✋':i+1}</div>
         <div class="wst">${ruby(x.t)}
@@ -2817,6 +2901,7 @@ function greeting(){
 function goalsOf(){
   if(lisOn()) return lisSess().goals;
   const l = L(), ks = l.keys;
+  if(isU2() && l.mode) return l.goals;
   const g = [
     {ico:'📖', zh:`讀出課文：${l.sentence}`, en:'Read the text aloud'},
     {ico:'🔤', zh:`認識 ${ks.length} 個詞語：${ks.join('、')}`, en:`Learn ${ks.length} new words`}
@@ -2861,7 +2946,7 @@ function renderLesson(){
   /* 鎖機時只靠右上角個掣著色提示；唔喺內容區加橫額，避免誤撳解鎖 */
   const tp = document.getElementById('tPanel');
   if(WSV) wsMount(tp, tWSView());
-  else tp.innerHTML = ({hello:tHello,notes:tNotes,text:tText,vocab:tVocab,round:tRound,sent:tSent,qa:(isU2()?tQA2:tQA),ws:tWS,
+  else tp.innerHTML = ({hello:tHello,notes:tNotes,text:tText,vocab:tVocab,round:tRound,sent:tSent,quiz:tQuiz,qa:(isU2()?tQA2:tQA),ws:tWS,
       review:tReview,goals:tGoals,lis:tLis}[STEP]||tHello)();
 }
 function pickLesson(n){          /* 課堂內快速轉課：與單元頁選課同一個流程 */
@@ -2874,7 +2959,7 @@ function tStep(k){
   if(k!=='ws') WSV=null;          /* 轉去其他頁就收起工作紙 */
   STEP=k;
   if(k!=='lis'){ lisStop(); LIS_PLAYING = false; }
-  if(['hello','notes','text','vocab','sent','round','qa','ws','goals','lis'].includes(k)) CTRL.phase=k;
+  if(['hello','notes','text','vocab','sent','round','qa','ws','goals','lis','quiz'].includes(k)) CTRL.phase=k;
   if(k==='sent' || k==='qa') u2Reset();
   if(lisOn() && k==='review') CTRL.phase='lisend';            /* 學生機：請望大電視 */
   if(!CTRL.lessonDate) CTRL.lessonDate = todayStr();
@@ -2979,6 +3064,7 @@ function tNotes(){
       <button class="btn mint" onclick="speak('${d}')">🔊 讀出日期</button>
       <button class="btn mint" onclick="speak('${u}')">🔊 讀出單元名稱</button>
       ${lisOn() ? `<button class="btn blue" onclick="tStep('lis')">下一步：聽力闖關 →</button>`
+                : (isU2() && L().mode) ? `<button class="btn blue" onclick="tStep('${L().mode==='quiz'?'quiz':'sent'}')">下一步：${L().mode==='quiz'?'單元小測':'語文遊戲'} →</button>`
                 : `<button class="btn blue" onclick="tStep('text')">下一步：讀課文 →</button>`}
     </div>
     <div class="sgrid" style="margin-top:18px">${STUDENTS.map(s=>{
@@ -2999,7 +3085,7 @@ function tText(){
       <div class="row" style="margin-top:18px">
         <button class="btn mint readbtn" onclick="toggleRead('${L().sentence}')">🔊 ${T('朗讀全句')}</button>
         <button class="btn stopbtn hide" onclick="stopRead()">⏹ 停止</button>
-        ${isU2() ? `<button class="btn lemon" onclick="openVideo(${L().cues[0]},${L().cues[1]},'lesson')">🎬 看這一段</button>` : ''}
+        ${(isU2() && L().cues) ? `<button class="btn lemon" onclick="openVideo(${L().cues[0]},${L().cues[1]},'lesson')">🎬 看這一段</button>` : ''}
         <button class="btn blue" onclick="tStep('vocab')">下一步：教授字詞 →</button>
       </div>
       <div class="note">按任何一個字或詞語，即時以粵語讀出；字下面是粵語拼音。
@@ -3397,7 +3483,7 @@ function renderStudent0(){
   if(WSV && CTRL.phase!=='ws') WSV=null;          /* 老師轉去第二頁，就退返出嚟 */
   if(WSV){ wsMount(B, sWSView(me)); NET.sendBeat(); return; }
   const f={hello:sHello,notes:sNotes,text:sText,vocab:sVocab,round:sRound,
-           sent:sSent,qa:(isU2()?sQA2:sQA),ws:sWS,goals:sGoals,lis:sLis,
+           sent:sSent,quiz:sQuiz,qa:(isU2()?sQA2:sQA),ws:sWS,goals:sGoals,lis:sLis,
            lisend:()=>wait('🏆','做得好！','請看大電視')}[CTRL.phase];
   B.innerHTML = f ? f(me) : wait('😊','等待老師開始','請看大電視');
   if(CTRL.phase==='round' && CTRL.sub==='write') initPad(me);
@@ -4128,7 +4214,7 @@ function lisPut(i, v){
   else a[lisKey(L.s,i)] = v;
   saveMine();
 }
-function stepsNow(){ return lisOn() ? LIS_STEPS : (isU2() ? STEPS2 : STEPS); }
+function stepsNow(){ return lisOn() ? LIS_STEPS : (isU2() ? stepsU2() : STEPS); }
 function unitName(){ return lisOn() ? lisSess().unit : unitInfo(curUnit()).name; }
 function lisFresh(it){ return (lisPage(it) || it.same || (!it.say && !it.beep)) ? 'answer' : 'listen'; }
 
@@ -5780,6 +5866,340 @@ LIS.push({ s:9, title:'新員工挑戰日', sub:'由報到到收工：一天的�
    {cert:1,cards:[{e:'✋',t:'停'},{e:'👀',t:'望'},{e:'👂',t:'聽'},{e:'🗣️',t:'說'},{e:'💪',t:'做'}]})
   ]});
 
+/* ═════════════════ 單元二聆聽：生活科技面面觀（第 10–13 節）═════════════════
+   沿用聆聽專題的引擎和五步曲；內容取自單元二課文：家電、出外、安全和節能、生活語文（說明書、電費單）。 */
+
+/* ───────────────────────── 第 10 節 家電的聲音和用途 ───────────────────────── */
+LIS.push({ s:10, title:'單元二聆聽①：家電的聲音和用途', sub:'聽聲音、聽描述，找出是哪一件家電', ico:'🔌', tx:1,
+  unit:'生活科技面面觀',
+  goals:[
+    {ico:'🔔', zh:'聽聲音，分辨家電發出的提示聲', en:'Tell appliances apart by their sounds'},
+    {ico:'🧺', zh:'聽描述，說出是哪一件家電、有甚麼用途', en:'Name an appliance from a description of its use'},
+    {ico:'🏠', zh:'聽課文句子，找出「有甚麼」和「做甚麼」', en:'Find "what" and "what for" in sentences from the text'}],
+  prep:['（活動）家電圖卡：電視、微波爐、洗衣機、冷氣機、電腦、雪櫃','（加長版）家中家電的相片（可請學生預先拍攝）'],
+  stages:['引起動機','聽聲音','聽用途','聽課文句子','我來說一說'],
+  strat:[
+    '引起動機：連結學生的家，請他們說出家中有甚麼家電，建立「科技產品」的概念。',
+    '聽覺辨別：用嗶聲模擬家電的提示聲（微波爐「叮」、洗衣機完成提示）；先數聲數，再配對家電。',
+    '聽描述猜物件：描述由「用途」入手（翻熱食物、清潔衣服），再加外形線索，訓練抓關鍵詞。',
+    '課文句式：「我家有……，可以讓我們……」；先聽「有甚麼」，再聽「做甚麼」。',
+    '說話遷移：學生用同一句式介紹自己家的家電，老師提問追問。'],
+  items:[
+  TCH(0,'🏠','我家的科技產品','我家有很多家電，每一件都有用途。',
+   '現代科技發達。｜每個家庭都有很多科技產品。｜例如：電視，微波爐，洗衣機，冷氣機，電腦，雪櫃。',
+   '請同學舉手說出家中有甚麼家電；老師逐一展示圖卡，全班跟讀名稱。',
+   {cards:[{e:'📺',t:'電視'},{e:'🍱',t:'微波爐'},{e:'🧺',t:'洗衣機'},{e:'❄️',t:'冷氣機'},{e:'💻',t:'電腦'},{e:'🧊',t:'雪櫃'}]}),
+  ACT(0,'👂','聽一聽：家裏的聲音','閉上眼睛，想一想家裏有甚麼聲音。',
+   ['請同學閉上眼睛（或望向地下）。','老師用口模仿聲音：「叮！」「嘟嘟嘟」「嗡嗡嗡」。','同學猜：這是哪一件家電的聲音？','請同學說出：「我聽到……，這是……。」'],
+   4,{timer:240,tip:'可先由老師示範，再請同學模仿；有感官敏感的同學可以降低音量。'}),
+  /* 聽聲音 */
+  CHQ(1,'🔔','','聽一聽，有幾聲？','一聲|兩聲|*三聲',
+   '一共三聲「叮」。微波爐翻熱好食物，會「叮」三聲。',{beep:BP([1046,1046,1046],.3),tip:'請同學邊聽邊用手指數。'}),
+  FUP(1,'「叮」三聲，是哪一件家電？','📺電視|*🍱微波爐|🧊雪櫃|❄️冷氣機','微波爐翻熱好食物，會「叮」一聲提醒我們。'),
+  CHQ(1,'🔔','','聽一聽，這是長聲還是短聲？','*長聲|短聲','這是一聲長的「嘟——」。洗衣機洗好衣服，會長長地響一聲。',{beep:BP([660],1.4)}),
+  FUP(1,'洗衣機響了，表示甚麼？','*🧺衣服洗好了|🍱食物熱好了|📺節目完了','洗衣機響，表示衣服洗好了，可以拿出來晾。'),
+  ...X([
+  CHQ(1,'🔔','','聽一聽，有幾聲？','一聲|*兩聲|三聲','兩聲。雪櫃門沒有關好，會「嘟嘟」提醒我們。',{beep:BP([880,880],.3)}),
+  FUP(1,'雪櫃一直「嘟嘟」響，你要怎樣做？','📺開電視|*🚪把雪櫃門關好|🏃不理它','把雪櫃門關好，食物才不會變壞。')
+  ]),
+  ...X([
+  ACT(1,'🎶','聲音記憶遊戲','聽一串聲音，記住次序。',
+   ['老師用口或嗶聲連續做兩至三種家電聲（例如：叮、嘟——、嗡嗡）。','同學聽完，按次序舉起家電圖卡。','逐步加長到三種聲音。','答對的同學當下一位出題人。'],
+   6,{timer:360,mat:'家電圖卡',tip:'初組同學只記第一個聲音；高組同學要記三個並說出次序。'})
+  ]),
+  /* 聽用途 */
+  TCH(2,'🧩','聽用途，猜家電','先聽「可以做甚麼」，就知道是哪一件。',
+   '聽描述的時候，先聽：它可以做甚麼。｜例如：可以翻熱食物，就是微波爐。',
+   '提示學生抓關鍵詞：「翻熱」「清潔」「涼快」「冷藏」「上網」。可在白板寫出關鍵詞。',
+   {cards:[{e:'🍱',t:'翻熱食物'},{e:'🧺',t:'清潔衣服'},{e:'❄️',t:'感到涼快'},{e:'🧊',t:'冷藏食物'},{e:'💻',t:'上網學習'}]}),
+  CHQ(2,'❓','它可以讓我們清潔衣服。｜衣服放進去，加洗衣粉，按掣就可以。','這是甚麼家電？','🍱微波爐|*🧺洗衣機|🧊雪櫃|📺電視','可以清潔衣服的，是洗衣機。'),
+  CHQ(2,'❓','天氣很熱的時候，｜打開它，我們會感到涼快。','這是甚麼家電？','*❄️冷氣機|🧺洗衣機|💻電腦|🍱微波爐','讓我們感到涼快的，是冷氣機。'),
+  CHQ(2,'❓','它可以讓我們冷藏食物，｜牛奶、水果放在裏面，不會變壞。','這是甚麼家電？','📺電視|🍱微波爐|*🧊雪櫃|❄️冷氣機','可以冷藏食物的，是雪櫃。'),
+  CHQ(2,'❓','我們可以用它上網，｜也可以學習電腦技能。','這是甚麼家電？','🧊雪櫃|*💻電腦|🧺洗衣機|❄️冷氣機','可以上網和學習的，是電腦。'),
+  ...X([
+  CHQ(2,'❓','一家人可以一起看它，｜裏面有很多節目。','這是甚麼家電？','*📺電視|🧊雪櫃|🍱微波爐|🧺洗衣機','一家人一起看節目的，是電視。'),
+  MUL(2,'🍽️','','哪些家電和「食物」有關？','*🍱微波爐|*🧊雪櫃|🧺洗衣機|📺電視','微波爐翻熱食物，雪櫃冷藏食物。')
+  ]),
+  ACT(2,'🃏','家電配對大比拼','老師說用途，同學舉起圖卡。',
+   ['每位同學拿一套家電圖卡（或全班分組）。','老師說一個用途，例如：「可以冷藏食物」。','同學聽完才舉起圖卡；舉對的得一分。','最後請同學說：「雪櫃可以冷藏食物。」'],
+   5,{timer:300,mat:'家電圖卡',tip:'提醒：聽完才舉卡。可加入「不是」的句子（「它不可以翻熱食物」）挑戰高組。'}),
+  ...X([
+  CHQ(2,'❓','它很細小，可以拿在手上。｜我們用手指點螢幕，可以上網和看片。','這是甚麼？','💻電腦|*📱平板電腦|📺電視|🧊雪櫃','用手指點螢幕的，是平板電腦。'),
+  CHQ(2,'❓','它放在廚房，｜有一道門，｜裏面很凍。','這是甚麼家電？','🍱微波爐|*🧊雪櫃|🧺洗衣機|❄️冷氣機','放在廚房、裏面很凍的，是雪櫃。'),
+  ACT(2,'🎤','我是推銷員','說出家電的用途，讓同學猜一猜。',
+   ['請一位同學抽一張家電圖卡，不給其他人看。','這位「推銷員」說出它的用途：「它可以……」。','其他同學專心聽，猜是哪一件家電。','猜對的同學做下一位推銷員。'],
+   8,{timer:480,mat:'家電圖卡',tip:'推銷員說得太短時，老師提示「它放在哪裏？」「它有甚麼聲音？」。'})
+  ]),
+  /* 聽課文句子 */
+  ...GRP(3,'🏠','我家有微波爐，｜可以讓我們翻熱食物。',[
+    ['物','我家有甚麼？','*🍱微波爐|🧺洗衣機|❄️冷氣機|🧊雪櫃','我家有微波爐。'],
+    ['事','可以讓我們做甚麼？','🧺清潔衣服|*🍲翻熱食物|❄️感到涼快|💻上網','可以翻熱食物。']],{tx:1}),
+  ...GRP(3,'🏠','我家有洗衣機，｜可以讓我們清潔衣服。',[
+    ['物','我家有甚麼？','🍱微波爐|*🧺洗衣機|❄️冷氣機|💻電腦','我家有洗衣機。'],
+    ['事','可以讓我們做甚麼？','*🧺清潔衣服|🍲翻熱食物|🧊冷藏食物|📺看節目','可以清潔衣服。']],{tx:0}),
+  ...X(GRP(3,'🏠','我家有電腦及平板電腦，｜可以讓我們上網及學習電腦技能。',[
+    ['物','我家有甚麼？（選兩樣中的一樣）','📺電視|*💻電腦|🧊雪櫃|🍱微波爐','我家有電腦及平板電腦。'],
+    ['事','可以讓我們做甚麼？','*🌐上網及學習|🍲翻熱食物|❄️感到涼快|🧺清潔衣服','可以上網及學習電腦技能。']],{tx:0})),
+  ...X(GRP(3,'🏠','我家有雪櫃，｜可以讓我們冷藏食物。',[
+    ['物','我家有甚麼？','🍱微波爐|*🧊雪櫃|❄️冷氣機|📺電視','我家有雪櫃。'],
+    ['事','可以讓我們做甚麼？','🍲翻熱食物|*🧊冷藏食物|🧺清潔衣服|🌐上網','可以冷藏食物。']],{tx:0})),
+  ...X(GRP(3,'🏠','我家有冷氣機，｜可以讓我們感到涼快。',[
+    ['物','我家有甚麼？','🧺洗衣機|📺電視|*❄️冷氣機|💻電腦','我家有冷氣機。'],
+    ['事','可以讓我們感到怎樣？','*😌涼快|😴很睏|🔥很熱|😋肚餓','可以讓我們感到涼快。']],{tx:0})),
+  /* 說一說 */
+  ACT(4,'🗣️','我家有……，可以讓我們……','用課文句式，介紹自己家的家電。',
+   ['老師示範：「我家有雪櫃，可以讓我們冷藏食物。」','同學輪流抽一張家電圖卡，用同一句式說一句。','其他同學專心聽，說出：「他家有甚麼？可以做甚麼？」','說得完整的同學，老師加分。'],
+   6,{timer:360,mat:'家電圖卡',tip:'初組同學可只說「我家有……」；高組同學要說出完整句子，並加上自己的經驗。'}),
+  TCH(4,'🏅','我會聽家電的聲音和用途','聽聲音、聽用途，就知道是哪一件家電。',
+   '今天，我們聽了家電的聲音，｜也聽了家電的用途。｜回家後，留心聽一聽家裏的聲音。',
+   '可請同學回家後拍一張家電相片，下堂分享。',
+   {cards:[{e:'🔔',t:'聽聲音'},{e:'🧩',t:'聽用途'},{e:'🏠',t:'說一說'}]})
+  ]});
+
+/* ───────────────────────── 第 11 節 聽電器的使用指示 ───────────────────────── */
+LIS.push({ s:11, title:'單元二聆聽②：聽電器的使用指示', sub:'先、然後、最後：翻熱飯盒、洗衣服、開冷氣', ico:'🍱', tx:0,
+  unit:'生活科技面面觀',
+  goals:[
+    {ico:'🔢', zh:'聽出使用電器的步驟：先、然後、最後', en:'Hear the steps for using an appliance'},
+    {ico:'⏱️', zh:'聽清楚時間和數字：一分鐘、三分鐘', en:'Hear times and numbers correctly'},
+    {ico:'🦺', zh:'聽安全指示，分辨應該做和不應該做', en:'Tell safe from unsafe instructions'}],
+  prep:['（活動）微波爐按鍵圖卡或本課件第 15 連堂的微波爐按鍵','（加長版）洗衣機步驟圖卡'],
+  stages:['引起動機','聽步驟','聽時間和數字','安全指示','我來試一試'],
+  strat:[
+    '連結第 15 連堂「微波爐說明書」：說明書的步驟，要聽清楚、按次序做。',
+    '次序線索詞：先、然後、最後；邊聽邊用手指數一數。',
+    '數字和時間：翻熱的時間不同（15 秒、1 分鐘、3 分鐘）；先預告「要留心聽數字」。',
+    '安全指示：用「媽媽說」遊戲（改編自「經理話」），分辨安全和不安全的做法。',
+    '實作：用按鍵圖卡按聽到的次序按一按，連結真實生活。'],
+  items:[
+  TCH(0,'📘','聽指示，用電器','用電器，要聽清楚步驟，按次序做。',
+   '用電器的時候，｜要聽清楚步驟。｜先做甚麼，然後做甚麼，最後做甚麼。',
+   '連結第 15 連堂：說明書會寫出步驟；家人教我們用電器時，也會說出步驟。',
+   {tx:1,cards:[{e:'1️⃣',t:'先'},{e:'2️⃣',t:'然後'},{e:'3️⃣',t:'最後'}]}),
+  /* 步驟 */
+  ORD(1,'🍱','翻熱飯盒：｜先打開微波爐的門，｜然後放入飯盒，｜最後按開始掣。','🚪打開門|🍱放入飯盒|▶️按開始掣','🧊放入雪櫃',{ask:'翻熱飯盒，先做甚麼？然後？最後？'}),
+  CHQ(1,'🧺','洗衣服：｜先把衣服放進洗衣機，｜然後加洗衣粉，｜最後按開始掣。','第一步做甚麼？','🧴加洗衣粉|*👕把衣服放進洗衣機|▶️按開始掣','第一步：把衣服放進洗衣機。'),
+  FUP(1,'第二步做甚麼？','*🧴加洗衣粉|👕晾衣服|📺開電視','然後加洗衣粉。'),
+  CHQ(1,'❄️','開冷氣：｜先關好窗，｜然後拿遙控器，｜按開關掣。','開冷氣前，先做甚麼？','📺開電視|*🪟關好窗|🧊開雪櫃','先關好窗，冷氣才不會走出去。'),
+  ...X([
+  ORD(1,'🧺','洗好衣服：｜先打開洗衣機的門，｜然後拿出衣服，｜最後把衣服晾起來。','🚪打開門|👕拿出衣服|🌞晾衣服','🍱翻熱飯盒',{ask:'洗好衣服後，先做甚麼？然後？最後？'}),
+  ACT(1,'🎭','我說你做：用電器','聽指示，用圖卡做出步驟。',
+   ['老師說一個用電器的指示（例如：先打開門，然後放入飯盒）。','同學聽完，用圖卡排出次序，或用動作做出來。','全班核對次序。','請同學把次序再說一次。'],
+   6,{timer:360,mat:'家電步驟圖卡',tip:'初組同學只需完成第一步；高組同學完成三步並複述。'})
+  ]),
+  CHQ(1,'📺','看電視：｜先拿遙控器，｜然後按開關掣，｜最後選節目。','最後做甚麼？','🎮拿遙控器|🔘按開關掣|*📺選節目','最後選節目。'),
+  ACT(1,'🔘','按鍵實作','聽指示，在微波爐按鍵上按一按。',
+   ['在大電視打開第 15 連堂的微波爐按鍵（或用按鍵圖卡）。','老師說：「先按時間掣，再按開始掣。」','請同學出來，按次序按一按。','全班一起說出步驟。'],
+   6,{timer:360,mat:'微波爐按鍵（課件第 15 連堂）',tip:'初組同學按一個掣；高組同學按兩至三個掣，並說出「先……再……」。'}),
+  /* 時間和數字 */
+  TCH(2,'⏱️','留心聽數字','時間不同，翻熱的結果也不同。',
+   '翻熱不同的食物，時間不一樣。｜翻熱麵包，十五秒。｜翻熱牛奶，一分鐘。｜翻熱飯盒，三分鐘。',
+   '說明書第 6 頁的建議時間。請同學用手指表示「一分鐘」「三分鐘」。',
+   {cards:[{e:'🍞',t:'麵包 15 秒'},{e:'🥛',t:'牛奶 1 分鐘'},{e:'🍱',t:'飯盒 3 分鐘'}]}),
+  CHQ(2,'🥛','媽媽說：｜請你翻熱這杯牛奶，｜翻熱一分鐘。','要翻熱多久？','⏱️十五秒|*⏱️一分鐘|⏱️三分鐘|⏱️十分鐘','翻熱一分鐘。'),
+  CHQ(2,'🍱','爸爸說：｜飯盒放進微波爐，｜翻熱三分鐘。','要翻熱多久？','⏱️一分鐘|⏱️兩分鐘|*⏱️三分鐘|⏱️五分鐘','翻熱三分鐘。'),
+  ...X([
+  CHQ(2,'🍞','哥哥說：｜麵包只需要翻熱二十秒，｜太久會變硬。','要翻熱多久？','*⏱️二十秒|⏱️兩分鐘|⏱️十秒|⏱️二十分鐘','翻熱二十秒。'),
+  FUP(2,'為甚麼不可以翻熱太久？','*🍞麵包會變硬|❄️會太凍|📺電視會壞','翻熱太久，麵包會變硬。')
+  ]),
+  CHQ(2,'🧺','媽媽說：｜洗衣機要洗四十五分鐘，｜洗好了就晾衣服。','洗衣機要洗多久？','⏱️十五分鐘|⏱️三十分鐘|*⏱️四十五分鐘|⏱️一小時','要洗四十五分鐘。'),
+  ...X([
+  CHQ(2,'❄️','爸爸說：｜冷氣機調到二十五度，｜不要調得太凍。','冷氣機要調到幾度？','❄️十六度|❄️二十度|*❄️二十五度|❄️三十度','調到二十五度，不太凍，也可以節省能源。'),
+  ORD(2,'🍞','哥哥說：｜先把麵包放入微波爐，｜然後按時間掣，調二十秒，｜最後按開始掣。','🍞放入麵包|⏱️調二十秒|▶️按開始掣','🥚放入雞蛋',{ask:'按次序排出哥哥說的步驟。'})
+  ]),
+  /* 安全指示 */
+  TCH(3,'🦺','媽媽說遊戲','聽到「媽媽說」，而且做法安全，才做。',
+   '我們玩「媽媽說」。｜聽到媽媽說，而且是安全的做法，｜就做動作。｜不安全的，就不做。',
+   '改編自第 6 節「經理話」。強調兩個條件：有「媽媽說」＋做法安全。',
+   {cards:[{e:'👍',t:'安全：做'},{e:'✋',t:'不安全：不做'}]}),
+  BOS(3,'媽媽說：保持手乾，才開關電器。',true,'有「媽媽說」，而且手乾才開關電器是安全的，要做。'),
+  BOS(3,'媽媽說：用濕手開電視。',false,'濕手開電器很危險，不安全，不做。'),
+  BOS(3,'媽媽說：把原隻雞蛋放入微波爐。',false,'原隻雞蛋會爆開，不安全，不做。'),
+  BOS(3,'媽媽說：保持適當的距離看電視。',true,'有「媽媽說」，而且保持距離看電視是好習慣，要做。'),
+  ...X([
+  BOS(3,'把錫紙放入微波爐。',false,'沒有「媽媽說」，而且錫紙不可以放入微波爐，不做。'),
+  BOS(3,'媽媽說：天氣稍涼，不開冷氣機。',true,'有「媽媽說」，而且可以節省能源，要做。')
+  ]),
+  ...X([
+  BOS(3,'媽媽說：看電視時，坐在沙發上，保持距離。',true,'有「媽媽說」，而且保持距離是好習慣，要做。'),
+  BOS(3,'媽媽說：一邊充電，一邊在床上玩平板電腦一整晚。',false,'玩太長時間，也不安全，不做。'),
+  ACT(3,'👩‍🏫','小老師：媽媽說','同學輪流做「媽媽」，說出安全或不安全的指示。',
+   ['請一位同學做「媽媽」，說一句用電器的指示。','其他同學判斷：安全的、有「媽媽說」，就做動作；否則不做。','做錯的同學說出原因。','輪流三至四位同學做「媽媽」。'],
+   8,{timer:480,tip:'可預備指示卡給初組同學讀出；高組同學自己想指示，並說出理由。'})
+  ]),
+  /* 試一試 */
+  ORD(4,'🍱','媽媽說：｜先拿飯盒，｜然後放入微波爐，｜再按時間掣，｜最後按開始掣。','🍱拿飯盒|🚪放入微波爐|⏱️按時間掣|▶️按開始掣','🧊放入雪櫃',{ask:'請按次序排出四個步驟。',tip:'初組完成首兩步即可；高組要全部排好並複述。'}),
+  TCH(4,'🏅','我會聽電器的使用指示','聽次序、聽數字、聽安全。',
+   '今天，我們學會了聽使用電器的指示。｜聽次序，聽數字，聽安全。｜不明白，就問。',
+   '回家後，請家人教自己用一件電器，並把步驟說給家人聽。',
+   {cards:[{e:'🔢',t:'聽次序'},{e:'⏱️',t:'聽數字'},{e:'🦺',t:'聽安全'}]})
+  ]});
+
+/* ───────────────────────── 第 12 節 出外聽廣播 ───────────────────────── */
+LIS.push({ s:12, title:'單元二聆聽③：出外聽廣播', sub:'超級市場、便利店、巴士和港鐵的廣播', ico:'🚌', tx:0,
+  unit:'生活科技面面觀',
+  goals:[
+    {ico:'👨‍👩‍👧', zh:'聽句子，說出誰去哪裏做甚麼', en:'Hear who goes where to do what'},
+    {ico:'📢', zh:'聽懂超級市場和便利店的廣播', en:'Understand shop announcements'},
+    {ico:'🚌', zh:'聽懂巴士和港鐵的報站廣播', en:'Understand bus and MTR announcements'}],
+  prep:['（活動）八達通（或仿製卡）','（加長版）巴士站牌圖片'],
+  stages:['引起動機','誰去哪裏','商店廣播','交通廣播','我來試一試'],
+  strat:[
+    '連結第 8–10 連堂：出外用八達通，生活很方便；先溫習「人、地、事」。',
+    '時人地事：用課文句子（媽媽去超級市場買菜……）練習抓重點。',
+    '商店廣播：先聽「叫誰」，再聽重點（特價、關門時間、付款）。',
+    '交通廣播：「下一站」「請準備下車」是關鍵詞；廣播只說一次，要專心。',
+    '實作：模擬乘巴士，聽到報站就按鐘。'],
+  items:[
+  TCH(0,'💳','出外的聲音','出外時，要留心聽廣播。',
+   '出外時，科技令我們的生活很方便。｜用八達通付款，會「嘟」一聲。｜在商店和巴士上，都會聽到廣播。',
+   '示範八達通「嘟」一聲（可播放嗶聲）；請同學說說在哪裏聽過廣播。',
+   {cards:[{e:'💳',t:'八達通',b:[1318]},{e:'🏪',t:'商店廣播'},{e:'🚌',t:'巴士廣播'}]}),
+  CHQ(0,'💳','','聽一聽，這是甚麼聲音？','📺電視|*💳八達通付款|🍱微波爐','八達通付款成功，會「嘟」一聲。',{beep:BP([1318],.35)}),
+  /* 誰去哪裏 */
+  ...SENT(1,'🛒','媽媽去超級市場，｜使用八達通買菜。',[
+    '🕗早上|*❓沒有說|🌙晚上|🕛中午',
+    '*👩媽媽|👨爸爸|👦哥哥|👧妹妹',
+    '🏪便利店|*🛒超級市場|🍔快餐店|🚌巴士站',
+    '📰買報紙|*🥬買菜|🍔吃午餐|🚌乘搭巴士'],
+    ['是甚麼時候？','是誰？','去哪裏？','做甚麼？'],{tx:1,tip:'這句沒有說時間，選「沒有說」。提醒同學：不是每一句都有四個重點。'}),
+  ...GRP(1,'🏪','爸爸去便利店，｜使用八達通買報紙。',[
+    ['人','是誰？','👩媽媽|*👨爸爸|👦哥哥|👧妹妹','是爸爸。'],
+    ['地','去哪裏？','*🏪便利店|🛒超級市場|🍔快餐店|🏫學校','去便利店。'],
+    ['事','做甚麼？','*📰買報紙|🥬買菜|🍔吃午餐|🚌上班','買報紙。']],{tx:0}),
+  ...X(GRP(1,'🍔','妹妹使用八達通，｜到快餐店吃午餐。',[
+    ['人','是誰？','👩媽媽|👨爸爸|👦哥哥|*👧妹妹','是妹妹。'],
+    ['地','去哪裏？','🏪便利店|🛒超級市場|*🍔快餐店|🚌巴士站','去快餐店。'],
+    ['事','做甚麼？','📰買報紙|🥬買菜|*🍔吃午餐|🚌乘搭巴士','吃午餐。']],{tx:0})),
+  ...X(GRP(1,'🚌','哥哥使用八達通，｜乘搭巴士上班。',[
+    ['人','是誰？','👩媽媽|👨爸爸|*👦哥哥|👧妹妹','是哥哥。'],
+    ['事','哥哥怎樣去上班？','🚶走路|*🚌乘搭巴士|🚕坐的士|🚲踏單車','乘搭巴士上班。'],
+    ['物','哥哥用甚麼付款？','💵現金|*💳八達通|🪙硬幣','用八達通付款。']],{tx:0})),
+  ACT(1,'💳','八達通拍卡遊戲','聽到地方名稱，用八達通「拍卡」。',
+   ['老師說一句話：「我去便利店買報紙。」','同學聽到「便利店」等地方名稱，就用仿製八達通拍一拍桌面：嘟！','老師說不用八達通的地方（例如：學校課室），同學就不拍卡。','請同學說出：「我用八達通在……付款。」'],
+   5,{timer:300,mat:'仿製八達通',tip:'這是練習聽關鍵詞；初組同學只需聽一個地方。'}),
+  /* 商店廣播 */
+  TCH(2,'📢','商店的廣播','先聽叫誰，再聽重點。',
+   '在商店，會聽到廣播。｜先聽：各位顧客請注意。｜再聽重點：甚麼東西，甚麼時間，做甚麼。',
+   '連結第 7 節「廣播和通知」。廣播只說一次，要專心聽。'),
+  ...GRP(2,'🛒','各位顧客請注意：｜今日蘋果特價，｜十蚊三個。',[
+    ['物','甚麼東西特價？','🍌香蕉|*🍎蘋果|🥛牛奶|🍞麵包','是蘋果。'],
+    ['量','十蚊有幾個？','兩個|*三個|四個|五個','十蚊三個。']],{tx:0}),
+  ...GRP(2,'🏪','各位顧客請注意：｜本店會在十點關門，｜請盡快到收銀處付款。',[
+    ['時','幾點關門？','🕘九點|*🕙十點|🕚十一點|🕛十二點','十點關門。'],
+    ['事','顧客要做甚麼？','🏃馬上離開|*💳到收銀處付款|🛒再買多些','到收銀處付款，可以用八達通。']],{tx:0}),
+  ...X([
+  CHQ(2,'🍔','各位顧客請注意：｜午餐套餐已經準備好，｜請到櫃位取餐。','顧客要去哪裏？','🚪門口|*🍔櫃位|🚻洗手間|🪑座位','到櫃位取餐。'),
+  CHQ(2,'🛒','各位顧客請注意：｜一號收銀處暫停服務，｜請到二號收銀處付款。','要到哪一個收銀處？','1️⃣一號|*2️⃣二號|3️⃣三號|4️⃣四號','請到二號收銀處付款。'),
+  ACT(2,'🛍️','超級市場購物遊戲','聽廣播，買東西，用八達通付款。',
+   ['在課室設「超級市場」：放幾件貨品（或圖卡），標上價錢。','老師扮廣播：「各位顧客請注意：今日牛奶特價。」','同學聽完，去買廣播提到的貨品，到「收銀處」拍卡付款。','請同學說出：「我買了……，用八達通付款。」'],
+   8,{timer:480,mat:'貨品或圖卡、仿製八達通',tip:'初組同學買一件；高組同學聽兩件特價貨品，並說出價錢。'})
+  ]),
+  /* 交通廣播 */
+  TCH(3,'🚌','交通的廣播','聽到「下一站」，就要準備。',
+   '乘搭巴士和港鐵，｜會聽到報站廣播。｜聽到：下一站，就要準備下車。',
+   '示範按鐘的動作；提醒同學：聽到自己要去的站名，才按鐘。'),
+  CHQ(3,'🚌','下一站：學校。｜要下車的乘客，請按鐘。','下一站是哪裏？','🛒超級市場|*🏫學校|🏥醫院|🏠家','下一站是學校。'),
+  FUP(3,'你要在學校下車，應該怎樣做？','😴繼續睡|*🔔按鐘|📱玩手機','要按鐘，司機才知道有人下車。'),
+  CHQ(3,'🚇','各位乘客請注意：｜列車即將到達旺角站，｜請小心月台空隙。','列車快到哪一個站？','🚉沙田|*🚉旺角|🚉中環|🚉屯門','快到旺角站。'),
+  ...X([
+  FUP(3,'下車時，要小心甚麼？','*⚠️月台空隙|☔下雨|🔔按鐘','要小心月台空隙。'),
+  ACT(3,'🎭','模擬乘巴士','聽報站，到站就按鐘。',
+   ['排好椅子當巴士座位；老師當司機，報站名。','每位同學拿一張「目的地」卡。','聽到自己的站名，就舉手（按鐘），說：「我要下車。」','用八達通（仿製卡）「拍卡」上車：嘟！'],
+   8,{timer:480,mat:'椅子、目的地卡、仿製八達通',tip:'初組同學可只聽一個站名；高組同學要記住兩個站，並說出「我在……下車」。'})
+  ]),
+  CHQ(3,'🚌','下一站：超級市場。｜要下車的乘客，請按鐘。','媽媽要去買菜，她要怎樣做？','😴繼續坐|*🔔按鐘下車|📱打電話','媽媽要去超級市場買菜，聽到「下一站：超級市場」就按鐘。'),
+  ...X([
+  CHQ(3,'🚇','各位乘客請注意：｜往中環的列車，｜將會在三分鐘後到達。','列車多久後到達？','⏰一分鐘|⏰兩分鐘|*⏰三分鐘|⏰五分鐘','三分鐘後到達。')
+  ]),
+  /* 試一試 */
+  MUL(4,'💳','','哪些地方可以用八達通？','*🛒超級市場|*🏪便利店|*🚌巴士|🏫學校課室','超級市場、便利店、巴士都可以用八達通，很方便。'),
+  TCH(4,'🏅','我會聽出外的廣播','先聽叫誰，再聽重點，聽到「下一站」就準備。',
+   '今天，我們聽了商店和交通的廣播。｜出外時，要專心聽廣播。',
+   '請同學下次乘車時，留心聽報站廣播，下堂分享。',
+   {cards:[{e:'🛒',t:'商店廣播'},{e:'🚌',t:'巴士報站'},{e:'🚇',t:'港鐵廣播'}]})
+  ]});
+
+/* ───────────────────────── 第 13 節 聽提醒：安全、節能和繳費 ───────────────────────── */
+LIS.push({ s:13, title:'單元二聆聽④：聽提醒——安全、節能和繳費', sub:'聽家人的提醒、聽電話留言的數字和日期', ico:'💡', tx:0,
+  unit:'生活科技面面觀',
+  goals:[
+    {ico:'🦺', zh:'聽懂使用科技產品的安全提醒', en:'Understand safety reminders'},
+    {ico:'🌱', zh:'聽懂節省能源的提醒，知道要怎樣做', en:'Understand energy-saving reminders'},
+    {ico:'💰', zh:'聽出電費的金額和最後繳費日期', en:'Hear the bill amount and the due date'}],
+  prep:['（活動）第 16 連堂的模擬電費單（可在大電視打開）','（加長版）便條紙和筆'],
+  stages:['引起動機','安全提醒','節能提醒','聽數字和日期','綜合挑戰'],
+  strat:[
+    '連結第 11–14 連堂：安全、節能、保持距離、節制；家人的提醒常常用「不要」「不宜」。',
+    '否定詞：聽到「不要」「不宜」「不開」，表示不應該做；先聽否定詞，再聽做甚麼。',
+    '節能：「天氣稍涼，可以不開冷氣機」；連結電費單上的節能小貼士。',
+    '數字和日期：電話留言提到金額和日期，邊聽邊記下（手指數、寫便條）。',
+    '綜合：把提醒和繳費放進一個家庭情景，請同學複述。'],
+  items:[
+  TCH(0,'💡','家人的提醒','聽家人的提醒，用電器更安全、更節省。',
+   '家人常常提醒我們。｜不要用濕手開電器。｜不宜太長時間看電視。｜天氣稍涼，可以不開冷氣機。',
+   '請同學分享：家人提醒過你甚麼？強調「不要」「不宜」是否定詞。',
+   {tx:1,cards:[{e:'🚫',t:'不要'},{e:'⛔',t:'不宜'},{e:'❄️',t:'不開'}]}),
+  /* 安全 */
+  CHQ(1,'📺','媽媽說：｜你已經看了兩小時電視，｜不宜再看了，休息一下吧。','媽媽叫你怎樣做？','📺繼續看電視|*😌休息一下|🎮玩電腦','媽媽說「不宜再看」，叫你休息一下。'),
+  CHQ(1,'💻','爸爸說：｜用平板電腦時，｜眼睛要和螢幕保持距離。','爸爸提醒你甚麼？','*📏保持距離|🤳貼近螢幕|🌙關燈看','眼睛要和螢幕保持適當的距離。'),
+  CHQ(1,'🔌','哥哥說：｜你的手濕了，｜不要開電飯煲，先抹乾手。','哥哥叫你先做甚麼？','🔌馬上開電飯煲|*🧻先抹乾手|🚿再洗手','先抹乾手，保持手乾才開關電器。'),
+  ...X([
+  CHQ(1,'🛒','妹妹說：｜我想買很多零食。｜媽媽說：購物須節制，只買需要的。','媽媽的意思是甚麼？','*🛍️只買需要的|🛒買很多很多|🙅甚麼都不買','購物須節制：只買需要的東西。')
+  ]),
+  ACT(1,'🕵️','安全小偵探','聽家中的情景，找出不安全的地方。',
+   ['老師說一個家中情景，例如：「弟弟濕手開電視，又坐得很近看。」','同學聽完，說出不安全的地方（濕手、坐得太近）。','再說出正確做法：「保持手乾」「保持距離」。','答對的組別得一分。'],
+   6,{timer:360,tip:'情景可以有兩個不安全的地方，訓練同學聽出所有重點。'}),
+  ...X([
+  BOS(1,'媽媽說：手乾了，才開關電器。',true,'有「媽媽說」，又是安全的做法，要做。'),
+  BOS(1,'媽媽說：看電視時，坐得越近越好。',false,'坐得太近對眼睛不好，不做。'),
+  BOS(1,'媽媽說：用完電腦，記得關機。',true,'有「媽媽說」，而且可以節省能源，要做。'),
+  BOS(1,'把飯盒連錫紙放入微波爐。',false,'沒有「媽媽說」，而且錫紙不可以放入微波爐，不做。')
+  ]),
+  /* 節能 */
+  CHQ(2,'❄️','今天天氣稍涼。｜爸爸說：不開冷氣機，打開窗就可以了。','爸爸叫你怎樣做？','❄️開冷氣機|*🪟打開窗，不開冷氣|🔥開暖爐','天氣稍涼，不開冷氣機，可以節省能源。'),
+  MUL(2,'🌱','','哪些做法可以節省能源？','*💡離開房間關燈|*❄️天氣稍涼不開冷氣|📺沒有人看也開着電視|*🔌用完電器關掉','關燈、不開冷氣、用完關掉電器，都可以節省能源。'),
+  ...X([
+  CHQ(2,'🧊','媽媽說：｜雪櫃門不要開太久，｜拿完食物要馬上關門。','為甚麼要馬上關雪櫃門？','*🌱節省能源|🍎食物會變多|📺看電視','馬上關門，雪櫃才不會浪費電。')
+  ]),
+  CHQ(2,'🌞','今天很熱。｜爸爸說：開冷氣機，但是不要調得太凍，｜調到二十五度就可以。','爸爸叫你調到幾度？','❄️十八度|*❄️二十五度|❄️二十度|❄️三十度','調到二十五度，舒適又節省能源。'),
+  ...X([
+  ACT(2,'🌱','節能小組','小組想出節省能源的方法。',
+   ['全班分成兩至三組。','老師說一個家中情景（例如：「房間沒有人，燈和電視都開着。」）。','各組討論：可以怎樣節省能源？派代表說出來。','老師把好方法寫在白板上，全班一起讀。'],
+   8,{timer:480,tip:'連結電費單上的「節能小貼士」；提醒節省能源也可以節省電費。'})
+  ]),
+  /* 數字和日期 */
+  TCH(3,'💰','聽電費的電話留言','留言裏有金額和日期，要記下來。',
+   '有時候，電力公司會打電話提醒我們交電費。｜我們要記下：要交多少錢，和最後繳費日期。',
+   '在大電視打開第 16 連堂的模擬電費單，指出「應繳總額」和「最後繳費日期」的位置。',
+   {cards:[{e:'💰',t:'要交多少錢'},{e:'📅',t:'最後繳費日期'}]}),
+  ...GRP(3,'📞','你好，這裏是安心電力公司。｜你這一期的電費是四百一十二元五角，｜最後繳費日期是十月二十六日。',[
+    ['量','要交多少錢？','$214.50|*$412.50|$421.50|$412.00','四百一十二元五角，即 $412.50。'],
+    ['時','最後繳費日期是哪一天？','📅十月十六日|*📅十月二十六日|📅十一月二十六日|📅十月六日','十月二十六日。']],{tx:0,gap:500,tip:'數字部分可重播；請同學邊聽邊寫下金額。'}),
+  CHQ(3,'🏪','媽媽說：｜我今天下午去便利店交電費。','媽媽去哪裏交電費？','🛒超級市場|*🏪便利店|🏫學校|🍔快餐店','媽媽去便利店交電費。'),
+  ...X(GRP(3,'🚰','水費單說：｜應繳總額三百九十六元八角，｜九月十三日或之前繳付。',[
+    ['量','要交多少水費？','$369.80|*$396.80|$396.08|$480.00','三百九十六元八角，即 $396.80。'],
+    ['時','最遲哪一天交？','*📅九月十三日|📅九月三十日|📅十月十三日|📅八月二十日','九月十三日或之前。']],{tx:0})),
+  ACT(3,'📝','寫電費便條','聽電費留言，寫下金額和日期。',
+   ['每人拿一張便條紙，畫兩格：「要交多少錢」「最後繳費日期」。','老師讀一段電費留言（可重播一次）。','同學邊聽邊寫，寫完和旁邊同學核對。','請一位同學把便條讀給全班聽。'],
+   6,{timer:360,mat:'便條紙、筆',tip:'初組同學可只寫金額或圈出日期；高組同學兩樣都要寫。'}),
+  ...X([
+  ...GRP(3,'📞','你好，這裏是安心電力公司。｜你上一期的電費是三百二十元，｜請在十一月五日之前，到便利店繳交。',[
+    ['量','要交多少錢？','$230|*$320|$302|$3200','三百二十元，即 $320。'],
+    ['時','要在哪一天之前繳交？','📅十月五日|*📅十一月五日|📅十一月十五日|📅五月十一日','十一月五日之前。'],
+    ['地','去哪裏繳交？','🏫學校|🛒超級市場|*🏪便利店|🍔快餐店','到便利店繳交。']],{tx:0}),
+  ACT(3,'🎭','家庭情景角色扮演','扮演一家人：一人提醒，一人照做。',
+   ['兩至三人一組：一人做「媽媽」或「爸爸」，其他人做子女。','「媽媽」說一句提醒（安全、節能或繳費）。','子女聽完，把提醒說一遍，再做出來。','交換角色再做一次。'],
+   8,{timer:480,tip:'提醒同學用「我聽到……」複述（聆聽五步曲的「說一說」）。'})
+  ]),
+  /* 綜合 */
+  ORD(4,'🏠','晚上，媽媽說：｜先關掉電視，｜然後把手抹乾，｜最後關燈去睡覺。','📺關掉電視|🧻把手抹乾|💡關燈睡覺','❄️開冷氣機',{ask:'媽媽說的三件事，按次序排出來。'}),
+  TCH(4,'🎓','生活科技小專家','聽提醒，安全用電器，節省能源，準時交費。',
+   '今天，我們聽了安全、節能和繳費的提醒。｜你們是生活科技小專家！',
+   '單元二聆聽完成。可按「🖨 列印」為全班列印證書。',
+   {cert:1,cards:[{e:'🦺',t:'安全'},{e:'🌱',t:'節能'},{e:'💰',t:'繳費'}]})
+  ]});
+
 /* 整理：預設答案說明；同一段話的追問沿用上一項的 say、scene；加上序號 */
 LIS.forEach(S=>{
   let last = '', lastScene = '';
@@ -6467,7 +6887,8 @@ const EXPLAIN2 = ({
     恰:'hap1',鬆:'sung1',擇:'zaak6',判:'pun3',斷:'dyun6',配:'pui3',程:'cing4',拆:'caak3',尾:'mei5',構:'gau3',素:'sou3',族:'zuk6',
     筒:'tung4',粵:'jyut6',拼:'ping3',聞:'man4',劇:'kek6',逗:'dau6',德:'dak1',湯:'tong1',襪:'mat6',拉:'laai1',火:'fo2',箭:'zin3',
     晾:'long6',吹:'ceoi1',炎:'jim4',厚:'hau5',況:'fong3',浪:'long6',雞:'gai1',聯:'lyun4',絡:'lok3',硬:'ngaang6',幣:'bai6',澡:'cou2',
-    雜:'zaap6',誌:'zi3',速:'cuk1',髒:'zong1',否:'fau2',費:'fai3',替:'tai3',陣:'zan6',碌:'luk1'};
+    雜:'zaap6',誌:'zi3',速:'cuk1',髒:'zong1',否:'fau2',費:'fai3',替:'tai3',陣:'zan6',碌:'luk1',
+    虛:'heoi1',擬:'ji5',鍵:'gin6',繳:'giu2',冊:'caak3',編:'pin1',寄:'gei3',署:'cyu5',封:'fung1',止:'zi2',錫:'sek3',屬:'suk6',建:'gin3',議:'ji5',驟:'zaau6',烹:'paang1',額:'ngaak6',刷:'caat3',牙:'ngaa4',置:'zi3',框:'kwaang1',限:'haan6',幸:'hang6',福:'fuk1',屏:'ping4',闊:'fut3',均:'gwan1',址:'zi2',版:'baan2',粒:'nap1',慣:'gwaan3',根:'gan1',據:'geoi3',途:'tou4',祖:'zou2',颱:'toi4',鄉:'hoeng1',儀:'ji4',砌:'cai3',幅:'fuk1',王:'wong4',沿:'jyun4',擎:'king4',描:'miu4',攝:'sip3',立:'laap6',概:'koi3',念:'nim6',嗶:'bat1',叮:'ding1',索:'sok3',抓:'zaa1',遷:'cin1',移:'ji4',追:'zeoi1',嘟:'dou1',嗡:'jung1',官:'gun1',降:'gong3',遙:'jiu4',控:'hung3',且:'ce2',首:'sau2',盡:'zeon6',隙:'kwik1',環:'waan4',座:'zo6',綜:'zung3',吧:'baa6',憶:'jik1',串:'cyun3',銷:'siu1',睏:'fan3',踏:'daap6',偵:'zing1',探:'taam3',越:'jyut6',土:'tou2',盤:'pun4',統:'tung2',狀:'zong6',齊:'cai4',際:'zai3',底:'dai2',補:'bou2',層:'cang4',切:'cit3',尚:'soeng6',滑:'waat6',頓:'deon6',韻:'wan5',揭:'kit3',曉:'hiu2',瀏:'lau4',覽:'laam5',爍:'soek3',煲:'bou1',證:'zing3'};
   for(const k in J2) if(!JYUT[k]) JYUT[k] = J2[k];
 })();
 
@@ -6900,6 +7321,189 @@ QA2[14] = [
 ];
 
 /* ================================================================
+   單元二　生活語文（第 15、16 連堂）：微波爐說明書、電費單和水費單
+   說明書和水費單用老師工作紙內的原圖；電費單是虛構公司的教學用模擬帳單。
+   ================================================================ */
+Object.assign(IMG, {
+  '2:m1':'u2/m1.jpg', '2:m2':'u2/m2.jpg', '2:m3':'u2/m3.jpg', '2:wb':'u2/wb.jpg',
+  '2:說明書':'u2/m1.jpg', '2:牌子':'u2/brand.jpg', '2:型號':'u2/model.jpg', '2:按鍵':'u2/keys.jpg',
+  '2:電費單':'u2/ebill.jpg', '2:水費單':'u2/wb.jpg', '2:繳交':'u2/pay.jpg', '2:最後繳費日期':'u2/due.jpg'
+});
+IT.sp = (q,doc,ans,o)=>({k:'spot', q, doc, ans, ...o});
+LESSONS2.push(
+ {no:15, title:'生活語文：微波爐說明書', sentence:'使用微波爐前，我們要先看說明書，認識牌子、型號和按鍵。',
+  pages:['m1','m3'], keys:['說明書','牌子','型號','按鍵'],
+  vocab:[V2('說明書','Instruction manual'), V2('牌子','Brand'), V2('型號','Model number'), V2('按鍵','Buttons')]},
+ {no:16, title:'生活語文：電費單和水費單', sentence:'電費單和水費單告訴我們要繳交多少錢，和最後繳費日期。',
+  pages:['wb'], doc:['ebill','wbill'], keys:['電費單','水費單','繳交','最後繳費日期'],
+  vocab:[V2('電費單','Electricity bill'), V2('水費單','Water bill'), V2('繳交','Pay (a bill)'), V2('最後繳費日期','Payment due date')]}
+);
+LESSONS2.forEach(l=>{ l.page = '2:'+l.pages[0]; });
+Object.assign(EXPLAIN2, {
+  '說明書':['📘','教我們怎樣正確使用電器的小冊子。','A booklet that tells us how to use an appliance.'],
+  '牌子':['🏷️','產品是哪一間公司做的，例如 Panasonic。','The company that makes the product.'],
+  '型號':['🔢','產品的編號，同一個牌子有很多型號。','The model number of a product.'],
+  '按鍵':['🔘','電器上用手按的掣。','The buttons we press on an appliance.'],
+  '電費單':['⚡','電力公司寄來的單，告訴我們用了多少電、要付多少錢。','A bill telling us how much electricity we used and must pay.'],
+  '水費單':['🚰','水務署寄來的單，告訴我們用了多少水、要付多少錢。','A bill telling us how much water we used and must pay.'],
+  '繳交':['💰','把錢交給別人，例如交電費。','To pay, e.g. pay the electricity bill.'],
+  '最後繳費日期':['📅','最遲要在這一天或之前交錢。','The last day to pay the bill.']
+});
+
+/* ───────────── 第 15 連堂　微波爐說明書 ───────────── */
+SENT2[15] = [
+  IT.th('say',{tag:'認識說明書', q:'甚麼是說明書？', img:'m1',
+    lines:['說明書教我們怎樣正確使用電器。','用新電器之前，要先看說明書。']}),
+  IT.th('doc',{tag:'說明書封面', q:'說明書的封面有甚麼？', doc:'manual1',
+    note:'封面有：產品名稱（微波爐）、產品圖片、牌子、型號。'}),
+  IT.sp('請按一按：「牌子」寫在哪裏？','manual1','brand',{tag:'找資料', qe:'Tap where the brand is.', near:'title'}),
+  IT.sp('請按一按：「型號」寫在哪裏？','manual1','model',{tag:'找資料', qe:'Tap where the model number is.', near:'brand'}),
+  IT.th('doc',{tag:'認識按鍵', q:'微波爐的按鍵', doc:'mw',
+    note:'時間掣：調較要煮多久。　開始掣：開始加熱。　停止掣：停下來。　自動翻熱掣：自動翻熱飯盒。'}),
+  IT.sp('請按「開始」掣。','mw','start',{tag:'按鍵', qe:'Press the START button.', say:'請按開始掣', near:'stop', dispOk:'▶ 開始'}),
+  IT.sp('翻熱飯盒：先按「時間」掣，再按「開始」掣。','mw',null,{seq:['time','start'], tag:'按次序', qe:'Press TIME, then START.',
+    say:'先按時間掣，再按開始掣', disp:'3:00', dispOk:'3:00 ▶'}),
+  IT.so([['a','可以放入微波爐','✅'],['b','不可以放入微波爐','❌']],
+    [S_('飯盒','a',0,'🍱'),S_('原隻雞蛋','b',0,'🥚'),S_('麵包','a',0,'🍞'),S_('錫紙包裝食物','b',0,'🥡'),S_('一杯牛奶','a',0,'🥛'),S_('金屬碗','b',0,'🥣')],
+    {tag:'安全', q:'分一分：哪些可以放入微波爐？', qe:'Sort: safe or not safe in a microwave?', cnt:{1:6,2:4,3:2},
+     hint:{img:'m2', t:'說明書寫着：原隻雞蛋、錫紙或金屬包裝的食物，不可以放入微波爐。'}}),
+  IT.tk('你家的微波爐是甚麼牌子？你會用它翻熱甚麼？',{tag:'說話', tip:'可以用「我家的微波爐是……牌子」開頭。'})
+];
+QA2[15] = [
+  IT.ch('這是甚麼產品的說明書？','微波爐',['冷氣機','電腦'],{qe:'What product is this manual for?', img:'m1', po:1,
+    hint:{img:'m1', t:'封面寫着「微波爐操作說明書」。'}}),
+  IT.ch('這部微波爐是甚麼牌子？','Panasonic',['Apple','Sony'],{qe:'What is the brand?', img:'牌子', hint:{img:'牌子', t:'看「牌子：」後面。'}}),
+  IT.ch('這部微波爐的型號是甚麼？','WN-S654WF',['AB-123','MW-2026'],{qe:'What is the model number?', img:'型號', hint:{img:'型號', t:'看「型號：」後面。'}}),
+  IT.sp('想停下來，要按哪一個掣？請按一按。','mw','stop',{qe:'Which button stops the microwave?', near:'start', dispOk:'⏹'}),
+  IT.ch('翻熱麵包，建議要多少時間？','15-20 秒',['1 分鐘','3-4 分鐘'],{qe:'How long to reheat bread?', img:'m2',
+    hint:{img:'m2', t:'說明書：翻熱麵包 15-20 秒；翻熱冷飲品 1 分鐘；翻熱飯盒 3-4 分鐘。'}}),
+  IT.tf('原隻雞蛋可以放入微波爐。',false,{qe:'A whole egg can go in the microwave.', em:'🥚', hint:{t:'原隻雞蛋會爆開，不可以放入微波爐。'}}),
+  IT.od(['打開門','放入食物','關上門','按時間掣','按開始掣'],{q:'排一排：使用微波爐的步驟', qe:'Put the steps in order', tag:'步驟'}),
+  IT.mu('哪些不可以放入微波爐？',[O_('原隻雞蛋',1,0,'🥚'),O_('錫紙包裝食物',1,0,'🥡'),O_('金屬碗',1,0,'🥣'),O_('麵包',0,0,'🍞'),O_('飯盒',0,0,'🍱')],
+    {qe:'Which ones must NOT go in a microwave?', hint:{img:'m2', t:'看說明書「不可烹調食品」。'}}),
+  IT.tk('用微波爐要注意甚麼？',{tag:'說話', tip:'引導學生說：保持手乾、不放金屬、等食物涼一點才吃。'})
+];
+
+/* ───────────── 第 16 連堂　電費單和水費單 ───────────── */
+SENT2[16] = [
+  IT.th('say',{tag:'認識電費單', q:'甚麼是電費單？', img:'電費單',
+    lines:['我們用電，要付錢。','電力公司會寄電費單來，告訴我們要繳交多少錢。']}),
+  IT.th('doc',{tag:'電費單', q:'電費單上有甚麼？', doc:'ebill',
+    note:'最重要的兩樣：應繳總額（要交多少錢）和最後繳費日期（最遲哪一天交）。'}),
+  IT.sp('「應繳總額」在哪裏？請按一按。','ebill','total',{tag:'找資料', qe:'Where is the total amount?', near:'usage'}),
+  IT.sp('「最後繳費日期」在哪裏？請按一按。','ebill','due',{tag:'找資料', qe:'Where is the due date?', near:'info'}),
+  IT.ch('這張電費單要繳交多少錢？','HK$ 412.50',['HK$ 320','HK$ 26'],{tag:'讀電費單', qe:'How much do we need to pay?', img:'電費單',
+    hint:{img:'繳交', t:'看「應繳總額」。'}}),
+  IT.ch('最遲哪一天要繳交電費？','2026年10月26日',['2026年10月5日','2026年8月5日'],{tag:'讀電費單', qe:'What is the due date?',
+    hint:{img:'最後繳費日期', t:'看「最後繳費日期」。'}}),
+  IT.th('doc',{tag:'水費單', q:'水費單', doc:'wbill', note:'水費單由水務署寄來。左上角有水務署的標誌。'}),
+  IT.so([['a','用電（電費單）','⚡'],['b','用水（水費單）','🚰']],
+    [S_('電視','a','電視'),S_('洗澡','b',0,'🚿'),S_('冷氣機','a','冷氣機'),S_('洗手','b',0,'🧼'),S_('雪櫃','a','雪櫃'),S_('刷牙','b',0,'🪥')],
+    {tag:'分類', q:'分一分：這是用電，還是用水？', qe:'Sort: electricity or water?', cnt:{1:6,2:4,3:2}}),
+  IT.tk('怎樣可以節省電費？說給大家聽。',{tag:'說話', tip:'連結第 12 連堂：天氣稍涼，可以不開冷氣機。'})
+];
+QA2[16] = [
+  IT.sp('請按一按水務署的標誌。','wbill','logo',{qe:'Tap the Water Supplies Department logo.', near:'chart'}),
+  IT.ch('水費單是誰寄來的？','水務署',['電力公司','學校'],{qe:'Who sends the water bill?', img:'水費單', hint:{img:'水費單', t:'水費單左上角寫着「水務署」。'}}),
+  IT.sp('電費單上，「繳費方法」在哪裏？請按一按。','ebill','pay',{qe:'Where are the ways to pay?', near:'tip'}),
+  IT.mu('可以在哪裏繳交電費？',[O_('便利店',1,0,'🏪'),O_('網上銀行',1,0,'💻'),O_('郵局',1,0,'🏤'),O_('公園',0,0,'🌳'),O_('學校',0,0,'🏫')],
+    {qe:'Where can we pay the electricity bill?', hint:{t:'看電費單的「繳費方法」：便利店、八達通、網上銀行、郵局。'}}),
+  IT.fl('電費單告訴我們要繳交多少＿＿。',[['錢','水','電視']],{qe:'Fill in the blank', hint:{sent:'電費單告訴我們要繳交多少（錢）。'}}),
+  IT.tf('過了最後繳費日期才交錢，也沒有問題。',false,{qe:'Paying after the due date is fine.', em:'📅',
+    hint:{t:'要在最後繳費日期或之前繳交，不可以遲交。'}}),
+  IT.ch('本期用了多少度電？','320 度',['412 度','26 度'],{qe:'How many units of electricity were used?', img:'電費單',
+    hint:{t:'看「本期用電量」。'}}),
+  IT.ch('請寫出：電費單要在（　　　　　　）之前繳交。','最後繳費日期',['帳單日期','生日'],{qe:'Write: pay before the ___.', wr:true,
+    img:'最後繳費日期', hint:{img:'最後繳費日期'}}),
+  IT.tk('你家誰負責繳交電費和水費？在哪裏交？',{tag:'說話', tip:'可以用「我家是……去……交電費」回答。'})
+];
+
+/* ───────────── 第 17 連堂　語文知識總複習（遊戲）　第 18 連堂　單元小測 ───────────── */
+LESSONS2.push(
+ {no:17, mode:'game', title:'語文遊戲', sentence:'全單元語文知識大比拼', pages:['slide1'], keys:[], vocab:[],
+  goals:[{ico:'🎮', zh:'玩語文遊戲，溫習全單元的語文知識', en:'Play language games to review the unit'},
+         {ico:'🧩', zh:'名詞、語素「電」、句式、代詞、形容詞、否定詞', en:'Nouns, morphemes, sentence patterns and more'}]},
+ {no:18, mode:'quiz', title:'單元小測', sentence:'按自己的程度完成小測', pages:['slide17'], keys:[], vocab:[],
+  goals:[{ico:'📝', zh:'完成單元二小測', en:'Finish the Unit 2 quiz'},
+         {ico:'⭐', zh:'第一次就答對，可以得到一粒星', en:'Get a star for each first-try answer'}]}
+);
+LESSONS2.forEach(l=>{ l.page = '2:'+l.pages[0]; });
+
+SENT2[17] = [
+  IT.th('say',{tag:'遊戲規則', q:'語文遊戲大比拼', img:'slide1',
+    lines:['今日一起玩語文遊戲，溫習整個單元。','答對了，就可以得到 $1！']}),
+  IT.so([['a','電器','🔌'],['b','地方','📍'],['c','人物','🧑']],
+    [S_('電視','a','電視'),S_('超級市場','b','超級市場'),S_('媽媽','c','媽媽'),S_('雪櫃','a','雪櫃'),S_('便利店','b','便利店'),S_('哥哥','c','哥哥')],
+    {tag:'名詞', q:'分一分：電器、地方、人物', qe:'Sort: appliances, places, people', cnt:{1:6,2:6,3:3}}),
+  IT.ch('「電」加上「腦」，變成甚麼？','電腦',['電視','電話'],{tag:'語素', qe:'電 + 腦 = ?', po:1, oe:{電話:'📞'}}),
+  IT.mu('選出有「電」字的詞語。',[O_('電視',1,'電視'),O_('電腦',1,'電腦'),O_('電話',1,0,'📞'),O_('雪櫃',0,'雪櫃'),O_('冷氣機',0,'冷氣機')],
+    {tag:'語素', qe:'Choose the words with 電.'}),
+  IT.od(['我家','有','洗衣機','。'],{tag:'句式', q:'排一排：名詞＋有＋名詞', qe:'Make a sentence', img:'洗衣機'}),
+  IT.fl('＿＿只要使用得宜，科技產品便能讓我們生活更舒適。',[['大家','雪櫃','涼快']],{tag:'代詞', qe:'Fill in the pronoun',
+    hint:{sent:'（大家）只要使用得宜，科技產品便能讓我們生活更舒適。'}}),
+  IT.ch('開了冷氣機，我們會感到怎樣？','涼快',['肚餓','下雨'],{tag:'形容詞', qe:'How do we feel with the air-conditioner on?', img:'冷氣機'}),
+  IT.mt([{img:'冷氣機',r:'涼快'},{img:'八達通',r:'方便'},{img:'舒適',r:'舒適'}],{tag:'形容詞', q:'配一配：圖片和形容詞', qe:'Match the pictures with the adjectives'}),
+  IT.tf('「不開冷氣機」的意思是打開冷氣機。',false,{tag:'否定詞', qe:'"Do not switch on" means switch on.', img:'不開',
+    hint:{t:'「不」是否定詞，「不開」就是不要打開。'}}),
+  IT.ch('讀一讀拼音，選出正確的詞語。','說明書',['電費單','雪櫃'],{tag:'粵拼', cue:'syut3 ming4 syu1', say:'說明書', po:1, pe:1}),
+  IT.ch('「媽媽去超級市場買菜。」誰去超級市場？','媽媽',['爸爸','哥哥'],{tag:'人物', qe:'Who goes to the supermarket?', po:1}),
+  IT.ch('「哥哥使用八達通乘搭巴士上班。」哥哥怎樣上班？','乘搭巴士',['吃午餐','買報紙'],{tag:'事情', qe:'How does Brother go to work?', po:1}),
+  IT.sp('搶答：電費單上，「最後繳費日期」在哪裏？','ebill','due',{tag:'生活語文', qe:'Where is the due date?', near:'total'}),
+  IT.od(['保持','手乾','才','開關','產品','。'],{tag:'品德', q:'排一排：使用電器的好習慣', qe:'Make the sentence', img:'手乾'}),
+  IT.tk('今日你最喜歡哪一個遊戲？為甚麼？',{tag:'說話', tip:'鼓勵同學用「我最喜歡……，因為……」回答。'})
+];
+
+/* 單元小測（根據老師的評估卷改編：高組卷、中高組卷、中初組卷） */
+const QUIZ2 = {
+  H:[
+    IT.mt([{img:'妹妹',r:'妹妹'},{img:'快餐店',r:'快餐店'},{img:'吃午餐',r:'吃午餐'}],{q:'配一配：圖片和詞語', qe:'Match the pictures with the words'}),
+    IT.fl('天氣稍＿，可以＿＿冷氣機，以＿省能源。',[['涼','熱','冷'],['不開','打開','買'],['節','關','用']],{qe:'Fill in the blanks'}),
+    IT.fl('保持適當的＿＿觀看產品的＿＿。',[['距離','時間','地方'],['螢幕','門口','開關']],{qe:'Fill in the blanks'}),
+    IT.fl('不宜太＿＿＿使用電視或平板電腦。',[['長時間','短時間','早上']],{qe:'Fill in the blank'}),
+    IT.fl('購物須＿＿。',[['節制','浪費','多買']],{qe:'Fill in the blank'}),
+    IT.ch('以上是甚麼科技產品的說明書？','微波爐',['冷氣機','電腦'],{img:'m1', po:1, qe:'What product is this manual for?'}),
+    IT.ch('看按鍵說明：E 掣叫甚麼？','解凍掣',['開始掣','顯示屏'],{img:'m3', qe:'What is button E called?'}),
+    IT.ch('看按鍵說明：I 掣叫甚麼？','停止／再調校掣',['解凍掣','時計／時鐘掣'],{img:'m3', qe:'What is button I called?'}),
+    IT.ch('微波爐有甚麼用途？','翻熱食物',['清潔衣服','感到涼快'],{img:'微波爐', qe:'What is a microwave oven for?'}),
+    IT.ch('洗衣機有甚麼用途？','清潔衣服',['冷藏食物','上網'],{img:'洗衣機', qe:'What is a washing machine for?'}),
+    IT.ch('冷氣機有甚麼用途？','讓我們感到涼快',['翻熱食物','清潔衣服'],{img:'冷氣機', qe:'What is an air-conditioner for?'}),
+    IT.ch('電腦及平板電腦有甚麼用途？','上網及學習電腦技能',['冷藏食物','翻熱食物'],{img:'平板電腦', qe:'What are computers for?'}),
+    IT.od(['我家','有','雪櫃','。'],{q:'句式：我家有……　排一排', qe:'Make a sentence', img:'雪櫃'}),
+    IT.fl('我有妹妹，我有＿＿。',[['哥哥','電視','涼快']],{qe:'Continue the pattern'})
+  ],
+  M:[
+    IT.ch('看圖，圈出正確的詞語。','媽媽',['媽祖'],{img:'媽媽'}),
+    IT.ch('看圖，圈出正確的詞語。','超級市場',['超級颱風'],{img:'超級市場'}),
+    IT.ch('看圖，圈出正確的詞語。','買菜',['買花'],{img:'買菜'}),
+    IT.ch('看圖，圈出正確的詞語。','洗衣機',['洗衣粉'],{img:'洗衣機'}),
+    IT.ch('看圖，圈出正確的詞語。','清潔衣服',['清潔地板'],{img:'清潔衣服'}),
+    IT.ch('看圖，圈出正確的詞語。','冷氣機',['洗衣機'],{img:'冷氣機'}),
+    IT.ch('看圖，圈出正確的詞語。','涼快',['涼鞋'],{img:'涼快'}),
+    IT.ch('看圖，圈出正確的詞語。','科技發達',['科學方法'],{img:'科技發達'}),
+    IT.ch('看圖，圈出正確的詞語。','家庭',['家鄉'],{img:'家庭'}),
+    IT.ch('看圖，圈出正確的詞語。','科技產品',['科學儀器'],{img:'產品'}),
+    IT.mt([{img:'爸爸',r:'爸爸'},{img:'便利店',r:'便利店'},{img:'買報紙',r:'買報紙'}],{q:'配一配：圖片和詞語', qe:'Match the pictures with the words'}),
+    IT.mt([{img:'妹妹',r:'妹妹'},{img:'快餐店',r:'快餐店'},{img:'吃午餐',r:'吃午餐'}],{q:'配一配：圖片和詞語', qe:'Match the pictures with the words'}),
+    IT.mu('找一找：選出有「電」字的詞語。',[O_('電視',1,'電視'),O_('電腦',1,'電腦'),O_('電筒',1,0,'🔦'),O_('雪櫃',0,'雪櫃'),O_('巴士',0,0,'🚌')],{qe:'Choose the words with 電.'}),
+    IT.od(['雪','櫃'],{q:'砌一砌：看圖砌出詞語', qe:'Build the word', img:'雪櫃'}),
+    IT.od(['電','腦'],{q:'砌一砌：看圖砌出詞語', qe:'Build the word', img:'電腦'}),
+    IT.od(['乘','搭','巴','士'],{q:'砌一砌：看圖砌出詞語', qe:'Build the word', img:'乘搭巴士'})
+  ],
+  C:[
+    IT.ch('這是甚麼？','雪櫃',['電視'],{img:'雪櫃', po:1}),
+    IT.ch('這是甚麼？','冷氣機',['洗衣機'],{img:'冷氣機', po:1}),
+    IT.mt([{img:'電視',r:'電視'},{img:'電腦',r:'電腦'},{img:'雪櫃',r:'雪櫃'}],{q:'配一配：圖片和詞語', qe:'Match the pictures with the words'}),
+    IT.ch('哪一幅圖是「大家」？','大家',['我','他'],{po:1, oe:{我:'🙋',他:'🧍'}, say:'大家'}),
+    IT.tf('這是電視。',true,{img:'電視'}),
+    IT.tf('這是雪櫃。',false,{img:'冷氣機'}),
+    IT.ch('哪一個是科技產品？','電視',['蘋果','椅子'],{po:1, oe:{蘋果:'🍎',椅子:'🪑'}}),
+    IT.ch('哪一個是「口」字？','口',['王','三'],{say:'口'}),
+    IT.ch('哪一個是「王」字？','王',['三','口'],{say:'王'}),
+    IT.ch('哪一個是「三」字？','三',['口','王'],{say:'三'})
+  ]
+};
+
+/* ================================================================
    第二階段：單元二的課堂引擎
    ① 單元感知（課文、問答、詞語按單元切換）
    ② 題目引擎（teach / choice / tf / order / fill / sort / match / multi / talk）
@@ -6909,17 +7513,23 @@ QA2[14] = [
 /* ───────────── ① 單元感知 ───────────── */
 function isU2(){ return curUnit()===2; }
 function lessons(){ return isU2() ? LESSONS2 : LESSONS; }
+const STEPS_GAME = [['hello','① 打招呼'],['notes','② 課堂筆記'],['sent','③ 語文遊戲'],['review','④ 總結算'],['goals','⑤ 課堂總結']];
+const STEPS_QUIZ = [['hello','① 打招呼'],['notes','② 課堂筆記'],['quiz','③ 單元小測'],['review','④ 總結算'],['goals','⑤ 課堂總結']];
+function stepsU2(){ const m = L().mode; return m==='quiz' ? STEPS_QUIZ : m==='game' ? STEPS_GAME : STEPS2; }
 const STEPS2 = [['hello','① 打招呼'],['notes','② 課堂筆記'],['text','③ 課文'],['vocab','④ 字詞'],
-                ['sent','⑤ 句子'],['round','⑥ 寫字＋選字'],['qa','⑦ 問答'],['review','⑧ 總結算'],['goals','⑨ 課堂總結']];
+                ['sent','⑤ 句子'],['round','⑥ 寫字＋選字'],['qa','⑦ 問答'],['ws','⑧ 工作紙'],['review','⑨ 總結算'],['goals','⑩ 課堂總結']];
 function u2Cards(){
-  return LESSONS2.map(l=>({k:l.no, g:NUMZH[l.no], text:l.sentence,
-    tags:[['ok', (SENT2[l.no]||[]).length+' 個句子活動'], ['', (QA2[l.no]||[]).length+' 題問答'], ['', l.keys.length+' 個詞語']],
-    img:IMG[l.vocab[0].img]}));
+  return LESSONS2.map(l=>({k:l.no, g:NUMZH[l.no], text:(l.mode ? l.title+'：' : '')+l.sentence,
+    tags: l.mode==='quiz' ? [['ok','高、中、初三份'], ['', `${QUIZ2.H.length}／${QUIZ2.M.length}／${QUIZ2.C.length} 題`]]
+        : l.mode==='game' ? [['ok', (SENT2[l.no]||[]).length+' 個遊戲'], ['', '全單元複習']]
+        : [['ok', (SENT2[l.no]||[]).length+' 個句子活動'], ['', (QA2[l.no]||[]).length+' 題問答'], ['', l.keys.length+' 個詞語']],
+    img: l.vocab[0] ? IMG[l.vocab[0].img] : IMG[l.page]}));
 }
 UNIT_CARDS[2] = u2Cards;
 
 /* 課文頁：大圖書（有些課只顯示上半／下半） */
 function pageHTML(l){
+  if(l.doc) return `<div class="pgs doc">${l.doc.map(d=>`<div class="pg">${docHTML(d)}</div>`).join('')}</div>`;
   return `<div class="pgs">${(l.pages||[]).map(p=>
     `<div class="pg ${l.crop?'crop-'+l.crop:''}"><img src="${IMG['2:'+p]||''}" alt="課文圖畫"></div>`).join('')}</div>`;
 }
@@ -6930,11 +7540,11 @@ const U2UI = {demo:{}, sel:{}, lists:{}, seen:{}, talked:{}};
 const CNT_OPT = {1:4, 2:3, 3:2};            /* 圈選：高 4、中 3、初 2 */
 function myLv(){ return ROLE==='t' ? 1 : ((stu(ME)||{}).lv||2); }
 function isSentPhase(){ return CTRL.phase==='sent'; }
-function itSet(){ return (ROLE==='t' ? STEP : CTRL.phase)==='qa' ? 'q' : 'x'; }
-function itemsOf(set){ const no = L().no; return ((set==='x' ? SENT2 : QA2)[no]) || []; }
-function itIdx(set){ return set==='x' ? (CTRL.xIdx||0) : (CTRL.qIdx||0); }
+function itSet(){ const p = ROLE==='t' ? STEP : CTRL.phase; return p==='qa' ? 'q' : (p==='quiz' ? 'z' : 'x'); }
+function itemsOf(set){ if(set==='z') return quizItems(); const no = L().no; return ((set==='x' ? SENT2 : QA2)[no]) || []; }
+function itIdx(set){ if(set==='z') return quizIdx(); return set==='x' ? (CTRL.xIdx||0) : (CTRL.qIdx||0); }
 function curItem(set){ set = set || itSet(); return itemsOf(set)[itIdx(set)]; }
-function itKey(set, i){ return (set==='x' ? 'x' : 'q') + i; }
+function itKey(set, i){ return set + i; }
 function recGet(key){ return ROLE==='t' ? U2UI.demo[key] : myAns()[key]; }
 function recPut(key, v){
   if(ROLE==='t') U2UI.demo[key] = v;
@@ -6979,7 +7589,7 @@ function qHead(it){
 
 /* ---- 單一題目：畫面 ---- */
 function iView(it, key){
-  const f = {teach:vTeach, choice:vChoice, tf:vTf, order:vOrder, fill:vFill, sort:vSort, match:vMatch, multi:vMulti, talk:vTalk}[it.k];
+  const f = {teach:vTeach, choice:vChoice, tf:vTf, order:vOrder, fill:vFill, sort:vSort, match:vMatch, multi:vMulti, talk:vTalk, spot:vSpot}[it.k];
   return f ? f(it, key) : '';
 }
 function afterCorrect(it){
@@ -7255,7 +7865,7 @@ function vTalk(it, key){
 /* teach（教學卡）-------------------------------------------------------- */
 function vTeach(it, key){
   const fresh = !U2UI.seen[key]; U2UI.seen[key] = 1;
-  const f = {strips:tcStrips, comp:tcComp, rule:tcRule, jp:tcJp, say:tcSay}[it.t];
+  const f = {strips:tcStrips, comp:tcComp, rule:tcRule, jp:tcJp, say:tcSay, doc:tcDoc}[it.t];
   return `<div class="tcard t-${it.t} ${fresh?'fresh':''}"><div class="it-q">${ruby(it.q||'')}</div>${f?f(it, key):''}
     ${it.note?`<div class="tnote">${ruby(it.note)}</div>`:''}</div>`;
 }
@@ -7311,8 +7921,9 @@ function tcJp(it){
 
 /* ---- 統一入口：按掣 ---- */
 function iAct(op, key, a){
+  if(ROLE!=='t' && String(key)[0]==='z' && quizDone(recGet(key))) return;   /* 小測：做完的題目鎖住 */
   ({choice:iChoice, tf:iTf, order:iOrder, unorder:iUnorder, orderclear:iOrderClear, fill:iFill, pickitem:iPickItem,
-    bucket:iBucket, mleft:iMLeft, mright:iMRight, mtoggle:iMToggle, mcheck:iMCheck,
+    bucket:iBucket, mleft:iMLeft, mright:iMRight, mtoggle:iMToggle, mcheck:iMCheck, spot:iSpot,
     sat:(k,i)=>{ U2UI.sel[k] = (U2UI.sel[k]===i ? undefined : i); render(); const it=curItem(); if(U2UI.sel[k]!==undefined && it && it.sats) speak(it.sats[i].w); }
   })[op](key, a);
 }
@@ -7327,6 +7938,7 @@ function ansBoard(it){
   else if(it.k==='sort') s = it.bk.map(b=>`${b[1]}：${it.its.filter(x=>x.to===b[0]).map(x=>x.t).join('、')}`).join('　｜　');
   else if(it.k==='match') s = it.pairs.map(x=>`${x.l||'（圖）'} → ${x.r}`).join('　｜　');
   else if(it.k==='multi') s = it.opts.filter(x=>x.ok).map(x=>x.t).join('、');
+  else if(it.k==='spot') s = spotSeq(it).map(id=>docLabel(it.doc, id)).join(' → ');
   else return '';
   return `<div class="q ansboard"><div class="qt" style="color:#1E8E62">✅ 正確答案</div>
     <div class="ansbig">${ruby(s)}</div></div>`;
@@ -7372,15 +7984,15 @@ function talkOk(key, sid){
 /* ---- 老師頁：句子（x）和問答（q）共用 ---- */
 function tItems(set){
   const items = itemsOf(set), i = itIdx(set), total = items.length, it = items[i];
-  const title = set==='x' ? '⑤ 句子' : '⑦ 問答';
+  const title = set==='x' ? (L().mode==='game' ? '③ 語文遊戲' : '⑤ 句子') : '⑦ 問答';
   if(!it) return `<div class="note">這一課的${set==='x'?'句子活動':'問答題'}尚未編寫。</div>`;
   const key = itKey(set, i);
   const dots = items.map((x,j)=>`<div class="pdot ${j===i?'cur':''}" onclick="${set==='x'?'xGo':'qGo'}(${j})" style="cursor:pointer" title="${esc(x.tag||'')}">${j+1}</div>`).join('');
   const interactive = scoredKind(it);
   const lastItem = i >= total-1;
   const next = lastItem
-    ? (set==='x' ? `<button class="btn peach" onclick="startRound()">句子完成 → ⑥ 寫字＋選字</button>`
-                 : `<button class="btn lemon" onclick="tStep('review')">問答完成 → 總結算</button>`)
+    ? (set==='x' ? (L().mode==='game' ? `<button class="btn lemon" onclick="tStep('review')">遊戲完成 → 總結算</button>` : `<button class="btn peach" onclick="startRound()">句子完成 → ⑥ 寫字＋選字</button>`)
+                 : `<button class="btn lemon" onclick="tStep('ws')">問答完成 → 工作紙</button>`)
     : `<button class="btn blue" onclick="${set==='x'?'xNav':'qNav'}(1)">${T('下一題')} →</button>`;
   return `<div class="row" style="margin-bottom:12px">
       <h3 class="sec" style="margin:0;border:none;flex:1">${title}　第 ${i+1} ／ ${total}${it.tag?`　<span class="it-tag">${esc(it.tag)}</span>`:''}</h3>
@@ -7395,7 +8007,7 @@ function tItems(set){
       ${interactive?(CTRL.qLocked?`<button class="btn" onclick="qLock(false)">🔓 解鎖</button>`
                                  :`<button class="btn peach" onclick="qLock(true)">🔒 顯示答案</button>`):''}
       ${next}
-      ${set==='x'?`<button class="btn" onclick="startRound()">跳去 ⑥ 寫字＋選字</button>`:''}</div>
+      ${(set==='x' && !L().mode)?`<button class="btn" onclick="startRound()">跳去 ⑥ 寫字＋選字</button>`:''}</div>
     ${tStatusGrid(it, i, set)}
     ${(it.k==='choice' && it.wr)?`<div class="note">這題高組同學用書寫／打字作答；中、初組圈選。</div>`:''}`;
 }
@@ -7425,7 +8037,7 @@ function sItems(me, set){
   const items = itemsOf(set), i = itIdx(set), it = items[i];
   if(!it) return wait('🌤','這一題沒有題目','請等待下一題');
   const key = itKey(set, i), showEn = me.en || LANG==='en';
-  const lab = set==='x' ? '句子' : '問答';
+  const lab = set==='x' ? (L().mode==='game' ? '遊戲' : '句子') : '問答';
   let body;
   if(isWrItem(it)){
     body = `${qHead(it)}<div class="qt" style="margin-top:10px">${ruby('把答案寫出來，或用鍵盤打出來')}</div>
@@ -7475,19 +8087,51 @@ function scoreOf2(sid){
     total++; const ok = v===w; if(ok) right++;
     det.push({lb:`遊戲「${w}」`, ok, done:true});
   });
+  /* 單元小測：第一次就答對 = $1 */
+  if(L().mode==='quiz') quizItems(sid).forEach((it,i)=>{
+    total++; const r = a['z'+i], ok = !!(r && r.ok && !r.e); if(ok) right++;
+    det.push({lb:`小測 ${i+1}`, ok, done:quizDone(r)});
+  });
+  /* 工作紙：老師確認一張 $1 */
+  wsList(s, wsSet()).forEach(x=>{
+    total++; const st = wsState(sid, x.id); if(st===2) right++;
+    det.push({lb:`工作紙「${x.t}」`, ok:st===2, done:st>0});
+  });
   return {right, total, det};
 }
 
 /* ───────────── ③ 課文影片 ───────────── */
-const VP = {on:false, i:0, tok:0, rate:.8, jp:true, sub:true, echo:false, fb:null, gap:null, id:'', bar:null};
+const VP = {on:false, i:0, tok:0, rate:.8, jp:true, sub:true, echo:false, fb:null, gap:null, id:'', bar:null,
+            k:1, ct0:0, off:0, pt:null, spk:false};   /* k：語速校正（按實際讀完的時間自動調整） */
 const VID_MIN = {k:.55};                /* 語音太快結束時，每句字幕至少停留估計時間的幾成 */
 function cueMs(t, rate){ return Math.max(1800, String(t).length * 330 / (rate||.8)); }
 function vidKeys(){ return [...new Set(LESSONS2.flatMap(l=>l.keys))]; }
-function vidSubHTML(i){
-  const c = VID2[i]; if(!c) return '';
-  const toks = tokenize(c.t, vidKeys());
-  return toks.map(t=> t.key ? `<b class="vk">${VP.jp?ruby(t.t):esc(t.t)}</b>` : (VP.jp?ruby(t.t):esc(t.t))).join('');
+/* 字幕逐字跟讀著色：每個字一格，按朗讀時間線逐個變色（和課文頁「朗讀全句」一樣） */
+const VPUNCT = /[，。、：；！？「」（）,.!?\s]/;
+function vChars(t){
+  const out = [], parts = FIX2RE ? String(t).split(FIX2RE) : [String(t)];
+  parts.forEach(p=>{ const fx = FIX2[p]; [...p].forEach((c,j)=>out.push({c, r:(fx&&fx[j])||JYUT[c]||''})); });
+  const keys = []; tokenize(String(t), vidKeys()).forEach(tk=>{ for(const _ of tk.t) keys.push(tk.key); });
+  out.forEach((x,n)=>{ x.key = keys[n]; });
+  return out;
 }
+function vCharMs(c, rate, k){ return (/[《》]/.test(c) ? 0 : VPUNCT.test(c) ? 140 : 300) / (rate||.8) * (k||1); }
+function vTimes(i, rate, k){ let acc = 0; return [...VID2[i].t].map(c=> acc += vCharMs(c, rate, k)); }
+function vidSubHTML(i, jp){
+  const c = VID2[i]; if(!c) return '';
+  if(jp===undefined) jp = VP.jp;
+  return vChars(c.t).map((x,n)=>`<span class="vc${x.key?' vk':''}" data-n="${n}">${(jp&&x.r)?`<ruby>${esc(x.c)}<rt>${x.r}</rt></ruby>`:esc(x.c)}</span>`).join('');
+}
+/* 按已讀的時間著色：讀過的字變紅，正在讀的字加底色 */
+function vPaint(box, i, el, rate, k, all){
+  if(!box || !VID2[i]) return;
+  const cs = box.querySelectorAll('.vc'); if(!cs.length) return;
+  const ts = vTimes(i, rate, k);
+  let cur = all ? cs.length : ts.findIndex(t=> el < t);
+  if(cur < 0) cur = cs.length;
+  cs.forEach((x,n)=>{ x.classList.toggle('done', n < cur); x.classList.toggle('now', n === cur); });
+}
+function vPaintT(all){ vPaint(document.getElementById('vSub'), VP.i, Date.now() - VP.ct0 + VP.off, VP.rate, VP.k, all); }
 function vidTitleOf(v){ return (v.from===0 && v.to===VID2.length-1) ? '《科技產品》整篇課文' : '《科技產品》片段'; }
 function openVideo(from, to, back){
   stopMedia();
@@ -7500,11 +8144,11 @@ function openVideo(from, to, back){
 function vidPush(extra){
   if(!CTRL.vid) return;
   const v = CTRL.vid;
-  Object.assign(v, {i:VP.i, t0:Date.now(), play:VP.on?1:0, rate:VP.rate, jp:VP.jp?1:0, sub:VP.sub?1:0, echo:VP.echo?1:0}, extra||{});
+  Object.assign(v, {i:VP.i, t0:Date.now(), play:VP.on?1:0, rate:VP.rate, k:+VP.k.toFixed(3), jp:VP.jp?1:0, sub:VP.sub?1:0, echo:VP.echo?1:0}, extra||{});
   saveCtrl({force:true});
 }
 function vidStop(){
-  VP.tok++; VP.on = false;
+  VP.tok++; VP.on = false; clearInterval(VP.pt);
   clearTimeout(VP.fb); clearTimeout(VP.gap);
   try{ speechSynthesis.cancel(); }catch(e){}
 }
@@ -7520,9 +8164,20 @@ function vidSayCue(tok){
   const c = VID2[VP.i]; if(!c) return;
   const est = cueMs(c.t, VP.rate), t0 = Date.now();
   let fin = false;
-  const done = ()=>{
+  /* 逐字著色的時間線 */
+  VP.ct0 = t0; VP.off = 0; VP.spk = true;
+  clearInterval(VP.pt);
+  VP.pt = setInterval(()=>{ if(tok!==VP.tok){ clearInterval(VP.pt); return; } vPaintT(!VP.spk); }, 60);
+  const sMap = []; [...c.t].forEach((ch,n)=>{ if(!/[《》]/.test(ch)) sMap.push(n); });
+  const done = (real)=>{
     if(fin || tok!==VP.tok) return; fin = true; clearTimeout(VP.fb);
     const el = Date.now() - t0, minMs = est * VID_MIN.k;
+    VP.spk = false; clearInterval(VP.pt); vPaintT(true);
+    /* 校正語速：真正讀完的時間 ÷ 估計時間，下一句（和學生機）用新的速度著色 */
+    if(real && el > 600){
+      const e1 = vTimes(VP.i, VP.rate, 1).slice(-1)[0] || 1;
+      VP.k = Math.min(1.8, Math.max(.6, VP.k * .5 + (el / e1) * .5));
+    }
     const go = ()=>{ if(tok!==VP.tok) return; vidAfterCue(tok); };
     if(el < minMs) VP.gap = setTimeout(go, minMs - el); else go();
   };
@@ -7530,10 +8185,17 @@ function vidSayCue(tok){
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(c.t.replace(/[《》]/g,''));
     u.lang = 'zh-HK'; u.rate = VP.rate; if(VOICE) u.voice = VOICE;
-    u.onend = done; u.onerror = e=>{ if(e && /cancel|interrupt/i.test(String(e.error||''))) return; done(); };
+    u.onend = ()=>done(true); u.onerror = e=>{ if(e && /cancel|interrupt/i.test(String(e.error||''))) return; done(false); };
+    /* 瀏覽器有回報讀到第幾個字，就把著色拉回真正的位置 */
+    u.onboundary = e=>{
+      if(tok!==VP.tok || e.charIndex==null) return;
+      const n = sMap[e.charIndex]; if(n==null) return;
+      const ts = vTimes(VP.i, VP.rate, VP.k), start = n ? ts[n-1] : 0;
+      VP.off = start - (Date.now() - VP.ct0);
+    };
     speechSynthesis.speak(u);
   }catch(e){}
-  VP.fb = setTimeout(done, est * 2 + 2500);
+  VP.fb = setTimeout(()=>done(false), est * 2 + 2500);
   vidBar(est);
 }
 function vidAfterCue(tok){
@@ -7555,7 +8217,7 @@ function vidAfterCue(tok){
   } else VP.gap = setTimeout(go, 380);
 }
 function vidFinish(){
-  VP.on = false; VP.tok++;
+  VP.on = false; VP.tok++; clearInterval(VP.pt); vPaintT(true);
   clearTimeout(VP.fb); clearTimeout(VP.gap);
   vidPush({end:1, play:0});
   const el = document.getElementById('vidEnd'); if(el) el.classList.add('show');
@@ -7564,7 +8226,7 @@ function vidFinish(){
 }
 function vidPause(){
   if(!VP.on){ return vidPlayFrom(VP.i); }
-  VP.tok++; VP.on = false; clearTimeout(VP.fb); clearTimeout(VP.gap);
+  VP.tok++; VP.on = false; clearTimeout(VP.fb); clearTimeout(VP.gap); clearInterval(VP.pt);
   try{ speechSynthesis.cancel(); }catch(e){}
   vidPush({play:0}); vidCtl();
   const b = document.getElementById('vidBar'); if(b) b.style.animationPlayState = 'paused';
@@ -7669,9 +8331,16 @@ function tVideoMount(){
 }
 
 /* 學生版：跟著老師的影片（只看畫面和字幕；老師每換一句就同步一次） */
-function svSubHTML(i, jp){
-  const toks = tokenize(VID2[i].t, vidKeys());
-  return toks.map(t=> t.key ? `<b class="vk">${jp?ruby(t.t):esc(t.t)}</b>` : (jp?ruby(t.t):esc(t.t))).join('');
+function svSubHTML(i, jp){ return vidSubHTML(i, !!jp); }
+/* 學生機：按老師傳來的開始時間和語速，逐字著色（不出聲） */
+let SVT = null;
+function svTick(){
+  const v = CTRL.vid, box = document.getElementById('svSub');
+  if(CTRL.screen!=='video' || !v || !box){ clearInterval(SVT); SVT = null; return; }
+  const i = Math.max(0, Math.min(VID2.length-1, v.i));
+  if(v.end) return vPaint(box, i, 0, v.rate, v.k||1, true);
+  if(!v.play) return;
+  vPaint(box, i, Date.now() - v.t0, v.rate, v.k||1, false);
 }
 function svSay(i){ return `speak('${VID2[i].t.replace(/[《》\']/g,'')}')`; }
 function sVideo(me){
@@ -7708,6 +8377,7 @@ function svUpdate(v){
 /* 學生版畫面入口（renderStudent 呼叫） */
 function sVideoRender(B, me){
   const v = CTRL.vid;
+  if(!SVT) SVT = setInterval(svTick, 80);
   if(v && B.getAttribute('data-vid') === v.id && svUpdate(v)) return;
   B.innerHTML = sVideo(me);
   B.setAttribute('data-vid', v ? v.id : '');
@@ -7723,7 +8393,8 @@ function tVideoRender(tp){
 
 /* 教師單元頁：額外按掣 */
 function uAct(u){
-  if(+u===2) return `<button class="btn lemon" onclick="openVideo(0,${VID2.length-1},'unit')">🎬 播放整篇課文影片</button>`;
+  if(+u===2) return `<button class="btn lemon" onclick="openVideo(0,${VID2.length-1},'unit')">🎬 播放整篇課文影片</button>
+    <button class="btn lilac" onclick="goUnit('L')">🎧 單元二聆聽（第 10–13 節）</button>`;
   return '';
 }
 
@@ -7748,6 +8419,208 @@ function printU2(lv, grey){
     return `<div class="q"><div class="qn">${n+1}.　${txt}</div>${bd}</div>`;
   }).join('');
 }
+
+/* ───────────── ⑥ 生活語文：模擬電費單、微波爐按鍵、說明書／水費單圖片 ─────────────
+   「spot」題：在文件上按出指定的位置（或按次序按幾個掣）。
+   初組：只亮出答案和另一個位置；中組：所有位置都有虛線框；高組：沒有框，要自己找。 */
+const EBILL = {co:'安心電力有限公司', name:'陳大文', addr:'香港幸福街 1 號 3 樓', acct:'2026 1023 88',
+  date:'2026年10月5日', period:'8月5日至10月4日', units:320, total:'412.50', due:'2026年10月26日',
+  hist:[['4月',260],['6月',290],['8月',410],['10月',320]]};
+const DOCS = {
+  ebill:{zh:'電費單', spots:{logo:'公司名稱', info:'客戶資料', total:'應繳總額', due:'最後繳費日期', usage:'用電量', pay:'繳費方法', tip:'節能小貼士'}},
+  mw:{zh:'微波爐按鍵', spots:{door:'開門掣', display:'顯示屏', power:'火力掣', time:'時間掣', auto:'自動翻熱掣', start:'開始掣', stop:'停止掣'}},
+  /* 圖片文件：[名稱, 左%, 上%, 闊%, 高%] */
+  wbill:{zh:'水費單', img:'2:wb', spots:{logo:['水務署標誌',4,1.6,44,6.4], box:['應繳總額和繳費日期',48,4.6,50,5.4], chart:['每日平均用水量',56,23.5,41,12]}},
+  manual1:{zh:'說明書封面', img:'2:m1', spots:{title:['產品名稱',6,10,88,11], pic:['產品圖片',7,33,84,32], brand:['牌子',58,82,40,5.5], model:['型號',58,88,40,5.5]}},
+  manual3:{zh:'按鍵說明', img:'2:m3', spots:{front:['正面圖',4,19,92,36], list:['按鍵名稱',4,56,52,36]}}
+};
+function docLabel(doc, id){ const s = DOCS[doc].spots[id]; return Array.isArray(s) ? s[0] : s; }
+
+/* 一個位置：mode = 'teach'（顯示標籤）、'spot'（可以按） */
+function spAttr(ctx, id){
+  if(!ctx) return `class="sp" data-spot="${id}"`;
+  const st = ctx.state(id);
+  const click = ctx.mode==='teach' ? `onclick="speak('${docLabel(ctx.doc, id)}')"` : (st.off ? '' : `onclick="iAct('spot','${ctx.key}','${id}')"`);
+  return `class="sp ${st.cls}" data-spot="${id}" ${click}`;
+}
+function spTag(ctx, id){
+  if(!ctx || ctx.mode!=='teach') return '';
+  const n = Object.keys(DOCS[ctx.doc].spots).indexOf(id) + 1;
+  return `<span class="sptag">${n}</span>`;
+}
+function ebillHTML(ctx){
+  const B = EBILL, a = id=>spAttr(ctx, id), t = id=>spTag(ctx, id);
+  const mx = Math.max(...B.hist.map(h=>h[1]));
+  return `<div class="ebill">
+    <div ${a('logo')}>${t('logo')}<div class="eb-logo"><span class="eb-bolt">⚡</span><div><b>${B.co}</b><small>電費單 · 教學用模擬帳單</small></div></div></div>
+    <div class="eb-mid">
+      <div ${a('info')}>${t('info')}<div class="eb-info">
+        <div><span>客戶姓名</span>${B.name}</div><div><span>地址</span>${B.addr}</div>
+        <div><span>帳戶號碼</span>${B.acct}</div><div><span>帳單日期</span>${B.date}</div></div></div>
+      <div class="eb-pay">
+        <div ${a('total')}>${t('total')}<div class="eb-total"><span>應繳總額</span><b>HK$ ${B.total}</b></div></div>
+        <div ${a('due')}>${t('due')}<div class="eb-due"><span>最後繳費日期</span><b>${B.due}</b></div></div>
+      </div>
+    </div>
+    <div ${a('usage')}>${t('usage')}<div class="eb-use">
+      <div class="eb-units"><span>本期用電量</span><b>${B.units} 度</b><small>（${B.period}）</small></div>
+      <div class="eb-chart">${B.hist.map(h=>`<i style="--h:${Math.round(h[1]/mx*100)}%"><em>${h[1]}</em><u>${h[0]}</u></i>`).join('')}</div></div></div>
+    <div ${a('pay')}>${t('pay')}<div class="eb-ways"><span>繳費方法</span>
+      <b>🏪 便利店</b><b>💳 八達通</b><b>💻 網上銀行</b><b>🏤 郵局</b></div></div>
+    <div ${a('tip')}>${t('tip')}<div class="eb-tip">💡 節能小貼士：天氣稍涼，可以不開冷氣機，以節省能源。</div></div>
+    <div class="eb-wm">樣本 SAMPLE</div>
+  </div>`;
+}
+function mwHTML(ctx, disp){
+  const a = id=>spAttr(ctx, id), t = id=>spTag(ctx, id);
+  return `<div class="mw">
+    <div ${a('door')}>${t('door')}<div class="mw-door"><div class="mw-win"><span>🍱</span></div><div class="mw-handle"></div></div></div>
+    <div class="mw-panel">
+      <div ${a('display')}>${t('display')}<div class="mw-disp">${disp||'0:00'}</div></div>
+      <div ${a('power')}>${t('power')}<div class="mw-btn">🔥 火力</div></div>
+      <div ${a('time')}>${t('time')}<div class="mw-btn">⏱️ 時間</div></div>
+      <div ${a('auto')}>${t('auto')}<div class="mw-btn">🍱 自動翻熱</div></div>
+      <div class="mw-row">
+        <div ${a('stop')}>${t('stop')}<div class="mw-btn red">⏹ 停止</div></div>
+        <div ${a('start')}>${t('start')}<div class="mw-btn green">▶ 開始</div></div>
+      </div>
+    </div>
+  </div>`;
+}
+function imgDocHTML(ctx){
+  const D = DOCS[ctx ? ctx.doc : 'wbill'];
+  const spots = Object.entries(D.spots).map(([id, s])=>
+    `<button ${spAttr(ctx, id)} style="left:${s[1]}%;top:${s[2]}%;width:${s[3]}%;height:${s[4]}%">${spTag(ctx, id)}</button>`).join('');
+  return `<div class="idoc"><img src="${IMG[D.img]||''}" alt="">${spots}</div>`;
+}
+function docHTML(doc, ctx, disp){
+  if(doc==='ebill') return ebillHTML(ctx);
+  if(doc==='mw') return mwHTML(ctx, disp);
+  return imgDocHTML(ctx || {doc, mode:'plain', state:()=>({cls:'', off:true})});
+}
+
+/* ---- 教學卡：文件＋編號標籤＋說明 ---- */
+function tcDoc(it){
+  const ctx = {doc:it.doc, mode:'teach', key:'', state:()=>({cls:'lab', off:false})};
+  const ids = Object.keys(DOCS[it.doc].spots);
+  return `<div class="docwrap dw-${it.doc}">${docHTML(it.doc, ctx)}</div>
+    <div class="doclegend">${ids.map((id,n)=>`<button class="rchip" onclick="speak('${docLabel(it.doc,id)}')"><span class="sptag in">${n+1}</span>${ruby(docLabel(it.doc,id))}</button>`).join('')}</div>`;
+}
+
+/* ---- spot 題 ---- */
+function spotSeq(it){ return it.seq || [it.ans]; }
+function spotCands(it, lv){
+  const all = Object.keys(DOCS[it.doc].spots);
+  if(ROLE==='t' || lv!==3) return all;
+  const seq = spotSeq(it), other = it.near || all.find(x=>!seq.includes(x) && x!=='display');
+  return [...seq, other];
+}
+function vSpot(it, key){
+  const lv = myLv(), rec = recGet(key) || {s:[]}, done = rec.s || [];
+  const seq = spotSeq(it), cands = spotCands(it, lv);
+  const show = ROLE==='t' || lv>=2;
+  const ctx = {doc:it.doc, mode:'spot', key, state:id=>{
+    const inSeq = done.includes(id);
+    if(rec.ok && seq.includes(id)) return {cls:'hit', off:true};
+    if(inSeq) return {cls:'hit', off:true};
+    if(!cands.includes(id)) return {cls:'dim', off:true};
+    return {cls: (lv===3 && ROLE!=='t') ? 'cand' : (show ? 'box' : ''), off:false};
+  }};
+  const disp = it.doc==='mw' ? (rec.ok ? (it.dispOk||'0:00') : (done.length ? (it.disp||'0:00') : '0:00')) : '';
+  const stepTxt = seq.length>1 ? `<div class="fillstep">${rec.ok?'✅ 全部做對了':`第 ${done.length+1} 步／共 ${seq.length} 步`}</div>` : '';
+  return qHead({...it, k:'spot'}) + stepTxt + `<div class="docwrap dw-${it.doc}">${docHTML(it.doc, ctx, disp)}</div>`;
+}
+function iSpot(key, id){
+  const it = curItem(), rec = recGet(key) || {s:[], e:0}, done = (rec.s||[]).slice();
+  if(rec.ok) return;
+  const seq = spotSeq(it), want = seq[done.length];
+  if(id !== want){ recPut(key, {ok:0, e:(rec.e||0)+1, s:done}); render(); wrongFlash(); return; }
+  done.push(id);
+  const fin = done.length >= seq.length;
+  recPut(key, {ok:fin?1:0, e:rec.e||0, s:done}); render();
+  if(ROLE==='t') speak(docLabel(it.doc, id));
+  if(fin) afterCorrect(it);
+}
+
+/* ───────────── ⑦ 單元小測：每位同學按自己的程度、自己的速度作答 ─────────────
+   高組／中組／初組各一份（根據老師的評估卷改編）。答錯可以再試一次；錯兩次就顯示答案，按「下一題」。
+   計分：第一次就答對 = ⭐（$1）。 */
+function quizTrack(s){
+  const t = (s && s.ws2) ? s.ws2 : (({1:'H',2:'M',3:'C'})[s && s.lv] || 'M');
+  return QUIZ2[t] ? t : 'M';
+}
+function quizItems(sid){
+  if(ROLE==='t' && !sid) return QUIZ2[U2UI.zTrack || 'H'];
+  return QUIZ2[quizTrack(stu(sid || ME))] || [];
+}
+function quizIdx(){ return ROLE==='t' ? (U2UI.zIdx || 0) : (myAns().zi || 0); }
+function quizDone(r){ return !!(r && (r.ok || (r.e||0) >= 2)); }
+function quizStat(sid){
+  const items = quizItems(sid), a = myA(sid);
+  let star = 0, done = 0;
+  items.forEach((it,i)=>{ const r = a['z'+i]; if(quizDone(r)) done++; if(r && r.ok && !r.e) star++; });
+  return {n:items.length, done, star, cur:a.zi||0, tr:quizTrack(stu(sid))};
+}
+/* 老師版：全班進度＋可以預覽三份試題 */
+function tQuiz(){
+  const tr = U2UI.zTrack || 'H', items = QUIZ2[tr], i = Math.min(U2UI.zIdx||0, items.length-1), it = items[i];
+  const rows = STUDENTS.map(s=>{
+    const st = quizStat(s.id), pct = st.n ? Math.round(st.done/st.n*100) : 0;
+    return `<div class="scard ${st.done>=st.n?'done':''}"><div class="nm">${esc(s.n)}<span class="lv g${({H:1,M:2,C:3})[st.tr]}">${WS_TRN[st.tr]}</span></div>
+      <div class="qzbar"><i style="width:${pct}%"></i></div>
+      <div class="st">${st.done>=st.n ? `🎉 完成　⭐ ${st.star}／${st.n}` : `做到第 ${Math.min(st.done+1, st.n)} 題　⭐ ${st.star}`}</div></div>`;
+  }).join('');
+  const key = 'z'+i;
+  return `<div class="note">📝 <b>單元小測</b>：每位同學按自己的組別作答（高組 ${QUIZ2.H.length} 題、中組 ${QUIZ2.M.length} 題、初組 ${QUIZ2.C.length} 題），
+      自己的速度，做完一題自動到下一題。第一次就答對得 ⭐（$1）；答錯可以再試一次，錯兩次會顯示答案。</div>
+    <div class="sgrid" style="margin-bottom:16px">${rows}</div>
+    <h3 class="sec">👀 預覽試題（在大電視示範，不會計分）</h3>
+    <div class="row" style="margin-bottom:10px">
+      ${['H','M','C'].map(t=>`<button class="btn sm ${t===tr?'mint':''}" onclick="quizPreview('${t}',0)">${WS_TRN[t]}（${QUIZ2[t].length} 題）</button>`).join('')}
+      <span class="sp1" style="flex:1"></span>
+      <button class="btn sm" onclick="quizPreview('${tr}',${i-1})" ${i?'':'disabled'}>← 上一題</button>
+      <b>第 ${i+1}／${items.length} 題</b>
+      <button class="btn sm" onclick="quizPreview('${tr}',${i+1})" ${i<items.length-1?'':'disabled'}>下一題 →</button>
+    </div>
+    <div class="q tv it it-${it.k}">${iView(it, key)}</div>
+    <div class="row" style="margin-top:14px"><button class="btn lemon" onclick="tStep('review')">小測完成 → 總結算</button></div>`;
+}
+function quizPreview(t, i){ U2UI.zTrack = t; U2UI.zIdx = Math.max(0, Math.min(QUIZ2[t].length-1, i)); U2UI.demo = {}; U2UI.sel = {}; render(); }
+/* 學生版 */
+function sQuiz(me){
+  const items = quizItems(), i = quizIdx(), n = items.length;
+  if(i >= n){
+    const st = quizStat(me.id);
+    return `<div class="stu"><div class="q" style="text-align:center"><div style="font-size:4rem">🎉</div>
+      <div class="qq">${ruby('小測完成了！')}</div>
+      <div class="qzstars">${'⭐'.repeat(st.star)}<span>${ruby(`第一次就答對 ${st.star} 題（共 ${n} 題）`)}</span></div>
+      <div class="note" style="text-align:center">${ruby('請等老師')}</div></div></div>`;
+  }
+  const it = items[i], key = 'z'+i, rec = myAns()[key], fin = quizDone(rec);
+  const head = `<div class="qt">📝 ${ruby('單元小測')}　${i+1} ／ ${n}</div>
+    <div class="qzbar big"><i style="width:${Math.round(i/n*100)}%"></i></div>`;
+  const after = fin ? `${rec.ok ? `<div class="qzres ok">${rec.e ? '✅ '+ruby('答對了') : '⭐ '+ruby('第一次就答對！')}</div>`
+                                 : `<div class="qzres no">${ruby('沒關係，正確答案是：')}</div>${ansBoard(it)}`}
+      <div class="row" style="justify-content:center;margin-top:12px"><button class="btn blue big" onclick="quizNext()">${ruby(i<n-1?'下一題':'完成')} →</button></div>` :
+      (rec && rec.e ? `<div class="qzres try">${ruby('再試一次')}</div>` : '');
+  return `<div class="stu"><div class="q it it-${it.k} ${fin?'qzlock':''}">${head}${iView(it, key)}${after}</div></div>`;
+}
+function quizNext(){
+  const a = myAns(); a.zi = (a.zi||0) + 1; saveMine();
+  U2UI.sel = {}; render();
+}
+
+/* 單元二工作紙目錄：由「4. 工作紙」逐份建立。set＝連堂（15 說明書、16 水費單、end 單元完結），H 高組、M 中組（中高組資料夾）、C 初組；v＝中組寫字三種版本 */
+const WS2 = {"1": {"C": [{"t": "配字「科技發達」", "d": "初組 › 配字", "f": "配字_科技發達", "id": "2c1-1"}, {"t": "配字「家庭」", "d": "初組 › 配字", "f": "配字_家庭", "id": "2c1-2"}, {"t": "配字「科技產品」", "d": "初組 › 配字", "f": "配字_科技產品", "id": "2c1-3"}, {"t": "連線配對", "d": "初組 › 連線配對", "f": "科技產品圖", "id": "2c1-4"}], "H": [{"t": "閱讀句子", "d": "高組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_1", "id": "2h1-1"}, {"t": "閱讀理解", "d": "高組 › 2.閱讀理解", "f": "生活科技面面觀-閱讀理解_1", "id": "2h1-2"}, {"t": "填充", "d": "高組 › 3.填充", "f": "生活科技面面觀-填充_1", "id": "2h1-3"}, {"t": "填充（二）", "d": "高組 › 3.填充", "f": "科技產品", "id": "2h1-4"}, {"t": "抄寫句子", "d": "高組 › 4.寫字", "f": "抄寫句子1", "id": "2h1-5"}], "M": [{"t": "閱讀句子", "d": "中組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_1", "id": "2m1-1"}, {"t": "圈字詞", "d": "中組 › 2.圈字詞", "f": "圈字詞-句1", "id": "2m1-2"}, {"t": "聆聽圈出字詞", "d": "中組 › 3.聆聽圈字詞", "f": "聆聽圈出字詞-句子1", "id": "2m1-3"}, {"v": {"big": [{"t": "寫字「科技產品」", "d": "中組 › 5. 寫字 › 3. 放大", "f": "1.3寫字- 科技產品", "id": "2m1-big1"}], "copy": [{"t": "寫字「科技產品」", "d": "中組 › 5. 寫字 › 1. 抄寫字詞", "f": "1.1寫字- 科技產品-2", "id": "2m1-copy1"}], "grey": [{"t": "寫字「科技產品」", "d": "中組 › 5. 寫字 › 2. 灰階字詞", "f": "1.2寫字- 科技產品", "id": "2m1-grey1"}]}}]}, "2": {"C": [{"t": "配字「電視」", "d": "初組 › 配字", "f": "配字_電視", "id": "2c2-1"}, {"t": "配字「我們」", "d": "初組 › 配字", "f": "配字_我們", "id": "2c2-2"}, {"t": "圈字詞「電」", "d": "初組 › 配字", "f": "圈字詞-電X", "id": "2c2-3"}], "H": [{"t": "閱讀句子", "d": "高組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_2", "id": "2h2-1"}, {"t": "閱讀理解", "d": "高組 › 2.閱讀理解", "f": "生活科技面面觀-閱讀理解_2", "id": "2h2-2"}, {"t": "填充", "d": "高組 › 3.填充", "f": "生活科技面面觀-填充_2", "id": "2h2-3"}, {"t": "填字詞「電」", "d": "高組 › 3.填充", "f": "填字詞-電X", "id": "2h2-4"}, {"t": "「電」字配詞", "d": "高組 › 5.電字配詞", "f": "1生活科技面面觀-配詞", "id": "2h2-5"}, {"t": "抄寫句子", "d": "高組 › 4.寫字", "f": "抄寫句子2", "id": "2h2-6"}], "M": [{"t": "閱讀句子", "d": "中組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_2", "id": "2m2-1"}, {"t": "圈字詞", "d": "中組 › 2.圈字詞", "f": "圈字詞-句2", "id": "2m2-2"}, {"t": "聆聽圈出字詞", "d": "中組 › 3.聆聽圈字詞", "f": "聆聽圈出字詞-句子2", "id": "2m2-3"}, {"t": "圈字詞「電」", "d": "中組 › 2.圈字詞", "f": "圈字詞-電X", "id": "2m2-4"}, {"v": {"big": [{"t": "寫字「電視」", "d": "中組 › 5. 寫字 › 3. 放大", "f": "2.3寫字- 電視", "id": "2m2-big1"}], "copy": [{"t": "寫字「電視」", "d": "中組 › 5. 寫字 › 1. 抄寫字詞", "f": "2.1寫字- 電視-2", "id": "2m2-copy1"}], "grey": [{"t": "寫字「電視」", "d": "中組 › 5. 寫字 › 2. 灰階字詞", "f": "2.2寫字- 電視", "id": "2m2-grey1"}]}}]}, "3": {"C": [{"t": "配字「微波爐」", "d": "初組 › 配字", "f": "配字_微波爐", "id": "2c3-1"}, {"t": "配字「翻熱食物」", "d": "初組 › 配字", "f": "配字_翻熱食物", "id": "2c3-2"}, {"t": "連線配對", "d": "初組 › 連線配對", "f": "微波爐-翻熱食物", "id": "2c3-3"}], "H": [{"t": "閱讀句子", "d": "高組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_3", "id": "2h3-1"}, {"t": "閱讀理解", "d": "高組 › 2.閱讀理解", "f": "生活科技面面觀-閱讀理解_3", "id": "2h3-2"}, {"t": "填充", "d": "高組 › 3.填充", "f": "生活科技面面觀-填充_3", "id": "2h3-3"}, {"t": "抄寫句子", "d": "高組 › 4.寫字", "f": "抄寫句子3", "id": "2h3-4"}], "M": [{"t": "閱讀句子", "d": "中組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_3", "id": "2m3-1"}, {"t": "圈字詞", "d": "中組 › 2.圈字詞", "f": "圈字詞-句3", "id": "2m3-2"}, {"t": "聆聽圈出字詞", "d": "中組 › 3.聆聽圈字詞", "f": "聆聽圈出字詞-句子3", "id": "2m3-3"}, {"t": "連線配對", "d": "中組 › 4. 連線配對", "f": "3. 微波爐-翻熱食物", "id": "2m3-4"}, {"v": {"big": [{"t": "寫字「微波爐」", "d": "中組 › 5. 寫字 › 3. 放大", "f": "3.3寫字- 微波爐", "id": "2m3-big1"}], "copy": [{"t": "寫字「微波爐」", "d": "中組 › 5. 寫字 › 1. 抄寫字詞", "f": "3.1寫字- 微波爐-2", "id": "2m3-copy1"}], "grey": [{"t": "寫字「微波爐」", "d": "中組 › 5. 寫字 › 2. 灰階字詞", "f": "3.2寫字- 微波爐", "id": "2m3-grey1"}]}}]}, "4": {"C": [{"t": "配字「洗衣機」", "d": "初組 › 配字", "f": "配字_洗衣機", "id": "2c4-1"}, {"t": "配字「清潔衣服」", "d": "初組 › 配字", "f": "1清潔衣服", "id": "2c4-2"}, {"t": "配字「清潔」", "d": "初組 › 配字", "f": "配字_清潔", "id": "2c4-3"}, {"t": "連線配對", "d": "初組 › 連線配對", "f": "洗衣機-清潔衣服", "id": "2c4-4"}], "H": [{"t": "閱讀句子", "d": "高組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_4", "id": "2h4-1"}, {"t": "閱讀理解", "d": "高組 › 2.閱讀理解", "f": "生活科技面面觀-閱讀理解_4", "id": "2h4-2"}, {"t": "填充", "d": "高組 › 3.填充", "f": "生活科技面面觀-填充_4", "id": "2h4-3"}, {"t": "抄寫句子", "d": "高組 › 4.寫字", "f": "抄寫句子4", "id": "2h4-4"}, {"t": "句式「我家有……」", "d": "高組 › 6.句式", "f": "家有...", "id": "2h4-5"}], "M": [{"t": "閱讀句子", "d": "中組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_4", "id": "2m4-1"}, {"t": "圈字詞", "d": "中組 › 2.圈字詞", "f": "圈字詞-句4", "id": "2m4-2"}, {"t": "聆聽圈出字詞", "d": "中組 › 3.聆聽圈字詞", "f": "聆聽圈出字詞-句子4", "id": "2m4-3"}, {"t": "連線配對", "d": "中組 › 4. 連線配對", "f": "4. 洗衣機-清洗衣服", "id": "2m4-4"}, {"v": {"big": [{"t": "寫字「洗衣機」", "d": "中組 › 5. 寫字 › 3. 放大", "f": "4.3寫字- 洗衣機", "id": "2m4-big1"}], "copy": [{"t": "寫字「洗衣機」", "d": "中組 › 5. 寫字 › 1. 抄寫字詞", "f": "4.1寫字- 洗衣機-2", "id": "2m4-copy1"}], "grey": [{"t": "寫字「洗衣機」", "d": "中組 › 5. 寫字 › 2. 灰階字詞", "f": "4.2寫字- 洗衣機", "id": "2m4-grey1"}]}}, {"t": "句式「我家有……」", "d": "中組 › 9. 句式", "f": "家有", "id": "2m4-5"}]}, "5": {"C": [{"t": "配字「冷氣機」", "d": "初組 › 配字", "f": "配字_冷氣機", "id": "2c5-1"}, {"t": "配字「涼快」", "d": "初組 › 配字", "f": "配字_涼快", "id": "2c5-2"}, {"t": "連線配對", "d": "初組 › 連線配對", "f": "冷氣機-涼快", "id": "2c5-3"}, {"t": "形容詞「涼快」", "d": "初組 › 形容詞", "f": "形容詞-涼快", "id": "2c5-4"}], "H": [{"t": "閱讀句子", "d": "高組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_5", "id": "2h5-1"}, {"t": "閱讀理解", "d": "高組 › 2.閱讀理解", "f": "生活科技面面觀-閱讀理解_5", "id": "2h5-2"}, {"t": "填充", "d": "高組 › 3.填充", "f": "生活科技面面觀-填充_5", "id": "2h5-3"}, {"t": "抄寫句子", "d": "高組 › 4.寫字", "f": "抄寫句子5", "id": "2h5-4"}], "M": [{"t": "閱讀句子", "d": "中組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_5", "id": "2m5-1"}, {"t": "圈字詞", "d": "中組 › 2.圈字詞", "f": "圈字詞-句5", "id": "2m5-2"}, {"t": "聆聽圈出字詞", "d": "中組 › 3.聆聽圈字詞", "f": "聆聽圈出字詞-句子5", "id": "2m5-3"}, {"t": "連線配對", "d": "中組 › 4. 連線配對", "f": "5. 冷氣機-涼快", "id": "2m5-4"}, {"v": {"big": [{"t": "寫字「冷氣機」", "d": "中組 › 5. 寫字 › 3. 放大", "f": "5.3寫字- 冷氣機", "id": "2m5-big1"}], "copy": [{"t": "寫字「冷氣機」", "d": "中組 › 5. 寫字 › 1. 抄寫字詞", "f": "5.1寫字- 冷氣機-2", "id": "2m5-copy1"}], "grey": [{"t": "寫字「冷氣機」", "d": "中組 › 5. 寫字 › 2. 灰階字詞", "f": "5.2寫字- 冷氣機", "id": "2m5-grey1"}]}}]}, "6": {"C": [{"t": "配字「電腦」", "d": "初組 › 配字", "f": "配字_電腦", "id": "2c6-1"}, {"t": "配字「平板電腦」", "d": "初組 › 配字", "f": "配字_平板電腦", "id": "2c6-2"}, {"t": "連線配對", "d": "初組 › 連線配對", "f": "電腦-平板電腦", "id": "2c6-3"}], "H": [{"t": "閱讀句子", "d": "高組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_6", "id": "2h6-1"}, {"t": "閱讀理解", "d": "高組 › 2.閱讀理解", "f": "生活科技面面觀-閱讀理解_6", "id": "2h6-2"}, {"t": "填充", "d": "高組 › 3.填充", "f": "生活科技面面觀-填充_6", "id": "2h6-3"}, {"t": "抄寫句子", "d": "高組 › 4.寫字", "f": "抄寫句子6", "id": "2h6-4"}], "M": [{"t": "閱讀句子", "d": "中組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_6", "id": "2m6-1"}, {"t": "圈字詞", "d": "中組 › 2.圈字詞", "f": "圈字詞-句6a", "id": "2m6-2"}, {"t": "圈字詞（二）", "d": "中組 › 2.圈字詞", "f": "圈字詞-句6b", "id": "2m6-3"}, {"t": "聆聽圈出字詞", "d": "中組 › 3.聆聽圈字詞", "f": "聆聽圈出字詞-句子6", "id": "2m6-4"}, {"t": "連線配對", "d": "中組 › 4. 連線配對", "f": "6.1 電腦-平板電腦", "id": "2m6-5"}, {"t": "連線配對（二）", "d": "中組 › 4. 連線配對", "f": "6.2 上網-學習-電腦技能", "id": "2m6-6"}, {"v": {"big": [{"t": "寫字「電腦」", "d": "中組 › 5. 寫字 › 3. 放大", "f": "6.3寫字- 電腦", "id": "2m6-big1"}], "copy": [{"t": "寫字「電腦」", "d": "中組 › 5. 寫字 › 1. 抄寫字詞", "f": "6.1寫字- 電腦-2", "id": "2m6-copy1"}], "grey": [{"t": "寫字「電腦」", "d": "中組 › 5. 寫字 › 2. 灰階字詞", "f": "6.2寫字- 電腦", "id": "2m6-grey1"}]}}]}, "7": {"C": [{"t": "配字「雪櫃」", "d": "初組 › 配字", "f": "配字_雪櫃", "id": "2c7-1"}, {"t": "配字「冷藏食物」", "d": "初組 › 配字", "f": "配字_冷藏食物", "id": "2c7-2"}], "H": [{"t": "閱讀句子", "d": "高組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_7", "id": "2h7-1"}, {"t": "閱讀理解", "d": "高組 › 2.閱讀理解", "f": "生活科技面面觀-閱讀理解_7", "id": "2h7-2"}, {"t": "填充", "d": "高組 › 3.填充", "f": "生活科技面面觀-填充_7", "id": "2h7-3"}, {"t": "抄寫句子", "d": "高組 › 4.寫字", "f": "抄寫句子7", "id": "2h7-4"}], "M": [{"t": "閱讀句子", "d": "中組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_7", "id": "2m7-1"}, {"t": "圈字詞", "d": "中組 › 2.圈字詞", "f": "圈字詞-句7", "id": "2m7-2"}, {"t": "聆聽圈出字詞", "d": "中組 › 3.聆聽圈字詞", "f": "聆聽圈出字詞-句子7", "id": "2m7-3"}, {"v": {"big": [{"t": "寫字「雪櫃」", "d": "中組 › 5. 寫字 › 3. 放大", "f": "7.3寫字- 雪櫃", "id": "2m7-big1"}], "copy": [{"t": "寫字「雪櫃」", "d": "中組 › 5. 寫字 › 1. 抄寫字詞", "f": "7.1寫字- 雪櫃-2", "id": "2m7-copy1"}], "grey": [{"t": "寫字「雪櫃」", "d": "中組 › 5. 寫字 › 2. 灰階字詞", "f": "7.2寫字- 雪櫃", "id": "2m7-grey1"}]}}]}, "8": {"C": [{"t": "配字「出外」", "d": "初組 › 配字", "f": "配字_出外", "id": "2c8-1"}, {"t": "配字「方便」", "d": "初組 › 配字", "f": "配字_方便", "id": "2c8-2"}], "H": [{"t": "閱讀句子", "d": "高組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_8", "id": "2h8-1"}, {"t": "閱讀理解", "d": "高組 › 2.閱讀理解", "f": "生活科技面面觀-閱讀理解_8", "id": "2h8-2"}, {"t": "填充", "d": "高組 › 3.填充", "f": "生活科技面面觀-填充_8", "id": "2h8-3"}, {"t": "抄寫句子", "d": "高組 › 4.寫字", "f": "抄寫句子8", "id": "2h8-4"}], "M": [{"t": "閱讀句子", "d": "中組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_8", "id": "2m8-1"}, {"t": "圈字詞", "d": "中組 › 2.圈字詞", "f": "圈字詞-句8", "id": "2m8-2"}, {"t": "聆聽圈出字詞", "d": "中組 › 3.聆聽圈字詞", "f": "聆聽圈出字詞-句子8", "id": "2m8-3"}, {"t": "連線配對", "d": "中組 › 4. 連線配對", "f": "8. 出外-方便", "id": "2m8-4"}, {"v": {"big": [{"t": "寫字「方便」", "d": "中組 › 5. 寫字 › 3. 放大", "f": "8.3寫字- 方便", "id": "2m8-big1"}], "copy": [{"t": "寫字「方便」", "d": "中組 › 5. 寫字 › 1. 抄寫字詞", "f": "8.1寫字- 方便-2", "id": "2m8-copy1"}], "grey": [{"t": "寫字「方便」", "d": "中組 › 5. 寫字 › 2. 灰階字詞", "f": "8.2寫字- 方便", "id": "2m8-grey1"}]}}]}, "9": {"C": [{"t": "配字「八達通」", "d": "初組 › 配字", "f": "配字_八達通", "id": "2c9-1"}, {"t": "配字「付款」", "d": "初組 › 配字", "f": "配字_付款", "id": "2c9-2"}, {"t": "配字「超級市場」", "d": "初組 › 配字", "f": "配字_超級市場", "id": "2c9-3"}, {"t": "配字「買菜」", "d": "初組 › 配字", "f": "配字_買菜", "id": "2c9-4"}, {"t": "配字「爸爸」", "d": "初組 › 配字", "f": "配字_爸爸", "id": "2c9-5"}, {"t": "配字「便利店」", "d": "初組 › 配字", "f": "配字_便利店", "id": "2c9-6"}, {"t": "配字「買報紙」", "d": "初組 › 配字", "f": "配字_買報紙", "id": "2c9-7"}, {"t": "連線配對", "d": "初組 › 連線配對", "f": "八達通_付款", "id": "2c9-8"}, {"t": "連線配對（二）", "d": "初組 › 連線配對", "f": "媽媽_超級市場_買菜", "id": "2c9-9"}], "H": [{"t": "閱讀句子", "d": "高組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_9a", "id": "2h9-1"}, {"t": "閱讀句子（二）", "d": "高組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_9b", "id": "2h9-2"}, {"t": "閱讀句子（三）", "d": "高組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_9c", "id": "2h9-3"}, {"t": "閱讀理解", "d": "高組 › 2.閱讀理解", "f": "生活科技面面觀-閱讀理解_9a", "id": "2h9-4"}, {"t": "閱讀理解（二）", "d": "高組 › 2.閱讀理解", "f": "生活科技面面觀-閱讀理解_9b", "id": "2h9-5"}, {"t": "閱讀理解（三）", "d": "高組 › 2.閱讀理解", "f": "生活科技面面觀-閱讀理解_9c", "id": "2h9-6"}, {"t": "填充", "d": "高組 › 3.填充", "f": "生活科技面面觀-填充_9a", "id": "2h9-7"}, {"t": "填充（二）", "d": "高組 › 3.填充", "f": "生活科技面面觀-填充_9b", "id": "2h9-8"}, {"t": "填充（三）", "d": "高組 › 3.填充", "f": "生活科技面面觀-填充_9c", "id": "2h9-9"}, {"t": "抄寫句子", "d": "高組 › 4.寫字", "f": "抄寫句子9a", "id": "2h9-10"}, {"t": "抄寫句子（二）", "d": "高組 › 4.寫字", "f": "抄寫句子9b", "id": "2h9-11"}, {"t": "抄寫句子（三）", "d": "高組 › 4.寫字", "f": "抄寫句子9c", "id": "2h9-12"}], "M": [{"t": "閱讀句子", "d": "中組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_9a", "id": "2m9-1"}, {"t": "閱讀句子（二）", "d": "中組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_9b", "id": "2m9-2"}, {"t": "閱讀句子（三）", "d": "中組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_9c", "id": "2m9-3"}, {"t": "圈字詞", "d": "中組 › 2.圈字詞", "f": "圈字詞-句9a", "id": "2m9-4"}, {"t": "圈字詞（二）", "d": "中組 › 2.圈字詞", "f": "圈字詞-句9b", "id": "2m9-5"}, {"t": "圈字詞（三）", "d": "中組 › 2.圈字詞", "f": "圈字詞-句9c", "id": "2m9-6"}, {"t": "聆聽圈出字詞", "d": "中組 › 3.聆聽圈字詞", "f": "聆聽圈出字詞-句子9a", "id": "2m9-7"}, {"t": "聆聽圈出字詞（二）", "d": "中組 › 3.聆聽圈字詞", "f": "聆聽圈出字詞-句子9b", "id": "2m9-8"}, {"t": "聆聽圈出字詞（三）", "d": "中組 › 3.聆聽圈字詞", "f": "聆聽圈出字詞-句子9c", "id": "2m9-9"}, {"t": "連線配對", "d": "中組 › 4. 連線配對", "f": "9a. 八達通_購物_付款", "id": "2m9-10"}, {"t": "連線配對（二）", "d": "中組 › 4. 連線配對", "f": "9a. 媽媽_超級市場_買菜", "id": "2m9-11"}, {"t": "連線配對（三）", "d": "中組 › 4. 連線配對", "f": "9c. 爸爸_便利店場_買報紙", "id": "2m9-12"}, {"t": "填字詞", "d": "中組 › 6. 填充", "f": "9c. 填字詞-爸爸-便利店-買報紙", "id": "2m9-13"}, {"v": {"big": [{"t": "寫字「八達通」", "d": "中組 › 5. 寫字 › 3. 放大", "f": "9a3.寫字- 八達通", "id": "2m9-big1"}, {"t": "寫字「買菜」", "d": "中組 › 5. 寫字 › 3. 放大", "f": "9b3.寫字- 買菜", "id": "2m9-big2"}, {"t": "寫字「便利店」", "d": "中組 › 5. 寫字 › 3. 放大", "f": "9c3.寫字- 便利店", "id": "2m9-big3"}], "copy": [{"t": "寫字「八達通」", "d": "中組 › 5. 寫字 › 1. 抄寫字詞", "f": "9a1.寫字- 八達通-2", "id": "2m9-copy1"}, {"t": "寫字「買菜」", "d": "中組 › 5. 寫字 › 1. 抄寫字詞", "f": "9b1.寫字- 買菜-2", "id": "2m9-copy2"}, {"t": "寫字「便利店」", "d": "中組 › 5. 寫字 › 1. 抄寫字詞", "f": "9c1.寫字- 便利店-2", "id": "2m9-copy3"}], "grey": [{"t": "寫字「八達通」", "d": "中組 › 5. 寫字 › 2. 灰階字詞", "f": "9a2.寫字- 八達通", "id": "2m9-grey1"}, {"t": "寫字「買菜」", "d": "中組 › 5. 寫字 › 2. 灰階字詞", "f": "9b2.寫字- 買菜", "id": "2m9-grey2"}, {"t": "寫字「便利店」", "d": "中組 › 5. 寫字 › 2. 灰階字詞", "f": "9c2.寫字- 便利店", "id": "2m9-grey3"}]}}]}, "10": {"C": [{"t": "配字「哥哥」", "d": "初組 › 配字", "f": "配字_哥哥", "id": "2c10-1"}, {"t": "配字「乘搭巴士」", "d": "初組 › 配字", "f": "配字_乘搭巴士", "id": "2c10-2"}, {"t": "配字「快餐店」", "d": "初組 › 配字", "f": "配字_快餐店", "id": "2c10-3"}, {"t": "配字「吃午餐」", "d": "初組 › 配字", "f": "配字_吃午餐", "id": "2c10-4"}, {"t": "連線配對", "d": "初組 › 連線配對", "f": "哥哥_乘搭巴士", "id": "2c10-5"}, {"t": "連線配對（二）", "d": "初組 › 連線配對", "f": "妹妹_快餐店_吃午餐", "id": "2c10-6"}], "H": [{"t": "閱讀句子", "d": "高組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_9d", "id": "2h10-1"}, {"t": "閱讀句子（二）", "d": "高組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_9e", "id": "2h10-2"}, {"t": "閱讀理解", "d": "高組 › 2.閱讀理解", "f": "生活科技面面觀-閱讀理解_9d", "id": "2h10-3"}, {"t": "閱讀理解（二）", "d": "高組 › 2.閱讀理解", "f": "生活科技面面觀-閱讀理解_9e", "id": "2h10-4"}, {"t": "填充", "d": "高組 › 3.填充", "f": "生活科技面面觀-填充_9d", "id": "2h10-5"}, {"t": "填充（二）", "d": "高組 › 3.填充", "f": "生活科技面面觀-填充_9e", "id": "2h10-6"}, {"t": "抄寫句子", "d": "高組 › 4.寫字", "f": "抄寫句子9d", "id": "2h10-7"}, {"t": "抄寫句子（二）", "d": "高組 › 4.寫字", "f": "抄寫句子9e", "id": "2h10-8"}], "M": [{"t": "閱讀句子", "d": "中組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_9d", "id": "2m10-1"}, {"t": "閱讀句子（二）", "d": "中組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_9e", "id": "2m10-2"}, {"t": "圈字詞", "d": "中組 › 2.圈字詞", "f": "圈字詞-句9d", "id": "2m10-3"}, {"t": "圈字詞（二）", "d": "中組 › 2.圈字詞", "f": "圈字詞-句9e", "id": "2m10-4"}, {"t": "聆聽圈出字詞", "d": "中組 › 3.聆聽圈字詞", "f": "聆聽圈出字詞-句子9d", "id": "2m10-5"}, {"t": "聆聽圈出字詞（二）", "d": "中組 › 3.聆聽圈字詞", "f": "聆聽圈出字詞-句子9e", "id": "2m10-6"}, {"t": "連線配對", "d": "中組 › 4. 連線配對", "f": "9d. 哥哥_乘搭巴士", "id": "2m10-7"}, {"t": "連線配對（二）", "d": "中組 › 4. 連線配對", "f": "9e. 妹妹_快餐店_吃午餐", "id": "2m10-8"}, {"t": "填字詞", "d": "中組 › 6. 填充", "f": "9d. 填字詞-哥哥-乘搭巴士", "id": "2m10-9"}, {"t": "填字詞（二）", "d": "中組 › 6. 填充", "f": "9e. 填字詞-妹妹-快餐店-吃午餐", "id": "2m10-10"}, {"v": {"big": [{"t": "寫字「乘搭巴士」", "d": "中組 › 5. 寫字 › 3. 放大", "f": "9d3.寫字- 乘搭巴士", "id": "2m10-big1"}, {"t": "寫字「吃午餐」", "d": "中組 › 5. 寫字 › 3. 放大", "f": "9e3.寫字- 吃午餐", "id": "2m10-big2"}], "copy": [{"t": "寫字「乘搭巴士」", "d": "中組 › 5. 寫字 › 1. 抄寫字詞", "f": "9d1.寫字- 乘搭巴士-2", "id": "2m10-copy1"}, {"t": "寫字「吃午餐」", "d": "中組 › 5. 寫字 › 1. 抄寫字詞", "f": "9e1.寫字- 吃午餐-2", "id": "2m10-copy2"}], "grey": [{"t": "寫字「乘搭巴士」", "d": "中組 › 5. 寫字 › 2. 灰階字詞", "f": "9d2.寫字- 乘搭巴士", "id": "2m10-grey1"}, {"t": "寫字「吃午餐」", "d": "中組 › 5. 寫字 › 2. 灰階字詞", "f": "9e2.寫字- 吃午餐", "id": "2m10-grey2"}]}}]}, "11": {"C": [{"t": "配字「手乾」", "d": "初組 › 配字", "f": "配字_手乾", "id": "2c11-1"}, {"t": "配字「開關」", "d": "初組 › 配字", "f": "配字_開關", "id": "2c11-2"}, {"t": "連線配對", "d": "初組 › 連線配對", "f": "安全_手乾_開關", "id": "2c11-3"}], "H": [{"t": "閱讀句子", "d": "高組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_10a", "id": "2h11-1"}, {"t": "閱讀理解", "d": "高組 › 2.閱讀理解", "f": "生活科技面面觀-閱讀理解_10a", "id": "2h11-2"}, {"t": "填充", "d": "高組 › 3.填充", "f": "生活科技面面觀-填充_10a", "id": "2h11-3"}, {"t": "抄寫句子", "d": "高組 › 4.寫字", "f": "抄寫句子10a", "id": "2h11-4"}], "M": [{"t": "閱讀句子", "d": "中組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_10a", "id": "2m11-1"}, {"t": "圈字詞", "d": "中組 › 2.圈字詞", "f": "圈字詞-句10a", "id": "2m11-2"}, {"t": "圈字詞（二）", "d": "中組 › 2.圈字詞", "f": "圈字詞-句10a2", "id": "2m11-3"}, {"t": "聆聽圈出字詞", "d": "中組 › 3.聆聽圈字詞", "f": "聆聽圈出字詞-句子10a", "id": "2m11-4"}, {"t": "連線配對", "d": "中組 › 4. 連線配對", "f": "10a. 科技產品_安全_正確", "id": "2m11-5"}, {"t": "連線配對（二）", "d": "中組 › 4. 連線配對", "f": "10a2. 態度_手乾_開關", "id": "2m11-6"}, {"t": "填字詞", "d": "中組 › 6. 填充", "f": "10a. 填字詞-安全-正確-開關", "id": "2m11-7"}, {"v": {"big": [{"t": "寫字「安全」", "d": "中組 › 5. 寫字 › 3. 放大", "f": "10a3.寫字- 安全", "id": "2m11-big1"}], "copy": [{"t": "寫字「安全」", "d": "中組 › 5. 寫字 › 1. 抄寫字詞", "f": "10a1.寫字- 安全-2", "id": "2m11-copy1"}], "grey": [{"t": "寫字「安全」", "d": "中組 › 5. 寫字 › 2. 灰階字詞", "f": "10a2.寫字- 安全", "id": "2m11-grey1"}]}}]}, "12": {"H": [{"t": "句式「不開……」", "d": "高組 › 6.句式", "f": "不開..", "id": "2h12-1"}], "M": [{"t": "連線配對", "d": "中組 › 4. 連線配對", "f": "10b1. 涼_不開_節省能源", "id": "2m12-1"}, {"t": "句式「不開……」", "d": "中組 › 9. 句式", "f": "不開", "id": "2m12-2"}]}, "13": {"C": [{"t": "配字「距離」", "d": "初組 › 配字", "f": "配字_距離", "id": "2c13-1"}, {"t": "配字「螢幕」", "d": "初組 › 配字", "f": "配字_螢幕", "id": "2c13-2"}, {"t": "連線配對", "d": "初組 › 連線配對", "f": "螢幕_距離", "id": "2c13-3"}], "H": [{"t": "閱讀句子", "d": "高組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_10b", "id": "2h13-1"}, {"t": "閱讀理解", "d": "高組 › 2.閱讀理解", "f": "生活科技面面觀-閱讀理解_10b", "id": "2h13-2"}, {"t": "填充", "d": "高組 › 3.填充", "f": "生活科技面面觀-填充_10b", "id": "2h13-3"}, {"t": "抄寫句子", "d": "高組 › 4.寫字", "f": "抄寫句子10b", "id": "2h13-4"}], "M": [{"t": "閱讀句子", "d": "中組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_10b", "id": "2m13-1"}, {"t": "圈字詞", "d": "中組 › 2.圈字詞", "f": "圈字詞-句10b", "id": "2m13-2"}, {"t": "圈字詞（二）", "d": "中組 › 2.圈字詞", "f": "圈字詞-句10b2", "id": "2m13-3"}, {"t": "聆聽圈出字詞", "d": "中組 › 3.聆聽圈字詞", "f": "聆聽圈出字詞-句子10b", "id": "2m13-4"}, {"t": "連線配對", "d": "中組 › 4. 連線配對", "f": "10b2. 適當的_距離_螢幕_長時間", "id": "2m13-5"}, {"t": "填字詞", "d": "中組 › 6. 填充", "f": "10b. 填字詞-涼-不開-螢幕", "id": "2m13-6"}, {"v": {"big": [{"t": "寫字「螢幕」", "d": "中組 › 5. 寫字 › 3. 放大", "f": "10b3.寫字- 螢幕", "id": "2m13-big1"}], "copy": [{"t": "寫字「螢幕」", "d": "中組 › 5. 寫字 › 1. 抄寫字詞", "f": "10b1.寫字- 螢幕-2", "id": "2m13-copy1"}], "grey": [{"t": "寫字「螢幕」", "d": "中組 › 5. 寫字 › 2. 灰階字詞", "f": "10b2.寫字- 螢幕", "id": "2m13-grey1"}]}}]}, "14": {"C": [{"t": "配字「大家」", "d": "初組 › 配字", "f": "配字_大家", "id": "2c14-1"}, {"t": "配字「舒適」", "d": "初組 › 配字", "f": "配字_舒適", "id": "2c14-2"}, {"t": "連線配對", "d": "初組 › 連線配對", "f": "大家_舒適", "id": "2c14-3"}, {"t": "代詞「大家」", "d": "初組 › 代詞", "f": "代詞-初-大宾", "id": "2c14-4"}], "H": [{"t": "閱讀句子", "d": "高組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_11", "id": "2h14-1"}, {"t": "閱讀理解", "d": "高組 › 2.閱讀理解", "f": "生活科技面面觀-閱讀理解_11", "id": "2h14-2"}, {"t": "填充", "d": "高組 › 3.填充", "f": "生活科技面面觀-填充_11", "id": "2h14-3"}, {"t": "抄寫句子", "d": "高組 › 4.寫字", "f": "抄寫句子11", "id": "2h14-4"}, {"t": "形容詞「涼快、方便、舒適」", "d": "高組 › 7.形容詞", "f": "副詞—涼快-舒適-方便", "id": "2h14-5"}, {"t": "代詞「大家」", "d": "高組 › 8.代詞", "f": "代詞-高-大家", "id": "2h14-6"}], "M": [{"t": "閱讀句子", "d": "中組 › 1.閱讀句子", "f": "生活科技面面觀-閱讀句子_11", "id": "2m14-1"}, {"t": "圈字詞", "d": "中組 › 2.圈字詞", "f": "圈字詞-句11", "id": "2m14-2"}, {"t": "聆聽圈出字詞", "d": "中組 › 3.聆聽圈字詞", "f": "聆聽圈出字詞-句子11", "id": "2m14-3"}, {"t": "連線配對", "d": "中組 › 4. 連線配對", "f": "11.1大家_得宜_舒適", "id": "2m14-4"}, {"t": "連線配對（二）", "d": "中組 › 4. 連線配對", "f": "11.2 科技產品", "id": "2m14-5"}, {"t": "填字詞", "d": "中組 › 6. 填充", "f": "11. 填字詞-大家-得宜-舒適", "id": "2m14-6"}, {"v": {"big": [{"t": "寫字「大家」", "d": "中組 › 5. 寫字 › 3. 放大", "f": "11.3寫字- 大家", "id": "2m14-big1"}], "copy": [{"t": "寫字「大家」", "d": "中組 › 5. 寫字 › 1. 抄寫字詞", "f": "11.1寫字- 大家-2", "id": "2m14-copy1"}], "grey": [{"t": "寫字「大家」", "d": "中組 › 5. 寫字 › 2. 灰階字詞", "f": "11.2寫字- 大家", "id": "2m14-grey1"}]}}, {"t": "形容詞「涼快、方便、舒適」", "d": "中組 › 7. 形容詞", "f": "形容詞_中組-方便-涼快-舒適", "id": "2m14-7"}, {"t": "代詞「大家」", "d": "中組 › 8. 代詞", "f": "代詞-中-大家", "id": "2m14-8"}]}, "15": {"C": [{"t": "微波爐說明書（封面）", "d": "微波爐說明書", "f": "閱讀理解-微波爐說明書封面-中", "id": "2c15-1"}], "H": [{"t": "微波爐說明書（封面）", "d": "微波爐說明書", "f": "閱讀理解-微波爐說明書封面-高", "id": "2h15-1"}, {"t": "微波爐說明書（正面圖）", "d": "微波爐說明書", "f": "閱讀理解-微波爐說明書正面圖-高", "id": "2h15-2"}], "M": [{"t": "微波爐說明書（封面）", "d": "微波爐說明書", "f": "閱讀理解-微波爐說明書封面-中高", "id": "2m15-1"}]}, "16": {"C": [{"t": "閱讀水費單", "d": "閱讀水費單", "f": "閱讀-水費單-中", "id": "2c16-1"}], "H": [{"t": "閱讀水費單", "d": "閱讀水費單", "f": "閱讀-水費單-高", "id": "2h16-1"}], "M": [{"t": "閱讀水費單", "d": "閱讀水費單", "f": "閱讀-水費單-中", "id": "2c16-1"}]}, "end": {"C": [{"t": "寫字「三」", "d": "初組 › 寫字", "f": "B.寫字- 三", "id": "2cend-1"}, {"t": "寫字「口」", "d": "初組 › 寫字", "f": "B.寫字- 口", "id": "2cend-2"}, {"t": "寫字「土」", "d": "初組 › 寫字", "f": "B.寫字- 土", "id": "2cend-3"}, {"t": "寫字「王」", "d": "初組 › 寫字", "f": "B.寫字- 王", "id": "2cend-4"}, {"t": "評估卷", "d": "評估卷", "f": "評估卷-中初組", "id": "2cend-5"}], "H": [{"t": "評估卷", "d": "評估卷", "f": "評估卷-高組", "id": "2hend-1"}], "M": [{"t": "評估卷", "d": "評估卷", "f": "評估卷-中高組", "id": "2mend-1"}]}};
+const WSIMG2 = {"2c1-1": 1, "2c1-2": 1, "2c1-3": 1, "2c1-4": 1, "2h1-1": 1, "2h1-2": 1, "2h1-3": 1, "2h1-4": 1, "2h1-5": 1, "2m1-1": 1, "2m1-2": 1, "2m1-3": 1, "2m1-big1": 1, "2m1-copy1": 1, "2m1-grey1": 1, "2c2-1": 1, "2c2-2": 1, "2c2-3": 1, "2h2-1": 1, "2h2-2": 1, "2h2-3": 1, "2h2-4": 1, "2h2-5": 1, "2h2-6": 1, "2m2-1": 1, "2m2-2": 1, "2m2-3": 1, "2m2-4": 1, "2m2-big1": 1, "2m2-copy1": 1, "2m2-grey1": 1, "2c3-1": 1, "2c3-2": 1, "2c3-3": 1, "2h3-1": 1, "2h3-2": 1, "2h3-3": 1, "2h3-4": 1, "2m3-1": 1, "2m3-2": 1, "2m3-3": 1, "2m3-4": 1, "2m3-big1": 1, "2m3-copy1": 1, "2m3-grey1": 1, "2c4-1": 1, "2c4-2": 1, "2c4-3": 1, "2c4-4": 1, "2h4-1": 1, "2h4-2": 1, "2h4-3": 1, "2h4-4": 1, "2h4-5": 1, "2m4-1": 1, "2m4-2": 1, "2m4-3": 1, "2m4-4": 1, "2m4-big1": 1, "2m4-copy1": 1, "2m4-grey1": 1, "2m4-5": 1, "2c5-1": 1, "2c5-2": 1, "2c5-3": 1, "2c5-4": 1, "2h5-1": 1, "2h5-2": 1, "2h5-3": 1, "2h5-4": 1, "2m5-1": 1, "2m5-2": 1, "2m5-3": 1, "2m5-4": 1, "2m5-big1": 1, "2m5-copy1": 1, "2m5-grey1": 1, "2c6-1": 1, "2c6-2": 1, "2c6-3": 1, "2h6-1": 1, "2h6-2": 1, "2h6-3": 1, "2h6-4": 1, "2m6-1": 1, "2m6-2": 1, "2m6-3": 1, "2m6-4": 1, "2m6-5": 1, "2m6-6": 1, "2m6-big1": 1, "2m6-copy1": 1, "2m6-grey1": 1, "2c7-1": 1, "2c7-2": 1, "2h7-1": 1, "2h7-2": 1, "2h7-3": 1, "2h7-4": 1, "2m7-1": 1, "2m7-2": 1, "2m7-3": 1, "2m7-big1": 1, "2m7-copy1": 1, "2m7-grey1": 1, "2c8-1": 1, "2c8-2": 1, "2h8-1": 1, "2h8-2": 1, "2h8-3": 1, "2h8-4": 1, "2m8-1": 1, "2m8-2": 1, "2m8-3": 1, "2m8-4": 1, "2m8-big1": 1, "2m8-copy1": 1, "2m8-grey1": 1, "2c9-1": 1, "2c9-2": 1, "2c9-3": 1, "2c9-4": 1, "2c9-5": 1, "2c9-6": 1, "2c9-7": 1, "2c9-8": 1, "2c9-9": 1, "2h9-1": 1, "2h9-2": 1, "2h9-3": 1, "2h9-4": 1, "2h9-5": 1, "2h9-6": 1, "2h9-7": 1, "2h9-8": 1, "2h9-9": 1, "2h9-10": 1, "2h9-11": 1, "2h9-12": 1, "2m9-1": 1, "2m9-2": 1, "2m9-3": 1, "2m9-4": 1, "2m9-5": 1, "2m9-6": 1, "2m9-7": 1, "2m9-8": 1, "2m9-9": 1, "2m9-10": 1, "2m9-11": 1, "2m9-12": 1, "2m9-13": 1, "2m9-big1": 1, "2m9-big2": 1, "2m9-big3": 1, "2m9-copy1": 1, "2m9-copy2": 1, "2m9-copy3": 1, "2m9-grey1": 1, "2m9-grey2": 1, "2m9-grey3": 1, "2c10-1": 1, "2c10-2": 1, "2c10-3": 1, "2c10-4": 1, "2c10-5": 1, "2c10-6": 1, "2h10-1": 1, "2h10-2": 1, "2h10-3": 1, "2h10-4": 1, "2h10-5": 1, "2h10-6": 1, "2h10-7": 1, "2h10-8": 1, "2m10-1": 1, "2m10-2": 1, "2m10-3": 1, "2m10-4": 1, "2m10-5": 1, "2m10-6": 1, "2m10-7": 1, "2m10-8": 1, "2m10-9": 1, "2m10-10": 1, "2m10-big1": 1, "2m10-big2": 1, "2m10-copy1": 1, "2m10-copy2": 1, "2m10-grey1": 1, "2m10-grey2": 1, "2c11-1": 1, "2c11-2": 1, "2c11-3": 1, "2h11-1": 1, "2h11-2": 1, "2h11-3": 1, "2h11-4": 1, "2m11-1": 1, "2m11-2": 1, "2m11-3": 1, "2m11-4": 1, "2m11-5": 1, "2m11-6": 1, "2m11-7": 1, "2m11-big1": 1, "2m11-copy1": 1, "2m11-grey1": 1, "2h12-1": 1, "2m12-1": 1, "2m12-2": 1, "2c13-1": 1, "2c13-2": 1, "2c13-3": 1, "2h13-1": 1, "2h13-2": 1, "2h13-3": 1, "2h13-4": 1, "2m13-1": 1, "2m13-2": 1, "2m13-3": 1, "2m13-4": 1, "2m13-5": 1, "2m13-6": 1, "2m13-big1": 1, "2m13-copy1": 1, "2m13-grey1": 1, "2c14-1": 1, "2c14-2": 1, "2c14-3": 1, "2c14-4": 1, "2h14-1": 1, "2h14-2": 1, "2h14-3": 1, "2h14-4": 1, "2h14-5": 1, "2h14-6": 1, "2m14-1": 1, "2m14-2": 1, "2m14-3": 1, "2m14-4": 1, "2m14-5": 1, "2m14-6": 1, "2m14-big1": 1, "2m14-copy1": 1, "2m14-grey1": 1, "2m14-7": 1, "2m14-8": 1, "2c15-1": 1, "2h15-1": 1, "2h15-2": 1, "2m15-1": 1, "2c16-1": 1, "2h16-1": 1, "2cend-1": 1, "2cend-2": 1, "2cend-3": 1, "2cend-4": 1, "2cend-5": 1, "2hend-1": 1, "2mend-1": 1};
+
+/* ───────────── ⑤ 單元二工作紙（沿用單元一的工作紙檢視器） ───────────── */
+function wsCat(){ return isU2() ? WS2 : WS; }
+function wsImgOk(id){ return !!(WSIMG[id] || WSIMG2[id]); }
+function wsTrack1Of(s){ return (s.ws!==undefined && s.ws!==null) ? s.ws : (s.lv==1 ? 'H' : 'M'); }
+function wsTrack2Of(s){ return (s.ws2!==undefined && s.ws2!==null) ? s.ws2 : (({1:'H',2:'M',3:'C'})[s.lv] || 'M'); }
+const WS_TRACK2 = {H:'高組工作紙', M:'中組工作紙', C:'初組工作紙', '':'不派工作紙'};
+const WS_TRN = {H:'高組', M:'中組', C:'初組'};
 
 render();
 </script>
