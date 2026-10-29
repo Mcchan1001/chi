@@ -1213,6 +1213,143 @@ body.calm .vid *,body.calm .tcard,body.calm .tcard *,body.calm .it *{animation:n
 
 body[data-scr="video"] .lessononly{display:none!important}
 body[data-scr="video"] #tPick,body[data-scr="video"] #tTop .meta{display:none}
+
+/* ==================================================================
+   ⭐ 特別課節（v38）
+   ================================================================== */
+:root{ --uS:#FFDCC8; --uSd:#B4471A; }
+.tg.tintS{background-color:var(--uS)}
+.uhead.uS{--tc:var(--uS);--td:var(--uSd);--ts:#F2B08C}
+.swait .uchip.uS{--tc:var(--uS)}
+.spcol{display:flex;flex-direction:column;gap:clamp(12px,1.4vw,18px);min-width:0}
+.special.sS{--tc:var(--uS);--td:var(--uSd);--ts:#F2B08C}
+.special.sS .tg{--w:78px}
+.spcol .special{flex:1}
+
+/* 分層設定（打招呼頁） */
+.tierpanel{margin-top:18px;background:rgba(255,255,255,.85);border:1px solid rgba(31,43,58,.1);border-radius:20px;padding:10px 16px}
+.tierpanel summary{cursor:pointer;font-weight:900;font-size:1.02rem;color:var(--mute);padding:4px 0}
+.tiergrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}
+.tiercol{border-radius:16px;padding:10px;background:#F6F8FB}
+.tiercol.t-h{background:#E3F4EA} .tiercol.t-m{background:#E8F2FB} .tiercol.t-s{background:#FFF4D6} .tiercol.t-x{background:#EEF0F3}
+.tierhd{font-weight:900;margin-bottom:6px}
+.tierchips{display:flex;flex-wrap:wrap;gap:6px}
+.tchip{border:none;border-radius:12px;padding:6px 12px;font-weight:800;background:#fff;box-shadow:0 2px 0 rgba(0,0,0,.08);cursor:pointer;font-size:.95rem}
+.tnone{color:var(--mute);font-size:.9rem}
+@media(max-width:900px){ .tiergrid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+
+/* 分段標籤 */
+.sptabs{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 12px}
+.sptab{display:flex;align-items:center;gap:8px;border:none;border-radius:16px;padding:8px 14px;background:rgba(255,255,255,.8);
+  font-weight:900;font-size:1rem;color:var(--mute);box-shadow:0 3px 0 rgba(120,130,170,.18);cursor:pointer}
+.sptab b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#EEF2F8;font-size:.85rem}
+.sptab small{font-weight:700;font-size:.78rem;opacity:.8}
+.sptab.on{background:var(--uS);color:var(--uSd)}
+.sptab.on b{background:#fff}
+.sptime{margin-left:auto;font-weight:900;color:var(--uSd);background:#fff;border-radius:14px;padding:6px 12px}
+
+/* 分層提問卡 */
+.askcard{margin:0 0 16px;background:#FFFDF6;border:2px solid #F1DFA6;border-radius:22px;padding:12px 14px}
+.askhd{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.askt{font-weight:900;font-size:1.12rem}
+.asks{color:var(--mute);font-weight:700;font-size:.9rem;flex:1;min-width:200px}
+.askb{display:flex;gap:6px;flex-wrap:wrap}
+.askcols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.askcol{border-radius:16px;padding:10px 12px;background:#fff;border:2px solid transparent;display:flex;flex-direction:column;gap:6px}
+.askcol.t-s{border-color:#F6DC8F} .askcol.t-m{border-color:#A9D0F0} .askcol.t-h{border-color:#9FD8B8}
+.askcol.on{box-shadow:0 0 0 4px rgba(255,170,60,.45)}
+.ath{font-weight:900;font-size:.92rem;color:var(--mute)}
+.aq{font-weight:900;font-size:1.18rem;line-height:1.9}
+.aa{font-size:.9rem;line-height:1.5;color:#3C4757}
+.aa b{display:inline-block;font-size:.75rem;background:#EEF2F8;border-radius:8px;padding:1px 7px;margin-right:6px;color:var(--mute)}
+.anames{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:4px}
+.aname{border:none;border-radius:12px;padding:6px 12px;font-weight:800;background:#F1F4F8;cursor:pointer;font-size:.95rem}
+.aname.on{background:#FFB85C;color:#fff}
+.aname.done::after{content:" ✓";color:#1E8E62}
+.askpick{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;background:#FFF1DE;border-radius:14px;padding:8px 12px}
+.apn{font-size:1.2rem;font-weight:800}
+.apc{margin-left:auto;font-weight:800;color:var(--mute)}
+@media(max-width:900px){ .askcols{grid-template-columns:1fr} }
+
+/* 思考沙漏 */
+.think{position:fixed;right:24px;bottom:24px;width:150px;height:150px;border-radius:50%;z-index:60;pointer-events:none;
+  display:flex;align-items:center;justify-content:center;background:#fff;box-shadow:0 10px 30px rgba(20,30,60,.25)}
+.tk-ring{position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(#FFB85C calc(var(--p,0)*1%), #F1F4F8 0);
+  -webkit-mask:radial-gradient(circle,transparent 62%,#000 63%);mask:radial-gradient(circle,transparent 62%,#000 63%);
+  animation:tkfill 5s linear forwards;animation-delay:var(--d,0ms)}
+@property --p{syntax:'<number>';inherits:false;initial-value:0}
+@keyframes tkfill{from{--p:0}to{--p:100}}
+.tk-in{position:relative;text-align:center}
+.tk-e{font-size:2.4rem;line-height:1}
+.tk-t{font-weight:900;font-size:1.25rem;margin-top:4px}
+.tk-n{font-weight:800;font-size:.95rem;color:var(--mute)}
+.think.go{background:#D4F1E3}
+.calm .tk-ring{animation-duration:5s}
+
+/* 聲量計 */
+.micbox{position:fixed;left:24px;bottom:24px;width:320px;z-index:61;background:#fff;border-radius:20px;padding:12px 14px;
+  box-shadow:0 10px 30px rgba(20,30,60,.22);display:none}
+.micbox.on{display:block}
+.mc-hd{display:flex;justify-content:space-between;align-items:center;font-weight:900;margin-bottom:8px}
+.mc-hd button{border:none;background:#EEF2F8;border-radius:10px;padding:2px 9px;cursor:pointer;font-weight:900}
+.mc-bar{position:relative;height:30px;border-radius:15px;background:#EEF2F8;overflow:hidden}
+.mc-bar i{position:absolute;top:0;bottom:0;width:2px;background:rgba(31,43,58,.2)}
+.mc-fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:15px;transition:width .05s linear}
+.mc-fill.lo{background:#F6C453} .mc-fill.ok{background:#7FD3B0} .mc-fill.hi{background:#3DB27E}
+.mc-peak{position:absolute;top:2px;bottom:2px;width:4px;border-radius:2px;background:#1F2B3A;left:0}
+.mc-lb{margin-top:8px;font-weight:900;font-size:1.1rem;text-align:center}
+
+/* 神秘袋、抽卡 */
+.bagwrap{display:flex;flex-direction:column;align-items:center;gap:6px;margin:12px 0}
+.bagbig{font-size:7rem;line-height:1}
+.baghint{font-weight:900;font-size:1.3rem;color:var(--mute)}
+.objcard,.spincard{display:flex;flex-direction:column;align-items:center;gap:8px;margin:12px auto;padding:14px 20px;
+  background:#fff;border-radius:24px;box-shadow:var(--sh);width:min(420px,100%)}
+.objcard img,.spincard img{width:min(300px,100%);max-height:260px;object-fit:contain;border-radius:16px}
+.objcard .o-em.big,.spincard .o-em.big{font-size:7rem}
+.objname{font-size:2rem;font-weight:900}
+.objname.q{color:var(--mute)}
+.objuse{font-size:1.5rem;font-weight:900;color:var(--uSd)}
+.spingal{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:12px 0}
+.spmini{width:96px;height:96px;border-radius:16px;background:#fff;box-shadow:var(--sh);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.spmini img{width:100%;height:100%;object-fit:cover}
+.spmini .o-em.big{font-size:3rem}
+.spframe{justify-content:center;flex-wrap:wrap;margin:10px 0}
+.strip.dash{border-style:dashed;opacity:.85}
+.sphelp{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:10px;font-weight:900;font-size:1.15rem}
+.btn.big{font-size:1.4rem;padding:14px 30px}
+
+/* 課文偵探 */
+.fsent{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:16px 0 8px}
+.fseg{border:3px solid #DCE3EC;background:#fff;border-radius:14px;padding:8px 14px;font-size:1.7rem;font-weight:900;cursor:pointer}
+.fseg.pun{padding:8px 8px}
+.fseg.hit.c1{background:var(--c1);border-color:var(--c1d)}
+.fseg.hit.c2{background:var(--c2);border-color:var(--c2d)}
+
+/* 配對後自動組句、答對後的句子 */
+.mksent{display:flex;flex-direction:column;gap:8px;align-items:center;margin-top:12px}
+.mksent button{border:none;background:#F3F0FF;border-radius:14px;padding:8px 16px;font-weight:900;font-size:1.2rem;cursor:pointer}
+.thensay{margin:14px auto 0;text-align:center;font-size:1.6rem;font-weight:900;background:#E3F4EA;border-radius:18px;padding:12px 18px;max-width:640px}
+
+/* 自我評估 */
+.selfrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;background:#fff;border-radius:20px;
+  padding:12px 16px;margin:10px auto;max-width:760px;box-shadow:var(--sh)}
+.selft{font-weight:900;font-size:1.3rem;flex:1;min-width:220px}
+.selfo{display:flex;gap:10px}
+.selfb{display:flex;flex-direction:column;align-items:center;gap:2px;border:3px solid #E3E8EF;background:#fff;border-radius:16px;padding:8px 12px;cursor:pointer}
+.selfb span{font-size:2.4rem;line-height:1}
+.selfb small{font-weight:800;font-size:.85rem}
+.selfb.on{border-color:#3DB27E;background:#E3F4EA}
+
+/* 學生：輪到你 */
+.pickban{background:#FFB85C;color:#fff;font-weight:900;font-size:1.35rem;text-align:center;border-radius:18px;padding:12px;margin-bottom:12px;
+  animation:pickpulse 1.2s ease-in-out infinite}
+@keyframes pickpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
+.calm .pickban{animation:none}
+
+.spframe .strip{padding:6px 12px 4px}
+.lv.tier-h{background:#D4F1E3;color:#17785A} .lv.tier-m{background:#DCEBFA;color:#1B63A0} .lv.tier-s{background:#FFF0C9;color:#8F5A00}
 </style>
 </head>
 <body>
@@ -1763,7 +1900,7 @@ document.body.classList.toggle('nojy', !JYON);
 /* ==================================================================
    狀態 + 同步（分權儲存）
    ================================================================== */
-const APPVER = 'v37';
+const APPVER = 'v38';
 const K = 'zw26';
 const KC = K+'.ctrl', KB = K+'.bank', KP = K+'.pulse', KS = K+'.stu';
 const KA = sid => K+'.ans.'+sid;
@@ -1962,6 +2099,7 @@ function phaseKey(){
           CTRL.sub, CTRL.qIdx, CTRL.xIdx||0,
           CTRL.vid ? [CTRL.vid.id,CTRL.vid.i,CTRL.vid.play,CTRL.vid.end,CTRL.vid.sub,CTRL.vid.jp].join('.') : '',
           CTRL.game?CTRL.game.w:'',
+          CTRL.sp ? [CTRL.sp.bag,CTRL.sp.stage,CTRL.sp.card,CTRL.sp.use,CTRL.sp.pick].join('.') : '',
           (CTRL.mode==='lis' && CTRL.lis) ? [CTRL.lis.s,CTRL.lis.run,CTRL.lis.i,CTRL.lis.st,CTRL.lis.plays,
             CTRL.lis.pick,CTRL.lis.tx?1:0,CTRL.lis.sp?1:0].join('.') : ''].join('|');
 }
@@ -2923,8 +3061,10 @@ function renderLesson(){
     `<optgroup label="📖 單元一 · 朋輩在我心">` + LESSONS.map(l=>
     `<option value="${l.no}" ${(!lisOn() && curUnit()===1 && l.no===CTRL.lessonNo)?'selected':''}>第 ${l.no} 連堂 — ${
       l.sentence.slice(0,15)}${l.sentence.length>15?'…':''}${hasQA(l.no,1)?'':'（問答未編）'}</option>`).join('')
-    + `</optgroup><optgroup label="🔬 單元二 · 生活科技面面觀">` + LESSONS2.map(l=>
+    + `</optgroup><optgroup label="🔬 單元二 · 生活科技面面觀">` + LESSONS2.filter(l=>!l.sp).map(l=>
     `<option value="U2:${l.no}" ${(!lisOn() && curUnit()===2 && l.no===CTRL.lessonNo)?'selected':''}>第 ${l.no} 連堂 — ${l.title}</option>`).join('')
+    + `</optgroup><optgroup label="⭐ 特別課節">` + LESSONS2.filter(l=>l.sp).map(l=>
+    `<option value="U2:${l.no}" ${(!lisOn() && curUnit()===2 && l.no===CTRL.lessonNo)?'selected':''}>${l.title}</option>`).join('')
     + `</optgroup><optgroup label="🎧 聆聽專題 · 聽指示做得到">` + LIS.map(x=>
     `<option value="L${x.s}" ${(lisOn() && lisS().s===x.s)?'selected':''}>聆聽第 ${x.s} 節 — ${x.title}</option>`).join('')
     + `</optgroup>`;
@@ -2993,7 +3133,8 @@ function tHello0(){
     <div class="row" style="margin-top:18px">
       <button class="btn mint" onclick="speak('${g.zh}，${goals.map(x=>x.zh).join('。')}')">🔊 讀出目標</button>
       <button class="btn lemon" onclick="zoomQR()">🔍 放大 QR 碼</button>
-      <button class="btn blue" onclick="tStep('notes')">下一步：寫姓名、日期、單元 →</button>
+      ${isSp() ? `<button class="btn blue" onclick="startSent()">下一步：課堂活動 →</button>`
+               : `<button class="btn blue" onclick="tStep('notes')">下一步：寫姓名、日期、單元 →</button>`}
     </div>
     <div class="note">派好平板電腦後，叫同學開啟相機對住左邊的 QR 碼，
       一掃就會直接開啟學生版，按自己的名字就可以上課。
@@ -3432,7 +3573,7 @@ function resetAll(){
   lisStop(); LIS_PLAYING = false;
   const ep = Date.now().toString(36);
   CTRL = {...CTRL0, paid:CTRL.paid||{}, unit:CTRL.unit, screen:CTRL.screen, last:CTRL.last,
-          lessonNo:CTRL.lessonNo, lessonDate:CTRL.lessonDate, epoch:ep, ...keepLis};
+          lessonNo:CTRL.lessonNo, lessonDate:CTRL.lessonDate, epoch:ep, spTier:CTRL.spTier, ...keepLis};
   STEP = 'hello'; CTRL.phase = 'hello'; u2Reset();
   if(keepLis.mode) CTRL.lis.st = lisFresh(lisItem());
   STUDENTS.forEach(s=>{ ANS[s.id]={a:{},prog:'',ep}; localStorage.removeItem(KA(s.id)); });
@@ -6349,7 +6490,7 @@ function tHome(){
   const qaN = LESSONS.filter(l=>hasQA(l.no,1)).length;
   const stat = {
     1:`${LESSONS.length} 連堂 · ${qaN} 課有問答`,
-    2:`${LESSONS2.length} 連堂 · 含課文影片`, 3:'準備中', 4:'準備中'
+    2:`${LESSONS2.filter(l=>!l.sp).length} 連堂 · 含課文影片`, 3:'準備中', 4:'準備中'
   };
   let k = 0;
   const tiles = [1,2,3,4].map(u=>{
@@ -6373,10 +6514,16 @@ function tHome(){
     </div>
     <div class="tiles">${tiles}</div>
     <div class="homerow">
+      <div class="spcol">
       <button class="special" onclick="goUnit('L')">
         ${tile(UNIT_L.ch, 'L', k++)}
         <span class="sptx"><b>聆聽專題 · 聽指示做得到</b>
           <span>${LIS.length} 節 · 每節有 60 分鐘和 90 分鐘版本</span></span></button>
+      <button class="special sS" onclick="goUnit('S')">
+        ${tile(UNIT_S.ch, 'S', k++)}
+        <span class="sptx"><b>特別課節</b>
+          <span>${spLessons().length} 課 · 觀課及專題課節</span></span></button>
+      </div>
       ${resume}
       <div class="qrcard">
         <div class="qrsvg" onclick="zoomQR()" title="放大 QR 碼">${QR_SVG}</div>
@@ -6396,7 +6543,7 @@ function tUnitPage(){
   if(cards.length){
     body = `<div class="lcards">${cards.map(c=>{
       const key = u + ':' + c.k, cur = key === lk;
-      return `<button class="lcard ${cur?'cur':''}" onclick="openLesson(${u==='L'?"'L'":u},${c.k})">
+      return `<button class="lcard ${cur?'cur':''}" onclick="openLesson(${(u==='L'||u==='S')?"'"+u+"'":u},${c.k})">
         ${tile(c.g, I.t, 0)}
         <span class="lmain"><span class="ltxt">${esc(c.text)}</span>
           <span class="ltags">${cur?'<span class="ltag warn">上次上到這裏</span>':''}${
@@ -6410,6 +6557,7 @@ function tUnitPage(){
       S.pv ? `<div class="pv">${ruby(S.pv)}</div>` : ''}</div>`;
   }
   const info = u==='L' ? `${LIS.length} 節 · 每節有 60 分鐘和 90 分鐘版本`
+             : u==='S' ? `${cards.length} 課 · 觀課及專題課節`
              : cards.length ? `${cards.length} 連堂` : '準備中';
   return `<div class="upage">
     <div class="uhead u${I.t==='L'?'L':I.t}">
@@ -6584,7 +6732,7 @@ function settle(){
 function tReview(){
   recalcAll();
   const done = !!(CTRL.paid||{})[payKey()];
-  const rank = STUDENTS.map(s=>({s, ...scoreOf(s.id), coin:CTRL.coins[s.id]||0}))
+  const rank = rosterNow().map(s=>({s, ...scoreOf(s.id), coin:CTRL.coins[s.id]||0}))
                        .sort((a,b)=> b.coin-a.coin || a.s.n.localeCompare(b.s.n));
   const MED = ['🥇','🥈','🥉'];
   const CLS = ['gold','silver','bronze'];
@@ -7610,7 +7758,8 @@ function vChoice(it, key){
     const vis = optVisual(it, o, lv);
     const st = rec.ok && o===it.ans ? 'right' : (rec.v===o && !rec.ok ? 'wrongkeep' : '');
     return `<button class="opt ${st}" onclick="iAct('choice','${key}',${j})">${vis}${showText?`<span class="o-t">${ruby(o)}</span>`:''}</button>`;
-  }).join('') + `</div>`;
+  }).join('') + `</div>` + ((rec.ok && it.then) ? `<div class="thensay">${ruby(it.then)}
+    <button class="btn sm mint" style="margin-left:10px" onclick="speak('${it.then.replace(/'/g,'')}')">🔊</button></div>` : '');
 }
 function iChoice(key, j){
   const it = curItem(), o = (U2UI.lists[key]||[])[j], rec = recGet(key) || {};
@@ -7803,7 +7952,9 @@ function vMatch(it, key){
   const rch = right.map(ri=>{ const x = pairs.find(y=>y._i===ri);
     return `<button class="chip ${usedR.has(ri)?'used':''}" ${usedR.has(ri)?'disabled':''} onclick="iAct('mright','${key}',${ri})">${ruby(x.r)}</button>`; }).join('');
   return qHead(it) + `<div class="matchwrap"><div class="mlefts">${left}</div><div class="mrights">${rch}</div></div>
-    <div class="sorthint">${rec.ok?'✅ 全部配對成功！':(sel!==undefined?'再按右邊的詞語':'先按左邊的一張，再按右邊的詞語')}</div>`;
+    <div class="sorthint">${rec.ok?'✅ 全部配對成功！':(sel!==undefined?'再按右邊的詞語':'先按左邊的一張，再按右邊的詞語')}</div>`
+    + ((rec.ok && it.mk) ? `<div class="mksent">${pairs.map(x=>{ const s = fillv(it.mk, x);
+        return `<button onclick="speak('${s.replace(/'/g,'')}')">🔊 ${ruby(s)}</button>`; }).join('')}</div>` : '');
 }
 function iMLeft(key, i){
   const rec = recGet(key) || {m:{}}; if(rec.ok) return;
@@ -7819,6 +7970,7 @@ function iMRight(key, ri){
   const done = Object.keys(m).length >= (U2UI.lists[key]||[]).length;
   recPut(key, {ok:done?1:0, e:rec.e||0, m}); render();
   if(done) afterCorrect(it);
+  if(done && it.mk && ROLE==='t') speak((U2UI.lists[key]||[]).map(x=>fillv(it.mk, x)).join(''));
 }
 
 /* multi ------------------------------------------------------------- */
@@ -7857,8 +8009,8 @@ function iMCheck(key){
 
 /* talk（說話）：老師按 👍 加分 ------------------------------------------ */
 function vTalk(it, key){
-  return `<div class="talkbox"><div class="talkico">🗣️</div>${qHead(it)}
-    <div class="talknote">${ruby(ROLE==='t' ? '請同學輪流回答，說得好的按 👍' : '請說給老師和同學聽')}</div>
+  return `<div class="talkbox"><div class="talkico">${it.ico||'🗣️'}</div>${qHead(it)}
+    <div class="talknote">${ruby(ROLE==='t' ? (it.tnote||'請同學輪流回答，說得好的按 👍') : (it.snote||'請說給老師和同學聽'))}</div>
     ${(ROLE==='t' && it.tip)?`<div class="tiptv">💡 老師提示：${esc(it.tip)}</div>`:''}</div>`;
 }
 
@@ -7961,18 +8113,19 @@ function stuStatus(s, it, i, set){
   return {txt:`🔄 做緊${e}`, cls:''};
 }
 function tStatusGrid(it, i, set){
-  if(it.k==='teach') return '';
+  if(it.k==='teach' || it.k==='bag' || it.k==='spin') return '';
+  if(it.k==='self') return selfGrid(it, itKey(set, i));
   if(it.k==='talk'){
     const key = itKey(set, i);
-    return `<div class="sgrid">${STUDENTS.map(s=>`<div class="scard ${(U2UI.talked[key]||{})[s.id]?'done':''}"><div class="nm">${esc(s.n)}</div>
+    return `<div class="sgrid">${rosterNow().map(s=>`<div class="scard ${(U2UI.talked[key]||{})[s.id]?'done':''}"><div class="nm">${esc(s.n)}</div>
       <div class="row" style="margin-top:8px">
-        <button class="btn sm mint" onclick="talkOk('${key}','${s.id}')">👍 說得好 +$1</button>
+        <button class="btn sm mint" onclick="talkOk('${key}','${s.id}')">${it.okLb||'👍 說得好 +$1'}</button>
         <button class="btn sm" onclick="addCoin('${s.id}',-1)">−$1</button></div>
       <div class="coin">${(U2UI.talked[key]||{})[s.id]?'✅ 已加分':''}　💰 今日 $${CTRL.coins[s.id]||0}</div></div>`).join('')}</div>`;
   }
-  return `<div class="sgrid">${STUDENTS.map(s=>{
+  return `<div class="sgrid">${rosterNow().map(s=>{
     const st = stuStatus(s, it, i, set);
-    return `<div class="scard ${st.cls}"><div class="nm">${esc(s.n)}<span class="lv g${s.lv}">${LVNAME2[s.lv]||''}</span></div><div class="st">${st.txt}</div></div>`;
+    return `<div class="scard ${st.cls}"><div class="nm">${esc(s.n)}${isSp() ? `<span class="lv tier-${spTierOf(s.id)}">${TIERS[spTierOf(s.id)].zh}</span>` : `<span class="lv g${s.lv}">${LVNAME2[s.lv]||''}</span>`}</div><div class="st">${st.txt}</div></div>`;
   }).join('')}</div>`;
 }
 const LVNAME2 = {1:'高', 2:'中', 3:'初'};
@@ -7984,23 +8137,23 @@ function talkOk(key, sid){
 /* ---- 老師頁：句子（x）和問答（q）共用 ---- */
 function tItems(set){
   const items = itemsOf(set), i = itIdx(set), total = items.length, it = items[i];
-  const title = set==='x' ? (L().mode==='game' ? '③ 語文遊戲' : '⑤ 句子') : '⑦ 問答';
+  const title = set==='x' ? (L().mode==='sp' ? '② 課堂活動' : L().mode==='game' ? '③ 語文遊戲' : '⑤ 句子') : '⑦ 問答';
   if(!it) return `<div class="note">這一課的${set==='x'?'句子活動':'問答題'}尚未編寫。</div>`;
   const key = itKey(set, i);
   const dots = items.map((x,j)=>`<div class="pdot ${j===i?'cur':''}" onclick="${set==='x'?'xGo':'qGo'}(${j})" style="cursor:pointer" title="${esc(x.tag||'')}">${j+1}</div>`).join('');
   const interactive = scoredKind(it);
   const lastItem = i >= total-1;
   const next = lastItem
-    ? (set==='x' ? (L().mode==='game' ? `<button class="btn lemon" onclick="tStep('review')">遊戲完成 → 總結算</button>` : `<button class="btn peach" onclick="startRound()">句子完成 → ⑥ 寫字＋選字</button>`)
+    ? (set==='x' ? ((L().mode==='game'||L().mode==='sp') ? `<button class="btn lemon" onclick="tStep('review')">${L().mode==='sp'?'活動完成':'遊戲完成'} → 總結算</button>` : `<button class="btn peach" onclick="startRound()">句子完成 → ⑥ 寫字＋選字</button>`)
                  : `<button class="btn lemon" onclick="tStep('ws')">問答完成 → 工作紙</button>`)
     : `<button class="btn blue" onclick="${set==='x'?'xNav':'qNav'}(1)">${T('下一題')} →</button>`;
-  return `<div class="row" style="margin-bottom:12px">
+  return `${isSp()?spTabs(i):''}<div class="row" style="margin-bottom:12px">
       <h3 class="sec" style="margin:0;border:none;flex:1">${title}　第 ${i+1} ／ ${total}${it.tag?`　<span class="it-tag">${esc(it.tag)}</span>`:''}</h3>
       <div class="pdots">${dots}</div></div>
     ${(CTRL.qLocked && interactive) ? ansBoard(it) : ''}
     <div class="q tv it it-${it.k}">${iView(it, key)}
       ${(CTRL.showHint && it.hint)?`<div class="hintbox" style="margin-top:14px">${hintHTML(hintFix(it.hint), true, true)}</div>`:''}
-    </div>
+    </div>${(isSp() && it.ask) ? askCard(it) : ''}${isSp() ? spThinkHTML() : ''}
     <div class="row" style="margin-bottom:14px">
       <button class="btn" onclick="${set==='x'?'xNav':'qNav'}(-1)" ${i?'':'disabled'}>← ${T('上一題')}</button>
       ${it.hint?`<button class="btn lemon" onclick="toggleShowHint()">💡 ${CTRL.showHint?'收起提示':'顯示提示（全班一齊看）'}</button>`:''}
@@ -8037,7 +8190,7 @@ function sItems(me, set){
   const items = itemsOf(set), i = itIdx(set), it = items[i];
   if(!it) return wait('🌤','這一題沒有題目','請等待下一題');
   const key = itKey(set, i), showEn = me.en || LANG==='en';
-  const lab = set==='x' ? (L().mode==='game' ? '遊戲' : '句子') : '問答';
+  const lab = set==='x' ? (L().mode==='game' ? '遊戲' : L().mode==='sp' ? '活動' : '句子') : '問答';
   let body;
   if(isWrItem(it)){
     body = `${qHead(it)}<div class="qt" style="margin-top:10px">${ruby('把答案寫出來，或用鍵盤打出來')}</div>
@@ -8048,7 +8201,7 @@ function sItems(me, set){
     <div class="row" style="justify-content:center;margin-top:14px">
       <button class="btn sm lemon" onclick="toggleHint()">💡 ${T('提示')}</button></div>
     <div id="hint" class="hintbox ${CTRL.showHint?'':'hide'}">${hintHTML(hintFix(it.hint), showEn)}</div>` : '';
-  return `<div class="stu"><div class="q it it-${it.k}">
+  return `<div class="stu">${spBanner()}<div class="q it it-${it.k}">
     <div class="qt">${lab}　${i+1} ／ ${items.length}${it.tag?`　<span class="it-tag">${esc(it.tag)}</span>`:''}</div>
     ${body}${hint}</div></div>`;
 }
@@ -8621,6 +8774,533 @@ function wsTrack1Of(s){ return (s.ws!==undefined && s.ws!==null) ? s.ws : (s.lv=
 function wsTrack2Of(s){ return (s.ws2!==undefined && s.ws2!==null) ? s.ws2 : (({1:'H',2:'M',3:'C'})[s.lv] || 'M'); }
 const WS_TRACK2 = {H:'高組工作紙', M:'中組工作紙', C:'初組工作紙', '':'不派工作紙'};
 const WS_TRN = {H:'高組', M:'中組', C:'初組'};
+
+
+/* ================================================================
+   ⭐ 特別課節（v38）
+   放觀課、專題等「單元以外」的課。第一課：觀課——句式「我有……，可以……」（高組）
+   · 資料仍放在單元二（LESSONS2 第 19 課，mode:'sp'），單元二課表不會顯示
+   · 教師首頁有「特別課節」入口；學生照舊揀名字，自動跟上
+   · 分層：🌳挑戰／🌿核心／🌱支援／💤不在本節（自習）——在「打招呼」頁設定
+   · 新增：神秘袋、課文偵探、抽卡說句、自我評估、分層提問卡、思考沙漏、聲量計
+   ================================================================ */
+const UNIT_S = {no:'S', zh:'特別課節', name:'觀課及專題課節', ch:'特', t:'S'};
+
+/* ---------- 單元登記：'S' 只用於首頁入口和課表頁 ---------- */
+const _unitInfo = unitInfo;
+unitInfo = function(u){ return u==='S' ? UNIT_S : _unitInfo(u); };
+const _curUnit = curUnit;
+curUnit = function(){ return CTRL.unit==='S' ? 'S' : _curUnit(); };
+UNIT_CARDS[2] = ()=> u2Cards().filter(c=> !(LESSONS2[c.k-1]||{}).sp);
+UNIT_CARDS.S = ()=> LESSONS2.filter(l=>l.sp).map(l=>({k:l.no, g:'特', text:l.title,
+  tags:[['ok', (SENT2[l.no]||[]).length+' 個活動'], ['', l.spInfo||'']], img:IMG[l.page]}));
+function isSp(){ return curUnit()===2 && !!L().sp; }
+function spLessons(){ return LESSONS2.filter(l=>l.sp); }
+
+const _openLesson = openLesson;
+openLesson = function(u, k){
+  if(u!=='S') return _openLesson(u, k);
+  const prev = CTRL.unit; CTRL.unit = 2;          /* 由特別課節課表開課：當作單元二，避免誤當「新一堂」而清走答案 */
+  const r = _openLesson(2, k);
+  if(CTRL.screen!=='lesson') CTRL.unit = prev;    /* 老師按了「取消」 */
+  return r;
+};
+Object.assign(JYUT, {寶:'bou2', 巡:'ceon4', 予:'jyu5', 摹:'mou4', 境:'ging2', 揀:'gaan2'});
+const _lessonLabelOf = lessonLabelOf;
+lessonLabelOf = function(u, k){
+  const l = (+u===2) && LESSONS2[k-1];
+  return (l && l.sp) ? l.title : _lessonLabelOf(u, k);
+};
+const _goUnit = goUnit;
+goUnit = function(u){
+  if(+u===2 && CTRL.screen==='lesson' && isSp()) u = 'S';   /* 「☰ 課表」回特別課節 */
+  return _goUnit(u);
+};
+const _tChrome = tChrome;
+tChrome = function(scr){
+  _tChrome(scr);
+  const tt = document.getElementById('tTtl');
+  if(tt && scr==='lesson' && isSp()) tt.textContent = `特別課節 · ${L().title}`;
+};
+const _stepsU2 = stepsU2;
+const STEPS_SP = [['hello','① 打招呼'],['sent','② 課堂活動'],['review','③ 總結算'],['goals','④ 課堂總結']];
+stepsU2 = function(){ return L().mode==='sp' ? STEPS_SP : _stepsU2(); };
+
+/* ---------- 分層 ---------- */
+const TIERS = {h:{ico:'🌳', zh:'挑戰', q:'挑戰題'}, m:{ico:'🌿', zh:'核心', q:'進階題'},
+               s:{ico:'🌱', zh:'支援', q:'基礎題'}, x:{ico:'💤', zh:'不在本節', q:''}};
+const TIER_RULES = [['h',/paul/i], ['m',/kendrick|陳亮宇|樂天/i], ['s',/andy|蕭子信|卓彤|昆城/i]];
+function tierGuess(s){
+  if(!s) return 'm';
+  const n = String(s.n||'');
+  for(const [t, re] of TIER_RULES) if(re.test(n)) return t;
+  /* 名單有今年高組同學的名字：其他人當作在另一邊自習 */
+  if(STUDENTS.some(x=>TIER_RULES.some(r=>r[1].test(String(x.n||''))))) return 'x';
+  return s.lv===1 ? 'm' : 's';
+}
+function spTierOf(sid){ return (CTRL.spTier||{})[sid] || tierGuess(stu(sid)); }
+function rosterNow(){ return isSp() ? STUDENTS.filter(s=>spTierOf(s.id)!=='x') : STUDENTS; }
+function spCycle(sid){
+  const order = ['h','m','s','x'];
+  const map = {}; STUDENTS.forEach(s=> map[s.id] = spTierOf(s.id));
+  map[sid] = order[(order.indexOf(map[sid])+1) % order.length];
+  CTRL.spTier = map; saveCtrl(); render();
+}
+function spTierPanel(){
+  const chips = t => STUDENTS.filter(s=>spTierOf(s.id)===t).map(s=>
+    `<button class="tchip t-${t}" onclick="spCycle('${s.id}')" title="按一下轉層次">${esc(s.n)}</button>`).join('')
+    || '<span class="tnone">（沒有）</span>';
+  return `<details class="tierpanel"><summary>🧩 本節分層設定（按名字可以轉層次：挑戰 → 核心 → 支援 → 不在本節）</summary>
+    <div class="tiergrid">${['h','m','s','x'].map(t=>`<div class="tiercol t-${t}">
+      <div class="tierhd">${TIERS[t].ico} ${TIERS[t].zh}</div><div class="tierchips">${chips(t)}</div></div>`).join('')}</div>
+    <div class="note" style="margin-top:8px">「不在本節」的同學（例如在課室另一邊自習），平板電腦會顯示自習畫面，不會計分。
+      學生的平板電腦不會顯示層次字眼。</div></details>`;
+}
+const _tHello = tHello;
+tHello = function(){ return _tHello() + (isSp() ? spTierPanel() : ''); };
+
+/* 學生的程度：挑戰、核心 = 1（全排、四個選項）；支援 = 2 */
+const _myLv = myLv;
+myLv = function(){
+  if(ROLE!=='t' && isSp()){ const t = spTierOf(ME); return t==='s' ? 2 : 1; }
+  return _myLv();
+};
+/* 分層題目：hv = 挑戰層版本，sv = 支援層版本 */
+const _itemsOf = itemsOf;
+itemsOf = function(set){
+  const base = _itemsOf(set);
+  if(set!=='x' || ROLE!=='s' || !isSp()) return base;
+  const t = spTierOf(ME);
+  return base.map(it => (t==='h' && it.hv) ? {...it, ...it.hv} : (t==='s' && it.sv) ? {...it, ...it.sv} : it);
+};
+const _scoredKind = scoredKind;
+scoredKind = function(it){ return _scoredKind(it) && !['bag','spin','self'].includes(it.k); };
+
+/* ---------- 課堂狀態（老師控制，同步到學生機） ---------- */
+function spSt(){ return CTRL.sp || (CTRL.sp = {bag:-1, stage:0, card:-1, use:0, pick:'', t0:0, used:[], okd:{}}); }
+const _u2Reset = u2Reset;
+u2Reset = function(){
+  _u2Reset();
+  if(ROLE==='t') CTRL.sp = {bag:-1, stage:0, card:-1, use:0, pick:'', t0:0, used:[], okd:{}};
+};
+const _startSent = startSent;
+startSent = function(){
+  if(isSp() && (!CTRL.spT || CTRL.spT.ep !== CTRL.epoch)) CTRL.spT = {ep:CTRL.epoch, t:Date.now()};
+  return _startSent();
+};
+function fillv(s, v){ return String(s||'').replace(/\{(\w+)\}/g, (m,k)=> (v && v[k]!=null) ? v[k] : '＿＿'); }
+function itVars(it){
+  const sp = spSt();
+  if(it.k==='bag') return it.objs[sp.bag] || null;
+  if(it.k==='spin') return it.cards[sp.card] || null;
+  return it.vars || null;
+}
+
+/* ---------- 分層提問卡（只在老師版） ---------- */
+function askOf(it){
+  const v = itVars(it);
+  return (v && v.ask) || it.ask;
+}
+function askCard(it){
+  const A = askOf(it); if(!A) return '';
+  const v = itVars(it), sp = spSt(), pk = sp.pick && stu(sp.pick), pt = pk ? spTierOf(pk.id) : '';
+  const cols = ['s','m','h'].map(t=>{
+    const q = A[t] || [];
+    const names = rosterNow().filter(s=>spTierOf(s.id)===t).map(s=>
+      `<button class="aname ${sp.pick===s.id?'on':''} ${(sp.okd||{})[s.id]?'done':''}" onclick="spPick('${s.id}')">${esc(s.n)}</button>`).join('');
+    return `<div class="askcol t-${t} ${pt===t?'on':''}">
+      <div class="ath">${TIERS[t].ico} ${TIERS[t].q}</div>
+      <div class="aq">${ruby(fillv(q[0], v))}</div>
+      ${q[1]?`<div class="aa"><b>改換措辭</b>${esc(fillv(q[1], v))}</div>`:''}
+      ${q[2]?`<div class="aa"><b>追問</b>${esc(fillv(q[2], v))}</div>`:''}
+      <div class="anames">${names}</div></div>`;
+  }).join('');
+  return `<div class="askcard">
+    <div class="askhd"><span class="askt">💬 分層提問卡</span>
+      <span class="asks">先問問題 → 等 5 秒 → 請同學回答；答不到就改換措辭，再追問</span>
+      <span class="askb">
+        <button class="btn sm lemon" onclick="spRand()">🎲 抽一位</button>
+        <button class="btn sm" onclick="spThink()">⏳ 思考 5 秒</button>
+        <button class="btn sm ${MIC.on?'peach':''}" onclick="micToggle()">🎤 ${MIC.on?'聲量計 ✓':'聲量計'}</button></span></div>
+    <div class="askcols">${cols}</div>
+    ${pk ? `<div class="askpick"><span class="apn">🙋 輪到 <b>${esc(pk.n)}</b></span>
+        <button class="btn sm mint" onclick="spGood()">👍 說得好 +$1</button>
+        <button class="btn sm" onclick="spPick('')">清除</button>
+        <span class="apc">💰 今日 $${CTRL.coins[pk.id]||0}</span></div>` : ''}
+  </div>`;
+}
+function spPick(sid){
+  const sp = spSt();
+  sp.pick = sid || ''; sp.t0 = sid ? Date.now() : 0;
+  if(sid && !sp.used.includes(sid)) sp.used.push(sid);
+  saveCtrl(); render(); thinkTick();
+}
+function spRand(){
+  const sp = spSt(), ros = rosterNow();
+  if(!ros.length) return;
+  let pool = ros.filter(s=>!sp.used.includes(s.id) && s.id!==sp.pick);
+  if(!pool.length){ sp.used = []; pool = ros.filter(s=>s.id!==sp.pick); if(!pool.length) pool = ros; }
+  spPick(pool[Math.floor(Math.random()*pool.length)].id);
+}
+function spThink(){ const sp = spSt(); sp.t0 = Date.now(); saveCtrl(); render(); thinkTick(); }
+function spGood(){
+  const sp = spSt(); if(!sp.pick) return;
+  sp.okd = sp.okd || {}; sp.okd[sp.pick] = 1;
+  try{ cheer('說得好！'); }catch(e){}
+  addCoin(sp.pick, 1);
+}
+/* 思考沙漏：用時間戳記計算，重畫畫面也不會由頭開始 */
+const THINK_MS = 5000;
+function spThinkHTML(){
+  const sp = spSt(); if(!sp.t0) return '';
+  const el = Date.now() - sp.t0;
+  if(el > THINK_MS + 1800) return '';
+  const pk = sp.pick && stu(sp.pick);
+  if(el >= THINK_MS) return `<div class="think go"><div class="tk-in"><div class="tk-e">✋</div>
+    <div class="tk-t">${ruby(pk ? pk.n+'，請說' : '可以回答了')}</div></div></div>`;
+  return `<div class="think" style="--d:-${el}ms"><div class="tk-ring"></div><div class="tk-in"><div class="tk-e">⏳</div>
+    <div class="tk-t">${ruby('想一想')}</div>${pk?`<div class="tk-n">${esc(pk.n)}</div>`:''}</div></div>`;
+}
+let THINK_TM = 0;
+function thinkTick(){
+  clearTimeout(THINK_TM);
+  const sp = spSt(); if(!sp.t0) return;
+  const el = Date.now() - sp.t0;
+  if(el < THINK_MS) THINK_TM = setTimeout(()=>{ render(); thinkTick(); }, THINK_MS - el + 30);
+  else if(el < THINK_MS + 1800) THINK_TM = setTimeout(()=>render(), THINK_MS + 1830 - el);
+}
+
+/* ---------- 聲量計（老師的電腦咪高峰；不用網絡，不錄音） ---------- */
+const MIC = {on:false, st:null, ctx:null, an:null, raf:0, lv:0, pk:0, buf:null};
+function micBox(){
+  let b = document.getElementById('micBox');
+  if(!b){
+    b = document.createElement('div'); b.id = 'micBox'; b.className = 'micbox';
+    b.innerHTML = `<div class="mc-hd">🎤 聲量計<button onclick="micToggle()" title="關閉">✕</button></div>
+      <div class="mc-bar"><div class="mc-fill" id="micFill"></div><div class="mc-peak" id="micPeak"></div>
+        <i style="left:35%"></i><i style="left:70%"></i></div>
+      <div class="mc-lb" id="micLb">請說話…</div>`;
+    document.body.appendChild(b);
+  }
+  return b;
+}
+async function micToggle(){
+  if(MIC.on){ micOff(); render(); return; }
+  try{
+    MIC.st = await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false, noiseSuppression:false, autoGainControl:false}});
+    MIC.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const src = MIC.ctx.createMediaStreamSource(MIC.st);
+    MIC.an = MIC.ctx.createAnalyser(); MIC.an.fftSize = 1024; src.connect(MIC.an);
+    MIC.buf = new Float32Array(MIC.an.fftSize);
+    MIC.on = true; micBox().classList.add('on'); micLoop(); render();
+  }catch(e){
+    micOff();
+    const b = micBox(); b.classList.add('on');
+    document.getElementById('micLb').textContent = '開不到咪高峰：請在瀏覽器網址列旁按「允許」使用咪高峰，再按一次「🎤 聲量計」。';
+  }
+}
+function micOff(){
+  MIC.on = false; cancelAnimationFrame(MIC.raf);
+  try{ MIC.st && MIC.st.getTracks().forEach(t=>t.stop()); }catch(e){}
+  try{ MIC.ctx && MIC.ctx.close(); }catch(e){}
+  MIC.st = MIC.ctx = MIC.an = null;
+  const b = document.getElementById('micBox'); if(b) b.classList.remove('on');
+}
+function micLoop(){
+  if(!MIC.on || !MIC.an) return;
+  MIC.an.getFloatTimeDomainData(MIC.buf);
+  let s = 0; for(let i=0;i<MIC.buf.length;i++) s += MIC.buf[i]*MIC.buf[i];
+  const db = 20*Math.log10(Math.sqrt(s/MIC.buf.length) + 1e-8);
+  const v = Math.max(0, Math.min(100, (db + 58) / 46 * 100));   /* 約 -58dB → 0，-12dB → 100 */
+  MIC.lv = MIC.lv*0.75 + v*0.25;
+  MIC.pk = Math.max(MIC.lv, MIC.pk - 0.35);
+  const f = document.getElementById('micFill'), p = document.getElementById('micPeak'), lb = document.getElementById('micLb');
+  if(f){ f.style.width = MIC.lv.toFixed(1)+'%'; f.className = 'mc-fill ' + (MIC.lv<35?'lo':MIC.lv<70?'ok':'hi'); }
+  if(p) p.style.left = MIC.pk.toFixed(1)+'%';
+  if(lb) lb.textContent = MIC.pk<35 ? '🤫 太細聲，大聲一點！' : MIC.pk<70 ? '🙂 聽到了，再大聲少少！' : '📣 好響亮！';
+  MIC.raf = requestAnimationFrame(micLoop);
+}
+
+/* ---------- 新題型：畫面 ---------- */
+const _iView = iView;
+iView = function(it, key){
+  const f = {bag:vBag, find:vFind, spin:vSpin, self:vSelf}[it.k];
+  return f ? f(it, key) : _iView(it, key);
+};
+const _iAct = iAct;
+iAct = function(op, key, a, b){
+  if(op==='find') return iFind(key, a);
+  if(op==='self') return iSelf(key, a, b);
+  return _iAct(op, key, a);
+};
+function objVis(o, big){
+  const src = o.img && im2(o.img);
+  return src ? `<img src="${src}" alt="">` : `<span class="o-em big">${o.em||'❓'}</span>`;
+}
+/* 神秘袋：stage 0＝只見圖、1＝加名稱、2＝加用途 */
+function vBag(it, key){
+  const sp = spSt(), o = it.objs[sp.bag];
+  const head = `<div class="it-q">${ruby(it.q||'')}</div>`;
+  const card = o ? `<div class="objcard">${objVis(o)}
+      ${sp.stage>=1?`<div class="objname">${ruby(o.t)}</div>`:`<div class="objname q">${ruby('這是甚麼？')}</div>`}
+      ${sp.stage>=2?`<div class="objuse">${ruby('它可以'+o.use+'。')}</div>`:''}</div>`
+    : `<div class="bagwrap"><div class="bagbig">👜</div><div class="baghint">${ruby('神秘袋裏有甚麼？')}</div></div>`;
+  if(ROLE!=='t') return head + card + (o && sp.stage>=1 ? `<div class="row" style="justify-content:center;margin-top:10px">
+      <button class="btn sm mint" onclick="speak('${(o.t+(sp.stage>=2?'，可以'+o.use:'')).replace(/'/g,'')}')">🔊 ${T('聽一次')}</button></div>` : '');
+  const nums = it.objs.map((x,j)=>`<button class="btn sm ${j===sp.bag?'blue':''}" onclick="spBag(${j})">第 ${j+1} 件</button>`).join('');
+  return head + card + `<div class="row" style="justify-content:center;margin-top:12px">
+      <button class="btn lemon" onclick="spBag(${Math.min(it.objs.length-1, sp.bag+1)})">👜 拿出${sp.bag<0?'第一':'下一'}件</button>
+      ${o?`<button class="btn mint" onclick="spStage()">💡 ${['顯示名稱','顯示用途','收起答案'][sp.stage]||'顯示名稱'}</button>
+      <button class="btn sm" onclick="speak('${(o.t+'，可以'+o.use).replace(/'/g,'')}')">🔊 讀出</button>`:''}</div>
+    <div class="row" style="justify-content:center;margin-top:8px">${nums}</div>`;
+}
+function spBag(j){ const sp = spSt(); if(sp.bag!==j){ sp.bag = j; sp.stage = 0; sp.pick = ''; sp.t0 = 0; } saveCtrl(); render(); }
+function spStage(){ const sp = spSt(); sp.stage = ((sp.stage||0)+1) % 3; saveCtrl(); render(); }
+
+/* 課文偵探：在句子中找出「有」和「可以」 */
+function vFind(it, key){
+  const rec = recGet(key) || {f:[]}, f = rec.f || [];
+  const segs = it.segs.map((t,j)=>{
+    const hit = f.includes(j), ci = it.ans.indexOf(j);
+    return `<button class="fseg ${hit?'hit c'+(ci===0?1:2):''} ${/^[，。]$/.test(t)?'pun':''}" onclick="iAct('find','${key}',${j})">${ruby(t)}</button>`;
+  }).join('');
+  const vid = (ROLE==='t' && it.vid) ? `<button class="btn lemon sm" onclick="openVideo(${it.vid[0]},${it.vid[1]},'lesson')">🎬 看課文影片</button>` : '';
+  return qHead(it) + `<div class="fsent">${segs}</div>
+    <div class="sorthint">${rec.ok ? '✅ 全部找到了！' : `找到 ${f.length} ／ ${it.ans.length} 個：按一按「有」和「可以」`}</div>
+    <div class="row" style="justify-content:center;margin-top:8px">
+      <button class="btn sm mint" onclick="speak('${it.segs.join('').replace(/'/g,'')}')">🔊 ${T('聽整句')}</button>${vid}</div>`;
+}
+function iFind(key, j){
+  const it = curItem(), rec = recGet(key) || {f:[], e:0}, f = (rec.f||[]).slice();
+  if(rec.ok || !it) return;
+  if(it.ans.includes(j)){
+    if(f.includes(j)) return;
+    f.push(j);
+    const ok = it.ans.every(a=>f.includes(a));
+    recPut(key, {ok:ok?1:0, e:rec.e||0, f}); render();
+    if(ok) afterCorrect(it); else speak(it.segs[j]);
+  } else { recPut(key, {ok:0, e:(rec.e||0)+1, f}); render(); wrongFlash(); }
+}
+
+/* 抽卡說句 */
+function frameHTML(c, showUse, adj){
+  const st = (t, c2, lb, dash)=>`<span class="strip c${c2} ${dash?'dash':''}"><span class="st-t">${ruby(t)}</span><span class="st-l">${lb}</span></span>`;
+  return `<div class="strips spframe">${st('我有',1,'誰有')}${st(c.t,3,'物件')}${st('，',4,'逗號')}${st('可以',2,'可以')}${
+    st(showUse ? c.use : '？',5,'做甚麼', !showUse)}${adj ? st('，',4,'逗號')+st('很'+(adj===true?'……':adj),6,'怎樣', adj===true) : ''}${st('。',4,'句號')}</div>`;
+}
+function vSpin(it, key){
+  const sp = spSt(), c = it.cards[sp.card];
+  const head = `<div class="it-q">${ruby(it.q||'')}</div>`;
+  if(ROLE==='t'){
+    if(!c) return head + `<div class="spingal">${it.cards.map(x=>`<span class="spmini">${objVis(x)}</span>`).join('')}</div>
+      <div class="row" style="justify-content:center;margin-top:14px"><button class="btn lemon big" onclick="spSpin()">🎲 抽卡</button></div>`;
+    const pk = sp.pick && stu(sp.pick), isH = pk && spTierOf(pk.id)==='h';
+    const full = '我有'+c.t+'，可以'+c.use+(isH?'，很'+c.adj:'')+'。';
+    return head + `<div class="spincard">${objVis(c)}<div class="objname">${ruby(c.t)}</div></div>
+      ${frameHTML(c, sp.use, isH ? (sp.use ? c.adj : true) : false)}
+      <div class="row" style="justify-content:center;margin-top:12px">
+        <button class="btn lemon" onclick="spSpin()">🎲 再抽一張</button>
+        <button class="btn mint" onclick="spShowUse()">💡 ${sp.use?'收起答案':'顯示答案'}</button>
+        <button class="btn sm" onclick="speak('${full.replace(/'/g,'')}')">🔊 讀出</button></div>`;
+  }
+  if(!c) return head + `<div class="bagwrap"><div class="bagbig">🎲</div><div class="baghint">${ruby('老師正在抽卡，請看大電視')}</div></div>`;
+  const t = spTierOf(ME);
+  let help = '';
+  if(t==='s') help = `<div class="sphelp">${ruby('可以……？')}${shufNot([c.use, c.alt], seedOf(c.t)).map(u=>
+      `<button class="chip" onclick="speak('${u}')">${ruby(u)}</button>`).join('')}</div>`;
+  if(t==='h') help = `<div class="sphelp">${ruby('很……？')}${['方便','涼快','舒適'].map(u=>
+      `<button class="chip" onclick="speak('${u}')">${ruby(u)}</button>`).join('')}</div>`;
+  return head + `<div class="spincard">${objVis(c)}<div class="objname">${ruby(c.t)}</div></div>
+    ${frameHTML(c, sp.use, t==='h' ? (sp.use ? c.adj : true) : false)}${help}`;
+}
+function spSpin(){
+  const it = curItem(), sp = spSt(); if(!it) return;
+  let j = Math.floor(Math.random()*it.cards.length);
+  if(it.cards.length>1 && j===sp.card) j = (j+1) % it.cards.length;
+  sp.card = j; sp.use = 0;
+  saveCtrl({force:false});
+  spRand();                       /* 同時抽一位同學（會順便開始思考沙漏） */
+}
+function spShowUse(){ const sp = spSt(); sp.use = sp.use ? 0 : 1; saveCtrl(); render(); }
+
+/* 自我評估 */
+const SELF_OPT = [['😀','我做到了'],['🙂','差不多'],['😐','還要努力']];
+function vSelf(it, key){
+  const rec = recGet(key) || {v:{}}, v = rec.v || {};
+  return `<div class="it-q">${ruby(it.q||'')}</div>` + it.rows.map((r,ri)=>`<div class="selfrow">
+      <div class="selft">${ruby(r)}</div><div class="selfo">${SELF_OPT.map((o,j)=>
+        `<button class="selfb ${v[ri]===j?'on':''}" onclick="iAct('self','${key}',${ri},${j})"><span>${o[0]}</span><small>${ruby(o[1])}</small></button>`).join('')}</div></div>`).join('')
+    + (rec.ok ? `<div class="sorthint">✅ 多謝你！</div>` : '');
+}
+function iSelf(key, ri, j){
+  const it = curItem(), rec = recGet(key) || {v:{}}, v = {...(rec.v||{})};
+  v[ri] = j;
+  const ok = it.rows.every((_,i)=>v[i]!==undefined);
+  recPut(key, {ok:ok?1:0, v}); render();
+  if(ok && !rec.ok) cheer('多謝你！');
+}
+function selfGrid(it, key){
+  return `<div class="sgrid">${rosterNow().map(s=>{
+    const v = ((myA(s.id)[key])||{}).v || {};
+    return `<div class="scard ${Object.keys(v).length>=it.rows.length?'done':''}"><div class="nm">${esc(s.n)}</div>
+      <div class="st">${it.rows.map((_,i)=> v[i]!==undefined ? SELF_OPT[v[i]][0] : '⏳').join('　')}</div></div>`;
+  }).join('')}</div>`;
+}
+
+/* 偵探題的答案板 */
+const _ansBoard = ansBoard;
+ansBoard = function(it){
+  if(it.k==='find') return `<div class="q ansboard"><div class="qt" style="color:#1E8E62">✅ 正確答案</div>
+    <div class="ansbig">${ruby(it.ans.map(j=>'「'+it.segs[j]+'」').join('和'))}</div></div>`;
+  return _ansBoard(it);
+};
+
+/* ---------- 課堂活動頁：分段標籤、計時 ---------- */
+function spTabs(i){
+  const items = itemsOf('x'), secs = [];
+  items.forEach((x,j)=>{ if(x.sec && !secs.find(s=>s.n===x.sec)) secs.push({n:x.sec, j, m:x.min||''}); });
+  const cur = (items[i]||{}).sec;
+  const T0 = CTRL.spT && CTRL.spT.ep===CTRL.epoch ? CTRL.spT.t : 0;
+  const mins = T0 ? Math.floor((Date.now()-T0)/60000) : 0;
+  return `<div class="sptabs">${secs.map((s,k)=>`<button class="sptab ${s.n===cur?'on':''}" onclick="xGo(${s.j})">
+      <b>${k+1}</b>${esc(s.n)}${s.m?`<small>${s.m} 分鐘</small>`:''}</button>`).join('')}
+    ${T0?`<span class="sptime" title="由開始課堂活動起計">⏱ 已上 ${mins} 分鐘</span>`:''}</div>`;
+}
+
+/* ---------- 學生：輪到你、自習畫面 ---------- */
+function spBanner(){
+  if(!isSp() || ROLE!=='s') return '';
+  const sp = CTRL.sp || {};
+  if(!sp.pick || sp.pick!==ME) return '';
+  return `<div class="pickban">🙋 ${ruby('輪到你了！先想一想，再大聲說。')}</div>`;
+}
+const _renderStudent0 = renderStudent0;
+renderStudent0 = function(){
+  if(ME && CTRL.screen==='lesson' && !CTRL.hold && isSp() && spTierOf(ME)==='x'){
+    const me = stu(ME);
+    document.getElementById('sName').textContent = me ? me.n : '';
+    document.getElementById('sMeta').textContent = '自習時間';
+    document.getElementById('sPurse').classList.add('hide');
+    stashPad(); WSV = null;
+    document.getElementById('sBody').innerHTML = `<div class="waitbox"><div class="em">📚</div>
+      <div class="t">${ruby('自習時間')}</div><div class="d">${ruby('請按老師的指示，完成自習工作。')}</div></div>`;
+    NET.sendBeat();
+    return;
+  }
+  _renderStudent0();
+  if(ME && CTRL.screen==='lesson' && isSp()){
+    const m = document.getElementById('sMeta'); if(m) m.textContent = `特別課節 · ${L().title}`;
+  }
+};
+
+/* ================================================================
+   特別課節第 1 課：觀課——句式「我有……，可以……」（高組，30 分鐘）
+   ================================================================ */
+const SPI = {
+  bag:(objs,o)=>({k:'bag', objs, ...o}),
+  find:(segs,ans,o)=>({k:'find', segs, ans, ...o}),
+  spin:(cards,o)=>({k:'spin', cards, ...o}),
+  self:(rows,o)=>({k:'self', rows, ...o})
+};
+/* 提問卡：每層 [問題, 改換措辭, 追問]；{t} 物件、{use} 用途、{alt} 錯的選擇、{adj} 形容詞 */
+const ASK_BAG = {
+  s:['這是{t}，還是{alt}？', '（指著實物）這是{t}嗎？', '跟老師說一次：這是{t}。'],
+  m:['這是甚麼？它可以做甚麼？', '{t}可以用來做甚麼？', '用句子說：我有{t}，可以{use}。'],
+  h:['如果沒有{t}，{use}會怎樣？', '沒有{t}，我們還可以{use}嗎？', '{t}對你方便嗎？為甚麼？']};
+const ASK_FIND = {
+  s:['哪一個是「有」字？指給我看。', '「有」字在「我家」的後面，你找到嗎？', '跟老師讀：我家有{t}。'],
+  m:['「可以」後面是甚麼？', '{t}可以做甚麼？', '用句子說：我有{t}，可以{use}。'],
+  h:['「我家有」和「我有」有甚麼不同？', '「我家有」是誰的？「我有」又是誰的？', '你可以用「我有」說一句嗎？']};
+const ASK_STRIP = {
+  s:['哪一張卡是「可以」？', '粉紅色的卡寫著甚麼？', '跟老師讀一次整句。'],
+  m:['「可以」後面要接甚麼？', '我有洗衣機，可以……？', '句子中間和最後，要用甚麼標點？'],
+  h:['「很方便」要放在句子的哪裏？', '你可以把「很方便」加在句子最後嗎？', '為甚麼八達通很方便？']};
+const ASK_SPIN = {
+  s:['{t}可以{use}，還是{alt}？', '看圖：{t}可以做甚麼？', '跟老師說：我有{t}，可以{use}。'],
+  m:['用句子說：我有{t}，可以……', '{t}可以做甚麼？', '很好！再說一次，大聲一點！'],
+  h:['用「很……」說：我有{t}，可以{use}，很……', '{t}方便嗎？舒適嗎？', '為甚麼{t}很{adj}？']};
+const ASK_END1 = {
+  s:['天氣很熱，你會用冷氣機，還是雪櫃？', '看圖揀一張：哪一個可以令我們涼快？', '跟老師說：我有冷氣機，可以感到涼快。'],
+  m:['不看提示，說出完整句子。', '你有甚麼？它可以做甚麼？', '句子最後要用甚麼標點？'],
+  h:['除了冷氣機，還有甚麼可以令我們涼快？', '天氣熱的時候，你會怎樣做？', '用「很……」再說一次。']};
+const ASK_END2 = {
+  s:['出外乘搭巴士，要用八達通，還是微波爐？', '看圖揀一張：乘搭巴士要用甚麼？', '跟老師說：我有八達通，可以乘搭巴士。'],
+  m:['不看提示，說出完整句子。', '你出外乘搭巴士時，用甚麼付款？', '八達通還可以做甚麼？'],
+  h:['八達通除了乘搭巴士，還可以做甚麼？', '你去便利店，可以用八達通做甚麼？', '為甚麼八達通很方便？']};
+const ASK_END3 = {
+  s:['你喜歡電視，還是平板電腦？', '看圖揀一件你最喜歡的科技產品。', '跟老師說：我有……，可以……。'],
+  m:['哪一件科技產品對你最重要？', '你每天都會用哪一件科技產品？', '它可以做甚麼？用句子說。'],
+  h:['哪一件科技產品對你最重要？為甚麼？', '如果只可以留下一件科技產品，你會留下哪一件？', '它令你的生活怎樣？很……？']};
+
+const SP_CARDS = [
+  {t:'電視',     img:'電視',     use:'看電視節目',   alt:'清潔衣服',   adj:'舒適'},
+  {t:'微波爐',   img:'微波爐',   use:'翻熱食物',     alt:'冷藏食物',   adj:'方便'},
+  {t:'洗衣機',   img:'洗衣機',   use:'清潔衣服',     alt:'翻熱食物',   adj:'方便'},
+  {t:'冷氣機',   img:'冷氣機',   use:'感到涼快',     alt:'上網',       adj:'舒適'},
+  {t:'雪櫃',     img:'雪櫃',     use:'冷藏食物',     alt:'看電視節目', adj:'方便'},
+  {t:'平板電腦', img:'平板電腦', use:'上網',         alt:'冷藏食物',   adj:'方便'},
+  {t:'電腦',     img:'電腦',     use:'學習電腦技能', alt:'清潔衣服',   adj:'方便'},
+  {t:'八達通',   img:'八達通',   use:'乘搭巴士',     alt:'翻熱食物',   adj:'方便'}
+];
+
+LESSONS2.push({no:LESSONS2.length+1, sp:true, mode:'sp', title:'觀課：我有……，可以……',
+  sentence:'我有微波爐，可以翻熱食物。', pages:['slide4'], keys:[], vocab:[], spInfo:'高組 · 30 分鐘',
+  goals:[{ico:'🧩', zh:'認識句式：我有……，可以……', en:'Learn the pattern: I have ..., it can ...'},
+         {ico:'🗣️', zh:'說出科技產品可以做甚麼', en:'Say what technology products can do'},
+         {ico:'✏️', zh:'寫出「我有……，可以……」的句子', en:'Write the sentence'}]});
+(function(){
+  const l = LESSONS2[LESSONS2.length-1]; l.page = '2:'+l.pages[0];
+  SENT2[l.no] = [
+    /* ① 引入 4 分鐘 */
+    SPI.bag([
+      {t:'八達通',       img:'八達通',   use:'乘搭巴士', alt:'手提電話'},
+      {t:'手提電話',     em:'📱',        use:'打電話',   alt:'八達通'},
+      {t:'平板電腦',     img:'平板電腦', use:'上網',     alt:'電視'},
+      {t:'冷氣機遙控器', img:'冷氣機',   use:'開冷氣機', alt:'電視遙控器'},
+      {t:'你的平板電腦', em:'🙋',        use:'上網和學習', alt:'雪櫃',
+       ask:{s:['你手上的是平板電腦，還是雪櫃？', '你拿著的是甚麼？', '跟老師說：我有平板電腦。'],
+            m:['你有甚麼？它可以做甚麼？', '你的平板電腦可以做甚麼？', '用句子說：我有平板電腦，可以上網。'],
+            h:['你最常用平板電腦做甚麼？', '你用平板電腦做過甚麼？', '為甚麼平板電腦很方便？']}}
+    ], {sec:'引入', min:4, tag:'神秘袋', q:'我有甚麼法寶？', ask:ASK_BAG}),
+    /* ② 句式教學 6 分鐘 */
+    SPI.find(['我家','有','電視','，','我們','可以','一起','看電視節目','。'], [1,5],
+      {sec:'句式教學', min:6, tag:'課文偵探', q:'課文偵探：找出「有」和「可以」', qe:'Find 有 and 可以', img:'電視', vid:[3,4],
+       vars:{t:'電視', use:'看電視節目'}, ask:ASK_FIND}),
+    SPI.find(['我家','有','微波爐','，','可以','讓我們','翻熱食物','。'], [1,4],
+      {sec:'句式教學', tag:'課文偵探', q:'課文偵探：找出「有」和「可以」', qe:'Find 有 and 可以', img:'微波爐', vid:[5,6],
+       vars:{t:'微波爐', use:'翻熱食物'}, ask:ASK_FIND}),
+    SPI.find(['我家','有','雪櫃','，','可以','讓我們','冷藏食物','。'], [1,4],
+      {sec:'句式教學', tag:'課文偵探', q:'課文偵探：找出「有」和「可以」', qe:'Find 有 and 可以', img:'雪櫃', vid:[13,14],
+       vars:{t:'雪櫃', use:'冷藏食物'}, ask:ASK_FIND}),
+    IT.th('strips', {sec:'句式教學', tag:'句式', q:'句式：「我有……，可以……」',
+      rows:[{parts:[P('我有',1,'誰有'),P('微波爐',3,'物件'),P('，',4,'逗號'),P('可以',2,'可以'),P('翻熱食物',5,'動作＋東西'),P('。',4,'句號')], img:'微波爐'},
+            {parts:[P('我有',1,'誰有'),P('洗衣機',3,'物件'),P('，',4,'逗號'),P('可以',2,'可以'),P('清潔衣服',5,'動作＋東西'),P('。',4,'句號')], img:'洗衣機'},
+            {parts:[P('我有',1,'誰有'),P('八達通',3,'物件'),P('，',4,'逗號'),P('可以',2,'可以'),P('乘搭巴士',5,'動作＋東西'),P('，',4,'逗號'),P('很方便',6,'很＋形容詞'),P('。',4,'句號')], img:'八達通'}],
+      note:'課文：「我家有……，可以讓我們……」→ 今日：「我有……，可以……」。「可以」後面要接動作。最後一句加上「很＋形容詞」（方便／涼快／舒適），句子更長更好！',
+      ask:ASK_STRIP}),
+    /* ③ 活動一 8 分鐘 */
+    IT.mt([{img:'電視',l:'電視',r:'看電視節目'},{img:'微波爐',l:'微波爐',r:'翻熱食物'},{img:'洗衣機',l:'洗衣機',r:'清潔衣服'},
+           {img:'雪櫃',l:'雪櫃',r:'冷藏食物'},{img:'八達通',l:'八達通',r:'乘搭巴士'},{img:'平板電腦',l:'平板電腦',r:'上網'}],
+      {sec:'活動一', min:8, tag:'配一配', q:'配一配：科技產品可以做甚麼？', qe:'Match each product with what it can do',
+       cnt:{1:6, 2:4}, mk:'我有{l}，可以{r}。'}),
+    IT.od(['我有','洗衣機','，','可以','清潔衣服','。'], {sec:'活動一', tag:'砌一砌', q:'砌一砌：排出完整句子', qe:'Make a sentence', img:'洗衣機',
+      hv:{parts:['我有','八達通','，','可以','乘搭巴士','，','很方便','。'], img:'八達通', q:'砌一砌：排出長句子（加上「很……」）'}}),
+    IT.od(['我有','雪櫃','，','可以','冷藏食物','。'], {sec:'活動一', tag:'砌一砌', q:'砌一砌：排出完整句子', qe:'Make a sentence', img:'雪櫃',
+      hv:{parts:['我有','平板電腦','，','可以','上網','，','很方便','。'], img:'平板電腦', q:'砌一砌：排出長句子（加上「很……」）'}}),
+    SPI.spin(SP_CARDS, {sec:'活動一', tag:'抽卡說句', q:'抽卡說句：大聲說出完整句子', ask:ASK_SPIN}),
+    /* ④ 活動二 8 分鐘：紙本工作紙 */
+    IT.tk('完成紙本工作紙', {sec:'活動二', min:8, tag:'紙本工作紙', ico:'✏️', okLb:'✔ 完成 +$1',
+      tnote:'同學完成紙本工作紙後，按「✔ 完成 +$1」', snote:'請完成紙本工作紙，做完了請舉手',
+      tip:'巡視時給予個別支援：挑戰層加形容詞；核心層用詞庫；支援層先圈選再抄寫（昆城用灰階字摹寫，卓彤完成後跟老師仿讀）。'}),
+    /* ⑤ 總結 4 分鐘 */
+    IT.ch('天氣很熱，我想涼快一點。我有甚麼？', '冷氣機', ['雪櫃','洗衣機','電視'],
+      {sec:'總結', min:4, tag:'情境', em:'🥵', po:1, then:'我有冷氣機，可以感到涼快。', sv:{opts:['冷氣機','雪櫃']}, ask:ASK_END1}),
+    IT.ch('我想出外乘搭巴士。我有甚麼？', '八達通', ['微波爐','雪櫃','電視'],
+      {sec:'總結', tag:'情境', em:'🚌', po:1, then:'我有八達通，可以乘搭巴士。', sv:{opts:['八達通','微波爐']}, ask:ASK_END2}),
+    IT.tk('哪一件科技產品對你最重要？為甚麼？', {sec:'總結', tag:'說話', tip:'可以用：我有……，可以……，很……。', ask:ASK_END3}),
+    SPI.self(['我會說「我有……，可以……」', '我會寫「我有……，可以……」'], {sec:'總結', tag:'自評', q:'自我評估：今日我學會了嗎？'})
+  ];
+})();
 
 render();
 </script>
