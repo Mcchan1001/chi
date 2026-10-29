@@ -8829,7 +8829,7 @@ stepsU2 = function(){ return L().mode==='sp' ? STEPS_SP : _stepsU2(); };
 /* ---------- 分層 ---------- */
 const TIERS = {h:{ico:'🌳', zh:'挑戰', q:'挑戰題'}, m:{ico:'🌿', zh:'核心', q:'進階題'},
                s:{ico:'🌱', zh:'支援', q:'基礎題'}, x:{ico:'💤', zh:'不在本節', q:''}};
-const TIER_RULES = [['h',/paul/i], ['m',/kendrick|陳亮宇|樂天/i], ['s',/andy|蕭子信|卓彤|昆城/i]];
+const TIER_RULES = [['h',/paul|kenneth/i], ['m',/kendrick|陳亮宇|樂天/i], ['s',/andy|蕭子信|卓彤|昆城/i]];
 function tierGuess(s){
   if(!s) return 'm';
   const n = String(s.n||'');
@@ -8838,6 +8838,17 @@ function tierGuess(s){
   if(STUDENTS.some(x=>TIER_RULES.some(r=>r[1].test(String(x.n||''))))) return 'x';
   return s.lv===1 ? 'm' : 's';
 }
+/* 名單更正：系統內一直叫「Kenneth」的同學就是 Paul（老師 2026-10-29 更正）。
+   老師版開啟、雲端名單下載完後自動改名一次，並同步到所有平板電腦；改好後不會再改。 */
+function fixNames(){
+  if(ROLE!=='t' && ROLE!=='a') return;
+  if(NET.on() && !NET.pulled) return;            /* 先等雲端名單下載，免得被舊資料蓋過 */
+  const k = STUDENTS.find(s=>/kenneth/i.test(String(s.n||'')));
+  if(!k || STUDENTS.some(s=>/paul/i.test(String(s.n||'')))) return;
+  k.n = String(k.n).replace(/kenneth/i, 'Paul');
+  saveStu(); render();
+}
+setInterval(fixNames, 3000);
 function spTierOf(sid){ return (CTRL.spTier||{})[sid] || tierGuess(stu(sid)); }
 function rosterNow(){ return isSp() ? STUDENTS.filter(s=>spTierOf(s.id)!=='x') : STUDENTS; }
 function spCycle(sid){
