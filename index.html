@@ -1350,6 +1350,72 @@ body[data-scr="video"] #tPick,body[data-scr="video"] #tTop .meta{display:none}
 
 .spframe .strip{padding:6px 12px 4px}
 .lv.tier-h{background:#D4F1E3;color:#17785A} .lv.tier-m{background:#DCEBFA;color:#1B63A0} .lv.tier-s{background:#FFF0C9;color:#8F5A00}
+
+/* ==================================================================
+   ⭐ 特別課節二：時地人事（v39）
+   ================================================================== */
+.tiergrid.lis5{grid-template-columns:repeat(5,minmax(0,1fr))}
+@media(max-width:900px){ .tiergrid.lis5{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.catchip{display:inline-flex;align-items:center;gap:6px;font-weight:900;font-size:1.05rem;padding:4px 14px;border-radius:14px}
+.catchip.big{font-size:2rem;padding:8px 22px;border-radius:20px}
+.qwh{padding:0 6px;border-radius:8px}
+.kwh{padding:0 6px;border-radius:8px;font-weight:900}
+.ava{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;font-size:1.7rem;line-height:1;flex:none}
+.ava.big{width:120px;height:120px;font-size:4.6rem}
+.lemo{display:inline-flex;align-items:center;justify-content:center;font-size:1.9rem;line-height:1;width:46px;flex:none}
+.lemo.big{font-size:5rem;width:auto}
+
+/* 四色格 */
+.fourlead{text-align:center;font-weight:800;font-size:1.2rem;color:var(--mute);margin-top:6px}
+.foursent{text-align:center;font-size:2.1rem;font-weight:900;margin:14px 0 16px;line-height:1.8}
+.fourgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:10px}
+.fbox{border-radius:20px;padding:12px;text-align:center;opacity:.55;border:3px solid transparent;transition:opacity .2s, transform .2s}
+.fbox.on{opacity:1;border-color:rgba(0,0,0,.12);transform:translateY(-2px)}
+.fhd{font-weight:900;font-size:1.25rem}
+.fqw{font-weight:800;font-size:1rem;opacity:.85;margin-top:2px}
+.fans{display:flex;flex-direction:column;align-items:center;gap:4px;font-weight:900;font-size:1.5rem;margin-top:8px;min-height:86px;justify-content:center;
+  background:rgba(255,255,255,.75);border-radius:14px;padding:8px;color:#1F2B3A}
+.fourgrid.mini .fbox{opacity:1}
+.fourgrid.mini .fhd{font-size:1.1rem}
+@media(max-width:700px){ .fourgrid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+
+/* 策略卡 */
+.tipsrows{display:flex;flex-direction:column;gap:10px;max-width:820px;margin:12px auto}
+.tiprow{display:flex;align-items:center;gap:14px;background:#fff;border-radius:18px;padding:12px 16px;box-shadow:var(--sh)}
+.tipe{font-size:2.4rem;line-height:1}
+.tipt{font-weight:900;font-size:1.35rem}
+.tipd{color:#3C4757;font-size:1rem;margin-top:2px}
+
+/* 舉牌 */
+.rdots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+.rdot{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;background:#EEF2F8;color:var(--mute)}
+.rdot.aud{background:#F3EDFB}
+.rdot.done{background:#D4F1E3;color:#17785A}
+.rdot.cur{background:#FFB85C;color:#fff}
+.raisebig{display:flex;flex-direction:column;align-items:center;gap:8px;margin:12px auto;padding:20px;background:#fff;border-radius:28px;
+  box-shadow:var(--sh);width:min(560px,100%);min-height:300px;justify-content:center}
+.rbe{font-size:5rem;line-height:1}
+.rbt{font-size:2.8rem;font-weight:900}
+.rbs{font-weight:800;color:var(--mute);font-size:1.15rem}
+.rbs.go{color:#C2410C;font-size:1.4rem}
+.raisebig.rev{border:6px solid rgba(0,0,0,.1)}
+.rbc{margin-top:6px}
+
+/* 探索一 */
+.lishead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:6px}
+.lisstep{font-weight:800;color:var(--mute);font-size:1rem}
+.lisq{text-align:center;font-size:2.1rem}
+.lisbar{justify-content:center;gap:8px;margin:10px 0;flex-wrap:wrap;align-items:center}
+.playcnt{font-weight:800;color:var(--mute);text-align:center}
+.lishint{display:flex;align-items:center;gap:16px;justify-content:center;background:#FFFDF2;border:2px dashed #F1DFA6;border-radius:20px;
+  padding:12px 18px;margin:10px auto;max-width:760px}
+.lhe{font-size:3rem;line-height:1;letter-spacing:4px}
+.lht{font-size:1.9rem;font-weight:900}
+.lisopts .opt{display:flex;flex-direction:column;align-items:center;gap:6px}
+.lisopts .opt .o-t{font-size:1.5rem;font-weight:900}
+.lisok{text-align:center;font-size:1.5rem;font-weight:800;margin-top:12px}
+.lisok span{font-size:1.8rem}
+.wslbig{text-align:center;font-size:1.5rem;font-weight:900;margin:8px 0}
 </style>
 </head>
 <body>
@@ -1900,7 +1966,7 @@ document.body.classList.toggle('nojy', !JYON);
 /* ==================================================================
    狀態 + 同步（分權儲存）
    ================================================================== */
-const APPVER = 'v38';
+const APPVER = 'v39';
 const K = 'zw26';
 const KC = K+'.ctrl', KB = K+'.bank', KP = K+'.pulse', KS = K+'.stu';
 const KA = sid => K+'.ans.'+sid;
@@ -2099,7 +2165,7 @@ function phaseKey(){
           CTRL.sub, CTRL.qIdx, CTRL.xIdx||0,
           CTRL.vid ? [CTRL.vid.id,CTRL.vid.i,CTRL.vid.play,CTRL.vid.end,CTRL.vid.sub,CTRL.vid.jp].join('.') : '',
           CTRL.game?CTRL.game.w:'',
-          CTRL.sp ? [CTRL.sp.bag,CTRL.sp.stage,CTRL.sp.card,CTRL.sp.use,CTRL.sp.pick].join('.') : '',
+          CTRL.sp ? [CTRL.sp.bag,CTRL.sp.stage,CTRL.sp.card,CTRL.sp.use,CTRL.sp.pick,CTRL.sp.hint,CTRL.sp.played].join('.') : '',
           (CTRL.mode==='lis' && CTRL.lis) ? [CTRL.lis.s,CTRL.lis.run,CTRL.lis.i,CTRL.lis.st,CTRL.lis.plays,
             CTRL.lis.pick,CTRL.lis.tx?1:0,CTRL.lis.sp?1:0].join('.') : ''].join('|');
 }
@@ -3573,7 +3639,7 @@ function resetAll(){
   lisStop(); LIS_PLAYING = false;
   const ep = Date.now().toString(36);
   CTRL = {...CTRL0, paid:CTRL.paid||{}, unit:CTRL.unit, screen:CTRL.screen, last:CTRL.last,
-          lessonNo:CTRL.lessonNo, lessonDate:CTRL.lessonDate, epoch:ep, spTier:CTRL.spTier, ...keepLis};
+          lessonNo:CTRL.lessonNo, lessonDate:CTRL.lessonDate, epoch:ep, spTier:CTRL.spTier, lisSet:CTRL.lisSet, ...keepLis};
   STEP = 'hello'; CTRL.phase = 'hello'; u2Reset();
   if(keepLis.mode) CTRL.lis.st = lisFresh(lisItem());
   STUDENTS.forEach(s=>{ ANS[s.id]={a:{},prog:'',ep}; localStorage.removeItem(KA(s.id)); });
@@ -8125,7 +8191,7 @@ function tStatusGrid(it, i, set){
   }
   return `<div class="sgrid">${rosterNow().map(s=>{
     const st = stuStatus(s, it, i, set);
-    return `<div class="scard ${st.cls}"><div class="nm">${esc(s.n)}${isSp() ? `<span class="lv tier-${spTierOf(s.id)}">${TIERS[spTierOf(s.id)].zh}</span>` : `<span class="lv g${s.lv}">${LVNAME2[s.lv]||''}</span>`}</div><div class="st">${st.txt}</div></div>`;
+    return `<div class="scard ${st.cls}"><div class="nm">${esc(s.n)}${isSp() ? `<span class="lv tier-${spTierOf(s.id)}">${spTierLabel(s.id)}</span>` : `<span class="lv g${s.lv}">${LVNAME2[s.lv]||''}</span>`}</div><div class="st">${st.txt}</div></div>`;
   }).join('')}</div>`;
 }
 const LVNAME2 = {1:'高', 2:'中', 3:'初'};
@@ -9310,6 +9376,336 @@ LESSONS2.push({no:LESSONS2.length+1, sp:true, mode:'sp', title:'觀課：我有�
       {sec:'總結', tag:'情境', em:'🚌', po:1, then:'我有八達通，可以乘搭巴士。', sv:{opts:['八達通','微波爐']}, ask:ASK_END2}),
     IT.tk('哪一件科技產品對你最重要？為甚麼？', {sec:'總結', tag:'說話', tip:'可以用：我有……，可以……，很……。', ask:ASK_END3}),
     SPI.self(['我會說「我有……，可以……」', '我會寫「我有……，可以……」'], {sec:'總結', tag:'自評', q:'自我評估：今日我學會了嗎？'})
+  ];
+})();
+
+
+/* ================================================================
+   ⭐ 特別課節二（v39）：觀課二——聽一聽，找出時地人事
+   · 第一節：高、中能力；第二節：初能力（同一課，在「打招呼」頁轉節次）
+   · 每位同學的選項數目：5／4／3／2 選 1，或「不在本節」（平板顯示自習）
+   · 探索一 12 題：按類別（時→地→人→事）或隨機
+   · 聲音用裝置內置的廣東話語音；只在大電視出聲
+   ================================================================ */
+const LISDATA = {"cat": {"時": {"n": "時間", "qw": "甚麼時候？", "tg": "a", "ico": "🕘"}, "地": {"n": "地點", "qw": "在哪裏？", "tg": "c", "ico": "📍"}, "人": {"n": "人物", "qw": "誰？", "tg": "b", "ico": "🙋"}, "事": {"n": "事情", "qw": "做甚麼？", "tg": "d", "ico": "🛠️"}}, "teachers": ["陳sir", "梁老師", "鄧sir", "屈老師", "范sir"], "students": ["何樂天", "陳亮宇", "楊師銘", "昆城", "Supratik", "Jelvin", "李卓熙", "管天恩", "何泓霖", "鍾卓彤", "Paul", "蕭子信"], "emo": {"星期一": "📅", "星期二": "📅", "星期三": "📅", "星期四": "📅", "星期五": "📅", "星期六": "📅", "星期日": "📅", "今天": "📆", "小息": "🔔", "小息時": "🔔", "放學後": "🎒", "早上": "🌅", "下午": "☀️", "午膳時": "🕛", "明天早上九點": "🕘", "操場": "🏟️", "音樂室": "🎹", "陶藝室": "🏺", "禮堂": "🎤", "圖書館": "📚", "課室": "🏫", "電腦室": "💻", "超級市場": "🛒", "倉庫": "🏭", "遲到了": "⏰", "生病了": "🤒", "去實習": "💼", "實習": "💼", "打籃球": "🏀", "看書": "📖", "上公民課": "📘", "上課後活動": "🎶", "遺失了手套": "🧤", "開早會": "📣", "教我們跑步": "🏃", "跑步": "🏃", "吃午飯": "🍱", "吃飯": "🍚", "唱歌": "🎵", "玩遊戲機": "🎮", "做陶藝": "👐", "講故事": "🗣️", "搬箱": "📦", "打字": "⌨️", "派工作紙": "📄"}, "intro": {"say": "星期一，陳sir在禮堂講故事。", "segs": [["星期一", "時"], ["，", null], ["陳sir", "人"], ["在", null], ["禮堂", "地"], ["講故事", "事"], ["。", null]]}, "raise": [{"t": "星期三", "c": "時"}, {"t": "操場", "c": "地"}, {"t": "范sir", "c": "人"}, {"t": "吃午飯", "c": "事"}, {"t": "圖書館", "c": "地"}, {"t": "小息", "c": "時"}, {"t": "陳亮宇", "c": "人"}, {"t": "打籃球", "c": "事"}, {"t": "禮堂", "c": "地"}, {"t": "放學後", "c": "時"}], "lis": [{"c": "時", "say": "昆城星期三去實習。", "q": "昆城甚麼時候去實習？", "ans": "星期三", "opts": ["星期三", "星期五", "星期一", "星期六", "今天"], "hint": "🧑💼📅"}, {"c": "時", "say": "何樂天放學後打籃球。", "q": "何樂天甚麼時候打籃球？", "ans": "放學後", "opts": ["放學後", "早上", "小息時", "午膳時", "星期日"], "hint": "🎒🏀"}, {"c": "時", "say": "梁老師星期五上公民課。", "q": "梁老師甚麼時候上公民課？", "ans": "星期五", "opts": ["星期五", "星期二", "星期四", "星期一", "放學後"], "hint": "🧑‍🏫📘📅"}, {"c": "地", "say": "陳亮宇到音樂室上課後活動。", "q": "陳亮宇到哪裏上課後活動？", "ans": "音樂室", "opts": ["音樂室", "操場", "陶藝室", "禮堂", "圖書館"], "hint": "🧑🎹🎶"}, {"c": "地", "say": "何泓霖在操場遺失了手套。", "q": "何泓霖在哪裏遺失了手套？", "ans": "操場", "opts": ["操場", "圖書館", "課室", "禮堂", "電腦室"], "hint": "🧑🏟️🧤"}, {"c": "地", "say": "范sir在禮堂開早會。", "q": "范sir在哪裏開早會？", "ans": "禮堂", "opts": ["禮堂", "電腦室", "操場", "音樂室", "課室"], "hint": "🧑‍🏫🎤📣"}, {"c": "人", "say": "陳sir遲到了。", "q": "誰遲到了？", "ans": "陳sir", "opts": ["陳sir", "梁老師", "鄧sir", "范sir", "屈老師"], "hint": "🧑‍🏫⏰"}, {"c": "人", "say": "屈老師帶我們去超級市場。", "q": "誰帶我們去超級市場？", "ans": "屈老師", "opts": ["屈老師", "鄧sir", "梁老師", "陳sir", "范sir"], "hint": "🧑‍🏫🛒"}, {"c": "人", "say": "蕭子信幫老師派工作紙。", "q": "誰幫老師派工作紙？", "ans": "蕭子信", "opts": ["蕭子信", "Paul", "何樂天", "昆城", "陳亮宇"], "hint": "🧑📄"}, {"c": "事", "say": "鄧sir在操場教我們跑步。", "q": "鄧sir在操場做甚麼？", "ans": "教我們跑步", "opts": ["教我們跑步", "吃午飯", "打籃球", "開早會", "看書"], "hint": "🧑‍🏫🏟️🏃"}, {"c": "事", "say": "鍾卓彤今天遲到了。", "q": "鍾卓彤今天怎麼了？", "ans": "遲到了", "opts": ["遲到了", "去實習", "生病了", "打籃球", "看書"], "hint": "🧑⏰"}, {"c": "事", "say": "梁老師在圖書館看書。", "q": "梁老師在圖書館做甚麼？", "ans": "看書", "opts": ["看書", "唱歌", "吃午飯", "玩遊戲機", "打籃球"], "hint": "🧑‍🏫📚📖"}], "ws": [{"say": "陳亮宇在小息時到操場玩遊戲機。", "parts": {"時": "小息時", "地": "操場", "人": "陳亮宇", "事": "玩遊戲機"}, "opts": {"時": ["小息時", "放學後", "早上", "午膳時", "星期六"], "地": ["操場", "課室", "圖書館", "禮堂", "音樂室"], "人": ["陳亮宇", "Paul", "何樂天", "昆城", "蕭子信"], "事": ["玩遊戲機", "看書", "打籃球", "吃午飯", "唱歌"]}, "hint": "🧑🔔🏟️🎮"}, {"say": "Paul在下午到陶藝室做陶藝。", "parts": {"時": "下午", "地": "陶藝室", "人": "Paul", "事": "做陶藝"}, "opts": {"時": ["下午", "早上", "小息時", "星期一", "放學後"], "地": ["陶藝室", "電腦室", "音樂室", "操場", "圖書館"], "人": ["Paul", "陳亮宇", "楊師銘", "鍾卓彤", "李卓熙"], "事": ["做陶藝", "唱歌", "打籃球", "吃午飯", "玩遊戲機"]}, "hint": "🧑☀️🏺👐"}], "summary": {"lead": "將來工作，經理說：", "say": "明天早上九點，何樂天到倉庫搬箱。", "segs": [["明天早上九點", "時"], ["，", null], ["何樂天", "人"], ["到", null], ["倉庫", "地"], ["搬箱", "事"], ["。", null]]}, "relay": [{"say": "何樂天星期一在操場跑步。", "parts": {"時": "星期一", "地": "操場", "人": "何樂天", "事": "跑步"}}, {"say": "鍾卓彤午膳時在課室吃飯。", "parts": {"時": "午膳時", "地": "課室", "人": "鍾卓彤", "事": "吃飯"}}, {"say": "屈老師下午在圖書館講故事。", "parts": {"時": "下午", "地": "圖書館", "人": "屈老師", "事": "講故事"}}, {"say": "昆城星期三到超級市場實習。", "parts": {"時": "星期三", "地": "超級市場", "人": "昆城", "事": "實習"}}, {"say": "范sir早上在禮堂唱歌。", "parts": {"時": "早上", "地": "禮堂", "人": "范sir", "事": "唱歌"}}, {"say": "楊師銘放學後在電腦室打字。", "parts": {"時": "放學後", "地": "電腦室", "人": "楊師銘", "事": "打字"}}]};
+const CAT = LISDATA.cat, CATS = ['時','地','人','事'];
+const TEACHERS = LISDATA.teachers;
+function isLis(){ return isSp() && L().spKind==='lis'; }
+
+/* ---------- 圖示：人物用卡通頭像，其餘用圖示 ---------- */
+function isPerson(w){ return TEACHERS.includes(w) || LISDATA.students.includes(w) || STUDENTS.some(s=>s.n===w); }
+function emoOf(w){ return TEACHERS.includes(w) ? '🧑‍🏫' : isPerson(w) ? '🧑' : (LISDATA.emo[w] || '❓'); }
+function avaCol(w){ return AV[seedOf(w) % AV.length]; }
+function lvis(w, big){
+  const e = emoOf(w);
+  return isPerson(w) ? `<span class="ava ${big?'big':''}" style="background:${avaCol(w)}">${e}</span>`
+                     : `<span class="lemo ${big?'big':''}">${e}</span>`;
+}
+function catChip(c, big){ return `<span class="catchip tg-${CAT[c].tg} ${big?'big':''}">${CAT[c].ico} ${CAT[c].n}</span>`; }
+function hlRuby(text, pairs){        /* 把關鍵詞加上顏色，其餘照常加粵拼 */
+  pairs = pairs.filter(p=>p[0]).sort((a,b)=>b[0].length-a[0].length);
+  let segs = [[String(text), null]];
+  pairs.forEach(([w, cls])=>{
+    segs = segs.flatMap(([t, c])=> c ? [[t, c]] : t.split(w).flatMap((x, i, arr)=> i < arr.length-1 ? [[x, null], [w, cls]] : [[x, null]]));
+  });
+  return segs.filter(x=>x[0]).map(([t, c])=> c ? `<b class="${c}">${ruby(t)}</b>` : ruby(t)).join('');
+}
+function qwHL(q, c){                 /* 問題詞加顏色 */
+  const words = {時:['甚麼時候'], 地:['哪裏'], 人:['誰'], 事:['做甚麼','怎麼了']}[c] || [];
+  return hlRuby(q, words.map(w=>[w, `qwh tg-${CAT[c].tg}`]));
+}
+function kwHL(say, parts){           /* 句子：時地人事加上顏色 */
+  return hlRuby(say, CATS.map(c=>[parts[c], `kwh tg-${CAT[c].tg}`]));
+}
+
+/* ---------- 讀出（只在老師版出聲） ---------- */
+function spSay(t, slow){
+  if(ROLE!=='t') return;
+  try{ stopRead(); speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(t); u.lang='zh-HK'; u.rate = slow ? .55 : .8;
+    if(VOICE) u.voice = VOICE; speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* ---------- 本節設定：節次、選項數目、題目次序 ---------- */
+function lisSet(){ return CTRL.lisSet || {sess:1, opt:null, ord:'cat', perm:null}; }
+function lisDefOpt(s, sess){
+  if(!s) return 0;
+  const n = String(s.n||'');
+  if(sess===2) return s.lv===3 ? (/管天恩|makenna|泓霖/i.test(n) ? 2 : 3) : 0;
+  return s.lv===1 ? 5 : s.lv===2 ? 4 : 0;
+}
+function spOptOf(sid){
+  const st = lisSet(), m = st.opt || {};
+  return m[sid]!==undefined ? m[sid] : lisDefOpt(stu(sid), st.sess||1);
+}
+function lisSave(patch){ CTRL.lisSet = {...lisSet(), ...patch}; saveCtrl(); render(); }
+function spLisSess(n){ lisSave({sess:n, opt:null}); }
+function lisCycle(sid){
+  const order = [5,4,3,2,0], m = {};
+  STUDENTS.forEach(s=> m[s.id] = spOptOf(s.id));
+  m[sid] = order[(order.indexOf(m[sid])+1) % order.length];
+  lisSave({opt:m});
+}
+function lisOrd(o){
+  let perm = null;
+  if(o==='rand'){ perm = [...Array(12).keys()]; for(let i=perm.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [perm[i],perm[j]]=[perm[j],perm[i]]; } }
+  lisSave({ord:o, perm});
+}
+function lisPanel(){
+  const st = lisSet(), n = st.sess||1;
+  const grp = v => STUDENTS.filter(s=>spOptOf(s.id)===v).map(s=>
+    `<button class="tchip" onclick="lisCycle('${s.id}')" title="按一下轉選項數目">${esc(s.n)}</button>`).join('') || '<span class="tnone">（沒有）</span>';
+  const col = (v, lb, cls) => `<div class="tiercol ${cls}"><div class="tierhd">${lb}</div><div class="tierchips">${grp(v)}</div></div>`;
+  return `<details class="tierpanel" open><summary>🧩 本節設定（請在開始課堂活動前設定）</summary>
+    <div class="row" style="gap:8px;margin:10px 0 4px;flex-wrap:wrap">
+      <b style="margin-right:4px">節次：</b>
+      <button class="btn sm ${n===1?'blue':''}" onclick="spLisSess(1)">第一節：高、中能力</button>
+      <button class="btn sm ${n===2?'blue':''}" onclick="spLisSess(2)">第二節：初能力</button>
+      <b style="margin:0 4px 0 16px">探索一的次序：</b>
+      <button class="btn sm ${st.ord!=='rand'?'blue':''}" onclick="lisOrd('cat')">按類別（時→地→人→事）</button>
+      <button class="btn sm ${st.ord==='rand'?'blue':''}" onclick="lisOrd('rand')">🎲 隨機</button>
+    </div>
+    <div class="tiergrid lis5">${col(5,'5 選 1','t-h')}${col(4,'4 選 1','t-m')}${col(3,'3 選 1','t-s')}${col(2,'2 選 1','t-s')}${col(0,'💤 不在本節（自習）','t-x')}</div>
+    <div class="note" style="margin-top:8px">按名字可以轉：5 → 4 → 3 → 2 選 1 → 不在本節。「不在本節」的同學，平板顯示自習畫面。
+      開始活動後才轉次序，已作答的題目會對不上，請先設定好。</div></details>`;
+}
+const _spTierPanel = spTierPanel;
+spTierPanel = function(){ return isLis() ? lisPanel() : _spTierPanel(); };
+const _spTierOf = spTierOf;
+spTierOf = function(sid){
+  if(!isLis()) return _spTierOf(sid);
+  const n = spOptOf(sid);
+  return n===0 ? 'x' : n>=5 ? 'h' : n===4 ? 'm' : 's';
+};
+function spTierLabel(sid){ return isLis() ? `${spOptOf(sid)} 選 1` : TIERS[spTierOf(sid)].zh; }
+
+/* 探索一隨機次序：只調動 12 題聆聽題的位置 */
+const _itemsOfLis = itemsOf;
+itemsOf = function(set){
+  const base = _itemsOfLis(set);
+  if(set!=='x' || !isLis()) return base;
+  const st = lisSet();
+  if(st.ord!=='rand' || !st.perm) return base;
+  const pos = base.map((it,i)=>it.k==='lis'?i:-1).filter(i=>i>=0);
+  const li = pos.map(i=>base[i]), out = base.slice();
+  pos.forEach((p,k)=>{ out[p] = li[st.perm[k] % li.length]; });
+  return out;
+};
+const _scoredKind2 = scoredKind;
+scoredKind = function(it){ return _scoredKind2(it) && !['raise','four','wsl','relay','tips'].includes(it.k); };
+const _itVars = itVars;
+itVars = function(it){
+  if(it.k==='lis') return {ans:it.ans, alt:it.opts[1], q:it.q, qw:CAT[it.c].qw, catn:CAT[it.c].n};
+  if(it.k==='wsl'){ const p = it.parts; return {when:p['時'], where:p['地'], who:p['人'], what:p['事'], whoAlt:it.opts['人'][1]}; }
+  return _itVars(it);
+};
+const _tStatusGrid2 = tStatusGrid;
+tStatusGrid = function(it, i, set){
+  if(['raise','four','tips'].includes(it.k)) return '';
+  if(it.k==='wsl' || it.k==='relay') return _tStatusGrid2({...it, k:'talk', okLb: it.k==='wsl' ? '✔ 完成 +$1' : '👍 合作好 +$1'}, i, set);
+  return _tStatusGrid2(it, i, set);
+};
+
+/* ---------- 畫面 ---------- */
+const _iViewLis = iView;
+iView = function(it, key){
+  const f = {four:vFour, raise:vRaise, tips:vTips, lis:vLis, wsl:vWsl, relay:vRelay}[it.k];
+  return f ? f(it, key) : _iViewLis(it, key);
+};
+function spS(){ return CTRL.sp || {}; }
+function spSet(patch){ CTRL.sp = {...spSt(), ...patch}; saveCtrl(); render(); }
+function playBtns(sayFn, extra){
+  const sp = spS(), n = sp.played||0;
+  if(ROLE!=='t') return n ? `<div class="playcnt">🔊 已播 ${n} 次</div>` : '';
+  return `<div class="row lisbar">
+    <button class="btn lemon" onclick="${sayFn}(0)">🔊 播放${n?'（再聽）':''}</button>
+    <button class="btn" onclick="${sayFn}(1)">🐢 慢速</button>
+    ${extra||''}<span class="playcnt">已播 ${n} 次</span></div>`;
+}
+
+/* 四色講解／總結：一按一格，逐項變色並讀出 */
+function vFour(it){
+  const sp = spS(), stg = sp.stage||0;
+  const order = CATS.filter(c=>it.segs.some(s=>s[1]===c));
+  const shown = order.slice(0, stg);
+  const sent = it.segs.map(([t,c])=> (c && shown.includes(c)) ? `<b class="kwh tg-${CAT[c].tg}">${ruby(t)}</b>` : ruby(t)).join('');
+  const boxes = CATS.map(c=>{
+    const seg = it.segs.find(s=>s[1]===c), on = shown.includes(c);
+    return `<div class="fbox tg-${CAT[c].tg} ${on?'on':''}"><div class="fhd">${CAT[c].ico} ${CAT[c].n}</div>
+      <div class="fqw">${CAT[c].qw}</div><div class="fans">${on && seg ? `${lvis(seg[0])}<span>${esc(seg[0])}</span>` : '？'}</div></div>`;
+  }).join('');
+  const btns = ROLE==='t' ? `<div class="row" style="justify-content:center;margin-top:12px">
+      <button class="btn lemon" onclick="fourNext()">${stg<order.length ? '▶ 下一項' : '↺ 由頭再來'}</button>
+      <button class="btn mint sm" onclick="spSay('${it.say}')">🔊 讀句子</button></div>` : '';
+  return `<div class="it-q">${ruby(it.q||'')}</div>${it.lead?`<div class="fourlead">${esc(it.lead)}</div>`:''}
+    <div class="foursent">${sent}</div><div class="fourgrid">${boxes}</div>${btns}`;
+}
+function fourNext(){
+  const it = curItem(), sp = spSt(), order = CATS.filter(c=>it.segs.some(s=>s[1]===c));
+  const stg = (sp.stage||0) >= order.length ? 0 : (sp.stage||0) + 1;
+  spSet({stage:stg});
+  if(stg>0){ const c = order[stg-1], seg = it.segs.find(s=>s[1]===c); spSay(`${CAT[c].n}，${seg[0]}`); }
+}
+
+/* 策略卡 */
+function vTips(it){
+  return `<div class="it-q">${ruby(it.q||'')}</div><div class="tipsrows">${it.rows.map(r=>
+    `<div class="tiprow"><span class="tipe">${r[0]}</span><div><div class="tipt">${ruby(r[1])}</div><div class="tipd">${esc(r[2])}</div></div></div>`).join('')}</div>
+    <div class="fourgrid mini">${CATS.map(c=>`<div class="fbox tg-${CAT[c].tg} on"><div class="fhd">${CAT[c].ico} ${CAT[c].n}</div><div class="fqw">${CAT[c].qw}</div></div>`).join('')}</div>`;
+}
+
+/* 舉牌：前半「看＋聽」，後半「只聽」 */
+function vRaise(it){
+  const sp = spS(), i = sp.bag==null ? -1 : sp.bag, el = it.els[i], rev = !!sp.stage;
+  const audioOnly = i >= (it.audioFrom||5);
+  const dots = it.els.map((e,j)=>`<span class="rdot ${j<i?'done':''} ${j===i?'cur':''} ${j>=(it.audioFrom||5)?'aud':''}">${j+1}</span>`).join('');
+  let card;
+  if(!el) card = `<div class="raisebig"><div class="rbe">🃏</div><div class="rbt">${ruby('準備好你的卡牌！')}</div>
+      <div class="rbs">${ruby('第 1–5 題：看＋聽　第 6–10 題：只聽')}</div></div>`;
+  else if(!rev) card = `<div class="raisebig">${audioOnly ? `<div class="rbe">🎧</div><div class="rbt">${ruby('只聽不看')}</div>`
+      : `<div class="rbe">${lvis(el.t, true)}</div><div class="rbt">${esc(el.t)}</div>`}
+      <div class="rbs go">${ruby('舉起你的卡牌！')}</div></div>`;
+  else card = `<div class="raisebig rev tg-${CAT[el.c].tg}"><div class="rbe">${lvis(el.t, true)}</div><div class="rbt">${esc(el.t)}</div>
+      <div class="rbc">${catChip(el.c, true)}</div></div>`;
+  const btns = ROLE==='t' ? `<div class="row" style="justify-content:center;margin-top:12px">
+      <button class="btn lemon" onclick="raiseNext()">${i<0?'▶ 開始（第 1 題）':i>=it.els.length-1?'↺ 由頭再來':'▶ 下一題'}</button>
+      ${el?`<button class="btn" onclick="spSay('${el.t}')">🔁 再聽</button>
+      <button class="btn mint" onclick="spSet({stage:${rev?0:1}})">${rev?'🙈 收起':'👀 揭曉'}</button>`:''}</div>` : '';
+  return `<div class="it-q">${ruby(it.q||'')}</div><div class="rdots">${dots}</div>${card}${btns}`;
+}
+function raiseNext(){
+  const it = curItem(), sp = spSt();
+  const i = (sp.bag==null || sp.bag>=it.els.length-1) ? 0 : sp.bag + 1;
+  if(sp.bag!=null && sp.bag>=it.els.length-1){ spSet({bag:-1, stage:0}); return; }
+  spSet({bag:i, stage:0});
+  setTimeout(()=>spSay(it.els[i].t), 250);
+}
+
+/* 探索一：先看問題，再聽，再選 */
+function lisList(it, n){
+  n = Math.max(2, Math.min(it.opts.length, n||5));
+  return shufNot([it.ans, ...it.opts.slice(1, n)], seedOf(it.say + n));
+}
+function vLis(it, key){
+  const sp = spS(), rec = recGet(key) || {};
+  const n = ROLE==='t' ? it.opts.length : spOptOf(ME);
+  const list = lisList(it, n); U2UI.lists[key] = list;
+  const showSent = !!sp.hint || rec.ok || (ROLE==='t' && CTRL.qLocked);
+  const parts = {[it.c]: it.ans};
+  const head = `<div class="lishead">${catChip(it.c)}<span class="lisstep">👀 ${ruby('先看問題')}　→　👂 ${ruby('再聽')}　→　👆 ${ruby('選答案')}</span></div>
+    <div class="it-q lisq">${qwHL(it.q, it.c)}</div>`;
+  const hint = sp.hint ? `<div class="lishint"><div class="lhe">${it.hpic||'💡'}</div><div class="lht">${kwHL(it.say, parts)}</div></div>` : '';
+  const opts = `<div class="opts it-opts lisopts n${list.length}">${list.map((o,j)=>{
+    const st = rec.ok && o===it.ans ? 'right' : (rec.v===o && !rec.ok ? 'wrongkeep' : '');
+    return `<button class="opt ${st}" onclick="iAct('choice','${key}',${j})">${lvis(o)}<span class="o-t">${ruby(o)}</span></button>`;
+  }).join('')}</div>`;
+  const after = (rec.ok && ROLE!=='t') ? `<div class="lisok">👂 ${ruby('你聽到：')}<span>${kwHL(it.say, parts)}</span></div>` : '';
+  return head + playBtns('spLisPlay', `<button class="btn ${sp.hint?'peach':''}" onclick="spSet({hint:${sp.hint?0:1}})">💡 ${sp.hint?'收起提示':'提示'}</button>`)
+    + hint + opts + after;
+}
+function spLisPlay(slow){
+  const it = curItem(), sp = spSt();
+  if(!it) return;
+  spSet({played:(sp.played||0)+1});
+  spSay(it.say, !!slow);
+}
+
+/* 工作紙：播放完整句子，同學在紙上圈；再逐格對答案 */
+function fourBoxes(parts, stage, cls){
+  return `<div class="fourgrid ${cls||''}">${CATS.map((c,k)=>{
+    const on = k < stage, w = parts[c];
+    return `<div class="fbox tg-${CAT[c].tg} ${on?'on':''}"><div class="fhd">${CAT[c].ico} ${CAT[c].n}</div>
+      <div class="fqw">${CAT[c].qw}</div><div class="fans">${on ? `${lvis(w)}<span>${esc(w)}</span>` : '？'}</div></div>`;
+  }).join('')}</div>`;
+}
+function vWsl(it){
+  const sp = spS(), stg = sp.stage||0;
+  const hint = sp.hint ? `<div class="lishint"><div class="lhe">${it.hpic||'💡'}</div><div class="lht">${kwHL(it.say, it.parts)}</div></div>` : '';
+  const btns = ROLE==='t' ? playBtns('wslPlay', `<button class="btn ${sp.hint?'peach':''}" onclick="spSet({hint:${sp.hint?0:1}})">💡 ${sp.hint?'收起提示':'提示'}</button>
+      <button class="btn mint" onclick="spSet({stage:${stg>=4?0:stg+1}})">${stg>=4?'↺ 收起答案':'✅ 對答案（第 '+(stg+1)+' 格）'}</button>
+      ${stg<4?`<button class="btn sm" onclick="spSet({stage:4})">全部顯示</button>`:''}`) : playBtns('wslPlay');
+  return `<div class="it-q">${ruby(it.q||'')}</div>
+    <div class="wslbig">🎧 ${ruby(ROLE==='t' ? '請同學拿出工作紙，聽句子，圈出答案。' : '聽句子，在工作紙圈出答案。')}</div>
+    ${btns}${hint}${fourBoxes(it.parts, stg)}
+    ${stg>=4 ? `<div class="lisok">👂 ${ruby('句子：')}<span>${kwHL(it.say, it.parts)}</span></div>` : ''}`;
+}
+function wslPlay(slow){ const it = curItem(), sp = spSt(); spSet({played:(sp.played||0)+1}); spSay(it.say, !!slow); }
+
+/* 傳話（後備）：時地人事拼句隊 */
+function vRelay(it){
+  const sp = spS(), i = sp.card==null ? -1 : sp.card, r = it.list[i], stg = sp.stage||0;
+  const rules = `<div class="tipsrows">${[
+      ['👥','四人一隊','每人負責一項：時間、地點、人物或事情（用回你的卡牌顏色）。'],
+      ['👂','只聽你那一項','老師播一次句子，你只要記住自己負責的那一項。'],
+      ['🃏','拼回句子','在自己的圖卡中揀一張，四人排好，一起把句子說出來。'],
+      ['🙋','請再說一次','每隊有一張「請再說一次」卡，可以用一次。']].map(x=>
+      `<div class="tiprow"><span class="tipe">${x[0]}</span><div><div class="tipt">${ruby(x[1])}</div><div class="tipd">${esc(x[2])}</div></div></div>`).join('')}</div>`;
+  if(ROLE!=='t') return `<div class="it-q">${ruby(it.q||'')}</div>${r ? playBtns() + fourBoxes(r.parts, stg) : rules}`;
+  const pick = `<div class="row" style="justify-content:center;gap:6px;margin:8px 0">${it.list.map((x,j)=>
+      `<button class="btn sm ${j===i?'blue':''}" onclick="spSet({card:${j}, stage:0, played:0})">第 ${j+1} 句</button>`).join('')}</div>`;
+  if(!r) return `<div class="it-q">${ruby(it.q||'')}</div>${rules}${pick}`;
+  return `<div class="it-q">${ruby(it.q||'')}</div>${pick}
+    ${playBtns('relayPlay', `<button class="btn" onclick="relayPlay(0, 1)">🙋 請再說一次</button>
+      <button class="btn mint" onclick="spSet({stage:${stg>=4?0:4}})">${stg>=4?'↺ 收起答案':'✅ 對答案'}</button>`)}
+    ${fourBoxes(r.parts, stg)}${stg>=4?`<div class="lisok">👂 <span>${kwHL(r.say, r.parts)}</span></div>`:''}`;
+}
+function relayPlay(slow){
+  const it = curItem(), sp = spSt(), r = it.list[sp.card]; if(!r) return;
+  spSet({played:(sp.played||0)+1}); spSay(r.say, !!slow);
+}
+
+/* 答案板：句子加上顏色 */
+const _ansBoardLis = ansBoard;
+ansBoard = function(it){
+  if(it.k==='lis') return `<div class="q ansboard"><div class="qt" style="color:#1E8E62">✅ 正確答案</div>
+    <div class="ansbig">${lvis(it.ans)} ${esc(it.ans)}</div><div class="lisok" style="margin-top:8px">👂 <span>${kwHL(it.say, {[it.c]:it.ans})}</span></div></div>`;
+  return _ansBoardLis(it);
+};
+
+/* ---------- 分層提問卡 ---------- */
+const ASK_LIS = {
+  s:['是「{ans}」，還是「{alt}」？', '再聽一次，指一指答案。', '跟老師說一次：{ans}。'],
+  m:['{q}', '這一題問「{qw}」，要聽{catn}。', '你聽到甚麼{catn}？說出來。'],
+  h:['你聽到甚麼？用完整句子說一次。', '{q}', '你怎樣知道是「{ans}」？']};
+const ASK_WSL = {
+  s:['是{who}，還是{whoAlt}？', '你聽到誰的名字？指一指。', '跟老師說：{who}，{what}。'],
+  m:['{who}在哪裏？做甚麼？', '這句話的地點是哪裏？', '是甚麼時候？'],
+  h:['把整句話說一次。', '先說人物，再說時間、地點、事情。', '你平時甚麼時候會做這件事？']};
+const ASK_SUM = {
+  s:['誰要去搬箱？', '是何樂天，還是陳亮宇？', '跟老師說：何樂天。'],
+  m:['甚麼時候？去哪裏？', '經理說的時間是幾點？', '要到哪裏工作？'],
+  h:['你是何樂天，把經理的話說一次。', '明天早上九點，你要做甚麼？', '聽不清楚時，你會怎樣問經理？']};
+
+/* ================================================================
+   第 2 課資料
+   ================================================================ */
+LESSONS2.push({no:LESSONS2.length+1, sp:true, spKind:'lis', mode:'sp', title:'觀課二：聽一聽，找出時地人事',
+  sentence:LISDATA.ws[0].say, pages:['slide4'], keys:[], vocab:[], spInfo:'第一節高中能力・第二節初能力・各 30 分鐘',
+  goals:[{ico:'🎨', zh:'認識時間、地點、人物、事情', en:'Know time, place, person and event'},
+         {ico:'👀', zh:'先看問題，再聽重點', en:'Read the question first, then listen for the key words'},
+         {ico:'✏️', zh:'聽句子，找出時地人事', en:'Listen and find the time, place, person and event'}]});
+(function(){
+  const l = LESSONS2[LESSONS2.length-1]; l.page = '2:'+l.pages[0];
+  const D = LISDATA;
+  SENT2[l.no] = [
+    /* ① 引入 5 分鐘 */
+    {k:'four', sec:'引入', min:5, tag:'時地人事', q:'時地人事：四種顏色，四個問題', segs:D.intro.segs, say:D.intro.say},
+    {k:'raise', sec:'引入', tag:'舉牌熱身', q:'舉牌熱身：這是時間、地點、人物，還是事情？', els:D.raise, audioFrom:5},
+    /* ② 探索一 12 分鐘 */
+    {k:'tips', sec:'探索一', min:12, tag:'聆聽策略', q:'聆聽策略：先看問題，再聽重點',
+     rows:[['👀','先看問題','問題問「誰？」，就要聽人物；問「在哪裏？」，就要聽地點。'],
+           ['👂','再聽重點','專心聽，把重點記在心裏。聽完才選答案。'],
+           ['🙋','聽不清楚','可以說：「請再說一次。」']]},
+    ...D.lis.map((x,i)=>({k:'lis', sec:'探索一', tag:CAT[x.c].n+' '+(i%3+1), c:x.c, q:x.q, say:x.say, ans:x.ans, opts:x.opts, hpic:x.hint, ask:ASK_LIS})),
+    /* ③ 工作紙 9 分鐘 */
+    ...D.ws.map((x,i)=>({k:'wsl', sec:'工作紙', min:i?undefined:9, tag:'工作紙'+'一二'[i], q:`工作紙${'一二'[i]}：聽一聽，圈一圈`,
+      say:x.say, parts:x.parts, opts:x.opts, hpic:x.hint, ask:ASK_WSL})),
+    /* ④ 總結 4 分鐘 */
+    {k:'four', sec:'總結', min:4, tag:'總結', q:'總結：將來工作，也要聽清楚時地人事', lead:D.summary.lead, segs:D.summary.segs, say:D.summary.say, ask:ASK_SUM},
+    SPI.self(['我會分辨時間、地點、人物、事情', '我會先看問題，再聽重點'], {sec:'總結', tag:'自評', q:'自我評估：今日我學會了嗎？'}),
+    /* ⑤ 後備：傳話遊戲 */
+    {k:'relay', sec:'後備：傳話', tag:'傳話', q:'傳話遊戲：時地人事拼句隊', list:D.relay}
   ];
 })();
 
